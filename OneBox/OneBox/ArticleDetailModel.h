@@ -9,7 +9,9 @@
 #import "baseModelJX.h"
 
 @interface ArticleDetailModel : baseModelJX
+
 +(ArticleDetailModel *)parsingWithJsonDataForModel:(NSDictionary *)dict;
+
 __string(share_link);
 __string(app_html_url);
 __string(m_id);//id long

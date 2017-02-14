@@ -32,4 +32,5 @@
 @property (nonatomic,assign)NSInteger house;
 @property (nonatomic,assign)NSInteger household;
 @property (nonatomic,assign)NSInteger manage_notice;
+
 @end

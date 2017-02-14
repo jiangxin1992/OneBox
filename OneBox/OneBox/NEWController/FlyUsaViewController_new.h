@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface FlyUsaViewController_new : UIViewController
+
 @property (nonatomic,copy) void(^block)(NSString*);
 @property (nonatomic,assign)NSInteger step;
+
 @end

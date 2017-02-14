@@ -20,7 +20,6 @@
 @property NSMutableString* isjunior;//是否是初中
 @property NSMutableString* issenior;//是否是高中
 @property NSMutableString* isESL;//是否ESL
-
 @property NSMutableString* state;//当前州名
 @property NSMutableString* city;//当前城市名
 @end

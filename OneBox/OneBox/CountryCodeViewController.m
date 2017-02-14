@@ -5,9 +5,12 @@
 //  Created by 谢江新 on 15/11/6.
 //  Copyright © 2015年 谢江新. All rights reserved.
 //
-#import "CountryCodeCell.h"
-#define foundCellHeight 80*_Scale
+
 #import "CountryCodeViewController.h"
+
+#import "CountryCodeCell.h"
+
+#define foundCellHeight 80*_Scale
 
 @interface CountryCodeViewController ()<UITableViewDataSource,UITableViewDelegate>
 

@@ -12,10 +12,11 @@
 {
     void(^changeBlock)(NSNumber *rownum,NSInteger type);
 }
+
 @property (nonatomic, strong) UISwipeGestureRecognizer *rightSwipeGestureRecognizer;
 @property (nonatomic,assign)BOOL islogin;
 @property (nonatomic,copy)UITableView *tableView;
 @property (nonatomic,copy) void(^block)(NSString *title);
-
 __string(sid);
+
 @end

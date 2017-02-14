@@ -7,6 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+
 @interface goalViewController : UIViewController
+
 __string(type);
+
 @end

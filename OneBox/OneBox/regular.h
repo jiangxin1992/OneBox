@@ -23,8 +23,6 @@
 + (void)createProgress:(NSString *)title;
 + (void)createSuccessProgress;
 +  (void)removeProgress;
-
-
 + (UIView *)returnNavView:(NSString *)title withmaxwidth:(CGFloat )maxwidth;
 
 + (UIButton *)CustomButtonWithFrame:(CGRect )rect;

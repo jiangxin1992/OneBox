@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+
 typedef  void(^bl)(NSNumber *rownum,NSInteger type);
+
 @interface comment_cell : UITableViewCell
+
 @property (nonatomic,copy)bl block;
 @property (nonatomic,copy)NSDictionary *dict;
 

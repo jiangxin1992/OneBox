@@ -1,11 +1,16 @@
-
+//
+//  academicRecordModel.h
+//  OneBox
+//
+//  Created by 谢江新 on 15/5/18.
+//  Copyright (c) 2015年 谢江新. All rights reserved.
+//
 
 #import <Foundation/Foundation.h>
 #import <MapKit/MapKit.h>
-#import "ADMapCluster.h"
-#import "ADClusterAnnotation.h"
 
 @class ADClusterMapView;
+@class ADClusterAnnotation;
 @protocol ADClusterMapViewDelegate <MKMapViewDelegate>
 @optional
 - (NSInteger)numberOfClustersInMapView:(ADClusterMapView *)mapView; // default: 32

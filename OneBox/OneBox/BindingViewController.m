@@ -5,8 +5,10 @@
 //  Created by 谢江新 on 15/10/21.
 //  Copyright © 2015年 谢江新. All rights reserved.
 //
-#import "CountryCodeViewController.h"
+
 #import "BindingViewController.h"
+
+#import "CountryCodeViewController.h"
 
 @interface BindingViewController ()
 

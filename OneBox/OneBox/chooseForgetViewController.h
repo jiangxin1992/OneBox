@@ -14,6 +14,8 @@ typedef  void(^bl)();
     void(^resetpasswordBlock2)();
     void(^disblock)();
 }
+
 __string(type);
 @property (nonatomic,copy)bl block;
+
 @end

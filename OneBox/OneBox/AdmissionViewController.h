@@ -14,4 +14,5 @@ typedef  void(^bl)(NSDictionary *dict,NSInteger num);
 @property (nonatomic,assign) NSInteger currentPage;
 @property (nonatomic,assign) NSInteger maxPage;
 @property (nonatomic,copy) NSArray *array;
+
 @end

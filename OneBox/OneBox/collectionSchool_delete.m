@@ -5,12 +5,19 @@
 //  Created by 谢江新 on 15/12/1.
 //  Copyright © 2015年 谢江新. All rights reserved.
 //
-#import "SchoolDetailViewController.h"
-#import "MJRefresh.h"
-#define CellHeight 200*_Scale
-#import "foundModel.h"
-#import "collection_del_Cell.h"
+
 #import "collectionSchool_delete.h"
+
+#import "MJRefresh.h"
+
+#import "SchoolDetailViewController.h"
+#import "CustomTabbarController.h"
+
+#import "collection_del_Cell.h"
+
+#import "foundModel.h"
+
+#define CellHeight 200*_Scale
 
 @interface collectionSchool_delete ()<UITableViewDelegate,UITableViewDataSource>
 

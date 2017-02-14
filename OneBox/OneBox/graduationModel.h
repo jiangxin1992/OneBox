@@ -9,13 +9,13 @@
 #import "baseModelJX.h"
 
 @interface graduationModel : baseModelJX
+
 +(NSMutableArray *)parsingWithJsonArr:(NSArray *)arr;
+
 __string(rank);
 __string(cn_name);
 __string(en_name);
 __string(en_city);
 __string(short_name);
-
-
 
 @end

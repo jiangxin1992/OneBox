@@ -8,6 +8,8 @@
 
 #import "UserCell.h"
 
+#import "usermodel.h"
+
 #define kUtilityButtonsWidthMax 260
 #define kUtilityButtonWidthDefault 90
 

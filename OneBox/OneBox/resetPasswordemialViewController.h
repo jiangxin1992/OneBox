@@ -7,10 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+
 typedef  void(^bl)();
+
 @interface resetPasswordemialViewController : UIViewController
+
 @property (nonatomic,copy) NSDictionary *dict;
 @property (nonatomic,copy)bl block;
 @property (nonatomic,copy)bl block2;
 @property (nonatomic,copy)NSString *type;
+
 @end

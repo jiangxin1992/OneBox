@@ -8,6 +8,8 @@
 
 #import "NOTContentViewController.h"
 
+#import "notificationModel.h"
+
 @interface NOTContentViewController ()
 
 @end

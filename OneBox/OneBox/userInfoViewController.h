@@ -11,10 +11,8 @@
 @interface userInfoViewController : UIViewController
 {
         void(^updataInfo)(NSDictionary *dict);
-
 }
 @property (weak, nonatomic) IBOutlet UILabel *username;
 @property (weak, nonatomic) IBOutlet UIImageView *headimg;
-
 
 @end

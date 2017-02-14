@@ -6,12 +6,19 @@
 //  Copyright © 2015年 谢江新. All rights reserved.
 //
 
+#import "ArticleViewController.h"
+
+#import "MJRefresh.h"
+
 #import "ArticleColViewController.h"
 #import "ArticleDetailViewController.h"
+#import "CustomTabbarController.h"
+#import "LoginViewController.h"
+
 #import "ArticleCell.h"
+
 #import "ArticleModel.h"
-#import "MJRefresh.h"
-#import "ArticleViewController.h"
+
 #define foundCellHeight 360*_Scale
 
 @interface ArticleViewController ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>

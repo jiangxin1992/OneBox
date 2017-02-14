@@ -8,6 +8,8 @@
 
 #import "suggestViewController.h"
 
+#import "CustomTabbarController.h"
+
 @interface suggestViewController ()<UITextViewDelegate>
 
 @end

@@ -5,11 +5,17 @@
 //  Created by 谢江新 on 15/8/25.
 //  Copyright (c) 2015年 谢江新. All rights reserved.
 //
-#import "NOTContentViewController.h"
-#import "notificationModel.h"
-#import "NotificationCell.h"
+
 #import "NotificationController.h"
+
 #import "MJRefresh.h"
+
+#import "NOTContentViewController.h"
+
+#import "NotificationCell.h"
+
+#import "notificationModel.h"
+
 @interface NotificationController ()<UITableViewDataSource,UITableViewDelegate>
 
 @end

@@ -16,6 +16,7 @@
 #import "UIViewController+HUD.h"
 #import "AddFriendCell.h"
 #import "InvitationManager.h"
+#import "EMAlertView.h"
 
 @interface AddFriendViewController ()<UITextFieldDelegate, UIAlertViewDelegate>
 

@@ -9,10 +9,10 @@
 #import <Foundation/Foundation.h>
 
 @interface chooseModel : NSObject
+
 +(NSMutableArray *)parsingWithJsonDataForModel:(NSDictionary *)dict;
+
 @property (nonatomic,assign)NSInteger step_no;
-
-
 @property (nonatomic,assign)NSInteger sid;
 __string(full_address);
 //建校时间
@@ -42,7 +42,6 @@ __string(sat_avg);
 //__string(tuition);
 //生活费
 //__string(alimony);
-
 //学校id
 __string(goal_id);
 

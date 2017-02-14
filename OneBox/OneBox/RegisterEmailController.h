@@ -7,12 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+
 typedef  void(^bl)();
+
 @interface RegisterEmailController : UIViewController
 {
     void(^disblock)();
 }
+
 @property (nonatomic,copy)bl block2;
 @property (nonatomic,copy)bl block;
 @property (nonatomic,copy)NSString *type;
+
 @end

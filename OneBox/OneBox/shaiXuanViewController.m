@@ -5,16 +5,23 @@
 //  Created by 谢江新 on 15/6/9.
 //  Copyright (c) 2015年 谢江新. All rights reserved.
 //
-#import "sousuo_card_Cell.h"
+
+#import "shaiXuanViewController.h"
+
 #import "MJRefresh.h"
+
 #import "suggestViewController.h"
 #import "SchoolDetailViewController.h"
-#define foundCellHeight 184*_Scale
-#define foundCellHeight_card 400*_Scale
+#import "CustomTabbarController.h"
+
+#import "sousuo_card_Cell.h"
 #import "FoundCell.h"
+
 #import "foundModel.h"
 #import "ChineseToPinyin.h"
-#import "shaiXuanViewController.h"
+
+#define foundCellHeight 184*_Scale
+#define foundCellHeight_card 400*_Scale
 
 @interface shaiXuanViewController ()<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate>
 
@@ -983,18 +990,6 @@
         _Dragging=NO;
     }
     _is_suoyin=NO;
-}
-#pragma mark-----------------工具类----------------
--(BOOL)IsChinese:(NSString *)str {
-    for(int i=0; i< [str length];i++)
-    {
-        int a = [str characterAtIndex:i];
-        if( a > 0x4e00 && a < 0x9fff)
-        {
-            return YES;
-        }
-
-    } return NO;
 }
 #pragma mark-----------------Others----------------
 -(void)saysomething_to_us

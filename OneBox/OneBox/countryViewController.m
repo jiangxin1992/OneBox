@@ -5,11 +5,16 @@
 //  Created by 谢江新 on 15/10/30.
 //  Copyright © 2015年 谢江新. All rights reserved.
 //
+
+#import "countryViewController.h"
+
 #import <CoreLocation/CoreLocation.h>
 #import <MapKit/MapKit.h>
 #import "ChineseToPinyin.h"
-#import "countryViewController.h"
+
 #import "statechooseViewController.h"
+#import "personinfoViewController.h"
+
 @interface countryViewController ()<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate,CLLocationManagerDelegate>
 
 @end

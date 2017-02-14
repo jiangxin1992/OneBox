@@ -5,13 +5,19 @@
 //  Created by 谢江新 on 15/9/8.
 //  Copyright (c) 2015年 谢江新. All rights reserved.
 //
+
+#import "followingViewController.h"
+
+#import "MJRefresh.h"
+#import "HttpRequestManager.h"
+
 #import "followerViewController.h"
 #import "ChatViewController.h"
-#import "MJRefresh.h"
+#import "CustomTabbarController.h"
+
 #import "UserCell1.h"
+
 #import "usermodel.h"
-#import "followingViewController.h"
-#import "HttpRequestManager.h"
 
 @interface followingViewController ()<UITableViewDataSource,UITableViewDelegate>
 

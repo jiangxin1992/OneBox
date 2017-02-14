@@ -9,9 +9,13 @@
 #import <Foundation/Foundation.h>
 
 @interface MyInfo : NSObject
+
++(MyInfo *)parsingWithJsonDataForModel:(NSData *)data;
+
++(NSMutableArray *)parsingWithArrForModel:(NSData *)data;
+
 __string(sid);
 __string(username);
-//enroll_order_schools_count
 @property(nonatomic,assign)NSInteger  enroll_order_schools_count;
 @property(nonatomic,assign)NSInteger follow_schools_count;
 @property(nonatomic,assign)NSInteger follows_count;
@@ -25,11 +29,8 @@ __string(email);
 @property(nonatomic,assign)BOOL weibo;
 @property(nonatomic,assign)BOOL qq_connect;
 @property(nonatomic,assign)BOOL weixin;
-
 @property (nonatomic,assign)NSInteger gender;
 __string(city);
 __string(mark);
-+(MyInfo *)parsingWithJsonDataForModel:(NSData *)data;
-+(NSMutableArray *)parsingWithArrForModel:(NSData *)data;
 
 @end

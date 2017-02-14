@@ -5,9 +5,12 @@
 //  Created by 谢江新 on 15/9/2.
 //  Copyright (c) 2015年 谢江新. All rights reserved.
 //
+
 #import <UIKit/UIGestureRecognizerSubclass.h>
-#import "usermodel.h"
 #import <UIKit/UIKit.h>
+
+@class usermodel;
+
 typedef  void(^bl)(NSNumber *rownum);
 
 @class UserCell;

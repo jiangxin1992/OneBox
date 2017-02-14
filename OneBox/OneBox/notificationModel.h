@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 
 @interface notificationModel : NSObject
+
++(NSMutableArray *)parsingWithArrForModel:(NSData *)data;
+
 __string(send_avatar);
 __string(sender);
 __string(NOT_ID);
@@ -19,5 +22,5 @@ __string(user_id);
 __string(updated_at);
 __string(body);
 @property (nonatomic,assign)BOOL is_readed;
-+(NSMutableArray *)parsingWithArrForModel:(NSData *)data;
+
 @end

@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface CountryCodeCell : UITableViewCell
+
 @property (nonatomic,copy)NSDictionary *dict;
+
 @end

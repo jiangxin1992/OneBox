@@ -9,8 +9,11 @@
 #import "baseModelJX.h"
 
 @interface comment_model_alter : baseModelJX
+
 +(NSMutableArray *)parsingWithJsonDict:(NSDictionary *)dict;
+
 +(comment_model_alter *)getdata:(NSDictionary *)dict;
+
 //评论id
 __string(cell);
 @property (nonatomic,assign) BOOL is_server;

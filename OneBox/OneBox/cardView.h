@@ -7,8 +7,10 @@
 //
 
 typedef  void(^bl)();
-#import "surveyModel.h"
+
 #import <UIKit/UIKit.h>
+
+@class surveyModel;
 
 @interface cardView : UIView
 +(id)sharedManager;

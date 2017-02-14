@@ -6,12 +6,13 @@
 //  Copyright (c) 2015年 谢江新. All rights reserved.
 //
 
+#import "cardView.h"
+
+#import "surveyModel.h"
+
 #define ScreenWidth [UIScreen mainScreen].bounds.size.width
 #define ScreenHeight [UIScreen mainScreen].bounds.size.height
-
 #define _Scale [UIScreen mainScreen].bounds.size.width/640.0f
-
-#import "cardView.h"
 
 @implementation cardView
 {

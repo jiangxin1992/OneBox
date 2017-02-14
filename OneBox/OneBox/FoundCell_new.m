@@ -7,6 +7,9 @@
 //
 
 #import "FoundCell_new.h"
+
+#import "foundModel_new.h"
+
 #define foundCellHeight 380*_Scale
 
 @implementation FoundCell_new

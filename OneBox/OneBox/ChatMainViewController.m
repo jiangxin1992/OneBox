@@ -5,19 +5,24 @@
 //  Created by 谢江新 on 15/8/13.
 //  Copyright (c) 2015年 谢江新. All rights reserved.
 //
-//#import "UserProfileManager.h"
+
+#import "ChatMainViewController.h"
+
 #import "EMCDDeviceManager.h"
+#import <AVFoundation/AVFoundation.h>
+
 #import "LoginViewController.h"
 #import "followingViewController.h"
 #import "followerViewController.h"
-#import "usermodel.h"
-#import "RobotManager.h"
 #import "ChatListViewController.h"
 #import "ChatViewController.h"
 #import "CallViewController.h"
-#import <AVFoundation/AVFoundation.h>
-#import "ChatMainViewController.h"
 #import "UserListViewController.h"
+#import "CustomTabbarController.h"
+
+#import "usermodel.h"
+#import "RobotManager.h"
+
 //两次提示的默认间隔
 //static const CGFloat kDefaultPlaySoundInterval = 3.0;
 //static NSString *kMessageType = @"MessageType";

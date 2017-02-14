@@ -7,12 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "surveyModel.h"
 
-@interface collectionSchool : UIViewController
-{
+@interface collectionSchool : UIViewController{
     void(^changeBlock)(NSInteger rownum);
 }
 @property (nonatomic,copy)NSDictionary *dict;
-//__string(type);
+
 @end

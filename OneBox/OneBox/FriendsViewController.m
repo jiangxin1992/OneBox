@@ -5,14 +5,19 @@
 //  Created by 谢江新 on 15/8/13.
 //  Copyright (c) 2015年 谢江新. All rights reserved.
 //
+
+#import "FriendsViewController.h"
+
+#import "HttpRequestManager.h"
+#import "MJRefresh.h"
+
 #import "followerViewController.h"
 #import "followingViewController.h"
-#import "HttpRequestManager.h"
 #import "ChatViewController.h"
-#import "MJRefresh.h"
+
 #import "UserCell.h"
+
 #import "usermodel.h"
-#import "FriendsViewController.h"
 
 @interface FriendsViewController ()<UITableViewDataSource,UITableViewDelegate, SWTableViewCellDelegate>
 

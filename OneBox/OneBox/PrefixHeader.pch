@@ -72,14 +72,30 @@
 #define kUIWindow    [[[UIApplication sharedApplication] delegate] window] //获得window
 
 #define kUnderStatusBarStartY (kIOSVersions>=7.0 ? 20 : 0)                 //7.0以上stautsbar不占位置，内容视图的起始位置要往下20
+
+/*************** Color ***************/
+#define _define_black_color [UIColor colorWithHexString:@"#000000"]
+
+#define _define_white_color [UIColor colorWithHexString:@"#FFFFFF"]
+
 #define _define_blue_color [UIColor colorWithRed:77.0f/255.0f green:190.0f/255.0f blue:217.0f/255.0f alpha:1]
+
 #define _define_login_background [UIColor colorWithRed:67.0f/255.0f green:183.0f/255.0f blue:223.0f/255.0f alpha:1]
+
 #define _define_blue_color_login [UIColor colorWithRed:130.0f/255.0f green:211.0f/255.0f blue:236.0f/255.0f alpha:1]
+
 #define _define_bluecell_color [UIColor colorWithRed:77.0f/255.0f green:190.0f/255.0f blue:217.0f/255.0f alpha:1]
+
 #define _define_head_color [UIColor colorWithRed:240.0f/255.0f green:240.0f/255.0f blue:240.0f/255.0f alpha:1]
+
 #define _define_backview_color [UIColor colorWithRed:244.0f/255.0f green:244.0f/255.0f blue:244.0f/255.0f alpha:1]
+
 #define _define_cailiao_color [UIColor colorWithRed:252.0f/255.0f green:252.0f/255.0f blue:252.0f/255.0f alpha:1]
+
 #define _define_cailiao_text_color [UIColor colorWithRed:200.0f/255.0f green:200.0f/255.0f blue:200.0f/255.0f alpha:1]
+
+
+
 #define kIiPhone6 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(750, 1334), [[UIScreen mainScreen] currentMode].size) : NO)
 
 #define kIPhone6Plus ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1242,2208), [[UIScreen mainScreen] currentMode].size) : NO)

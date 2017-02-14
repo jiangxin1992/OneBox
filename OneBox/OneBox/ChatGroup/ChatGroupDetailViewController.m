@@ -18,6 +18,7 @@
 #import "ContactView.h"
 #import "GroupBansViewController.h"
 #import "GroupSubjectChangingViewController.h"
+#import "EMAlertView.h"
 
 #pragma mark - ChatGroupDetailViewController
 

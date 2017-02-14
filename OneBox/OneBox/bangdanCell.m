@@ -7,8 +7,12 @@
 //
 
 #import "bangdanCell.h"
+
+#import "foundModel.h"
+
 #define foundCellHeight 200*_Scale
 #define labelHight 40*_Scale
+
 @implementation bangdanCell
 {
     NSMutableArray *leftViewArray;

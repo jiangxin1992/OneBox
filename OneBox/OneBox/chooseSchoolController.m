@@ -5,21 +5,25 @@
 //  Created by 谢江新 on 15/3/9.
 //  Copyright (c) 2015年 谢江新. All rights reserved.
 //
+
+#import "chooseSchoolController.h"
+
 #import "OnlineProjectsViewController.h"
 #import "new_AcademicRecordsController.h"
 #import "SchoolDetailViewController.h"
 #import "submitSchoolController.h"
+#import "CustomTabbarController.h"
+
+#import "collectionSchool.h"
+#import "chooseModel.h"
+#import "surveyModel.h"
+#import "Tools.h"
+
 #define cardHeight 300*_Scale
 #define card_detail 300*_Scale
 #define card_type 140*_Scale
 #define schoolSign @"注:以上学费信息为官网获取，可能未包含书本，校服，活动等费用，最终费用请以学校通知为准。"
-#import "collectionSchool.h"
 
-#import "chooseModel.h"
-#import "surveyModel.h"
-
-#import "chooseSchoolController.h"
-#import "Tools.h"
 @interface chooseSchoolController ()<UIAlertViewDelegate,UIScrollViewDelegate>
 
 @end

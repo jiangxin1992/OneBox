@@ -5,17 +5,21 @@
 //  Created by 谢江新 on 15/10/21.
 //  Copyright © 2015年 谢江新. All rights reserved.
 //
-#import "countryViewController.h"
-#import "statechooseViewController.h"
-#import "citychooseViewController.h"
+
+#import "personinfoViewController.h"
+
 #import "QiniuSDK.h"
 #import <CoreLocation/CoreLocation.h>
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <AVFoundation/AVFoundation.h>
 #import "UIImageView+AFNetworking.h"
-#import "MyInfo.h"
 #import "HttpRequestManager.h"
-#import "personinfoViewController.h"
+
+#import "countryViewController.h"
+#import "statechooseViewController.h"
+#import "citychooseViewController.h"
+
+#import "MyInfo.h"
 
 @interface personinfoViewController ()<UIAlertViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextFieldDelegate>
 

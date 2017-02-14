@@ -9,10 +9,13 @@
 #import "baseModelJX.h"
 
 @interface ArticleModel : baseModelJX
+
 +(NSMutableArray *)parsingData:(NSDictionary *)dict;
+
 @property(nonatomic,assign) BOOL isapp;
 __string(m_id);
 __string(title);
 __string(desc);
 __string(thumb_url);
+
 @end

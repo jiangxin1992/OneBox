@@ -5,16 +5,24 @@
 //  Created by 谢江新 on 15/6/9.
 //  Copyright (c) 2015年 谢江新. All rights reserved.
 //
-#import "sousuo_card_Cell.h"
+
+#import "souSuoViewController.h"
+
 #import "MJRefresh.h"
+
 #import "suggestViewController.h"
 #import "SchoolDetailViewController.h"
-#define foundCellHeight 184*_Scale
-#define foundCellHeight_card 400*_Scale
+#import "CustomTabbarController.h"
+
+#import "sousuo_card_Cell.h"
 #import "FoundCell.h"
+
 #import "foundModel.h"
 #import "ChineseToPinyin.h"
-#import "souSuoViewController.h"
+#import "NSString+Valid.h"
+
+#define foundCellHeight 184*_Scale
+#define foundCellHeight_card 400*_Scale
 
 @interface souSuoViewController ()<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate>
 

@@ -8,6 +8,8 @@
 
 #import "NotificationCell.h"
 
+#import "notificationModel.h"
+
 @implementation NotificationCell
 {
     DBImageView *icon;

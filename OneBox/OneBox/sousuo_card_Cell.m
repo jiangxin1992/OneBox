@@ -7,8 +7,12 @@
 //
 
 #import "sousuo_card_Cell.h"
+
+#import "foundModel.h"
+
 #define foundCellHeight 400*_Scale
 #define labelHight 20
+
 @implementation sousuo_card_Cell
 {
     DBImageView *imagebackview;

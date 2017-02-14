@@ -6,13 +6,18 @@
 //  Copyright (c) 2015年 谢江新. All rights reserved.
 //
 #import "SchoolDetailViewController.h"
+
 #import "MJRefresh.h"
-#define CellHeight 200*_Scale
+
+#import "CustomTabbarController.h"
+
 #import "collectionCell.h"
 
 #import "collectionSchool.h"
-
+#import "surveyModel.h"
 #import "foundModel.h"
+
+#define CellHeight 200*_Scale
 
 @interface collectionSchool ()<UITableViewDelegate,UITableViewDataSource>
 

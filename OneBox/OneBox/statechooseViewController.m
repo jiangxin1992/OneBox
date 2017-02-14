@@ -5,9 +5,13 @@
 //  Created by 谢江新 on 15/10/30.
 //  Copyright © 2015年 谢江新. All rights reserved.
 //
-#import "ChineseToPinyin.h"
-#import "citychooseViewController.h"
+
 #import "statechooseViewController.h"
+
+#import "ChineseToPinyin.h"
+
+#import "citychooseViewController.h"
+#import "personinfoViewController.h"
 
 @interface statechooseViewController ()<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate>
 

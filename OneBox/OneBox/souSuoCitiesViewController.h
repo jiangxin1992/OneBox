@@ -8,7 +8,10 @@
 
 #import <UIKit/UIKit.h>
 typedef  void(^bl)(NSInteger row,NSInteger section,NSString *type);
+
 @interface souSuoCitiesViewController : UIViewController
+
 @property (nonatomic,copy)bl sousuoBlock;
 @property (nonatomic,copy)NSDictionary *cityNameDict;
+
 @end

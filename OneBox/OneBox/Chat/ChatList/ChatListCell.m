@@ -11,8 +11,9 @@
   */
 
 
-#import "ChatListCell.h"
 #import "UIImageView+EMWebCache.h"
+
+#import "ChatListCell.h"
 
 @interface ChatListCell (){
     UILabel *_timeLabel;

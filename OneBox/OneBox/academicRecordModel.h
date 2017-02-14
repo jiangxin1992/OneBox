@@ -9,11 +9,10 @@
 #import <Foundation/Foundation.h>
 
 @interface academicRecordModel : NSObject
-//[model setValuesForKeysWithDictionary:dict];
+
 +(academicRecordModel *)parsingWithJsonDataForModel:(NSDictionary *)dict;
 
 @property (nonatomic,assign)NSInteger user_id;
-
 //申请年级
 @property (nonatomic,assign)NSInteger apply_grade;
 //学校类别
@@ -38,7 +37,6 @@ __string(cell);
 __string(qq);
 //email
 __string(email);
-
 //gpa
 @property (nonatomic,assign)CGFloat gpa;
 @property (nonatomic,assign)CGFloat sat;
@@ -49,4 +47,5 @@ __string(email);
 @property (nonatomic,assign)CGFloat ielts;
 @property (nonatomic,assign)CGFloat slate;
 @property (nonatomic,assign)CGFloat act;
+
 @end

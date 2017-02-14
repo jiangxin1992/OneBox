@@ -5,15 +5,15 @@
 //  Created by 谢江新 on 15-2-5.
 //  Copyright (c) 2015年 谢江新. All rights reserved.
 //
-#import "GeTuiSdk.h"
-#import "webViewController.h"
-#import "MyMD5.h"
-#import "RegisterEmailController.h"
-#define Color_tp [UIColor colorWithRed:170.0f/255.0f green:230.0f/255.0f blue:245.0f/255.0f alpha:1]
-#define Color_o [UIColor colorWithRed:172.0f/255.0f green:230.0f/255.0f blue:245.0f/255.0f alpha:1]
-#define lightColor [UIColor colorWithRed:79.0f/255.0f green:190.0f/255.0f blue:221.0f/255.0f alpha:0.8]
-#define darkColor [UIColor colorWithRed:66.0f/255.0f green:162.0f/255.0f blue:189.0f/255.0f alpha:0.8]
 
+#import "RegisterEmailController.h"
+
+#import "GeTuiSdk.h"
+#import "MyMD5.h"
+
+#import "webViewController.h"
+
+#define Color_tp [UIColor colorWithRed:170.0f/255.0f green:230.0f/255.0f blue:245.0f/255.0f alpha:1]
 
 @interface RegisterEmailController ()<UITextFieldDelegate,UIAlertViewDelegate>
 {

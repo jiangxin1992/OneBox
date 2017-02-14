@@ -5,38 +5,40 @@
 //  Created by 谢江新 on 15/6/23.
 //  Copyright (c) 2015年 谢江新. All rights reserved.
 //
-#define yellow_color [UIColor colorWithRed:248.0f/255.0f green:210.0f/255.0f blue:82.0f/255.0f alpha:1]
-#define yellow_color_2 [UIColor colorWithRed:247.0f/255.0f green:152.0f/255.0f blue:25.0f/255.0f alpha:1]
-#define photoHeight (ScreenWidth-_margin*2)*9.0f/16.0f
-#import "usermodel.h"
+
+#import "SchoolDetailViewController.h"
+
 #import <CoreLocation/CoreLocation.h>
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <AVFoundation/AVFoundation.h>
-
 #import <ShareSDK/ShareSDK.h>
 #import <ShareSDKExtension/ShareSDK+Extension.h>
 #import <ShareSDKConnector/ShareSDKConnector.h>
-
+#import "HttpRequestManager.h"
+#import <MessageUI/MessageUI.h>
+#import <UIKit/UIKit.h>
+#import <MapKit/MapKit.h>
 
 #import "followerViewController.h"
 #import "followingViewController.h"
-#import "HttpRequestManager.h"
 #import "AdmissionViewController.h"
 #import "schoolCommentController.h"
-#import <MessageUI/MessageUI.h>
-#import "graduationModel.h"
-#import "MyPoint.h"
-#import "SchoolDetailViewController.h"
-
-#import "KVNProgress.h"
-#import "Tools.h"
+#import "CustomTabbarController.h"
 #import "ImageViewController.h"
-
 #import "LoginViewController.h"
-#import "schoolDetailModel.h"
 #import "ChatViewController.h"
-#import <UIKit/UIKit.h>
-#import <MapKit/MapKit.h>
+
+#import "MyPoint.h"
+#import "KVNProgress.h"
+
+#import "Tools.h"
+#import "usermodel.h"
+#import "schoolDetailModel.h"
+#import "graduationModel.h"
+
+#define yellow_color [UIColor colorWithRed:248.0f/255.0f green:210.0f/255.0f blue:82.0f/255.0f alpha:1]
+#define yellow_color_2 [UIColor colorWithRed:247.0f/255.0f green:152.0f/255.0f blue:25.0f/255.0f alpha:1]
+#define photoHeight (ScreenWidth-_margin*2)*9.0f/16.0f
 
 @interface SchoolDetailViewController ()<UIScrollViewDelegate,UIPageViewControllerDataSource,UIPageViewControllerDelegate,UIAlertViewDelegate,MKMapViewDelegate,CLLocationManagerDelegate,MFMailComposeViewControllerDelegate,UIActionSheetDelegate,UIWebViewDelegate,MFMailComposeViewControllerDelegate>
 

@@ -7,13 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+
 typedef  void(^bl)();
+
 @interface chooseRegisterViewController : UIViewController
 {
     void(^disblock)();
     void(^resetpasswordBlock)();
     void(^resetpasswordBlock2)();
 }
+
 __string(type);
 @property (nonatomic,copy)bl block;
+
 @end

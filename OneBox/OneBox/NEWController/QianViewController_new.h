@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface QianViewController_new : UIViewController
+
 @property (nonatomic,copy) void(^block)(NSString*,BOOL);
 @property (nonatomic,assign)NSInteger step;
+
 @end

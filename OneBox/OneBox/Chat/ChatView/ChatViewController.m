@@ -37,6 +37,8 @@
 #import "EMCDDeviceManager.h"
 #import "EMCDDeviceManagerDelegate.h"
 #import "RobotManager.h"
+#import "CustomTabbarController.h"
+#import "EMAlertView.h"
 #define KPageCount 20
 #define KHintAdjustY    50
 

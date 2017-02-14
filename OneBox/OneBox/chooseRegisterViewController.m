@@ -5,9 +5,11 @@
 //  Created by 谢江新 on 15/11/20.
 //  Copyright © 2015年 谢江新. All rights reserved.
 //
+
+#import "chooseRegisterViewController.h"
+
 #import "RegisterEmailController.h"
 #import "RetrievePasswordController.h"
-#import "chooseRegisterViewController.h"
 
 @interface chooseRegisterViewController ()
 

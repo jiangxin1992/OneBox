@@ -9,7 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface ImageViewController : UIViewController
+
 @property (nonatomic,assign) NSInteger currentPage;
 @property (nonatomic,assign) NSInteger maxPage;
 @property (nonatomic,copy) NSArray *array;
+
 @end

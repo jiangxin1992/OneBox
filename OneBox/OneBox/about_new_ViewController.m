@@ -6,16 +6,17 @@
 //  Copyright (c) 2015年 谢江新. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "about_new_ViewController.h"
+
 #import "BindingEmailViewController.h"
 #import "BingingAuthViewController.h"
 #import "personinfoViewController.h"
 #import "BindingViewController.h"
 #import "ChangePswViewController.h"
 #import "NotificationController.h"
-
+#import "CustomTabbarController.h"
 #import "AboutViewController.h"
-#import "about_new_ViewController.h"
+
 
 @interface about_new_ViewController ()<UIAlertViewDelegate>
 

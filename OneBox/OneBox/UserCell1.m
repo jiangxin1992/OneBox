@@ -8,6 +8,8 @@
 
 #import "UserCell1.h"
 
+#import "usermodel.h"
+
 @implementation UserCell1
 {
     NSMutableArray *labelarr;

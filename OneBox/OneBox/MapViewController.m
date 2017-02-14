@@ -5,18 +5,21 @@
 //  Created by 谢江新 on 15-2-2.
 //  Copyright (c) 2015年 谢江新. All rights reserved.
 //
-#define detail_search_url @"/v1/schools"
-#import "ADClusterableAnnotation.h"
-#import "MyPoint.h"
+
+#import "MapViewController.h"
+
 #import "SchoolDetailViewController.h"
 #import "ADClusterMapView.h"
 #import "ADClusterableAnnotation.h"
-#import "customTap.h"
 #import "customMKPinAnnotationView.h"
-#import "cardView.h"
-#import "surveyModel.h"
+#import "CustomTabbarController.h"
 
-#import "MapViewController.h"
+#import "cardView.h"
+
+#import "ADClusterableAnnotation.h"
+#import "MyPoint.h"
+#import "customTap.h"
+#import "surveyModel.h"
 
 @interface MapViewController ()<UIAlertViewDelegate,UIGestureRecognizerDelegate>
 

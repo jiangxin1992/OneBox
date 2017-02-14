@@ -5,10 +5,13 @@
 //  Created by 谢江新 on 15/12/1.
 //  Copyright © 2015年 谢江新. All rights reserved.
 //
+
+#import "collection_del_Cell.h"
+
+#import "foundModel.h"
+
 #define foundCellHeight 200*_Scale
 #define labelHight 40*_Scale
-#import "foundModel.h"
-#import "collection_del_Cell.h"
 
 @implementation collection_del_Cell
 {

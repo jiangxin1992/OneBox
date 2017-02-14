@@ -9,12 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @interface SchoolDetailViewController : UIViewController
-//{
-//    void(^Admissionblock)(NSDictionary *dict,NSInteger num);
-//}
+
 @property (nonatomic, strong) UISwipeGestureRecognizer *leftSwipeGestureRecognizer;
 @property (nonatomic, strong) UISwipeGestureRecognizer *rightSwipeGestureRecognizer;
 @property (nonatomic,copy)NSDictionary *data_dict;
 @property (nonatomic,assign)BOOL islogin;
 __string(sid);
+
 @end

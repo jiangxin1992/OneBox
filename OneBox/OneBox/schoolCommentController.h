@@ -8,14 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@interface schoolCommentController : UIViewController
-{
+@interface schoolCommentController : UIViewController{
     void(^changeBlock)(NSNumber *rownum,NSInteger type);
 }
+
 @property (nonatomic,assign)BOOL islogin;
 @property (nonatomic,copy)UITableView *tableView;
 @property (nonatomic,copy) void(^block)(NSString *title);
 @property (nonatomic, strong) UISwipeGestureRecognizer *rightSwipeGestureRecognizer;
-
 __string(sid);
+
 @end

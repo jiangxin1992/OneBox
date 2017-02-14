@@ -6,15 +6,17 @@
 //  Copyright (c) 2015年 谢江新. All rights reserved.
 //
 
-//[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel://8008808888"]];
+#import "bangdanViewController.h"
+
 #import "SchoolDetailViewController.h"
-#define foundCellHeight 200*_Scale
+#import "CustomTabbarController.h"
+
 #import "bangdanCell.h"
+
 #import "foundModel.h"
 #import "ChineseToPinyin.h"
 
-#import "bangdanViewController.h"
-
+#define foundCellHeight 200*_Scale
 
 @interface bangdanViewController ()<UITableViewDataSource,UITableViewDelegate>
 

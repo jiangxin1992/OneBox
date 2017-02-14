@@ -5,13 +5,13 @@
 //  Created by 谢江新 on 15/11/16.
 //  Copyright © 2015年 谢江新. All rights reserved.
 //
-//#import "guanzhuViewController.h"
-//#import "FriendsViewController.h"
-//#import "AdmissionOfficerViewController.h"
-//#import "GroupViewController.h"
-#import "bangdanViewController.h"
+
 #import "bangdanlistViewController.h"
+
+#import "bangdanViewController.h"
 #import "SchoolDetailViewController.h"
+#import "CustomTabbarController.h"
+
 @interface bangdanlistViewController ()
 
 @end

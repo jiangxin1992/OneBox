@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface collection_del_Cell : UITableViewCell
+
 @property(nonatomic,copy)NSMutableDictionary *dict;
+
 @end

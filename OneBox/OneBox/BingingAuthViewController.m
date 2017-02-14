@@ -5,12 +5,15 @@
 //  Created by 谢江新 on 15/11/5.
 //  Copyright © 2015年 谢江新. All rights reserved.
 //
+
+#import "BingingAuthViewController.h"
+
 #import "MyInfo.h"
 #import "HttpRequestManager.h"
 #import <ShareSDK/ShareSDK.h>
 #import <ShareSDKExtension/ShareSDK+Extension.h>
 #import <ShareSDKConnector/ShareSDKConnector.h>
-#import "BingingAuthViewController.h"
+
 
 @interface BingingAuthViewController ()<UIAlertViewDelegate>
 

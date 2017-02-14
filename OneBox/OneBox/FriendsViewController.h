@@ -13,5 +13,4 @@
     void(^changeBlock)(NSNumber *rownum);
 }
 
-
 @end

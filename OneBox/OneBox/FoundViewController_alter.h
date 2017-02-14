@@ -11,6 +11,7 @@
 @interface FoundViewController_alter : UIViewController
 
 @property (strong,nonatomic) UITableView *tableView;
+
 @property NSMutableString* ismixed;
 @property NSMutableString* ismale;
 @property NSMutableString* isfemale;
@@ -21,6 +22,5 @@
 @property NSMutableString* isESL;
 @property NSMutableString* state;
 @property NSMutableString* city;
-
 
 @end

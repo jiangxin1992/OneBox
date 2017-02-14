@@ -8,34 +8,31 @@
 //  Copyright (c) 2015年 谢江新. All rights reserved.
 //
 
+#import "userInfoViewController.h"
+
+#import "HttpRequestManager.h"
+#import "QiniuSDK.h"
+#import "UIImageView+AFNetworking.h"
+
 #import <CoreLocation/CoreLocation.h>
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <AVFoundation/AVFoundation.h>
-
 #import <MessageUI/MFMailComposeViewController.h>
 #import <ShareSDK/ShareSDK.h>
 #import <ShareSDKExtension/ShareSDK+Extension.h>
 #import <ShareSDKConnector/ShareSDKConnector.h>
 
-
+#import "CustomTabbarController.h"
 #import "suggestViewController.h"
 #import "about_new_ViewController.h"
 #import "goalViewController.h"
 #import "collectionSchool_delete.h"
-
-#import "userInfoViewController.h"
-#import "regular.h"
 #import "LoginViewController.h"
-#import "MyMD5.h"
-
 #import "AboutViewController.h"
-#import "HttpRequestManager.h"
+
+#import "regular.h"
+#import "MyMD5.h"
 #import "MyInfo.h"
-#import "QiniuSDK.h"
-#import "UIImageView+AFNetworking.h"
-//#import "WeiboApi.h"
-#define COLOR [UIColor colorWithRed:153/255.0 green:153/255.0 blue:153/255.0 alpha:1.0]
-#define NEWSCOLOR  [UIColor colorWithRed:77/255.0 green:190/255.0 blue:217/255.0 alpha:1.0]
 
 @interface userInfoViewController ()<UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,NSURLConnectionDelegate,UITextFieldDelegate,UICollectionViewDelegate,UIAlertViewDelegate,MFMailComposeViewControllerDelegate,UIActionSheetDelegate>
 {

@@ -6,31 +6,24 @@
 //  Copyright (c) 2015年 谢江新. All rights reserved.
 //
 
+#import "schoolCommentController.h"
+
+#import "MJRefresh.h"
+#import "HttpRequestManager.h"
+
 #import "followingViewController.h"
 #import "followerViewController.h"
 #import "ChatViewController.h"
-#import "MJRefresh.h"
-#define COLOR [UIColor colorWithRed:153/255.0 green:153/255.0 blue:153/255.0 alpha:1.0]
-//获得评论接口
-#define  getcomment_url @"http://121.40.153.17/api/index.php/Home/School/getcomments"
-//发表评论接口
-#define  send_comment_url @"http://121.40.153.17/api/index.php/Home/School/comment"
-//删除评论接口
-#define  remove_comment_url @"http://121.40.153.17/api/index.php/Home/School/deleteComment/cid/"
-//评论的view的高度（发表评论）
-#define commentHeight 70*_Scale
 #import "LoginViewController.h"
-#import "Tools.h"
+
 #import "comment_cell.h"
 
-#import "schoolCommentController.h"
+#import "Tools.h"
+#import "MyInfo.h"
 #import "comment_model_alter.h"
 
-
-#import "HttpRequestManager.h"
-//#import "RCIM.h"
-#import "MyInfo.h"
-//#import "DemoChatViewController.h"
+//评论的view的高度（发表评论）
+#define commentHeight 70*_Scale
 
 @interface schoolCommentController ()<UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate,UITextFieldDelegate,UITextViewDelegate>
 {

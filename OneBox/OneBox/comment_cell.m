@@ -5,9 +5,13 @@
 //  Created by 谢江新 on 15/2/25.
 //  Copyright (c) 2015年 谢江新. All rights reserved.
 //
-#import "Tools.h"
+
 #import "comment_cell.h"
+
+#import "Tools.h"
+
 #import "comment_model_alter.h"
+
 @implementation comment_cell
 {
     DBImageView *headImg;

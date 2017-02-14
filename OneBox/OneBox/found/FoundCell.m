@@ -7,8 +7,12 @@
 //
 
 #import "FoundCell.h"
+
+#import "foundModel.h"
+
 #define foundCellHeight 184*_Scale
 #define labelHight 20
+
 @implementation FoundCell
 {
     NSMutableArray *leftViewArray;

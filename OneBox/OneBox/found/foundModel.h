@@ -9,7 +9,9 @@
 #import "baseModelJX.h"
 
 @interface foundModel : baseModelJX
+
 +(NSMutableArray *)parsingData:(NSDictionary *)dict;
+
 @property(nonatomic,assign) BOOL isapp;
 @property (nonatomic,assign)BOOL if_order_school;
 @property (nonatomic,assign)NSInteger is_order_school;
@@ -18,7 +20,6 @@ __string(en_name);
 __string(cn_name);
 __string(city);
 __string(state);
-
 __string(rank);
 __string(grade);
 __string(setup_year);

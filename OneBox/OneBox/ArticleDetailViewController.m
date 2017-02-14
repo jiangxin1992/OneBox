@@ -5,24 +5,29 @@
 //  Created by 谢江新 on 15/12/24.
 //  Copyright © 2015年 谢江新. All rights reserved.
 //
-#import "ChatViewController.h"
-#import "followerViewController.h"
-#import "followingViewController.h"
+
+#import "ArticleDetailViewController.h"
+
 #import "HttpRequestManager.h"
 #import <CoreLocation/CoreLocation.h>
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <AVFoundation/AVFoundation.h>
 #import <MessageUI/MFMailComposeViewController.h>
-
-
 #import <ShareSDK/ShareSDK.h>
 #import <ShareSDKExtension/ShareSDK+Extension.h>
 #import <ShareSDKConnector/ShareSDKConnector.h>
 
+#import "ChatViewController.h"
+#import "followerViewController.h"
+#import "followingViewController.h"
+#import "CustomTabbarController.h"
 #import "ArticleCommentController.h"
 #import "LoginViewController.h"
+
+#import "ArticleModel.h"
 #import "ArticleDetailModel.h"
-#import "ArticleDetailViewController.h"
+#import "ArticleDetailModel.h"
+
 
 @interface ArticleDetailViewController ()<UIWebViewDelegate,MFMailComposeViewControllerDelegate>
 

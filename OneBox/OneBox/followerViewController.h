@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface followerViewController : UIViewController
-{
+@interface followerViewController : UIViewController{
     void(^changeBlock)(NSNumber *rownum);
 }
 __string(token);
+
 @end

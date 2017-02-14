@@ -9,17 +9,22 @@
   * is strictly forbidden unless prior written permission is obtained
   * from EaseMob Technologies.
   */
-#import "usermodel.h"
+
 #import "ChatListViewController.h"
+
+#import "NSDate+Category.h"
+#import "RealtimeSearchUtil.h"
+#import "ConvertToCommonEmoticonsHelper.h"
+#import "RobotManager.h"
+
+#import "ChatViewController.h"
+#import "EMSearchDisplayController.h"
+
 #import "SRRefreshView.h"
 #import "ChatListCell.h"
 #import "EMSearchBar.h"
-#import "NSDate+Category.h"
-#import "RealtimeSearchUtil.h"
-#import "ChatViewController.h"
-#import "EMSearchDisplayController.h"
-#import "ConvertToCommonEmoticonsHelper.h"
-#import "RobotManager.h"
+
+#import "usermodel.h"
 
 @interface ChatListViewController ()<UITableViewDelegate,UITableViewDataSource, UISearchDisplayDelegate,SRRefreshDelegate, UISearchBarDelegate, IChatManagerDelegate,ChatViewControllerDelegate>
 

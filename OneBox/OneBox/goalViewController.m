@@ -5,12 +5,17 @@
 //  Created by 谢江新 on 15/6/25.
 //  Copyright (c) 2015年 谢江新. All rights reserved.
 //
-#define card_type 140*_Scale
-#define cardHeight 440*_Scale
+
+#import "goalViewController.h"
+
+#import "CustomTabbarController.h"
 #import "SchoolDetailViewController.h"
+
 #import "Tools.h"
 #import "chooseModel.h"
-#import "goalViewController.h"
+
+#define card_type 140*_Scale
+#define cardHeight 440*_Scale
 
 @interface goalViewController ()
 
@@ -24,10 +29,6 @@
     UIView *middleview;
     CGFloat max_y;
     UIView *downview;
-//    BOOL _islogin;
-
-
-
 }
 
 - (void)viewDidLoad {

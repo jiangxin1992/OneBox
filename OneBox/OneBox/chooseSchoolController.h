@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface chooseSchoolController : UIViewController
+
 @property (nonatomic,assign)NSInteger step;
 @property (nonatomic,copy) void(^block)(NSString*);
 

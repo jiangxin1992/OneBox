@@ -5,11 +5,13 @@
 //  Created by 谢江新 on 15/8/13.
 //  Copyright (c) 2015年 谢江新. All rights reserved.
 //
+
+#import "UserListViewController.h"
+
 #import "guanzhuViewController.h"
 #import "FriendsViewController.h"
 #import "AdmissionOfficerViewController.h"
 #import "GroupViewController.h"
-#import "UserListViewController.h"
 
 @interface UserListViewController ()
 

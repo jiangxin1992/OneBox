@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface bangdanViewController : UIViewController
+
 @property (nonatomic,assign)NSInteger type;
+
 @end

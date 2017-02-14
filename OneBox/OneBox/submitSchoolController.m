@@ -6,12 +6,16 @@
 //  Copyright (c) 2015年 谢江新. All rights reserved.
 //
 
+#import "submitSchoolController.h"
 
 #import "OnlineProjectsViewController.h"
-#define color_gray [UIColor colorWithRed:153.0f/255.0f green:153.0f/255.0f blue:153.0f/255.0f alpha:1]
 #import "QianViewController_new.h"
-#import "submitSchoolController.h"
+#import "CustomTabbarController.h"
+
 #import "chooseModel.h"
+
+#define color_gray [UIColor colorWithRed:153.0f/255.0f green:153.0f/255.0f blue:153.0f/255.0f alpha:1]
+
 @interface submitSchoolController ()
 
 @end

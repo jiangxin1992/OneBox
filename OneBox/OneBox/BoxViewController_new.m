@@ -5,30 +5,34 @@
 //  Created by 谢江新 on 15/11/25.
 //  Copyright © 2015年 谢江新. All rights reserved.
 //
-#import "Boxlistviewcontroller.h"
+
+#import "BoxViewController_new.h"
+
 #import "GifView.h"
 #import "DataSigner.h"
 #import <CoreLocation/CoreLocation.h>
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <AVFoundation/AVFoundation.h>
 #import <MessageUI/MFMailComposeViewController.h>
-
 #import <ShareSDK/ShareSDK.h>
 #import <ShareSDKExtension/ShareSDK+Extension.h>
 #import <ShareSDKConnector/ShareSDKConnector.h>
+#import "HttpRequestManager.h"
 
-#define _blueColor [UIColor colorWithRed:79.0f/255.0f green:194.0f/255.0f blue:248.0f/255.0f alpha:1]
-#define _yellowColor [UIColor colorWithRed:245.0f/255.0f green:186.0f/255.0f blue:0 alpha:1]
-#define _grayColor [UIColor colorWithRed:224.0f/255.0f green:224.0f/255.0f blue:224.0f/255.0f alpha:1]
-
+#import "Boxlistviewcontroller.h"
 #import "QianViewController_new.h"
 #import "LoginViewController.h"
 #import "FlyUsaViewController_new.h"
 #import "chooseSchoolController.h"
 #import "submitSchoolController.h"
-#import "HttpRequestManager.h"
+#import "CustomTabbarController.h"
+
 #import "MyInfo.h"
-#import "BoxViewController_new.h"
+#import "Order.h"
+
+#define _blueColor [UIColor colorWithRed:79.0f/255.0f green:194.0f/255.0f blue:248.0f/255.0f alpha:1]
+#define _yellowColor [UIColor colorWithRed:245.0f/255.0f green:186.0f/255.0f blue:0 alpha:1]
+#define _grayColor [UIColor colorWithRed:224.0f/255.0f green:224.0f/255.0f blue:224.0f/255.0f alpha:1]
 
 @interface BoxViewController_new ()<MFMailComposeViewControllerDelegate>
 {

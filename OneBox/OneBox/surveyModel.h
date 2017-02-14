@@ -5,9 +5,13 @@
 //  Created by 谢江新 on 15/2/11.
 //  Copyright (c) 2015年 谢江新. All rights reserved.
 //
-#define __string(__k__) @property(nonatomic,copy) NSString *__k__
+
 #import "baseModelJX.h"
+
 #import <Foundation/Foundation.h>
+
+#define __string(__k__) @property(nonatomic,copy) NSString *__k__
+
 @interface surveyModel : baseModelJX
 +(surveyModel *)parsingWithJsonDataForModel:(NSDictionary *)dict;
 //__string(progress);

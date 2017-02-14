@@ -7,6 +7,9 @@
 //
 
 #import "ArticleCell.h"
+
+#import "ArticleModel.h"
+
 #define foundCellHeight 360*_Scale
 
 @implementation ArticleCell

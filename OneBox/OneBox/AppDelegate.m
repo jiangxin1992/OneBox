@@ -23,6 +23,7 @@
 
 #import "EaseMob.h"
 #import "AppDelegate.h"
+#import "CustomTabbarController.h"
 
 
 #define kAppId           @"aLuGPVna2MAoAVtfbB66a3"

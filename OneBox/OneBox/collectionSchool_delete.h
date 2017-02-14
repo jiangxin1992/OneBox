@@ -9,4 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface collectionSchool_delete : UIViewController
+
 @end

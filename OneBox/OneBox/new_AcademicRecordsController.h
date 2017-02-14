@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface new_AcademicRecordsController : UIViewController
+
 @property NSMutableString* ismixed;
 @property NSMutableString* ismale;
 @property NSMutableString* isfemale;
@@ -19,5 +20,5 @@
 @property NSMutableString* isESL;
 @property NSMutableString* state;
 @property NSMutableString* city;
-//@property NSMutableString* renzheng;
+
 @end

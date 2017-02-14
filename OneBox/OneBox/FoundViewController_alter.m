@@ -5,21 +5,28 @@
 //  Created by 谢江新 on 15/4/20.
 //  Copyright (c) 2015年 谢江新. All rights reserved.
 //
+
+#import "FoundViewController_alter.h"
+
+#import "MJRefresh.h"
+
 #import "bangdanlistViewController.h"
-#import "NMRangeSlider.h"
-#define foundCellHeight 184*_Scale
-#define detail_search_url @"/v1/schools"
 #import "SchoolDetailViewController.h"
 #import "souSuoViewController.h"
 #import "shaiXuanViewController.h"
 #import "bangdanViewController.h"
-#import "foundModel.h"
-#import "FoundViewController_alter.h"
-#import "FoundCell.h"
 #import "userInfoViewController.h"
 #import "LoginViewController.h"
-#import "MJRefresh.h"
+#import "CustomTabbarController.h"
+
+#import "NMRangeSlider.h"
+#import "FoundCell.h"
+
 #import "ChineseToPinyin.h"
+#import "foundModel.h"
+
+#define foundCellHeight 184*_Scale
+
 @interface FoundViewController_alter ()<UITableViewDataSource,UITableViewDelegate>
 
 @end
@@ -464,9 +471,8 @@ _dictPinyinAndChinese = [[NSMutableDictionary alloc] init];
 //    [[ToolManager sharedManager] createProgress:@"加载中"];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
 
-    NSLog(@"%@%@",DNS,detail_search_url);
     NSLog(@"%@",dict);
-    [manager GET:[[NSString alloc] initWithFormat:@"%@%@",DNS,detail_search_url] parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager GET:[[NSString alloc] initWithFormat:@"%@%@",DNS,@"/v1/schools"] parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
 
         NSString *html = operation.responseString;
         NSData* data=[html dataUsingEncoding:NSUTF8StringEncoding];

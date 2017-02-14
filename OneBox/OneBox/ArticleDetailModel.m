@@ -28,7 +28,6 @@
     {
         model.app_html_url=@"";
     }
-//
     if([_dict objectForKey:@"share_link"]!=[NSNull null])
     {
         if([_dict objectForKey:@"share_link"]!=nil)

@@ -54,7 +54,7 @@
 
     if ([CLLocationManager locationServicesEnabled]) {
 
-        NSLog( @"Starting CLLocationManager" );
+        JXLOG( @"Starting CLLocationManager" );
 
         locationManager.delegate = self;
 
@@ -68,7 +68,7 @@
 
     } else {
 
-        NSLog( @"Cannot Starting CLLocationManager" );
+        JXLOG( @"Cannot Starting CLLocationManager" );
     }
     
 }
@@ -170,7 +170,7 @@
     _dictPinyinAndChinese=[self get_country_dict:country_data_arr];
     _arrayChar = [self get_country_arr:_dictPinyinAndChinese];
 
-    NSLog(@"111");
+    JXLOG(@"111");
 
 }
 #pragma mark*进行解析数据，得到排序后的索引数组
@@ -271,7 +271,7 @@
 
 // 错误信息
 -(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
-    NSLog(@"error");
+    JXLOG(@"error");
 
 }
 

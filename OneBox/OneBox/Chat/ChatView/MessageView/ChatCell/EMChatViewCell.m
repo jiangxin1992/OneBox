@@ -86,7 +86,7 @@ NSString *const kShouldResendCell = @"kShouldResendCell";
         
         bubbleFrame.origin.x = self.headImageView.frame.origin.x - bubbleFrame.size.width - HEAD_PADDING;
         _bubbleView.frame = bubbleFrame;
-        NSLog(@"rrrr%f",self.bubbleView.frame.size.height);
+        JXLOG(@"rrrr%f",self.bubbleView.frame.size.height);
 
         CGRect frame = self.activityView.frame;
         if (_hasRead.hidden)
@@ -108,7 +108,7 @@ NSString *const kShouldResendCell = @"kShouldResendCell";
         }
         _bubbleView.frame = bubbleFrame;
 
-        NSLog(@"rrrr%f",self.bubbleView.frame.size.height);
+        JXLOG(@"rrrr%f",self.bubbleView.frame.size.height);
 
     }
 }

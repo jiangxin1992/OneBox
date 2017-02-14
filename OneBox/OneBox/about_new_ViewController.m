@@ -15,6 +15,7 @@
 #import "ChangePswViewController.h"
 #import "NotificationController.h"
 #import "CustomTabbarController.h"
+
 #import "AboutViewController.h"
 
 
@@ -215,16 +216,16 @@
     EMError *error = nil;
     NSDictionary *info = [[EaseMob sharedInstance].chatManager logoffWithUnbindDeviceToken:YES error:&error];
     if (!error && info) {
-        NSLog(@"退出成功");
+        JXLOG(@"退出成功");
     }
     NSDictionary *parameters=@{@"token":[[NSUserDefaults standardUserDefaults] objectForKey:@"token"]};
     NSString *url=[[NSString alloc] initWithFormat:@"%@%@",DNS,@"/v1/users/login_out"];
     AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc]init];
     [manager POST:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
 
-        NSLog(@"111");
+        JXLOG(@"111");
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"222");
+        JXLOG(@"222");
     }];
 
 
@@ -296,7 +297,7 @@
 
                        NSArray *files = [[NSFileManager defaultManager] subpathsAtPath:cachPath];
 
-                       NSLog(@"files :%lu",(unsigned long)[files count]);
+                       JXLOG(@"files :%lu",(unsigned long)[files count]);
 
                        for (NSString *p in files) {
 
@@ -319,7 +320,7 @@
 
 {
     
-    NSLog(@"清理成功");
+    JXLOG(@"清理成功");
     
 }
 

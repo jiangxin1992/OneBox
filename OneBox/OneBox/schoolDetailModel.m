@@ -11,7 +11,7 @@
 @implementation schoolDetailModel
 +(schoolDetailModel *)parsingWithJsonDataForModel:(NSDictionary *)dict
 {
-    NSLog(@"dict==%@",dict);
+    JXLOG(@"dict==%@",dict);
     schoolDetailModel *model=[[schoolDetailModel alloc] init];
     if([dict objectForKey:@"school_ratings"]!=[NSNull null])
     {

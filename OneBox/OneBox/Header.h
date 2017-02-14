@@ -24,6 +24,7 @@
 #import "UITextField+Custom.h"
 #import "UILabel+DD_Custom.h"
 #import "UIView+Custom.h"
+#import "NSDate+Formatter.h"
 
 /*************** Custom ***************/
 #import "regular.h"

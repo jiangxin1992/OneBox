@@ -14,7 +14,7 @@
 
     surveyModel *model = [[surveyModel alloc]init];
     NSDictionary *_dict=[dict objectForKey:@"data"];
-    NSLog(@"%@",_dict);
+    JXLOG(@"%@",_dict);
     if([_dict objectForKey:@"full_address"]!=[NSNull null])
     {
 

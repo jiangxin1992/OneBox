@@ -175,7 +175,7 @@
         token = res[@"data"][@"token"];
 
     } failed:^{
-        NSLog(@"失败");
+        JXLOG(@"失败");
     }];
     
 }
@@ -258,7 +258,7 @@
                 label.attributedText = attributedString;
                 [label sizeToFit];
 
-                NSLog(@"%f %f",label.frame.size.width,label.frame.size.height);
+                JXLOG(@"%f %f",label.frame.size.width,label.frame.size.height);
 
                 [_height_array addObject:[NSNumber numberWithFloat:label.frame.size.height]];
 
@@ -709,7 +709,7 @@
         }
 
     } failed:^{
-        NSLog(@"失败");
+        JXLOG(@"失败");
     }];
 
 
@@ -752,10 +752,10 @@
             manager.responseSerializer = [AFHTTPResponseSerializer serializer];
 
             [manager POST:str parameters:para success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                //                NSLog(@"%@",responseObject);
+                //                JXLOG(@"%@",responseObject);
                 [regular removeProgress];
                 id res = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-                NSLog(@"%@",res);
+                JXLOG(@"%@",res);
                 if ([res[@"code"] integerValue] == 1) {
 
                     [[NSNotificationCenter defaultCenter] postNotificationName:@"RefreshChatList" object:nil];
@@ -764,7 +764,7 @@
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
 
                 [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错白色" Withtype:1]];
-                NSLog(@"失败");
+                JXLOG(@"失败");
             }];
 
         }else
@@ -802,10 +802,10 @@
             manager.responseSerializer = [AFHTTPResponseSerializer serializer];
 
             [manager POST:str parameters:para success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                //                NSLog(@"%@",responseObject);
+                //                JXLOG(@"%@",responseObject);
                 [regular removeProgress];
                 id res = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-                NSLog(@"%@",res);
+                JXLOG(@"%@",res);
                 if ([res[@"code"] integerValue] == 1) {
                     [[NSNotificationCenter defaultCenter] postNotificationName:@"RefreshChatList" object:nil];
                     _isguanzhu=NO;
@@ -814,7 +814,7 @@
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
 
                 [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错白色" Withtype:1]];
-                NSLog(@"失败");
+                JXLOG(@"失败");
             }];
 
 
@@ -1313,7 +1313,7 @@ _tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
                 label.attributedText = attributedString;
                 [label sizeToFit];
 
-                NSLog(@"%f %f",label.frame.size.width,label.frame.size.height);
+                JXLOG(@"%f %f",label.frame.size.width,label.frame.size.height);
                 [_height_array addObject:[NSNumber numberWithFloat:label.frame.size.height]];
 
             }

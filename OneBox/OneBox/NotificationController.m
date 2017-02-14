@@ -43,7 +43,7 @@
 }
 -(void)isopen:(NSNotification *)not
 {
-    NSLog(@"%@",not.object);
+    JXLOG(@"%@",not.object);
     for (notificationModel *model in dataArr) {
         if([model.NOT_ID isEqualToString:not.object])
         {

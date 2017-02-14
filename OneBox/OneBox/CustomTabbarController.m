@@ -53,7 +53,7 @@ static CustomTabbarController *tabbarController = nil;
 }
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
 {
-    NSLog(@"%lu",(unsigned long)self.selectedIndex);
+    JXLOG(@"%lu",(unsigned long)self.selectedIndex);
 
 
     //    遍历标签栏子视图，使他们为normal状态
@@ -62,7 +62,7 @@ static CustomTabbarController *tabbarController = nil;
         b.selected = NO;
     }
     //    将点击的item变为select状态
-    NSLog(@"%lu",(unsigned long)self.selectedIndex);
+    JXLOG(@"%lu",(unsigned long)self.selectedIndex);
     ((TabbarItem*)btnarr[self.selectedIndex]).selected=YES;
     
 }
@@ -237,7 +237,7 @@ static CustomTabbarController *tabbarController = nil;
                                    timeIntervalSinceDate:self.lastPlaySoundDate];
     if (timeInterval < kDefaultPlaySoundInterval) {
         //如果距离上次响铃和震动时间太短, 则跳过响铃
-        NSLog(@"skip ringing & vibration %@, %@", [NSDate date], self.lastPlaySoundDate);
+        JXLOG(@"skip ringing & vibration %@, %@", [NSDate date], self.lastPlaySoundDate);
         return;
     }
 
@@ -347,7 +347,7 @@ static CustomTabbarController *tabbarController = nil;
     notification.timeZone = [NSTimeZone defaultTimeZone];
     NSTimeInterval timeInterval = [[NSDate date] timeIntervalSinceDate:self.lastPlaySoundDate];
     if (timeInterval < kDefaultPlaySoundInterval) {
-        NSLog(@"skip ringing & vibration %@, %@", [NSDate date], self.lastPlaySoundDate);
+        JXLOG(@"skip ringing & vibration %@, %@", [NSDate date], self.lastPlaySoundDate);
     } else {
         notification.soundName = UILocalNotificationDefaultSoundName;
         self.lastPlaySoundDate = [NSDate date];
@@ -670,7 +670,7 @@ static CustomTabbarController *tabbarController = nil;
             }
             item.type=12;
         }
-        item.frame = CGRectMake(buttonWidth*i, 0, buttonWidth, tabbarHeight);
+        item.frame = CGRectMake(buttonWidth*i, 0, buttonWidth, kTabBarHeight);
         //item.backgroundColor=[UIColor redColor];
         //        设置item的frame，标题，normal和select的图片
 
@@ -737,7 +737,7 @@ static CustomTabbarController *tabbarController = nil;
 -(void)createTabbar
 {
 //     对_tabbar进行初始化，并进行ui布局
-    _tabbar = [[UIImageView alloc]initWithFrame:CGRectMake(0, [[UIScreen mainScreen]bounds].size.height - tabbarHeight, [[UIScreen mainScreen]bounds].size.width, tabbarHeight)];
+    _tabbar = [[UIImageView alloc]initWithFrame:CGRectMake(0, [[UIScreen mainScreen]bounds].size.height - kTabBarHeight, [[UIScreen mainScreen]bounds].size.width, kTabBarHeight)];
     _tabbar.image = [UIImage imageNamed:@"found_activity_菜单栏"];
     _tabbar.userInteractionEnabled = YES;
     [self.view addSubview:_tabbar];
@@ -763,7 +763,7 @@ static CustomTabbarController *tabbarController = nil;
     [UIView setAnimationCurve: UIViewAnimationCurveEaseInOut];
     [UIView setAnimationDelegate:self];
 
-     _tabbar.frame=CGRectMake(0, [[UIScreen mainScreen]bounds].size.height, [[UIScreen mainScreen]bounds].size.width, tabbarHeight);
+     _tabbar.frame=CGRectMake(0, [[UIScreen mainScreen]bounds].size.height, [[UIScreen mainScreen]bounds].size.width, kTabBarHeight);
 
     [UIView commitAnimations];
 
@@ -776,7 +776,7 @@ static CustomTabbarController *tabbarController = nil;
     [UIView setAnimationDuration:0.2];
     [UIView setAnimationCurve: UIViewAnimationCurveEaseInOut];
     [UIView setAnimationDelegate:self];
-    _tabbar.frame=CGRectMake(0, [[UIScreen mainScreen]bounds].size.height - tabbarHeight, [[UIScreen mainScreen]bounds].size.width, tabbarHeight);
+    _tabbar.frame=CGRectMake(0, [[UIScreen mainScreen]bounds].size.height - kTabBarHeight, [[UIScreen mainScreen]bounds].size.width, kTabBarHeight);
     [UIView commitAnimations];
 
 

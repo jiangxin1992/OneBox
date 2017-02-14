@@ -280,7 +280,8 @@
 
             if([[dict objectForKey:@"code"] integerValue]==1)
             {
-                [regular alertTitle_Simple:@"发送成功"];
+
+                [self presentViewController:[regular alertTitle_Simple:@"发送成功"] animated:YES completion:nil];
 #pragma mark-激活定时器
                 yanzhengma=YES;
                 _time=60;

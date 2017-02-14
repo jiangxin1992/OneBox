@@ -178,7 +178,7 @@
 {
     if(btn.tag-2200==0)
     {
-//        NSLog(@"currentPage=%ld",(long)_currentPage);
+//        JXLOG(@"currentPage=%ld",(long)_currentPage);
 
 //        NSDictionary *__dict=[_array objectAtIndex:_currentPage];
 //        NSInteger _num=btn.tag-2200;
@@ -186,7 +186,7 @@
 
     }else if(btn.tag-2200==1)
     {
-//        NSLog(@"currentPage=%ld",(long)_currentPage);
+//        JXLOG(@"currentPage=%ld",(long)_currentPage);
 
 //        NSDictionary *__dict=[_array objectAtIndex:_currentPage];
 //        NSInteger _num=btn.tag-2200;

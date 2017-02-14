@@ -300,12 +300,12 @@
     NSUserDefaults *dict=[NSUserDefaults standardUserDefaults];
     NSMutableDictionary *parameters=[[NSMutableDictionary alloc] init];
     [parameters setObject:[dict objectForKey:@"token"] forKey:@"token"];
-    //    NSLog(@"titleArr=%@",titleArr);
+    //    JXLOG(@"titleArr=%@",titleArr);
 
     for (int i=0; i<arr111.count; i++) {
         if(i==_index)
         {
-            NSLog(@"%@",data_dict_must);
+            JXLOG(@"%@",data_dict_must);
             NSInteger _obj=0;
             if([[data_dict_must objectForKey:arr111[i]] integerValue])
             {

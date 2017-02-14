@@ -85,8 +85,8 @@
 
         if([type isEqualToString:@"1"])
         {
-            NSLog(@"%@",_dictPinyinAndChinese);
-            NSLog(@"%@",_arrayChar);
+            JXLOG(@"%@",_dictPinyinAndChinese);
+            JXLOG(@"%@",_arrayChar);
              foundModel *model=[[_dictPinyinAndChinese objectForKey:[_arrayChar objectAtIndex:section]] objectAtIndex:row];
             model.isapp=YES;
         }else if([type isEqualToString:@"2"])
@@ -321,7 +321,7 @@
     [self.view addSubview:indicator];
     [indicator startAnimation];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    NSLog(@"%@",_data_dict);
+    JXLOG(@"%@",_data_dict);
     [_data_dict setValue:[[NSString alloc] initWithFormat:@"%ld",(long)_page] forKey:@"page"];
 
     [manager GET:[[NSString alloc] initWithFormat:@"%@%@",DNS,@"/v1/schools"] parameters:_data_dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -467,7 +467,7 @@
                 }
             }
         }
-        NSLog(@"%d %d",_m_row,_m_section);
+        JXLOG(@"%d %d",_m_row,_m_section);
 
 
         [_tableView reloadData];
@@ -511,7 +511,7 @@
         }];
 //  @{@"data":_result_arr}
         //获得搜索数据
-        NSLog(@"111");
+        JXLOG(@"111");
         _dictPinyinAndChinese1=[self get_country_dict:data_Result_arr];
         _arrayChar1=[self get_country_arr:_dictPinyinAndChinese1];
         _m_row1=0;
@@ -746,7 +746,7 @@
 //            _m_section
 
             cell_card.block=self.sousuoBlock;
-            NSLog(@"%@",_dictPinyinAndChinese);
+            JXLOG(@"%@",_dictPinyinAndChinese);
             NSDictionary *_dict=[[NSDictionary alloc] initWithObjectsAndKeys:[[_dictPinyinAndChinese objectForKey:[_arrayChar objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row],@"model",[NSNumber numberWithInteger:indexPath.row],@"row",[NSNumber numberWithInteger:indexPath.section],@"section",@"1",@"type",[_arrayChar objectAtIndex:indexPath.section],@"char",[NSNumber numberWithBool:_is_suoyin],@"suoyin",[NSNumber numberWithInteger:_m_row],@"m_row",[NSNumber numberWithInteger:_m_section],@"m_section",nil];
 
             cell_card.dict=_dict;
@@ -816,7 +816,7 @@
     if(scrollView==_tableView&&_appear)
     {
         _start_y=scrollView.contentOffset.y;
-        NSLog(@"滚动视图即将开始拖动=%f",scrollView.contentOffset.y);
+        JXLOG(@"滚动视图即将开始拖动=%f",scrollView.contentOffset.y);
         _Dragging=YES;
     }
 
@@ -825,7 +825,7 @@
 -(NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index {
     NSInteger count = 0;
 
-//    NSLog(@"%@-%d",title,index);
+//    JXLOG(@"%@-%d",title,index);
 
     _is_suoyin=YES;
     for(NSString *character in _arrayChar)
@@ -884,7 +884,7 @@
         if(scrollView==_tableView&&_appear)
         {
 
-            NSLog(@"滚动视图正在滚动=%f",scrollView.contentOffset.y);
+            JXLOG(@"滚动视图正在滚动=%f",scrollView.contentOffset.y);
             if(_start_y<20&&scrollView.contentOffset.y>20)
             {
 

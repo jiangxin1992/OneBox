@@ -254,7 +254,7 @@
                 NSDictionary *dict=[NSJSONSerialization  JSONObjectWithData:data options:0 error:nil];
                 if([[dict objectForKey:@"code"] integerValue]==1)
                 {
-                    NSLog(@"111");
+                    JXLOG(@"111");
                     [[ToolManager sharedManager] removeProgress];
 
                 }else
@@ -536,7 +536,7 @@
             }
         }
     } failed:^{
-        NSLog(@"失败");
+        JXLOG(@"失败");
     }];
 }
 -(void)xiaoshi
@@ -583,10 +583,10 @@
             manager.responseSerializer = [AFHTTPResponseSerializer serializer];
 
             [manager POST:str parameters:para success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                //                NSLog(@"%@",responseObject);
+                //                JXLOG(@"%@",responseObject);
                 [regular removeProgress];
                 id res = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-                NSLog(@"%@",res);
+                JXLOG(@"%@",res);
                 if ([res[@"code"] integerValue] == 1) {
 
                     [[NSNotificationCenter defaultCenter] postNotificationName:@"RefreshChatList" object:nil];
@@ -625,10 +625,10 @@
             manager.responseSerializer = [AFHTTPResponseSerializer serializer];
 
             [manager POST:str parameters:para success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                //                NSLog(@"%@",responseObject);
+                //                JXLOG(@"%@",responseObject);
                 [regular removeProgress];
                 id res = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-                NSLog(@"%@",res);
+                JXLOG(@"%@",res);
                 if ([res[@"code"] integerValue] == 1) {
                     [[NSNotificationCenter defaultCenter] postNotificationName:@"RefreshChatList" object:nil];
                     _isguanzhu=NO;
@@ -643,7 +643,7 @@
     {
         if(_isguanzhu)
         {
-            NSLog(@"111");
+            JXLOG(@"111");
             [[self.view.window viewWithTag:1000] removeFromSuperview];
             //                    usermodel *model=(usermodel *)not.object;
             ChatViewController *chatVC = [[ChatViewController alloc] initWithChatter:model.ease_mob_username isGroup:NO];

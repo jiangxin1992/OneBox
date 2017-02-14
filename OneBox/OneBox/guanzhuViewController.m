@@ -42,7 +42,7 @@
 }
 - (void)caseBtn:(UIButton *)btn
 {
-    NSLog(@"%@",btnarr);
+    JXLOG(@"%@",btnarr);
 
     usermodel *model=ArrayData[_rownum];
     if (btn.tag == 10000) {
@@ -79,10 +79,10 @@
             manager.responseSerializer = [AFHTTPResponseSerializer serializer];
 
             [manager POST:str parameters:para success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                //                NSLog(@"%@",responseObject);
+                //                JXLOG(@"%@",responseObject);
                 [regular removeProgress];
                 id res = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-                NSLog(@"%@",res);
+                JXLOG(@"%@",res);
                 if ([res[@"code"] integerValue] == 1) {
 
                     _isguanzhu=YES;
@@ -132,10 +132,10 @@
             manager.responseSerializer = [AFHTTPResponseSerializer serializer];
 
             [manager POST:str parameters:para success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                //                NSLog(@"%@",responseObject);
+                //                JXLOG(@"%@",responseObject);
                 [regular removeProgress];
                 id res = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-                NSLog(@"%@",res);
+                JXLOG(@"%@",res);
                 if ([res[@"code"] integerValue] == 1) {
                     _isguanzhu=NO;
 
@@ -203,7 +203,7 @@
 }
 -(void)CreateNofollowerView
 {
-    nofollow=[[UIView alloc] initWithFrame:CGRectMake(0,(ScreenHeight-330*_Scale)/2.0f-tabbarHeight-80*_Scale, ScreenWidth, 330*_Scale)];
+    nofollow=[[UIView alloc] initWithFrame:CGRectMake(0,(ScreenHeight-330*_Scale)/2.0f-kTabBarHeight-80*_Scale, ScreenWidth, 330*_Scale)];
     [self.view addSubview:nofollow];
 //    nofollow.backgroundColor=[UIColor redColor];
 
@@ -416,7 +416,7 @@
 ////            }
 ////            
 //        } failed:^{
-////            NSLog(@"失败");
+////            JXLOG(@"失败");
 //             [[ToolManager sharedManager] alertTitle_Simple:@"Network connection error, please check your connection."];
 //        }];
     };
@@ -437,7 +437,7 @@
 -(void)CreateTableview
 {
 
-    _tableView=[[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-tabbarHeight-80*_Scale-64) style:UITableViewStylePlain];
+    _tableView=[[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-kTabBarHeight-80*_Scale-64) style:UITableViewStylePlain];
     _tableView.userInteractionEnabled=YES;
     _tableView.delegate=self;
     _tableView.dataSource=self;
@@ -514,17 +514,17 @@
 //        manager.responseSerializer = [AFHTTPResponseSerializer serializer];
 //
 //        [manager POST:str parameters:para success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//            //                NSLog(@"%@",responseObject);
+//            //                JXLOG(@"%@",responseObject);
 //            [regular removeProgress];
 //            id res = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-//            NSLog(@"%@",res);
+//            JXLOG(@"%@",res);
 //            if ([res[@"code"] integerValue] == 1) {
 //                //                _isguanzhu=NO;
 //
 //            }
 //        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
 //            
-//            NSLog(@"失败");
+//            JXLOG(@"失败");
 //        }];
 //        
 //    }
@@ -654,10 +654,10 @@
 
 //                    NSIndexSet *indexSet=[[NSIndexSet alloc]initWithIndex:indexPathAll.section];
 //                    [_tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
-                    NSLog(@"%@",ArrayData);
+                    JXLOG(@"%@",ArrayData);
                     [_tableView reloadData];
 
-                    NSLog(@"1111");
+                    JXLOG(@"1111");
                 }else
                 {
                      [[ToolManager sharedManager] alertTitle_Simple:[dict objectForKey:@"message"]];
@@ -694,10 +694,10 @@
             manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     
             [manager POST:str parameters:para success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                //                NSLog(@"%@",responseObject);
+                //                JXLOG(@"%@",responseObject);
                 [regular removeProgress];
                 id res = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-                NSLog(@"%@",res);
+                JXLOG(@"%@",res);
                 if ([res[@"code"] integerValue] == 1) {
 
                 }

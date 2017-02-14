@@ -275,7 +275,7 @@
         ////            }
         //
         //        } failed:^{
-        ////            NSLog(@"失败");
+        ////            JXLOG(@"失败");
         //             [[ToolManager sharedManager] alertTitle_Simple:@"Network connection error, please check your connection."];
         //        }];
     };
@@ -286,7 +286,7 @@
 }
 - (void)caseBtn:(UIButton *)btn
 {
-    NSLog(@"%@",btnarr);
+    JXLOG(@"%@",btnarr);
 
     usermodel *model=ArrayData[_rownum];
     if (btn.tag == 10000) {
@@ -323,17 +323,17 @@
             manager.responseSerializer = [AFHTTPResponseSerializer serializer];
 
             [manager POST:str parameters:para success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                //                NSLog(@"%@",responseObject);
+                //                JXLOG(@"%@",responseObject);
                 [regular removeProgress];
                 id res = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-                NSLog(@"%@",res);
+                JXLOG(@"%@",res);
                 if ([res[@"code"] integerValue] == 1) {
 
                     _isguanzhu=YES;
                 }
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
 
-                //                NSLog(@"失败");
+                //                JXLOG(@"失败");
                 [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错白色" Withtype:1]];
             }];
 
@@ -378,17 +378,17 @@
             manager.responseSerializer = [AFHTTPResponseSerializer serializer];
 
             [manager POST:str parameters:para success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                //                NSLog(@"%@",responseObject);
+                //                JXLOG(@"%@",responseObject);
                 [regular removeProgress];
                 id res = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-                NSLog(@"%@",res);
+                JXLOG(@"%@",res);
                 if ([res[@"code"] integerValue] == 1) {
                     _isguanzhu=NO;
 
                 }
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
 
-                //                NSLog(@"失败");
+                //                JXLOG(@"失败");
                 [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错白色" Withtype:1]];
             }];
 
@@ -435,7 +435,7 @@
 }
 -(void)CreateTableview
 {
-    _tableView=[[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-tabbarHeight-80*_Scale-64) style:UITableViewStylePlain];
+    _tableView=[[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-kTabBarHeight-80*_Scale-64) style:UITableViewStylePlain];
     _tableView.delegate=self;
     _tableView.dataSource=self;
     _tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
@@ -489,17 +489,17 @@
 //        manager.responseSerializer = [AFHTTPResponseSerializer serializer];
 //
 //        [manager POST:str parameters:para success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//            //                NSLog(@"%@",responseObject);
+//            //                JXLOG(@"%@",responseObject);
 //            [regular removeProgress];
 //            id res = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-//            NSLog(@"%@",res);
+//            JXLOG(@"%@",res);
 //            if ([res[@"code"] integerValue] == 1) {
 ////                _isguanzhu=NO;
 //
 //            }
 //        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
 //
-////            NSLog(@"失败");
+////            JXLOG(@"失败");
 //             [[ToolManager sharedManager] alertTitle_Simple:@"Network connection error, please check your connection."];
 //        }];
 //
@@ -650,10 +650,10 @@
                 manager.responseSerializer = [AFHTTPResponseSerializer serializer];
 
                 [manager POST:str parameters:para success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                    //                NSLog(@"%@",responseObject);
+                    //                JXLOG(@"%@",responseObject);
                     [regular removeProgress];
                     id res = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-                    NSLog(@"%@",res);
+                    JXLOG(@"%@",res);
                     if ([res[@"code"] integerValue] == 1) {
 
                         model.is_following=YES;
@@ -664,7 +664,7 @@
                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
 
                     model.is_following=NO;
-                    //                NSLog(@"失败");
+                    //                JXLOG(@"失败");
                     [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错白色" Withtype:1]];
                 }];
 
@@ -687,10 +687,10 @@
                 manager.responseSerializer = [AFHTTPResponseSerializer serializer];
 
                 [manager POST:str parameters:para success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                    //                NSLog(@"%@",responseObject);
+                    //                JXLOG(@"%@",responseObject);
                     [regular removeProgress];
                     id res = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-                    NSLog(@"%@",res);
+                    JXLOG(@"%@",res);
                     if ([res[@"code"] integerValue] == 1) {
                         model.is_following=NO;
 
@@ -701,7 +701,7 @@
                     }
                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                     model.is_following=YES;
-                    //                NSLog(@"失败");
+                    //                JXLOG(@"失败");
                     [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错白色" Withtype:1]];
                 }];
 
@@ -738,7 +738,7 @@
                     NSIndexSet *indexSet=[[NSIndexSet alloc]initWithIndex:indexPathAll.section];
                     [_tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
 
-                    NSLog(@"1111");
+                    JXLOG(@"1111");
                 }else
                 {
                     [[ToolManager sharedManager] alertTitle_Simple:[dict objectForKey:@"message"]];
@@ -778,10 +778,10 @@
             manager.responseSerializer = [AFHTTPResponseSerializer serializer];
 
             [manager POST:str parameters:para success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                //                NSLog(@"%@",responseObject);
+                //                JXLOG(@"%@",responseObject);
                 [regular removeProgress];
                 id res = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-                NSLog(@"%@",res);
+                JXLOG(@"%@",res);
                 if ([res[@"code"] integerValue] == 1) {
 
                 }

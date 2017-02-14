@@ -146,7 +146,7 @@
     changeBlock=^( )
     {
         //        跳转到下一页面
-        //        NSLog(@"222");
+        //        JXLOG(@"222");
         SchoolDetailViewController *schoolView=[[SchoolDetailViewController alloc] init]  ;
         schoolView.data_dict=[[NSDictionary alloc] initWithObjectsAndKeys:cname,@"schoolName",sid,@"schoolID",[NSNumber numberWithInteger:is_order_school],@"is_order_school",nil];
 
@@ -201,7 +201,7 @@
 }
 - (void)tapDoubleGes:(UITapGestureRecognizer *)tapGes
 {
-    NSLog(@"tapDoubleGes");
+    JXLOG(@"tapDoubleGes");
 }
 #pragma mark-单击隐藏状态栏和导航栏
 - (void)tapRec:(UIGestureRecognizer *)tapGes
@@ -226,7 +226,7 @@
 //
 //    }
 //
-//    NSLog(@"tapRec");
+//    JXLOG(@"tapRec");
 
 
 }
@@ -384,7 +384,7 @@
     //没有出错
     if (error == nil) {
         [indicator stopAnimationWithLoadText:@"loading..." withType:YES];
-        NSLog(@"urlResponse = %@", urlResponse);
+        JXLOG(@"urlResponse = %@", urlResponse);
 
         NSString *html = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         NSData* data=[html dataUsingEncoding:NSUTF8StringEncoding];
@@ -402,10 +402,10 @@
     {
         [indicator stopAnimationWithLoadText:@"loading..." withType:YES];
         //打印出错内容
-        NSLog(@"error = %@", error);
+        JXLOG(@"error = %@", error);
         _numberOfCluster=25;
         _clusterDiscrimination=1;
-        NSLog(@"Error: %@", error);
+        JXLOG(@"Error: %@", error);
        [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错白色" Withtype:1]];
 
     }
@@ -445,10 +445,10 @@
     data =  [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&urlResponse error:&error];
     //没有出错
     if (error == nil) {
-        NSLog(@"urlResponse = %@", urlResponse);
+        JXLOG(@"urlResponse = %@", urlResponse);
 
         NSString *html = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-        //        NSLog(@"html = %@", html);
+        //        JXLOG(@"html = %@", html);
         //        NSString *html = operation.responseString;
         NSData* data=[html dataUsingEncoding:NSUTF8StringEncoding];
         NSDictionary *dict=[NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
@@ -479,7 +479,7 @@
 
                 }
                 _annoations=arr111;
-                NSLog(@"%@",_annoations);
+                JXLOG(@"%@",_annoations);
 
             }
 
@@ -498,7 +498,7 @@
 
         _numberOfCluster=25;
         _clusterDiscrimination=1;
-        NSLog(@"Error: %@", error);
+        JXLOG(@"Error: %@", error);
         [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错白色" Withtype:1]];
         [[ToolManager sharedManager] removeProgress];
 
@@ -512,7 +512,7 @@
 }
 
 -(void)showdetail:(customTap*)recognizer{
-//    NSLog(@"ssss%d",_mapview.annotations.count);
+//    JXLOG(@"ssss%d",_mapview.annotations.count);
     if(_mapview.annotations.count!=1)
     {
         [self mapView:_mapview didSelectAnnotationView:recognizer.v];
@@ -546,7 +546,7 @@
 
             [sid setString:[[NSString alloc] initWithFormat:@"%ld",(long)[dict[@"id"] integerValue]]];
 
-            NSLog(@"%@",dict);
+            JXLOG(@"%@",dict);
 
 
             void (^blockSuccess)(NSDictionary *dict);
@@ -626,7 +626,7 @@
                 break;
             }
         }
-        NSLog(@"%lu",(unsigned long)_annoations.count);
+        JXLOG(@"%lu",(unsigned long)_annoations.count);
         if(_annoations.count==1)
         {
             pinView.image=[UIImage imageNamed:@"newMapIcon_new.png"];
@@ -648,7 +648,7 @@
     }
     else {
 
-        NSLog(@"lat =%f",_mapview.region.span.latitudeDelta);
+        JXLOG(@"lat =%f",_mapview.region.span.latitudeDelta);
         //
         pinView.annotation = annotation;
         if(_mapview.region.span.latitudeDelta>50.0)
@@ -704,7 +704,7 @@
         jjj=0;
 
         hasnum=YES;
-        NSLog(@"%f",_mapview.region.span.latitudeDelta);
+        JXLOG(@"%f",_mapview.region.span.latitudeDelta);
         if(_mapview.region.span.latitudeDelta>73.0f)
         {
             pinView.hidden=YES;
@@ -787,7 +787,7 @@
         
     }else
     {
-        NSLog(@"%f",_mapview.region.span.latitudeDelta);
+        JXLOG(@"%f",_mapview.region.span.latitudeDelta);
         [mengbanImg removeFromSuperview];
         if(jjj==1&&_num<2&&!hasnum)
         {
@@ -813,13 +813,13 @@
 
 - (NSInteger)numberOfClustersInMapView:(ADClusterMapView *)mapView {
     
-    NSLog(@"%ld",(long)_numberOfCluster);
+    JXLOG(@"%ld",(long)_numberOfCluster);
     return _numberOfCluster;
 }
 
 - (double)clusterDiscriminationPowerForMapView:(ADClusterMapView *)mapView {
     
-    NSLog(@"%ld",(long)_clusterDiscrimination);
+    JXLOG(@"%ld",(long)_clusterDiscrimination);
     return _clusterDiscrimination;
 }
 
@@ -831,11 +831,11 @@
 
 -(void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated{
 
-    NSLog(@"latitudeDelta=%lf",_mapview.region.center.latitude);
+    JXLOG(@"latitudeDelta=%lf",_mapview.region.center.latitude);
     
     [_mapview removeAnnotations:_mapview.annotations];
     [_mapview setAnnotations:_annoations];
-    NSLog(@"%f",_mapview.region.span.latitudeDelta);
+    JXLOG(@"%f",_mapview.region.span.latitudeDelta);
 
     _iii=0;
     

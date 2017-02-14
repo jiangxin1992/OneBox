@@ -52,7 +52,7 @@
         {
             if(call.callState == CTCallStateIncoming)
             {
-                NSLog(@"Call is incoming");
+                JXLOG(@"Call is incoming");
                 [_timeTimer invalidate];
                 [self _stopRing];
                 

@@ -13,7 +13,7 @@ typedef  void(^bl)();
 @interface RetrievePasswordController : UIViewController
 {
     void(^registerBlock)();
-     void(^registerBlock2)();
+    void(^registerBlock2)();
 }
 
 __string(type1);

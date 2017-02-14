@@ -54,7 +54,7 @@
     if ( ![[NSFileManager defaultManager] fileExistsAtPath:self.localDirectory] ) {
         NSError *error;
         if ( ![[NSFileManager defaultManager] createDirectoryAtPath:self.localDirectory withIntermediateDirectories:YES attributes:nil error:&error] ) {
-            NSLog(@"[%@] ERROR: attempting to write create MyFolder directory", [self class]);
+            JXLOG(@"[%@] ERROR: attempting to write create MyFolder directory", [self class]);
             NSAssert( FALSE, @"Failed to create directory maybe out of disk space?");
         }
     }

@@ -111,7 +111,7 @@
             {
                 _tableView.tableHeaderView=[UIView new];
                 [dataArray addObjectsFromArray:_array];
-                NSLog(@"111");
+                JXLOG(@"111");
             }
 
 
@@ -134,7 +134,7 @@
         [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错白色" Withtype:1]];
         [_tableView headerEndRefreshing];
         [_tableView footerEndRefreshing];
-        NSLog(@"Error: %@", error);
+        JXLOG(@"Error: %@", error);
         [[ToolManager sharedManager] removeProgress];
     }];
 

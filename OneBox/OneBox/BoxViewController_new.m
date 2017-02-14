@@ -10,6 +10,7 @@
 
 #import "GifView.h"
 #import "DataSigner.h"
+#import <AlipaySDK/AlipaySDK.h>
 #import <CoreLocation/CoreLocation.h>
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <AVFoundation/AVFoundation.h>
@@ -97,7 +98,7 @@
         }
     }
 
-    CGFloat _jiange=(ScreenHeight-_diameter*4-tabbarHeight-64-_labelheight*4)/7.0f;
+    CGFloat _jiange=(ScreenHeight-_diameter*4-kTabBarHeight-64-_labelheight*4)/7.0f;
     CGFloat _y_p=2*_jiange+64;
     for (int i=0; i<titlearr.count; i++) {
         NSData *localData = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"box_main_gif@2x" ofType:@"gif"]];
@@ -374,16 +375,16 @@
     switch (result)
     {
         case MFMailComposeResultCancelled: // 用户取消编辑
-            NSLog(@"Mail send canceled...");
+            JXLOG(@"Mail send canceled...");
             break;
         case MFMailComposeResultSaved: // 用户保存邮件
-            NSLog(@"Mail saved...");
+            JXLOG(@"Mail saved...");
             break;
         case MFMailComposeResultSent: // 用户点击发送
-            NSLog(@"Mail sent...");
+            JXLOG(@"Mail sent...");
             break;
         case MFMailComposeResultFailed: // 用户尝试保存或发送邮件失败
-            NSLog(@"Mail send errored: %@...", [error localizedDescription]);
+            JXLOG(@"Mail send errored: %@...", [error localizedDescription]);
             break;
     }
     // 关闭邮件发送视图
@@ -451,7 +452,7 @@
     {
         arrayName = @[@(22),@(23),@(1),@(24),@(6),@(18)];
     }
-    NSLog(@"ssss%ld",(long)[arrayName[btn.tag - 9000] integerValue]);
+    JXLOG(@"ssss%ld",(long)[arrayName[btn.tag - 9000] integerValue]);
     
     //1、创建分享参数（必要）
     NSMutableDictionary *shareParams = [NSMutableDictionary dictionary];
@@ -629,16 +630,16 @@
     order.itBPay = @"30m";
     NSString *appScheme = @"OneBox";
     NSString *orderSpec = [order description];
-    NSLog(@"orderSpec = %@",orderSpec);
+    JXLOG(@"orderSpec = %@",orderSpec);
     id<DataSigner> signer = CreateRSADataSigner(PRIVATEKEY);
     NSString *signedString = [signer signString:orderSpec];
     NSString *orderString = nil;
         if (signedString != nil) {
             orderString = [NSString stringWithFormat:@"%@&sign=\"%@\"&sign_type=\"%@\"",
                            orderSpec, signedString, @"RSA"];
-            NSLog(@"%@",orderString);
+            JXLOG(@"%@",orderString);
             [[AlipaySDK defaultService] payOrder:orderString fromScheme:appScheme callback:^(NSDictionary *resultDic) {
-                NSLog(@"reslut = %@",resultDic);
+                JXLOG(@"reslut = %@",resultDic);
             }];}
 
 }

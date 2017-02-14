@@ -57,7 +57,7 @@
 -(void)taphead:(UIGestureRecognizer *)ges
 {
     //    bl(_num);
-    //    NSLog(@"%d",_num);
+    //    JXLOG(@"%d",_num);
     self.block([NSNumber numberWithInteger:_num]);
 }
 -(void)UIConfig

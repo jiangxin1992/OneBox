@@ -312,7 +312,7 @@
             //90 84
 
         } failed:^{
-            NSLog(@"失败");
+            JXLOG(@"失败");
         }];
     };
 }
@@ -374,10 +374,10 @@
             manager.responseSerializer = [AFHTTPResponseSerializer serializer];
 
             [manager POST:str parameters:para success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                //                NSLog(@"%@",responseObject);
+                //                JXLOG(@"%@",responseObject);
                 [regular removeProgress];
                 id res = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-                NSLog(@"%@",res);
+                JXLOG(@"%@",res);
                 if ([res[@"code"] integerValue] == 1) {
 
                      [[NSNotificationCenter defaultCenter] postNotificationName:@"RefreshChatList" object:nil];
@@ -385,7 +385,7 @@
                 }
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
 
-//                NSLog(@"失败");
+//                JXLOG(@"失败");
                 [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错白色" Withtype:1]];
             }];
 
@@ -426,10 +426,10 @@
             manager.responseSerializer = [AFHTTPResponseSerializer serializer];
 
             [manager POST:str parameters:para success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                //                NSLog(@"%@",responseObject);
+                //                JXLOG(@"%@",responseObject);
                 [regular removeProgress];
                 id res = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-                NSLog(@"%@",res);
+                JXLOG(@"%@",res);
                 if ([res[@"code"] integerValue] == 1) {
                      [[NSNotificationCenter defaultCenter] postNotificationName:@"RefreshChatList" object:nil];
                     _isguanzhu=NO;
@@ -438,7 +438,7 @@
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
 
                 [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错白色" Withtype:1]];
-                NSLog(@"失败");
+                JXLOG(@"失败");
             }];
 
 

@@ -414,7 +414,7 @@
     if ([_secondaryDelegate respondsToSelector:@selector(numberOfClustersInMapView:)]) {
         numberOfClusters = [_secondaryDelegate numberOfClustersInMapView:self];
     }
-    NSLog(@"nnn%ld",(long)numberOfClusters);
+    JXLOG(@"nnn%ld",(long)numberOfClusters);
     return numberOfClusters;
 }
 

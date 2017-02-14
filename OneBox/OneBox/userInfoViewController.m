@@ -341,7 +341,7 @@
         upToken = res[@"uptoken"];
         
     } failed:^{
-        NSLog(@"失败");
+        JXLOG(@"失败");
     }];
     
 }
@@ -408,7 +408,7 @@
 
 
     } failed:^{
-        NSLog(@"失败");
+        JXLOG(@"失败");
     }];
 }
 -(void)tapAction:(UIGestureRecognizer *)sender
@@ -451,7 +451,7 @@
             }
             else
             {
-                NSLog(@"不能打开相机");
+                JXLOG(@"不能打开相机");
             }
 
         }
@@ -464,7 +464,7 @@
             }
             else
             {
-                NSLog(@"无法打开相册");
+                JXLOG(@"无法打开相册");
             }
 
 
@@ -488,8 +488,8 @@
 -(void)createScrollView
 {
     
-    _scrollView=[[UIScrollView alloc] initWithFrame:CGRectMake(0, 64, ScreenWidth, ScreenHeight-64-tabbarHeight)];
-    _scrollView.contentSize=CGSizeMake(ScreenWidth, ScreenHeight-64-tabbarHeight);
+    _scrollView=[[UIScrollView alloc] initWithFrame:CGRectMake(0, 64, ScreenWidth, ScreenHeight-64-kTabBarHeight)];
+    _scrollView.contentSize=CGSizeMake(ScreenWidth, ScreenHeight-64-kTabBarHeight);
     [self.view addSubview:_scrollView];
 }
 -(void)mubiao_action:(UIGestureRecognizer *)ges
@@ -885,16 +885,16 @@
     switch (result)
     {
         case MFMailComposeResultCancelled: // 用户取消编辑
-            NSLog(@"Mail send canceled...");
+            JXLOG(@"Mail send canceled...");
             break;
         case MFMailComposeResultSaved: // 用户保存邮件
-            NSLog(@"Mail saved...");
+            JXLOG(@"Mail saved...");
             break;
         case MFMailComposeResultSent: // 用户点击发送
-            NSLog(@"Mail sent...");
+            JXLOG(@"Mail sent...");
             break;
         case MFMailComposeResultFailed: // 用户尝试保存或发送邮件失败
-            NSLog(@"Mail send errored: %@...", [error localizedDescription]);
+            JXLOG(@"Mail send errored: %@...", [error localizedDescription]);
             break;
     }
     // 关闭邮件发送视图
@@ -929,7 +929,7 @@
     {
         arrayName = @[@(22),@(23),@(1),@(24),@(6),@(18)];
     }
-    NSLog(@"ssss%ld",(long)[arrayName[btn.tag - 9000] integerValue]);
+    JXLOG(@"ssss%ld",(long)[arrayName[btn.tag - 9000] integerValue]);
     
     //1、创建分享参数（必要）
     NSMutableDictionary *shareParams = [NSMutableDictionary dictionary];
@@ -1086,7 +1086,7 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-    NSLog(@"%@",info);
+    JXLOG(@"%@",info);
     //找出图片
     UIImage *originImage = info[UIImagePickerControllerEditedImage];
 
@@ -1164,7 +1164,7 @@
 
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错白色" Withtype:1]];
-            NSLog(@"失败");
+            JXLOG(@"失败");
         }];
     
 }
@@ -1186,13 +1186,13 @@
     NSDictionary *dict;
     NSString *str;
     UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:nil message:@"连接超时" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    // NSLog(@"%@",[[NSString alloc]initWithData:_datas encoding:NSUTF8StringEncoding]);
+    // JXLOG(@"%@",[[NSString alloc]initWithData:_datas encoding:NSUTF8StringEncoding]);
     dict=[NSJSONSerialization JSONObjectWithData:_datas options:NSJSONReadingAllowFragments error:nil];
-    //NSLog(@"%@",[[NSString alloc]initWithData:_datas encoding:NSUTF8StringEncoding]);
+    //JXLOG(@"%@",[[NSString alloc]initWithData:_datas encoding:NSUTF8StringEncoding]);
     str=[dict objectForKey:@"state"];
     if([str isEqualToString:@"1"])
     {
-        NSLog(@"++++");
+        JXLOG(@"++++");
         NSUserDefaults *defaults =[NSUserDefaults standardUserDefaults];
         if([[defaults objectForKey:@"islogin"]intValue]==1)
         {

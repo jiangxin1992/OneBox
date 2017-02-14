@@ -637,7 +637,7 @@
 
 - (void)didIgnoreGroupPushNotification:(NSArray *)ignoredGroupList error:(EMError *)error {
     // todo
-    NSLog(@"ignored group list:%@.", ignoredGroupList);
+    JXLOG(@"ignored group list:%@.", ignoredGroupList);
 }
 
 #pragma mark - UIActionSheetDelegate

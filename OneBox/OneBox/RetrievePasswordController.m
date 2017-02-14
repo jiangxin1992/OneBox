@@ -256,9 +256,9 @@
     [[self.view viewWithTag:200] addSubview:_scr];
     _scr.backgroundColor=[UIColor clearColor];
 
-    NSLog(@"%@",countrydict);
-    NSLog(@"%@",_arrayChar);
-    NSLog(@"111");
+    JXLOG(@"%@",countrydict);
+    JXLOG(@"%@",_arrayChar);
+    JXLOG(@"111");
     CGFloat _y_p=0;
     for (int i=0; i<_arrayChar.count; i++) {
         NSArray *arr=[countrydict objectForKey:_arrayChar[i]];
@@ -389,7 +389,6 @@
             if([[dict objectForKey:@"code"] intValue]==1)
             {
                 yanzhengma=YES;
-//                [regular alertTitle_Simple:@"发送成功"];
 
                 [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"验证码已发送" WithImg:@"Prompt_验证码发送蓝色" Withtype:2]];
                 _time=60;
@@ -408,7 +407,7 @@
             [[ToolManager sharedManager] removeProgress];
         }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             //        下载失败时，打印错误信息
-//            NSLog(@"发生错误！%@",error);
+//            JXLOG(@"发生错误！%@",error);
             [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错蓝色" Withtype:2]];
 
             [[ToolManager sharedManager] removeProgress];
@@ -418,8 +417,7 @@
         [queue addOperation:operation];
     }else
     {
-        [regular alertTitle_Simple:@"请输入正确格式的手机号"];
-
+        [self presentViewController:[regular alertTitle_Simple:@"请输入正确格式的手机号"] animated:YES completion:nil];
     }
 
 
@@ -543,16 +541,16 @@
     }
     else if([str1 isEqualToString:@"1"])
     {
-        [regular alertTitle_Simple:@"邮箱格式错误"];
+        [self presentViewController:[regular alertTitle_Simple:@"邮箱格式错误"] animated:YES completion:nil];
 
     }
     else if([str1 isEqualToString:@"2"])
     {
-        [regular alertTitle_Simple:@"邮箱未使用"];
+        [self presentViewController:[regular alertTitle_Simple:@"邮箱未使用"] animated:YES completion:nil];
     }
     else
     {
-        [regular alertTitle_Simple:@"请求次数过多，请24小时后再次尝试"];
+        [self presentViewController:[regular alertTitle_Simple:@"请求次数过多，请24小时后再次尝试"] animated:YES completion:nil];
     }
 
 }

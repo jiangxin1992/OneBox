@@ -102,12 +102,12 @@
 	    if (info.isOK) {
 	        resp = responseObject;
 		}
-	    NSLog(@"success %@", info);
+	    JXLOG(@"success %@", info);
 	    completeBlock(info, resp);
 	}                                                                failure: ^(AFHTTPRequestOperation *operation, NSError *error) {
 	    double duration = [[NSDate date] timeIntervalSinceDate:startTime];
 	    QNResponseInfo *info = [QNHttpManager buildResponseInfo:operation withError:error withDuration:duration withResponse:operation.responseData withIp:ip];
-	    NSLog(@"failure %@", info);
+	    JXLOG(@"failure %@", info);
 	    completeBlock(info, nil);
 	}
 	    ];

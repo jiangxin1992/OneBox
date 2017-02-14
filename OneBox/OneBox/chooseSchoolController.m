@@ -241,7 +241,7 @@
 
     }
     [_nextBtn setBackgroundColor:nextcolor];
-    NSLog(@"%f %f",_nextBtn.frame.origin.y,ScreenHeight);
+    JXLOG(@"%f %f",_nextBtn.frame.origin.y,ScreenHeight);
     [_nextBtn setTitle:nexttitle forState:UIControlStateNormal];
     _nextBtn.titleLabel.font=[regular getFont:12.0f];
     [_nextBtn.titleLabel setAttributedText:[regular createAttributeString:nexttitle andFloat:@(3)]];
@@ -307,7 +307,7 @@
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错白色" Withtype:1]];
-            NSLog(@"失败");
+            JXLOG(@"失败");
         }];
 
     }
@@ -540,7 +540,7 @@
         
     }else
     {
-        NSLog(@"%@",skusArr);
+        JXLOG(@"%@",skusArr);
 
         CGFloat _width=102*_Scale;
         CGFloat _interval=(CGRectGetWidth(downview.frame)-_width*4)/5.0f;
@@ -714,7 +714,7 @@
     UIImageView *imageview=_deleteBtnArray[_index];
     UIImageView *titleimg=_titleImgArray[_index];
     UIView *view=_cardArray[_index];
-    NSLog(@"%@",_alertViewArray);
+    JXLOG(@"%@",_alertViewArray);
     if((_cardArray.count)*cardHeight+250*_Scale<ScreenHeight-64)
     {
 
@@ -1049,7 +1049,7 @@
 
 //                if(_dataArray.count<=2)
 //                {
-            NSLog(@"%d",_deleteAct);
+            JXLOG(@"%d",_deleteAct);
 
 //                }else
 //                {
@@ -1077,7 +1077,7 @@
 
             //                if(_dataArray.count<=2)
             //                {
-            NSLog(@"%d",_deleteAct);
+            JXLOG(@"%d",_deleteAct);
             if(_deleteAct&&_dataArray.count<=3)
             {
 

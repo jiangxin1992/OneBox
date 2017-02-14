@@ -112,12 +112,12 @@ typedef void (^task)(void);
 	NSError *error;
 	NSData *data = [NSJSONSerialization dataWithJSONObject:rec options:NSJSONWritingPrettyPrinted error:&error];
 	if (error != nil) {
-		NSLog(@"up record json error %@ %@", key, error);
+		JXLOG(@"up record json error %@ %@", key, error);
 		return;
 	}
 	error = [_recorder set:key data:data];
 	if (error != nil) {
-		NSLog(@"up record set error %@ %@", key, error);
+		JXLOG(@"up record set error %@ %@", key, error);
 	}
 }
 
@@ -142,7 +142,7 @@ typedef void (^task)(void);
 	NSError *error;
 	NSDictionary *info = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&error];
 	if (error != nil) {
-		NSLog(@"recovery error %@ %@", key, error);
+		JXLOG(@"recovery error %@ %@", key, error);
 		[_recorder del:self.key];
 		return 0;
 	}
@@ -161,7 +161,7 @@ typedef void (^task)(void);
 	}
 	UInt64 t = [time unsignedLongLongValue];
 	if (t != _modifyTime) {
-		NSLog(@"modify time changed %llu, %llu", t, _modifyTime);
+		JXLOG(@"modify time changed %llu, %llu", t, _modifyTime);
 		return 0;
 	}
 	_contexts = [[NSMutableArray alloc] initWithArray:contexts copyItems:true];

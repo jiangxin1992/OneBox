@@ -294,8 +294,8 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
 }
 
 static void uncaughtExceptionHandler(NSException *exception) {
-    NSLog(@"CRASH: %@", exception);
-    NSLog(@"Stack Trace: %@", [exception callStackSymbols]);
+    JXLOG(@"CRASH: %@", exception);
+    JXLOG(@"Stack Trace: %@", [exception callStackSymbols]);
 }
 //去主页
 //-(void)gotoMain{
@@ -349,15 +349,15 @@ static void uncaughtExceptionHandler(NSException *exception) {
 
 -(void)introductionDidFinishWithType:(MYFinishType)finishType{
     if (finishType == MYFinishTypeSkipButton) {
-        NSLog(@"Did Finish Introduction By Skipping It");
+        JXLOG(@"Did Finish Introduction By Skipping It");
     }
     else if (finishType == MYFinishTypeSwipeOut){
-        NSLog(@"Did Finish Introduction By Swiping Out");
+        JXLOG(@"Did Finish Introduction By Swiping Out");
     }
 
 }
 -(void)introductionDidChangeToPanel:(MYIntroductionPanel *)panel withIndex:(NSInteger)panelIndex{
-    NSLog(@"%@ \nPanelIndex: %d", panel.Description, panelIndex);
+    JXLOG(@"%@ \nPanelIndex: %d", panel.Description, panelIndex);
 }
 
 #pragma mark scrollView的代理
@@ -438,7 +438,7 @@ static void uncaughtExceptionHandler(NSException *exception) {
     if ([url.host isEqualToString:@"safepay"]) {
         //跳转支付宝钱包进行支付，处理支付结果
         [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
-            NSLog(@"result = %@",resultDic);
+            JXLOG(@"result = %@",resultDic);
         }];
     }
     return YES;

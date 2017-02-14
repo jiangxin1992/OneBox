@@ -208,7 +208,7 @@
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错白色" Withtype:1]];
-            NSLog(@"失败");
+            JXLOG(@"失败");
         }];
 
     }
@@ -238,7 +238,7 @@
         NSString *html = operation.responseString;
         NSData* data=[html dataUsingEncoding:NSUTF8StringEncoding];
         NSDictionary *dict=[NSJSONSerialization  JSONObjectWithData:data options:0 error:nil];
-        NSLog(@"%@",dict);
+        JXLOG(@"%@",dict);
         if([[dict objectForKey:@"code"] integerValue]==1)
         {
             requestnum++;
@@ -372,7 +372,7 @@
                 nextcolor=[UIColor colorWithRed:51.0f/255.0f green:204.0f/255.0f blue:204.0f/255.0f alpha:1];
             }
             [NextBtn setBackgroundColor:nextcolor];
-            NSLog(@"%f %f",NextBtn.frame.origin.y,ScreenHeight);
+            JXLOG(@"%f %f",NextBtn.frame.origin.y,ScreenHeight);
             [NextBtn setTitle:nexttitle forState:UIControlStateNormal];
             NextBtn.titleLabel.font=[regular getFont:12.0f];
             [NextBtn.titleLabel setAttributedText:[regular createAttributeString:nexttitle andFloat:@(3)]];
@@ -380,7 +380,7 @@
             [NextBtn addTarget:self action:@selector(NextBtnPress:) forControlEvents:UIControlEventTouchUpInside];
             [_scrollView addSubview:NextBtn];
 
-            NSLog(@"%f",CGRectGetMaxY(NextBtn.frame));
+            JXLOG(@"%f",CGRectGetMaxY(NextBtn.frame));
             _scrollView.contentSize = CGSizeMake(CGRectGetWidth(_scrollView.frame), CGRectGetMaxY(NextBtn.frame)+10);
 
 
@@ -443,8 +443,8 @@
             NSTimeInterval timenow= [nowdate timeIntervalSince1970];
             long jiantime=(long)(time-timenow);
 
-            NSLog(@"timenow=%ld,time=%ld",(long)timenow,(long)time);
-            NSLog(@"time=%ld",(long)(time-timenow));
+            JXLOG(@"timenow=%ld,time=%ld",(long)timenow,(long)time);
+            JXLOG(@"time=%ld",(long)(time-timenow));
 
             if(jiantime<=0)
             {
@@ -504,7 +504,7 @@
         }
 //        [regular removeProgress];
         [indicator stopAnimationWithLoadText:@"loading..." withType:YES];
-        NSLog(@"失败");
+        JXLOG(@"失败");
     }];
 
 }
@@ -532,7 +532,7 @@
 
     NSDateComponents *d = [cal components:unitFlags fromDate:today toDate:NiceNewdate options:0];
     compsNew = d;
-//    NSLog(@"day=%ld,hour=%ld,minyte=%ld,second=%ld",(long)[d day],[d hour],[d minute],(long)[d second]);
+//    JXLOG(@"day=%ld,hour=%ld,minyte=%ld,second=%ld",(long)[d day],[d hour],[d minute],(long)[d second]);
 
     if([d day]==0&&[d hour]==0&&[d minute]==0&&[d second]==0)
     {
@@ -729,7 +729,7 @@
 
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错白色" Withtype:1]];
-            NSLog(@"失败");
+            JXLOG(@"失败");
         }];
 
 
@@ -760,7 +760,7 @@
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错白色" Withtype:1]];
-            NSLog(@"失败");
+            JXLOG(@"失败");
         }];
         
     }

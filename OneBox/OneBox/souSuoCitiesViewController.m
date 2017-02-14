@@ -293,10 +293,10 @@
 
         for (NSString *keys in [_dictPinyinAndChinese allKeys]) {
 
-            //        NSLog(@"%@", [_dictPinyinAndChinese objectForKey:keys]);
-            NSLog(@"%@", keys);
+            //        JXLOG(@"%@", [_dictPinyinAndChinese objectForKey:keys]);
+            JXLOG(@"%@", keys);
             for (NSString *str in [_dictPinyinAndChinese objectForKey:keys]) {
-                NSLog(@"%@", str);
+                JXLOG(@"%@", str);
             }
         }
 
@@ -553,7 +553,7 @@
     if(scrollView==_tableView&&_appear)
     {
         _start_y=scrollView.contentOffset.y;
-        NSLog(@"滚动视图即将开始拖动=%f",scrollView.contentOffset.y);
+        JXLOG(@"滚动视图即将开始拖动=%f",scrollView.contentOffset.y);
         _Dragging=YES;
     }
 
@@ -562,7 +562,7 @@
 -(NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index {
     NSInteger __count = 0;
 
-    //    NSLog(@"%@-%d",title,index);
+    //    JXLOG(@"%@-%d",title,index);
 
     _is_suoyin=YES;
     for(NSString *character in _arrayChar)
@@ -619,7 +619,7 @@
         if(scrollView==_tableView&&_appear)
         {
 
-            NSLog(@"滚动视图正在滚动=%f",scrollView.contentOffset.y);
+            JXLOG(@"滚动视图正在滚动=%f",scrollView.contentOffset.y);
             if(_start_y<20&&scrollView.contentOffset.y>20)
             {
 
@@ -754,7 +754,7 @@
 
     SchoolDetailViewController *schoolView=[[SchoolDetailViewController alloc] init];
     NSInteger _section=indexPath.section;
-    NSLog(@"%@",_arrayChar);
+    JXLOG(@"%@",_arrayChar);
     NSString *strKey  = [_arrayChar objectAtIndex:_section];
     NSMutableArray  *__arr=[[NSMutableArray alloc] initWithArray:[_dictPinyinAndChinese objectForKey:strKey]];
     NSInteger num=indexPath.row;
@@ -782,13 +782,13 @@
     {
         //因为在searchDC上的_searchBar就是创建searchDC时，由第一个参数指定的_searchBar
         //        NSString *searchCon = _searchBar.text;
-        //        NSLog(@"%@", searchCon);
+        //        JXLOG(@"%@", searchCon);
 
         [_arrayResult removeAllObjects];
         NSString *title=_searchBar.text;
 
         //遍历数据源数据，找到与当前搜索内容相匹配的数据
-        NSLog(@"%@",_dictPinyinAndChinese);
+        JXLOG(@"%@",_dictPinyinAndChinese);
 
         for (foundModel *model in _arrayData) {
 
@@ -831,7 +831,7 @@
                 }
             }
         }
-        NSLog(@"%@",_arrayResult);
+        JXLOG(@"%@",_arrayResult);
         return 1;
     }
 
@@ -947,7 +947,7 @@
 //        if( _arrayData.count>0)
 //        {
 //            NSInteger _section=indexPath.section;
-//            NSLog(@"%@",_arrayChar);
+//            JXLOG(@"%@",_arrayChar);
 //            NSString *strKey  = [_arrayChar objectAtIndex:_section];
 //            NSMutableArray  *__arr=[[NSMutableArray alloc] initWithArray:[_dictPinyinAndChinese objectForKey:strKey]];
 //            NSInteger num=indexPath.row;
@@ -968,13 +968,13 @@
 #pragma mark-索引
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
 {
-    NSLog(@"%@",_arrayChar);
-    NSLog(@"111");
+    JXLOG(@"%@",_arrayChar);
+    JXLOG(@"111");
     if(tableView==_tableView)
     {
         return _arrayChar;
     }
-    NSLog(@"%@",_arrayResult);
+    JXLOG(@"%@",_arrayResult);
 
     _dictPinyinAndChinese1= [[NSMutableDictionary alloc] init];
 
@@ -1010,8 +1010,8 @@
             }
         }
     }
-    NSLog(@"%@",_arrayChar1);
-    NSLog(@"111");
+    JXLOG(@"%@",_arrayChar1);
+    JXLOG(@"111");
 
 
 

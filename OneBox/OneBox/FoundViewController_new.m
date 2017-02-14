@@ -144,7 +144,7 @@
     [self PrepareUI];//一些初始化UI的准备
     changeBlock=^(NSInteger row)
     {
-        NSLog(@"%@",_arrayData);
+        JXLOG(@"%@",_arrayData);
         ((foundModel_new *)[_arrayData objectAtIndex:row]).isapp=YES;
     };
 
@@ -252,7 +252,7 @@
 -(void)createHelp
 {
 //    70
-    UIView *helpview=[[UIView alloc] initWithFrame:CGRectMake(ScreenWidth-90*_Scale-70*_Scale, ScreenHeight-160*_Scale-tabbarHeight, 90*_Scale, 150*_Scale)];
+    UIView *helpview=[[UIView alloc] initWithFrame:CGRectMake(ScreenWidth-90*_Scale-70*_Scale, ScreenHeight-160*_Scale-kTabBarHeight, 90*_Scale, 150*_Scale)];
     [self.view addSubview:helpview];
     helpview.backgroundColor=[UIColor clearColor];
 
@@ -999,7 +999,7 @@ _package
 
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:[[NSString alloc] initWithFormat:@"%@%@%@",DNS,@"/v1/us_states/",state_id] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"%@",state_id);
+        JXLOG(@"%@",state_id);
 
         NSString *html = operation.responseString;
         NSData* data=[html dataUsingEncoding:NSUTF8StringEncoding];
@@ -1438,7 +1438,7 @@ _package
         }
     }
     NSMutableDictionary *_dict=[self getParameters];
-    NSLog(@"%@",_dict);
+    JXLOG(@"%@",_dict);
 
 //当没有选择筛选条件时，不给予跳转，提示请选择筛选条件。没有选择时，key count为2
     NSArray *keyarr=[_dict allKeys];
@@ -1699,7 +1699,7 @@ _package
 //slider滑动时候触发的方法，改变下面label的值
 -(void)valueChangedForDoubleSlider:(NMRangeSlider *)slider
 {
-    NSLog(@"up=%f,down=%f",slider.upperValue,slider.lowerValue);
+    JXLOG(@"up=%f,down=%f",slider.upperValue,slider.lowerValue);
     if(slider.tag==5000)
     {
         leftLabel1.text=[[NSString alloc] initWithFormat:@"%.f",slider.lowerValue];
@@ -1763,8 +1763,8 @@ _package
 {
 
 
-    NSLog(@"%f",scrollView.contentOffset.y);
-    CGFloat _height=scrollView.contentOffset.y+CGRectGetHeight(_tableView.frame)-_min_offset-tabbarHeight-420*_Scale;
+    JXLOG(@"%f",scrollView.contentOffset.y);
+    CGFloat _height=scrollView.contentOffset.y+CGRectGetHeight(_tableView.frame)-_min_offset-kTabBarHeight-420*_Scale;
     NSInteger now_cell=0;
     if(_isPad)
     {

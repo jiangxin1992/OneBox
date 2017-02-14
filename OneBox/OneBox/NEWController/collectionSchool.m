@@ -80,7 +80,7 @@
                             UIView *headview=[[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 70)];
 
                             UILabel *label=[[UILabel alloc] initWithFrame:CGRectMake(0, 30, ScreenWidth, 30)];
-                            NSLog(@"%@",_dict);
+                            JXLOG(@"%@",_dict);
                             if([[_dict objectForKey:@"type"] isEqualToString:@"add"])
                             {
                                 [label setAttributedText:[regular createAttributeString:@" 你的心愿单是空的，到学校页面点击添加心愿吧。" andFloat:@(2.0)]];
@@ -166,7 +166,7 @@
     NSString *url=nil;
     NSDictionary *parameters=nil;
 
-    NSLog(@"%@",[_dict objectForKey:@"type"]);
+    JXLOG(@"%@",[_dict objectForKey:@"type"]);
     if([[_dict objectForKey:@"type"] isEqualToString:@"recommend"])
     {
 //        [[NSString alloc] initWithFormat:@"%@%@",DNS,@"/v1/schools"]
@@ -193,7 +193,7 @@
                     UIView *headview=[[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 70)];
 
                     UILabel *label=[[UILabel alloc] initWithFrame:CGRectMake(0, 30, ScreenWidth, 30)];
-                    NSLog(@"%@",_dict);
+                    JXLOG(@"%@",_dict);
                     if([[_dict objectForKey:@"type"] isEqualToString:@"add"]||[[_dict objectForKey:@"type"] isEqualToString:@"delete"])
                     {
                         [label setAttributedText:[regular createAttributeString:@" 你的心愿单是空的，到学校页面点击添加心愿吧。" andFloat:@(2.0)]];
@@ -236,7 +236,7 @@
         [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错白色" Withtype:1]];
         [_tableView headerEndRefreshing];
         [_tableView footerEndRefreshing];
-        NSLog(@"Error: %@", error);
+        JXLOG(@"Error: %@", error);
         [[ToolManager sharedManager] removeProgress];
     }];
 

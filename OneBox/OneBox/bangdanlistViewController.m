@@ -74,7 +74,7 @@
             }
         }
     }
-    NSLog(@"Spacing=%f  font=%f",_Default_Spacing,_Default_font);
+    JXLOG(@"Spacing=%f  font=%f",_Default_Spacing,_Default_font);
     if(CGRectGetWidth(titleLabel.frame)>230&&_Default_font==13.0f)
     {
         titleLabel.frame=CGRectMake(0, 0, CGRectGetWidth(view.frame), CGRectGetHeight(view.frame));

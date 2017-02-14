@@ -3,13 +3,12 @@
 //  OneBox
 //
 //  Created by 谢江新 on 15-2-3.
-//  Copyright (c) 2015年 谢江新. AllkIOSVersions rights reserved.
+//  Copyright (c) 2015年 谢江新. All rights reserved.
 //
-#import <AlipaySDK/AlipaySDK.h>
+
 #import "Header.h"
 #define pathImage @"http://121.40.153.17/api/Public/School/"
 #define path_HeadImage @"http://121.40.153.17/api/Public/User/"
-#define _isPad (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 //#define DNS @"http://120.26.192.105:5000"
 //#define DNS @"http://api.abroadbox.cn"
 #define DNS @"http://120.26.192.105:5000"
@@ -17,7 +16,44 @@
 //#define DNS @"http://10.0.1.11:3000"
 //#define DNS @"http://115.28.54.216:8001"
 
+//自定义log（调试阶段打印,发布阶段不打印）
+#ifdef DEBUG
+
+#define JXLOG(...) NSLog(__VA_ARGS__);
+
+#else
+
+#define JXLOG(...)
+
+#endif
+
+#define IS_IOS7_OR_LATER    ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0)
+#define IS_IOS8_OR_LATER    ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
+#define IS_IOS10_OR_LATER    ([[[UIDevice currentDevice] systemVersion] floatValue] >= 10.0)
+
+/*************** Color ***************/
+#define _define_black_color [UIColor colorWithHexString:@"#000000"]
+
+#define _define_white_color [UIColor colorWithHexString:@"#FFFFFF"]
+
+#define _define_blue_color [UIColor colorWithRed:77.0f/255.0f green:190.0f/255.0f blue:217.0f/255.0f alpha:1]
+
+#define _define_login_background [UIColor colorWithRed:67.0f/255.0f green:183.0f/255.0f blue:223.0f/255.0f alpha:1]
+
+#define _define_blue_color_login [UIColor colorWithRed:130.0f/255.0f green:211.0f/255.0f blue:236.0f/255.0f alpha:1]
+
+#define _define_bluecell_color [UIColor colorWithRed:77.0f/255.0f green:190.0f/255.0f blue:217.0f/255.0f alpha:1]
+
+#define _define_head_color [UIColor colorWithRed:240.0f/255.0f green:240.0f/255.0f blue:240.0f/255.0f alpha:1]
+
+#define _define_backview_color [UIColor colorWithRed:244.0f/255.0f green:244.0f/255.0f blue:244.0f/255.0f alpha:1]
+
+#define _define_cailiao_color [UIColor colorWithRed:252.0f/255.0f green:252.0f/255.0f blue:252.0f/255.0f alpha:1]
+
+#define _define_cailiao_text_color [UIColor colorWithRed:200.0f/255.0f green:200.0f/255.0f blue:200.0f/255.0f alpha:1]
+
 /*************** @property 属性 ***************/
+
 
 #define __mu_array(__k__) @property(nonatomic,strong) NSMutableArray *__k__
 
@@ -51,58 +87,55 @@
 
 #define __scrollView(__k__) @property(nonatomic,strong) UIScrollView *__k__
 
+/*************** SIZE ***************/
+#define IS_RETINA ([[UIScreen mainScreen] scale] >= 2.0)
+
+#define kStatusBarHeight         20 //状态栏高度
+
+#define kNavigationBarHeight     44 //导航栏高度
+
+#define kNavHeight     64 //导航栏高度+状态栏高度
+
+#define kTabBarHeight 49 //tabbar高度
+
+#define ScreenHeight [UIScreen mainScreen].bounds.size.height //当前设备屏幕高
+
+#define ScreenWidth [UIScreen mainScreen].bounds.size.width //当前设备屏幕宽
+
+#define kIPhone6Plus ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1242,2208), [[UIScreen mainScreen] currentMode].size) : NO) //判断是否为5.5英寸屏幕
+
+#define kIiPhone6 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(750, 1334), [[UIScreen mainScreen] currentMode].size) : NO) //判断是否为4.7寸屏幕
+
+#define kIPhone5s ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640,1136), [[UIScreen mainScreen] currentMode].size) : NO) //判断是否为4英寸屏幕
+
+#define kIPhone4s ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640,960), [[UIScreen mainScreen] currentMode].size) : NO) //判断是否3.5英寸屏幕
+
+#define IsPhone6_gt kIPhone6Plus||kIiPhone6 //判断当前设备是否为iPhone 6以上
+
+#define IsPhone5_gt kIPhone6Plus||kIiPhone6||kIPhone5s //判断当前设备是否为iPhone 5以上
+
+#define _isPad (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) //是否是pad
+
+#define kIOSVersions [[[UIDevice currentDevice] systemVersion] floatValue] //获得iOS版本
+
+#define kIOSVersions_v9 kIOSVersions>=9.0 //判断当前系统是否为iOS 9以上
+
 
 #define IS_IPHONE_5 ( fabs( ( double )[ [ UIScreen mainScreen ] bounds ].size.height - ( double )568 ) < DBL_EPSILON )
 #define RGBACOLOR(r,g,b,a) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:(a)]
-//#define _fz @"FZLanTingHei-EL-GBK"
 #define _package /*********可封装*********/
-#define tabbarHeight 49
 #define _margin 2
 #ifndef OneBox_PrefixHeader_pch
 #define OneBox_PrefixHeader_pch
+
 #define iPhone5 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 1136), [[UIScreen mainScreen] currentMode].size) : NO)
-
-#define ScreenWidth [UIScreen mainScreen].bounds.size.width
-#define ScreenHeight [UIScreen mainScreen].bounds.size.height
-
 #define _Scale [UIScreen mainScreen].bounds.size.width/640.0f
 #define __Scale [UIScreen mainScreen].bounds.size.height/568.0f
-#define kIOSVersions [[[UIDevice currentDevice] systemVersion] floatValue] //获得iOS版本
 
 #define kUIWindow    [[[UIApplication sharedApplication] delegate] window] //获得window
 
 #define kUnderStatusBarStartY (kIOSVersions>=7.0 ? 20 : 0)                 //7.0以上stautsbar不占位置，内容视图的起始位置要往下20
 
-/*************** Color ***************/
-#define _define_black_color [UIColor colorWithHexString:@"#000000"]
-
-#define _define_white_color [UIColor colorWithHexString:@"#FFFFFF"]
-
-#define _define_blue_color [UIColor colorWithRed:77.0f/255.0f green:190.0f/255.0f blue:217.0f/255.0f alpha:1]
-
-#define _define_login_background [UIColor colorWithRed:67.0f/255.0f green:183.0f/255.0f blue:223.0f/255.0f alpha:1]
-
-#define _define_blue_color_login [UIColor colorWithRed:130.0f/255.0f green:211.0f/255.0f blue:236.0f/255.0f alpha:1]
-
-#define _define_bluecell_color [UIColor colorWithRed:77.0f/255.0f green:190.0f/255.0f blue:217.0f/255.0f alpha:1]
-
-#define _define_head_color [UIColor colorWithRed:240.0f/255.0f green:240.0f/255.0f blue:240.0f/255.0f alpha:1]
-
-#define _define_backview_color [UIColor colorWithRed:244.0f/255.0f green:244.0f/255.0f blue:244.0f/255.0f alpha:1]
-
-#define _define_cailiao_color [UIColor colorWithRed:252.0f/255.0f green:252.0f/255.0f blue:252.0f/255.0f alpha:1]
-
-#define _define_cailiao_text_color [UIColor colorWithRed:200.0f/255.0f green:200.0f/255.0f blue:200.0f/255.0f alpha:1]
-
-
-
-#define kIiPhone6 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(750, 1334), [[UIScreen mainScreen] currentMode].size) : NO)
-
-#define kIPhone6Plus ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1242,2208), [[UIScreen mainScreen] currentMode].size) : NO)
-
-#define kIPhone4s ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640,960), [[UIScreen mainScreen] currentMode].size) : NO)
-
-#define kIPhone5s ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640,1136), [[UIScreen mainScreen] currentMode].size) : NO)
 
 #define kScreenSize           [[UIScreen mainScreen] bounds].size                 //(e.g. 320,480)
 #define kScreenWidth          [[UIScreen mainScreen] bounds].size.width           //(e.g. 320)
@@ -112,12 +145,8 @@
 #define kApplicationSize      [[UIScreen mainScreen] applicationFrame].size       //(e.g. 320,460)
 #define kApplicationWidth     [[UIScreen mainScreen] applicationFrame].size.width //(e.g. 320)
 #define kApplicationHeight    [[UIScreen mainScreen] applicationFrame].size.height//不包含状态bar的高度(e.g. 460)
-
-#define kStatusBarHeight         20
-#define kNavigationBarHeight     44
 #define kNavigationheightForIOS7 64
 #define kContentHeight           (kApplicationHeight - kNavigationBarHeight)
-#define kTabBarHeight            49
 #define kTableRowTitleSize       14
 #define maxPopLength             215
 

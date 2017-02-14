@@ -8,24 +8,166 @@
 #import "KVNProgress.h"
 #import "regular.h"
 #import "NSString+extra.h"
+#import "Tools.h"
+#import <CommonCrypto/CommonDigest.h>
 @implementation regular
-{
 
-}
-static regular *_tools = nil;
+static regular *_t = nil;
 
-+(regular *)shared
+/**
+ * 单例
+ */
++(id)sharedManager
 {
     @synchronized(self)
     {
-        if (_tools == nil) {
-            _tools = [[regular alloc] init];
-
+        if (!_t) {
+            _t = [[regular alloc]init];
         }
-        return _tools;
+    }
+    return _t;
+}
++(BOOL)isEnableAPNS
+{
+    UIRemoteNotificationType types;
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0){
+        types = [[UIApplication sharedApplication] currentUserNotificationSettings].types;
+    }else{
+        // 原来的代码
+        types = [[UIApplication sharedApplication] enabledRemoteNotificationTypes];
+        
+    }
+    return (types & UIRemoteNotificationTypeAlert);
+    
+}
++ (NSString *)getRoundNum:(CGFloat )_num
+{
+    CGFloat _changeNum=round(_num*100)/100;
+    long _changeNum2=round(_num*100);
+    
+    NSInteger _index=0;
+    
+    if(_changeNum2 % 100)
+    {
+        _index++;
+    }
+    if(_changeNum2 % 10)
+    {
+        _index++;
+    }
+    
+    NSString *_str=@"";
+    if(_index==0)
+    {
+        _str=[[NSString alloc] initWithFormat:@"%.0lf",_changeNum];
+    }else if(_index==1)
+    {
+        _str=[[NSString alloc] initWithFormat:@"%.1lf",_changeNum];
+    }else if(_index==2)
+    {
+        _str=[[NSString alloc] initWithFormat:@"%.2lf",_changeNum];
+    }
+    return _str;
+}
++ (NSString *)getHTMLStringWithContent:(NSString *)content WithFont:(NSString *)font WithColorCode:(NSString *)color
+{
+    if(!content)content=@"";
+    if(!font)font=@"15px/20px";
+    if(!color)color=@"#000000";
+    NSString *temp = nil;
+    NSMutableString *mut=[[NSMutableString alloc] init];
+    for(int i =0; i < [content length]; i++)
+    {
+        temp = [content substringWithRange:NSMakeRange(i, 1)];
+        if([temp isEqualToString:@"\n"])
+        {
+            [mut appendString:@"<br>"];
+            
+        }else
+        {
+            [mut appendString:temp];
+        }
+    }
+    return [NSString stringWithFormat:@"<!DOCTYPE HTML><html><head><meta charset=utf-8><meta name=viewport content=width=device-width, initial-scale=1><style>body{word-wrap:break-word;margin:0;background-color:transparent;font:%@ Helvetica;align:justify;color:%@}</style><div align='justify'>%@<div>",font,color,mut];
+}
++(CGFloat )getHeightWithWidth:(CGFloat )width WithContent:(NSString *)content WithFont:(UIFont *)font
+{
+    CGSize titleSize = [content boundingRectWithSize:CGSizeMake(width, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:font} context:nil].size;
+    return titleSize.height+1;
+}
++(CGFloat )getWidthWithHeight:(CGFloat )height WithContent:(NSString *)content WithFont:(UIFont *)font
+{
+    CGSize titleSize = [content boundingRectWithSize:CGSizeMake(MAXFLOAT, height) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:font} context:nil].size;
+    return titleSize.width+1;
+}
++(NSString *)getSpacingTime:(long)createTime
+{
+    long _minute=60;
+    long _hour=60*60;
+    long _day=60*60*24;
+    long _year=60*60*24*365;
+    long space=[NSDate nowTime]-createTime;
+    if(space)
+    {
+        if(space<_minute)
+        {
+            return [[NSString alloc] initWithFormat:@"%ld秒前",space];
+        }else if(space<_hour)
+        {
+            return [[NSString alloc] initWithFormat:@"%ld分钟前",space/_minute];
+        }else if(space<_day)
+        {
+            return [[NSString alloc] initWithFormat:@"%ld小时前",space/_hour];
+        }else if(space<_year)
+        {
+            return [[NSString alloc] initWithFormat:@"%ld天前",space/_day];
+        }else
+        {
+            return [[NSString alloc] initWithFormat:@"%ld年前",space/_year];
+        }
+    }
+    return @"";
+}
+/**
+ * 根据shareAdvise获取当前label高度
+ */
++(CGFloat )getHeightWithContent:(NSString *)shareAdvise WithWidth:(CGFloat)Width WithFont:(CGFloat )font
+{
+    CGSize size=[Tools sizeOfStr:shareAdvise andFont:[regular getFont:font] andMaxSize:CGSizeMake(Width, 99999999) andLineBreakMode:NSLineBreakByWordWrapping];
+    return size.height;
+}
++(void)setBorder:(UIView *)view
+{
+    view.layer.masksToBounds=YES;
+    view.layer.borderColor=[[UIColor blackColor] CGColor];
+    view.layer.borderWidth=1;
+}
++(void)setZeroBorder:(UIView *)view
+{
+    //    view.layer.masksToBounds=YES;
+    //    view.layer.borderColor=[[UIColor blackColor] CGColor];
+    //    view.layer.borderWidth=0;
+    view.clipsToBounds=YES;
+}
++(void)setBorder:(UIView *)view WithColor:(UIColor *)color WithWidth:(CGFloat )width
+{
+    view.layer.masksToBounds=YES;
+    view.layer.borderColor=[color CGColor];
+    view.layer.borderWidth=width;
+}
++(void)dispatch_cancel:(dispatch_source_t )_timer
+{
+    if(_timer)
+    {
+        if(!dispatch_source_testcancel(_timer))
+        {
+            dispatch_source_cancel(_timer);
+        }
     }
 }
-
++(NSDate*)zoneChange:(long)time{
+    return [NSDate dateWithTimeIntervalSince1970:time];
+}
 - (instancetype)init
 {
     self = [super init];
@@ -34,16 +176,208 @@ static regular *_tools = nil;
     }
     return self;
 }
-
-+ (BOOL )isNilOrEmpty: (NSString *) str;
++(NSString *)getTimeStr:(long)time
 {
-    if (str && ![str isEqualToString:@""])
+    if(time>=0)
     {
+        NSCalendar *cal = [NSCalendar currentCalendar];//定义一个NSCalendar对象
+        NSDate *today = [NSDate date];//得到当前时间
+        
+        //用来得到具体的时差
+        unsigned int unitFlags =  NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond;
+        NSDate *NiceNewdate=[regular zoneChange:[NSDate nowTime]+time];
+        NSDateComponents *d = [cal components:unitFlags fromDate:today toDate:NiceNewdate options:0];
+        
+        
+        if([d day]<0||[d hour]<0||[d minute]<0||[d second]<0)
+        {
+            return @"发布会已结束";
+        }else
+        {
+            return [[NSString alloc] initWithFormat:@"%ld天%ld时%ld分%ld秒",[d day],[d hour],[d minute],[d second]];
+        }
+    }else
+    {
+        return @"发布会已结束";
+    }
+}
++(NSString *)getTimeStr:(long)time WithFormatter:(NSString *)_formatter
+{
+    
+    
+    NSDate*detaildate=[NSDate dateWithTimeIntervalSince1970:time];
+    
+    JXLOG(@"date:%@",[detaildate description]);
+    
+    //实例化一个NSDateFormatter对象
+    
+    NSDateFormatter*dateFormatter = [[NSDateFormatter alloc]init];
+    
+    //设定时间格式,这里可以设置成自己需要的格式
+    
+    [dateFormatter setDateFormat:_formatter];
+    
+    NSString*currentDateStr = [dateFormatter stringFromDate:detaildate];
+    
+    return currentDateStr;
+    
+    //NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    //[formatter setDateFormat:_formatter];
+    //NSDate *confromTimesp = [NSDate dateWithTimeIntervalSince1970:time];
+    //NSString *nowtimeStr = [formatter stringFromDate:confromTimesp];//----------将nsdate按formatter格式转成nsstring
+    //return nowtimeStr;
+    
+}
++(long )getTimeWithTimeStr:(NSString *)time
+{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"YYYY-MM-dd HH:mm"];
+    NSDate* date = [formatter dateFromString:time];
+    return [date timeIntervalSince1970];
+}
++(long)date
+{
+    return [[NSDate date] timeIntervalSince1970];
+}
++(void)pushSystem
+{
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+}
++(void)dismissKeyborad
+{
+    [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+}
+/**
+ *  // 验证是固话或者手机号
+ *
+ *  @param mobileNum 手机号
+ *
+ *  @return 是否
+ */
++ (BOOL)isMobilePhoneOrtelePhone:(NSString *)mobileNum {
+    if (mobileNum==nil || mobileNum.length ==0) {
         return NO;
     }
-
-    return YES;
+    /**
+     * 手机号码
+     * 移动：134[0-8],135,136,137,138,139,150,151,157,158,159,182,187,188
+     * 联通：130,131,132,152,155,156,185,186
+     * 电信：133,1349,153,180,189
+     */
+    NSString * MOBILE = @"^((13)|(14)|(15)|(17)|(18))\\d{9}$";// @"^1(3[0-9]|5[0-35-9]|8[025-9])\\d{8}$";
+    /**
+     10         * 中国移动：China Mobile
+     11         * 134[0-8],135,136,137,138,139,150,151,157,158,159,182,187,188
+     12         */
+    NSString * CM = @"^1(34[0-8]|(3[5-9]|5[017-9]|8[278])\\d)\\d{7}$";
+    /**
+     15         * 中国联通：China Unicom
+     16         * 130,131,132,152,155,156,185,186
+     17         */
+    NSString * CU = @"^1(3[0-2]|5[256]|8[56])\\d{8}$";
+    /**
+     20         * 中国电信：China Telecom
+     21         * 133,1349,153,180,189
+     22         */
+    NSString * CT = @"^1((33|53|8[09])[0-9]|349)\\d{7}$";
+    /**
+     25         * 大陆地区固话及小灵通
+     26         * 区号：010,020,021,022,023,024,025,027,028,029
+     27         * 号码：七位或八位
+     28         */
+    NSString * PHS = @"^((0\\d{2,3}-?)\\d{7,8}(-\\d{2,5})?)$";// @"^0(10|2[0-5789]-|\\d{3})\\d{7,8}$";
+    
+    NSPredicate *regextestPHS = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", PHS];
+    NSPredicate *regextestmobile = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", MOBILE];
+    NSPredicate *regextestcm = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", CM];
+    NSPredicate *regextestcu = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", CU];
+    NSPredicate *regextestct = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", CT];
+    
+    if (([regextestmobile evaluateWithObject:mobileNum] == YES)
+        || ([regextestcm evaluateWithObject:mobileNum] == YES)
+        || ([regextestct evaluateWithObject:mobileNum] == YES)
+        || ([regextestcu evaluateWithObject:mobileNum] == YES)
+        || ([regextestPHS evaluateWithObject:mobileNum]==YES)) {
+        return YES;
+    }
+    else{
+        return NO;
+    }
 }
++(BOOL )emailVerify:(NSString *)email
+{
+    return [self Verify:email WithCode:@"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}"];
+}
++(BOOL )codeVerify:(NSString *)phone
+{
+    return [self Verify:phone WithCode:@"^[A-Za-z0-9]+$"];
+}
++(BOOL )phoneVerify:(NSString *)phone
+{
+    return [self Verify:phone WithCode:@"^1[3|4|5|7|8][0-9]\\d{8}$"];
+}
++(BOOL )PostCodeVerify:(NSString *)phone
+{
+    
+    return [self Verify:phone WithCode:@"^[1-9][0-9]{5}$"];
+}
+
++ (BOOL)checkPassword:(NSString *) password
+{
+    return [self Verify:password WithCode:@"^[A-Za-z0-9]{6,16}$"];
+    
+}
+
++(BOOL)numberVerift:(NSString *)phone
+{
+    return [self Verify:phone WithCode:@"^[0-9]+([.]{0,1}[0-9]+){0,1}$"];
+}
++(BOOL )telephoneAreaCode:(NSString *)telephoneArea
+{
+    // 03xx
+    NSString *fourDigit03 = @"03([157]\\d|35|49|9[1-68])";
+    // 04xx
+    NSString *fourDigit04 = @"04([17]\\d|2[179]|[3,5][1-9]|4[08]|6[4789]|8[23])";
+    // 05xx
+    NSString *fourDigit05 = @"05([1357]\\d|2[37]|4[36]|6[1-6]|80|9[1-9])";
+    // 06xx
+    NSString *fourDigit06 = @"06(3[1-5]|6[0238]|9[12])";
+    // 07xx
+    NSString *fourDigit07 = @"07(01|[13579]\\d|2[248]|4[3-6]|6[023689])";
+    // 08xx
+    NSString *fourDigit08 = @"08(1[23678]|2[567]|[37]\\d)|5[1-9]|8[3678]|9[1-8]";
+    // 09xx
+    NSString *fourDigit09 = @"09(0[123689]|[17][0-79]|[39]\\d|4[13]|5[1-5])";
+    
+    NSString *codeStr = [NSString stringWithFormat:@"%@|%@|%@|%@|%@|%@|%@",fourDigit03,fourDigit04,fourDigit05,fourDigit06,fourDigit07,fourDigit08,fourDigit09];
+    
+    return [self Verify:telephoneArea WithCode:codeStr]||[self Verify:telephoneArea WithCode:@"010|02[0-57-9]"];
+}
+
++(BOOL)Verify:(NSString *)content WithCode:(NSString *)code
+{
+    NSError *error = NULL;
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:code options:NSRegularExpressionCaseInsensitive error:&error];
+    NSTextCheckingResult *result = [regex firstMatchInString:content options:0 range:NSMakeRange(0, [content length])];
+    if (result) {
+        return YES;
+    }
+    return NO;
+}
++ (NSString *)md5:(NSString *)str
+{
+    const char *original_str = [str UTF8String];
+    unsigned char result[CC_MD5_DIGEST_LENGTH];
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wconversion"
+    CC_MD5(original_str, strlen(original_str), result);
+#pragma clang diagnostic pop
+    NSMutableString *hash = [NSMutableString string];
+    for (int i = 0; i < 16; i++)
+        [hash appendFormat:@"%02X", result[i]];
+    return [hash lowercaseString];
+}
+
 //#define _fz  (kIOSVersions>=9.0? @"San Francisco":@"Helvetica Neue")
 //(kIOSVersions>=9.0? @"":@"Helvetica Neue" )
 +(UIFont *)get_en_Font:(CGFloat)font
@@ -73,6 +407,43 @@ static regular *_tools = nil;
 
     }
     return (kIOSVersions>=9.0? [UIFont systemFontOfSize:_font]:[UIFont fontWithName:@"Helvetica Neue" size:_font]);
+}
++(UIAlertController *)alertTitle_Simple:(NSString *)title
+{
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:title preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"ok", @"") style:UIAlertActionStyleDefault handler:nil];
+    [alertController addAction:okAction];
+    return alertController;
+}
++(UIAlertController *)alertTitle_Simple:(NSString *)title WithBlock:(void(^)())block
+{
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:title preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"ok", @"") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        block();
+    }];
+    [alertController addAction:okAction];
+    return alertController;
+}
+
++(UIAlertController *)alertTitleCancel_Simple:(NSString *)title WithBlock:(void(^)())block
+{
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:title preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"ok", @"") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        block();
+    }];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"cancel", @"") style:UIAlertActionStyleCancel handler:nil];
+    
+    [alertController addAction:okAction];
+    [alertController addAction:cancelAction];
+    return alertController;
+}
+
++(UIAlertController *)alert_NONETWORKING
+{
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:NSLocalizedString(@"NetworkConnectError", @"") preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"ok", @"") style:UIAlertActionStyleDefault handler:nil];
+    [alertController addAction:okAction];
+    return alertController;
 }
 + (UIButton *)createBtnWithRect:(CGRect) rect WithTitle:(NSString *)title WithNormalStr:(NSString *)nStr WithSelectStr:(NSString *)sStr
 {
@@ -109,6 +480,10 @@ static regular *_tools = nil;
 
     [titleImage addSubview:labelImage];
     return titleImage;
+}
++ (NSMutableAttributedString *)createAttributeString:(NSString *)str andFloat:(NSNumber*)nsKern{
+    NSMutableAttributedString *attributedString =[[NSMutableAttributedString alloc] initWithString:str attributes:@{NSKernAttributeName : nsKern}];
+    return attributedString;
 }
 +(UIImageView *)createImgView:(NSString *)imageName WithRect:(CGRect )rect
 {
@@ -203,7 +578,7 @@ static regular *_tools = nil;
 
 }
 
-+(UIAlertView *)alertTitle_Simple:(NSString *)title
++(UIAlertView *)alertTitle_Simple_OLD:(NSString *)title
 {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:nil delegate:self cancelButtonTitle:@"ok" otherButtonTitles: nil];
     [alert show];
@@ -258,143 +633,9 @@ static regular *_tools = nil;
     return text;
 }
 
-#pragma mark ---------------- 缓存处理 -----------------
-/**
- *  获取缓存大小（带单位）
- *
- *  @return 缓存大小（带单位）, 单位 M，小于1M用kb
- */
-- (NSString *) getCacheSize
-{
-    CGFloat tempSize = [self folderSizeAtPath:[self getCachesPathWithAppendPath:nil]];
-
-    if (tempSize / 1024.0 > 1.0)
-    {
-        return [NSString stringWithFormat:@"%.2f M", tempSize / (1024.0 * 1024.0)];
-    }
-    else
-    {
-        return [NSString stringWithFormat:@"%.2f kb", tempSize / 1024.0];
-    }
-}
-
-/**
- *  获取指定全路径的文件总大小
- *
- *  @param folderPath 指定全路径
- *
- *  @return 总大小B
- */
-- (float ) folderSizeAtPath:(NSString*) folderPath
-{
-    NSFileManager* manager = [NSFileManager defaultManager];
-    if (![manager fileExistsAtPath:folderPath])
-    {
-        return 0;
-    }
-    NSEnumerator *childFilesEnumerator = [[manager subpathsAtPath:folderPath] objectEnumerator];//从前向后枚举器
-    NSString* fileName;
-    long long folderSize = 0;
-    while ((fileName = [childFilesEnumerator nextObject]) != nil){
-        //        NSLog(@"fileName ==== %@",fileName);
-        NSString* fileAbsolutePath = [folderPath stringByAppendingPathComponent:fileName];
-        //        NSLog(@"fileAbsolutePath ==== %@",fileAbsolutePath);
-        folderSize += [self fileSizeAtPath:fileAbsolutePath];
-    }
-    //    NSLog(@"folderSize ==== %lld",folderSize);
-    return folderSize;
-}
-
-
-/**
- *  获取指定缓存文件路径
- *
- *  @param appendPath 指定子路径，为空或Nil时返回整个缓存文件夹大小
- *
- *  @return 指定缓存文件路径
- */
-- (NSString *) getCachesPathWithAppendPath: (NSString *) appendPath
-{
-    // 获取Caches目录路径
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-    NSString *cachesDir = [paths objectAtIndex:0];
-
-    NSString *filePath = cachesDir;
-    if (![NSString isNilOrEmpty:appendPath ])
-    {
-        filePath = [cachesDir stringByAppendingPathComponent:appendPath];
-    }
-
-    return filePath;
-}
-
-
-//计算某个文件的大小
-- (long long) fileSizeAtPath:(NSString*) filePath
-{
-    NSFileManager* manager = [NSFileManager defaultManager];
-    if ([manager fileExistsAtPath:filePath])
-    {
-
-        //        //取得一个目录下得所有文件名
-        //        NSArray *files = [manager subpathsAtPath:filePath];
-        //        NSLog(@"files1111111%@ == %ld",files,files.count);
-        //
-        //        // 从路径中获得完整的文件名（带后缀）
-        //        NSString *exe = [filePath lastPathComponent];
-        //        NSLog(@"exeexe ====%@",exe);
-        //
-        //        // 获得文件名（不带后缀）
-        //        exe = [exe stringByDeletingPathExtension];
-        //
-        //        // 获得文件名（不带后缀）
-        //        NSString *exestr = [[files objectAtIndex:1] stringByDeletingPathExtension];
-        //        NSLog(@"files2222222%@  ==== %@",[files objectAtIndex:1],exestr);
-
-        return [[manager attributesOfItemAtPath:filePath error:nil] fileSize];
-    }
-
-    return 0;
-}
-
-
-/**
- *  清理指定类型的指定路径文件(NSHomeDirectory 目录下)
- *
- *  @param fullPath 指定全路径，如果为空或者nil，表示整个NSDocumentDirectory
- *  @param extension  指定文件类型如 m4r,如果为空或者nil,表示删除所有文件
- */
-- (void) clearFileWithPath: (NSString *) fullPath withExtension: (NSString *) extension
-{
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSString *homePath = NSHomeDirectory();
-    //    NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    //    NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *filePath = homePath;
-    if (![NSString isNilOrEmpty:fullPath ])
-    {
-        filePath = fullPath;
-    }
-
-    NSArray *contents = [fileManager contentsOfDirectoryAtPath:filePath error:NULL];
-    NSEnumerator *e = [contents objectEnumerator];
-    NSString *filename;
-    while ((filename = [e nextObject])) {
-
-        if ([NSString isNilOrEmpty:extension ])
-        {
-            [fileManager removeItemAtPath:[filePath stringByAppendingPathComponent:filename] error:NULL];
-        }
-        else if ([[filename pathExtension] isEqualToString:extension])
-        {
-
-            [fileManager removeItemAtPath:[filePath stringByAppendingPathComponent:filename] error:NULL];
-        }
-    }
-}
 //+ (void)checkLogin
 //{
-//    NSLog(@"islogin%ld",[[[NSUserDefaults standardUserDefaults] objectForKey:@"islogin"] integerValue]);
+//    JXLOG(@"islogin%ld",[[[NSUserDefaults standardUserDefaults] objectForKey:@"islogin"] integerValue]);
 //    if([[[NSUserDefaults standardUserDefaults] objectForKey:@"islogin"] integerValue] == 1){
 ////        [regular createProgress:@"登录中"];
 //
@@ -418,7 +659,7 @@ static regular *_tools = nil;
 ////            [regular removeProgress];
 //            if(!operation.response)
 //            {
-//                [regular alertTitle_Simple:@"请查收你的邮箱"];
+//                [self presentViewController:[regular alertTitle_Simple:@"请查收你的邮箱"] animated:YES completion:nil];
 //            }else
 //            {
 //                NSString *html = operation.responseString;
@@ -427,14 +668,14 @@ static regular *_tools = nil;
 ////                [self login_praise:data];
 //                id res = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
 //                [[NSUserDefaults standardUserDefaults] setObject:res[@"data"][@"token"] forKey:@"token"];
-//                NSLog(@"token%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"token"]);
+//                JXLOG(@"token%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"token"]);
 //
 //
 //            }
 //
 //        }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
 //            //        下载失败时，打印错误信息
-//            NSLog(@"发生错误！%@",error);
+//            JXLOG(@"发生错误！%@",error);
 ////            [regular removeProgress];
 //        }];
 //
@@ -472,15 +713,10 @@ static regular *_tools = nil;
     }
     else
     {
-        [regular alertTitle_Simple:[dict objectForKey:@"message"]];
+        [regular alertTitle_Simple_OLD:[dict objectForKey:@"message"]];
         [regular removeProgress];
     }
 
-}
-
-+ (NSMutableAttributedString *)createAttributeString:(NSString *)str andFloat:(NSNumber*)nsKern{
-    NSMutableAttributedString *attributedString =[[NSMutableAttributedString alloc] initWithString:str attributes:@{NSKernAttributeName : nsKern}];
-    return attributedString;
 }
 
 @end

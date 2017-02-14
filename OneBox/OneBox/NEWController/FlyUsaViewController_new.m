@@ -71,7 +71,7 @@
     NSString *newsDetailUrl = [NSString stringWithFormat:@"%@/v1/user_fly_infos?token=%@",DNS,[[NSUserDefaults standardUserDefaults] objectForKey:@"token"]];
     [HttpRequestManager GET:newsDetailUrl complete:^(NSData *data) {
         NSString *str = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-        NSLog(@"%@",str);
+        JXLOG(@"%@",str);
         id res = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
 //        NSInteger step = [res[@"data"][@"step"] integerValue];
         if([res[@"code"] integerValue]==1)
@@ -98,7 +98,7 @@
         }
 //        [regular removeProgress];
         [indicator stopAnimationWithLoadText:@"loading..." withType:YES];
-        NSLog(@"失败");
+        JXLOG(@"失败");
     }];
 
 }
@@ -200,12 +200,12 @@
 
     NSMutableDictionary *parameters=[[NSMutableDictionary alloc] init];
     [parameters setObject:[dict objectForKey:@"token"] forKey:@"token"];
-    NSLog(@"titleArr=%@",titleArr_must);
+    JXLOG(@"titleArr=%@",titleArr_must);
     for (int i=0; i<titleArr_must.count; i++) {
 
         if(i==_index)
         {
-            NSLog(@"%@",data_dict_must);
+            JXLOG(@"%@",data_dict_must);
             NSInteger _obj=0;
             if([[data_dict_must objectForKey:titleArr_must[i]] integerValue])
             {
@@ -438,7 +438,7 @@
 
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错白色" Withtype:1]];
-            NSLog(@"失败");
+            JXLOG(@"失败");
         }];
 
 
@@ -469,7 +469,7 @@
 
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错白色" Withtype:1]];
-            NSLog(@"失败");
+            JXLOG(@"失败");
         }];
         
     }
@@ -532,8 +532,8 @@
             NSTimeInterval timenow= [nowdate timeIntervalSince1970];
             long jiantime=(long)(time-timenow);
 
-            NSLog(@"timenow=%ld,time=%ld",(long)timenow,(long)time);
-            NSLog(@"time=%ld",(long)(time-timenow));
+            JXLOG(@"timenow=%ld,time=%ld",(long)timenow,(long)time);
+            JXLOG(@"time=%ld",(long)(time-timenow));
 
             if(jiantime<=0)
             {
@@ -552,7 +552,7 @@
 
             }else
             {
-                NSLog(@"time=%ld  timenow=%ld",(long)(time/(86400)),(long)(timenow/(86400)));
+                JXLOG(@"time=%ld  timenow=%ld",(long)(time/(86400)),(long)(timenow/(86400)));
                 //                今天为面签日
                 if((((long)(time/(86400)))==((long)(timenow/(86400))))&&(time>timenow))
                 {
@@ -599,7 +599,7 @@
         }
 //        [regular removeProgress];
         [indicator stopAnimationWithLoadText:@"loading..." withType:YES];
-        NSLog(@"失败");
+        JXLOG(@"失败");
     }];
     
 }
@@ -769,7 +769,7 @@
 
 
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//            NSLog(@"失败");
+//            JXLOG(@"失败");
             [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错白色" Withtype:1]];
         }];
 
@@ -918,7 +918,7 @@
         nextcolor=[UIColor colorWithRed:51.0f/255.0f green:204.0f/255.0f blue:204.0f/255.0f alpha:1];
     }
     [NextBtn setBackgroundColor:nextcolor];
-    NSLog(@"%f %f",NextBtn.frame.origin.y,ScreenHeight);
+    JXLOG(@"%f %f",NextBtn.frame.origin.y,ScreenHeight);
     [NextBtn setTitle:nexttitle forState:UIControlStateNormal];
     NextBtn.titleLabel.font=[regular getFont:12.0f];
     [NextBtn.titleLabel setAttributedText:[regular createAttributeString:nexttitle andFloat:@(3)]];
@@ -937,11 +937,11 @@
     NSDictionary *dict = @{@"step":@(button.tag - 100)};
     [manager PUT:Url parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
 
-        NSLog(@"%@",responseObject);
+        JXLOG(@"%@",responseObject);
         [[NSNotificationCenter defaultCenter] postNotificationName:@"updataBox" object:nil];
 
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        NSLog(@"失败");
+//        JXLOG(@"失败");
         [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错白色" Withtype:1]];
     }];
 

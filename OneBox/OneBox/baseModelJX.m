@@ -46,7 +46,7 @@
     id res = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
     NSDictionary *_dict=(NSDictionary*)res;
     NSDictionary *dict=_dict[_key];
-    NSLog(@"detail %@",dict);
+    JXLOG(@"detail %@",dict);
     id model = [[self alloc]init];
     [model setValuesForKeysWithDictionary:dict];
     return model;
@@ -76,6 +76,6 @@
 
 -(void)setValue:(id)value forUndefinedKey:(NSString *)key
 {
-    //    NSLog(@"%@",key);
+    //    JXLOG(@"%@",key);
 }
 @end

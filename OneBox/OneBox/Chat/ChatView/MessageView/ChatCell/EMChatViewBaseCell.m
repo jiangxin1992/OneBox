@@ -32,7 +32,7 @@ NSString *const kRouterEventChatHeadImageTapEventName = @"kRouterEventChatHeadIm
             originX = self.bounds.size.width - HEAD_SIZE - HEAD_PADDING;
         }
 
-        NSLog(@"%f",self.height);
+        JXLOG(@"%f",self.height);
         _headImageView = [[UIImageView alloc] initWithFrame:CGRectMake(originX, CELLPADDING, HEAD_SIZE, HEAD_SIZE)];
         [_headImageView addGestureRecognizer:tap];
         _headImageView.userInteractionEnabled = YES;
@@ -40,7 +40,7 @@ NSString *const kRouterEventChatHeadImageTapEventName = @"kRouterEventChatHeadIm
         _headImageView.backgroundColor = [UIColor clearColor];
 
         [self.contentView addSubview:_headImageView];
-        NSLog(@"contentview=%f",CGRectGetHeight(self.contentView.frame));
+        JXLOG(@"contentview=%f",CGRectGetHeight(self.contentView.frame));
 
         _nameLabel = [[UILabel alloc] init];
         _nameLabel.backgroundColor = [UIColor clearColor];
@@ -66,7 +66,7 @@ NSString *const kRouterEventChatHeadImageTapEventName = @"kRouterEventChatHeadIm
     frame.origin.x = _messageModel.isSender ? (self.bounds.size.width - _headImageView.frame.size.width - HEAD_PADDING) : HEAD_PADDING;
     _headImageView.frame = frame;
     [_nameLabel sizeToFit];
-    NSLog(@"namelabel=%f",_nameLabel.frame.size.height);
+    JXLOG(@"namelabel=%f",_nameLabel.frame.size.height);
     frame = _nameLabel.frame;
     frame.origin.x = HEAD_PADDING * 2 + CGRectGetWidth(_headImageView.frame) + NAME_LABEL_PADDING;
     frame.origin.y = CGRectGetMinY(_headImageView.frame);
@@ -113,11 +113,11 @@ NSString *const kRouterEventChatHeadImageTapEventName = @"kRouterEventChatHeadIm
 {
     if (model.isSender) {
 
-        NSLog(@"11111%f",self.bubbleView.frame.size.height);
+        JXLOG(@"11111%f",self.bubbleView.frame.size.height);
         self.headImageView.frame = CGRectMake(self.bounds.size.width - HEAD_SIZE - HEAD_PADDING, self.bounds.size.height-CELLPADDING-HEAD_SIZE, HEAD_SIZE, HEAD_SIZE);
     }
     else{
-        NSLog(@"111%f",self.bubbleView.frame.size.height);
+        JXLOG(@"111%f",self.bubbleView.frame.size.height);
         self.headImageView.frame = CGRectMake(0,self.bounds.size.height-CELLPADDING-HEAD_SIZE, HEAD_SIZE, HEAD_SIZE);
     }
 }

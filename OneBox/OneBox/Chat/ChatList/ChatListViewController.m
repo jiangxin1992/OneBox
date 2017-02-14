@@ -445,7 +445,7 @@
     }
 
 
-    NSLog(@"%@   %@",[self subTitleMessageByConversation:conversation],[self lastMessageTimeByConversation:conversation]);
+    JXLOG(@"%@   %@",[self subTitleMessageByConversation:conversation],[self lastMessageTimeByConversation:conversation]);
     cell.detailMsg = [self subTitleMessageByConversation:conversation];
     cell.time = [self lastMessageTimeByConversation:conversation];
     cell.unreadCount = [self unreadMessageCountByConversation:conversation];
@@ -490,8 +490,8 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    NSLog(@"%@",turearr);
-    NSLog(@" %d",indexPath.row);
+    JXLOG(@"%@",turearr);
+    JXLOG(@" %d",indexPath.row);
     if(turearr.count)
     {
         NSDictionary *__ddd=[[NSDictionary alloc] initWithObjectsAndKeys:(EMConversation *)[self.dataSource objectAtIndex:indexPath.row],@"con",[turearr objectAtIndex:indexPath.row],@"title",nil];
@@ -702,7 +702,7 @@
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错白色" Withtype:1]];
-        NSLog(@"失败");
+        JXLOG(@"失败");
 
     }];
 
@@ -730,7 +730,7 @@
 }
 
 - (void)willReceiveOfflineMessages{
-    NSLog(NSLocalizedString(@"message.beginReceiveOffine", @"Begin to receive offline messages"));
+    JXLOG(NSLocalizedString(@"message.beginReceiveOffine", @"Begin to receive offline messages"));
 }
 #pragma mark-收到消息的时候调用
 - (void)didReceiveOfflineMessages:(NSArray *)offlineMessages
@@ -739,7 +739,7 @@
 }
 
 - (void)didFinishedReceiveOfflineMessages{
-    NSLog(NSLocalizedString(@"message.endReceiveOffine", @"End to receive offline messages"));
+    JXLOG(NSLocalizedString(@"message.endReceiveOffine", @"End to receive offline messages"));
 }
 
 #pragma mark - ChatViewControllerDelegate

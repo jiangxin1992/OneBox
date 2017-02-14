@@ -112,7 +112,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSLog(@"沙盒路径：%@",NSHomeDirectory());
+    JXLOG(@"沙盒路径：%@",NSHomeDirectory());
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(qiehuan) name:@"qiehuan" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(xiaoshi:) name:@"xiaoshi" object:nil];
 
@@ -227,7 +227,7 @@
             }
         }
 
-    NSLog(@"title=%@",title);
+    JXLOG(@"title=%@",title);
 
     NSString *chatter = conversation.chatter;
     ChatViewController *chatController = [[ChatViewController alloc] initWithChatter:chatter conversationType:conversation.conversationType];
@@ -725,7 +725,7 @@
 //    notification.timeZone = [NSTimeZone defaultTimeZone];
 //    NSTimeInterval timeInterval = [[NSDate date] timeIntervalSinceDate:self.lastPlaySoundDate];
 //    if (timeInterval < kDefaultPlaySoundInterval) {
-//        NSLog(@"skip ringing & vibration %@, %@", [NSDate date], self.lastPlaySoundDate);
+//        JXLOG(@"skip ringing & vibration %@, %@", [NSDate date], self.lastPlaySoundDate);
 //    } else {
 //        notification.soundName = UILocalNotificationDefaultSoundName;
 //        self.lastPlaySoundDate = [NSDate date];
@@ -762,7 +762,7 @@
 //                                   timeIntervalSinceDate:self.lastPlaySoundDate];
 //    if (timeInterval < kDefaultPlaySoundInterval) {
 //        //如果距离上次响铃和震动时间太短, 则跳过响铃
-//        NSLog(@"skip ringing & vibration %@, %@", [NSDate date], self.lastPlaySoundDate);
+//        JXLOG(@"skip ringing & vibration %@, %@", [NSDate date], self.lastPlaySoundDate);
 //        return;
 //    }
 //

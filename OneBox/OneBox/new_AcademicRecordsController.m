@@ -99,7 +99,7 @@
 
 
 //        UIButton *_btn=(UIButton *)[self.view viewWithTag:400];
-        NSLog(@"%@",btn.titleLabel.text);
+        JXLOG(@"%@",btn.titleLabel.text);
         for (NSDictionary *_dict in stateArr) {
             if([[_dict objectForKey:@"en_name"]isEqualToString:btn.titleLabel.text])
             {
@@ -400,13 +400,13 @@
     _scrollview_city.backgroundColor=upviewcity.backgroundColor;
     _scrollview_city.showsVerticalScrollIndicator=YES;
     [upviewcity addSubview:_scrollview_city];
-    NSLog(@"%@",state_id);
+    JXLOG(@"%@",state_id);
 
 
     //    [[ToolManager sharedManager] createProgress:@"加载中"];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:[[NSString alloc] initWithFormat:@"%@%@%@",DNS,@"/v1/us_states/",state_id] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"%@",state_id);
+        JXLOG(@"%@",state_id);
 
         NSString *html = operation.responseString;
         NSData* data=[html dataUsingEncoding:NSUTF8StringEncoding];
@@ -713,7 +713,7 @@
     NSMutableDictionary *parameters=[[NSMutableDictionary alloc] init];
 
 
-    NSLog(@"%@",data_dict);
+    JXLOG(@"%@",data_dict);
     for (int i=0;i<keyArray.count ; i++) {
         UILabel *label=(UILabel*)[self.view viewWithTag:i+1];
         if([_alertNum isEqualToString:@""])
@@ -920,7 +920,7 @@
     NSMutableDictionary *parameters=[[NSMutableDictionary alloc] init];
 
 
-    NSLog(@"%@",data_dict);
+    JXLOG(@"%@",data_dict);
     for (int i=0;i<keyArray.count ; i++) {
         UILabel *label=(UILabel*)[self.view viewWithTag:i+1];
         if([_alertNum isEqualToString:@""])
@@ -1063,7 +1063,7 @@
         _token=[dict objectForKey:@"token"];
     }
     [parameters setValue:_token forKey:@"token"];
-    NSLog(@"%@  %@",state_id,city_id);
+    JXLOG(@"%@  %@",state_id,city_id);
     if(![city_id isEqualToString:@"0"])
     {
         if(![city_id isEqualToString:@""])
@@ -1155,7 +1155,7 @@
 }
 -(void)valueChangedForDoubleSlider:(NMRangeSlider *)slider
 {
-    NSLog(@"up=%f,down=%f",slider.upperValue,slider.lowerValue);
+    JXLOG(@"up=%f,down=%f",slider.upperValue,slider.lowerValue);
     if(slider.tag==5000)
     {
 
@@ -1617,7 +1617,7 @@
 
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错白色" Withtype:1]];
-        NSLog(@"Error: %@", error);
+        JXLOG(@"Error: %@", error);
         [[ToolManager sharedManager] removeProgress];
     }];
 

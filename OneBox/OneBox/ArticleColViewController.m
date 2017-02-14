@@ -89,12 +89,12 @@
     [self PrepareUI];//一些初始化UI的准备
     changeBlock=^(NSInteger row)
     {
-        NSLog(@"%@",_arrayData);
+        JXLOG(@"%@",_arrayData);
         ((ArticleModel *)[_arrayData objectAtIndex:row]).isapp=YES;
     };
     alterBlock=^(ArticleModel *model,BOOL isdelete)
     {
-        NSLog(@"111");
+        JXLOG(@"111");
         if(isdelete)
         {
 //            删除
@@ -440,7 +440,7 @@
 {
 
 
-    NSLog(@"%f",scrollView.contentOffset.y);
+    JXLOG(@"%f",scrollView.contentOffset.y);
     CGFloat _height=scrollView.contentOffset.y+CGRectGetHeight(_tableView.frame)-_min_offset-kTabBarHeight;
     NSInteger now_cell=0;
     if(_isPad)

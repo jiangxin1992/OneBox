@@ -145,7 +145,7 @@
     
     if(![self validateEmail:username.text])
     {
-        [regular alertTitle_Simple:@"请输入正确格式的邮箱。"];
+        [self presentViewController:[regular alertTitle_Simple:@"请输入正确格式的邮箱。"] animated:YES completion:nil];
     }else
     {
         [[[UIApplication sharedApplication] keyWindow] endEditing:YES];

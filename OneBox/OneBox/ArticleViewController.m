@@ -173,7 +173,7 @@
 {
     if(_isPad)
     {
-        _tableView=[[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-(tabbarHeight-49)) style:UITableViewStylePlain];
+        _tableView=[[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-(kTabBarHeight-49)) style:UITableViewStylePlain];
     }else
     {
         _tableView=[[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight) style:UITableViewStylePlain];
@@ -331,7 +331,7 @@
 }
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView;
 {
-    CGFloat _height=scrollView.contentOffset.y+CGRectGetHeight(_tableView.frame)-_min_offset-tabbarHeight;
+    CGFloat _height=scrollView.contentOffset.y+CGRectGetHeight(_tableView.frame)-_min_offset-kTabBarHeight;
 
     NSInteger now_cell=0;
     if(_isPad)

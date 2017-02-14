@@ -112,10 +112,10 @@
 {
     if([username.text isEqualToString:@""])
     {
-        [regular alertTitle_Simple:@"密码不能为空"];
+        [self presentViewController:[regular alertTitle_Simple:@"密码不能为空"] animated:YES completion:nil];
     }else if([username.text length]<6||[username.text length]>16)
     {
-        [regular alertTitle_Simple:@"密码长度为6到16位之间"];
+        [self presentViewController:[regular alertTitle_Simple:@"密码长度为6到16位之间"] animated:YES completion:nil];
     }else
     {
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];

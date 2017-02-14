@@ -100,7 +100,7 @@
 {
 
     UIView *__view = [[UIView  alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth,ScreenHeight)];
-    NSLog(@"%f   %f",ScreenWidth,ScreenHeight);
+    JXLOG(@"%f   %f",ScreenWidth,ScreenHeight);
     __view.backgroundColor=[UIColor whiteColor];
     self.view = __view;
 
@@ -328,9 +328,9 @@
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         NSDictionary *parameters=@{@"server_id":_uid,@"token":[[NSUserDefaults standardUserDefaults] objectForKey:@"token"]};
         [manager POST:[[NSString alloc] initWithFormat:@"%@/v1/chats/close_server_chat",DNS] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSLog(@"111");
+            JXLOG(@"111");
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            NSLog(@"111");
+            JXLOG(@"111");
 
         }];
     }
@@ -440,9 +440,9 @@
                 NSDictionary *parameters=@{@"server_id":_uid,@"token":[[NSUserDefaults standardUserDefaults] objectForKey:@"token"]};
                 [manager POST:[[NSString alloc] initWithFormat:@"%@/v1/chats/open_server_chat",DNS] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
 
-                    NSLog(@"111");
+                    JXLOG(@"111");
                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                    NSLog(@"111");
+                    JXLOG(@"111");
                     
                 }];
             }
@@ -487,23 +487,23 @@
         [exportSession exportAsynchronouslyWithCompletionHandler:^{
             switch ([exportSession status]) {
                 case AVAssetExportSessionStatusFailed: {
-                    NSLog(@"failed, error:%@.", exportSession.error);
+                    JXLOG(@"failed, error:%@.", exportSession.error);
                 } break;
                 case AVAssetExportSessionStatusCancelled: {
-                    NSLog(@"cancelled.");
+                    JXLOG(@"cancelled.");
                 } break;
                 case AVAssetExportSessionStatusCompleted: {
-                    NSLog(@"completed.");
+                    JXLOG(@"completed.");
                 } break;
                 default: {
-                    NSLog(@"others.");
+                    JXLOG(@"others.");
                 } break;
             }
             dispatch_semaphore_signal(wait);
         }];
         long timeout = dispatch_semaphore_wait(wait, DISPATCH_TIME_FOREVER);
         if (timeout) {
-            NSLog(@"timeout.");
+            JXLOG(@"timeout.");
         }
         if (wait) {
             //dispatch_release(wait);
@@ -665,7 +665,7 @@
             if(model.type==eMessageBodyType_Voice)
             {
 
-                NSLog(@"111");
+                JXLOG(@"111");
             }
             NSString *cellIdentifier = [EMChatViewCell cellIdentifierForMessageModel:model];
             EMChatViewCell *cell = (EMChatViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
@@ -959,7 +959,7 @@
                     }
                     else
                     {
-                        NSLog(@"Read %@ failed!", localPath);
+                        JXLOG(@"Read %@ failed!", localPath);
                     }
                     return ;
                 }
@@ -983,7 +983,7 @@
                         }
                         else
                         {
-                            NSLog(@"Read %@ failed!", localPath);
+                            JXLOG(@"Read %@ failed!", localPath);
                         }
                         return ;
                     }
@@ -1037,10 +1037,10 @@
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSDictionary *_parameters=@{@"token":[[NSUserDefaults standardUserDefaults] objectForKey:@"token"]};
     [manager POST:[[NSString alloc] initWithFormat:@"%@/v1/chats/recive_msg",DNS] parameters:_parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"111");
+        JXLOG(@"111");
 
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"222");
+        JXLOG(@"222");
 
     }];
     [self.tableView reloadData];
@@ -1126,7 +1126,7 @@
 }
 
 - (void)didFetchingMessageAttachments:(EMMessage *)message progress:(float)progress{
-    NSLog(@"didFetchingMessageAttachment: %f", progress);
+    JXLOG(@"didFetchingMessageAttachment: %f", progress);
 }
 #pragma mark - 收到消息
 
@@ -1386,7 +1386,7 @@
                                                                  completion:^(NSError *error)
          {
              if (error) {
-                 NSLog(NSLocalizedString(@"message.startRecordFail", @"failure to start recording"));
+                 JXLOG(NSLocalizedString(@"message.startRecordFail", @"failure to start recording"));
              }
          }];
     }
@@ -1442,7 +1442,7 @@
             NSError *error = nil;
             [fileman removeItemAtURL:videoURL error:&error];
             if (error) {
-                NSLog(@"failed to remove file, error:%@.", error);
+                JXLOG(@"failed to remove file, error:%@.", error);
             }
         }
         EMChatVideo *chatVideo = [[EMChatVideo alloc] initWithFile:[mp4 relativePath] displayName:@"video.mp4"];
@@ -1634,7 +1634,7 @@
 {
     if(if_refresh)
     {
-        NSLog(@"%@",self.messages);
+        JXLOG(@"%@",self.messages);
 
         if(self.messages.count)
         {
@@ -1648,14 +1648,14 @@
                     msg_id=Message.messageId;
                 }
             }
-            NSLog(@"mintime=%lld;msgid=%@",min_time,msg_id);
-            NSLog(@"1111");
+            JXLOG(@"mintime=%lld;msgid=%@",min_time,msg_id);
+            JXLOG(@"1111");
         }else
         {
             msg_id=@"";
         }
-        NSLog(@"%@",_uid);
-        NSLog(@"%@",msg_id);
+        JXLOG(@"%@",_uid);
+        JXLOG(@"%@",msg_id);
 
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         NSDictionary *_parameters=@{@"token":[[NSUserDefaults standardUserDefaults] objectForKey:@"token"],@"target_user_id":_uid,@"msg_id":msg_id} ;
@@ -1755,7 +1755,7 @@
 //        message=[[EMMessage alloc] initWithReceiver:_chatter bodies:@[textBody]];
 
 
-        NSLog(@"%@",dict);
+        JXLOG(@"%@",dict);
     NSDictionary *voiceDic = @{EMMessageBodyAttrKeySecret:[[bodies firstObject] objectForKey:@"secret"],
                                EMMessageBodyAttrKeyFileName:[[bodies firstObject] objectForKey:@"filename"],
                                EMMessageBodyAttrKeyDuration:@6,
@@ -1794,7 +1794,7 @@
 
         dispatch_async(dispatch_get_main_queue(), ^{
 
-            NSLog(@"%@",msg_id);
+            JXLOG(@"%@",msg_id);
 
             if(_page>2||![msg_id isEqualToString:@""])
             {
@@ -1825,7 +1825,7 @@
                                                        options:NSJSONWritingPrettyPrinted // Pass 0 if you don't care about the readability of the generated string
                                                          error:&error];
     if (! jsonData) {
-        NSLog(@"Got an error: %@", error);
+        JXLOG(@"Got an error: %@", error);
     } else {
         jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
     }

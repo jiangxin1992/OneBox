@@ -214,7 +214,7 @@
     if(_query!=nil)
     {
         if ( [_query rangeOfString:@"author_info"].location !=NSNotFound) {
-            NSLog(@"111");
+            JXLOG(@"111");
             [self iconClick];
             return NO;
         }
@@ -498,7 +498,7 @@
         }
 
     } failed:^{
-        NSLog(@"失败");
+        JXLOG(@"失败");
     }];
 
 
@@ -541,10 +541,10 @@
             manager.responseSerializer = [AFHTTPResponseSerializer serializer];
 
             [manager POST:str parameters:para success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                //                NSLog(@"%@",responseObject);
+                //                JXLOG(@"%@",responseObject);
                 [regular removeProgress];
                 id res = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-                NSLog(@"%@",res);
+                JXLOG(@"%@",res);
                 if ([res[@"code"] integerValue] == 1) {
 
                     [[NSNotificationCenter defaultCenter] postNotificationName:@"RefreshChatList" object:nil];
@@ -553,7 +553,7 @@
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
 
                 [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错白色" Withtype:1]];
-                NSLog(@"失败");
+                JXLOG(@"失败");
             }];
 
         }else
@@ -589,10 +589,10 @@
             manager.responseSerializer = [AFHTTPResponseSerializer serializer];
 
             [manager POST:str parameters:para success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                //                NSLog(@"%@",responseObject);
+                //                JXLOG(@"%@",responseObject);
                 [regular removeProgress];
                 id res = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-                NSLog(@"%@",res);
+                JXLOG(@"%@",res);
                 if ([res[@"code"] integerValue] == 1) {
                     [[NSNotificationCenter defaultCenter] postNotificationName:@"RefreshChatList" object:nil];
                     _isguanzhu=NO;
@@ -601,7 +601,7 @@
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
 
                 [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错白色" Withtype:1]];
-                NSLog(@"失败");
+                JXLOG(@"失败");
             }];
             
             
@@ -928,16 +928,16 @@
     switch (result)
     {
         case MFMailComposeResultCancelled: // 用户取消编辑
-            NSLog(@"Mail send canceled...");
+            JXLOG(@"Mail send canceled...");
             break;
         case MFMailComposeResultSaved: // 用户保存邮件
-            NSLog(@"Mail saved...");
+            JXLOG(@"Mail saved...");
             break;
         case MFMailComposeResultSent: // 用户点击发送
-            NSLog(@"Mail sent...");
+            JXLOG(@"Mail sent...");
             break;
         case MFMailComposeResultFailed: // 用户尝试保存或发送邮件失败
-            NSLog(@"Mail send errored: %@...", [error localizedDescription]);
+            JXLOG(@"Mail send errored: %@...", [error localizedDescription]);
             break;
     }
     // 关闭邮件发送视图
@@ -977,7 +977,7 @@
     {
         arrayName = @[@(22),@(23),@(1),@(24),@(6),@(18)];
     }
-    NSLog(@"ssss%ld",(long)[arrayName[btn.tag - 9000] integerValue]);
+    JXLOG(@"ssss%ld",(long)[arrayName[btn.tag - 9000] integerValue]);
     
     //1、创建分享参数（必要）
     NSMutableDictionary *shareParams = [NSMutableDictionary dictionary];

@@ -257,7 +257,7 @@
     NSDictionary *dict=not.object;
     [AdmissionDict removeAllObjects];
     [AdmissionDict setValuesForKeysWithDictionary:[dict objectForKey:@"content"]];
-    NSLog(@"111");
+    JXLOG(@"111");
     if([[dict objectForKey:@"key"] integerValue]==0)
     {
         //电话
@@ -273,7 +273,7 @@
     }else if([[dict objectForKey:@"key"] integerValue]==1)
     {
         //邮件
-        NSLog(@"%@",[[dict objectForKey:@"content"] objectForKey:@"email"]);
+        JXLOG(@"%@",[[dict objectForKey:@"content"] objectForKey:@"email"]);
         if(([[dict objectForKey:@"content"] objectForKey:@"email"]!=[NSNull null])&&(![[[dict objectForKey:@"content"] objectForKey:@"email"] isEqualToString:@""]))
         {
             emailSheet1=[[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"发送邮件"otherButtonTitles: nil];
@@ -289,9 +289,9 @@
 //{
 //    Admissionblock=^(NSDictionary *dict,NSInteger num)
 //    {
-//        NSLog(@"%@",dict);
-//        NSLog(@"%ld",(long)num);
-//        NSLog(@"1111");
+//        JXLOG(@"%@",dict);
+//        JXLOG(@"%ld",(long)num);
+//        JXLOG(@"1111");
 //
 //    };
 //
@@ -774,7 +774,7 @@
 
     }
 
-    NSLog(@"%@",AdmissionsArr);
+    JXLOG(@"%@",AdmissionsArr);
     if(AdmissionsArr.count>0)
     {
         _view_Admissions=[[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(subview.frame)+_margin, CGRectGetWidth(_scrollView.frame), 460*_Scale)];
@@ -1036,7 +1036,7 @@
     }
     [_scrollView addSubview:_coll_titlelab];
 
-    NSLog(@"y_p=%f",CGRectGetMaxY(_coll_titlelab.frame));
+    JXLOG(@"y_p=%f",CGRectGetMaxY(_coll_titlelab.frame));
     help_btn=[UIButton buttonWithType:UIButtonTypeCustom];
     help_btn.backgroundColor=_define_blue_color;
     help_btn.frame=CGRectMake(10*_Scale, CGRectGetMaxY(_coll_titlelab.frame)+10*_Scale, CGRectGetWidth(_scrollView.frame)-20*_Scale, 80*_Scale);
@@ -1254,16 +1254,16 @@
     switch (result)
     {
         case MFMailComposeResultCancelled: // 用户取消编辑
-            NSLog(@"Mail send canceled...");
+            JXLOG(@"Mail send canceled...");
             break;
         case MFMailComposeResultSaved: // 用户保存邮件
-            NSLog(@"Mail saved...");
+            JXLOG(@"Mail saved...");
             break;
         case MFMailComposeResultSent: // 用户点击发送
-            NSLog(@"Mail sent...");
+            JXLOG(@"Mail sent...");
             break;
         case MFMailComposeResultFailed: // 用户尝试保存或发送邮件失败
-            NSLog(@"Mail send errored: %@...", [error localizedDescription]);
+            JXLOG(@"Mail send errored: %@...", [error localizedDescription]);
             break;
     }
     // 关闭邮件发送视图
@@ -1303,7 +1303,7 @@
     {
         arrayName = @[@(22),@(23),@(1),@(24),@(6),@(18)];
     }
-    NSLog(@"ssss%ld",(long)[arrayName[btn.tag - 9000] integerValue]);
+    JXLOG(@"ssss%ld",(long)[arrayName[btn.tag - 9000] integerValue]);
     
     //1、创建分享参数（必要）
     NSMutableDictionary *shareParams = [NSMutableDictionary dictionary];
@@ -1865,7 +1865,7 @@
             }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错白色" Withtype:1]];
                 //        下载失败时，打印错误信息
-//                NSLog(@"发生错误！%@",error);
+//                JXLOG(@"发生错误！%@",error);
                 [regular removeProgress];
             }];
             
@@ -1994,8 +1994,8 @@
         _view_wenli=[[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(subview.frame), CGRectGetWidth(_scrollView.frame), 0)];
     }
     [_scrollView addSubview:_view_wenli];
-    NSLog(@"%f",CGRectGetMinY(_view_wenli.frame));
-    NSLog(@"111");
+    JXLOG(@"%f",CGRectGetMinY(_view_wenli.frame));
+    JXLOG(@"111");
 
     
 }
@@ -2130,7 +2130,7 @@
 
     [_scrollView addSubview:_view_Certification];
 
-    NSLog(@"%@",xunzhangArr);
+    JXLOG(@"%@",xunzhangArr);
     if(xunzhangArr.count>0)
     {
         _view_Certification=[[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(subview.frame)+_margin, CGRectGetWidth(_scrollView.frame), 190*_Scale)];
@@ -2408,8 +2408,8 @@
         [_view_Tuition addSubview:_imageview];
 
 
-        NSLog(@"%@",skusArr);
-        NSLog(@"111");
+        JXLOG(@"%@",skusArr);
+        JXLOG(@"111");
         CGFloat _width=102*_Scale;
         CGFloat _interval=(ScreenWidth-_margin*2-_width*4)/5.0f;
         CGFloat _x_p=0;
@@ -2541,8 +2541,8 @@
             }
         }
 
-        NSLog(@"%ld",(long)max_num);
-        NSLog(@"%@",height_arr);
+        JXLOG(@"%ld",(long)max_num);
+        JXLOG(@"%@",height_arr);
         CGFloat _width=44*_Scale;
         CGFloat _bianju=60*_Scale;
         CGFloat _jiange=(CGRectGetWidth(_view_StuGrade.frame)-_bianju*2-_width*7)/6.0f;
@@ -2710,7 +2710,7 @@
 //            }
 //            [contentArray addObject:__count];
 //        }
-//        NSLog(@"111");
+//        JXLOG(@"111");
 //
 //        for (int i=0; i<contentArray.count; i++) {
 //
@@ -3078,7 +3078,7 @@
     MyPoint *myPoint = [[MyPoint alloc] initWithCoordinate:coord andTitle:@""];
 
 
-//    NSLog(@"111%@",totleStr);
+//    JXLOG(@"111%@",totleStr);
     //添加标注
     [_mkMapView addAnnotation:myPoint];
     MKCoordinateRegion reg;
@@ -3276,7 +3276,7 @@
 
     NSArray *arrtitle= [detail_model.full_address componentsSeparatedByString:@","];
 
-    NSLog(@"%lu",(unsigned long)arrtitle.count);
+    JXLOG(@"%lu",(unsigned long)arrtitle.count);
 
     UIView *backview=[[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
     CGFloat _jiange=(CGRectGetHeight(fulladdress.frame)-CGRectGetMaxY(label_fulladdress.frame)-60*_Scale)/2.0f;
@@ -3307,7 +3307,7 @@
 
             }
             [label setAttributedText:[regular createAttributeString:mutablestr andFloat:@(1.0)]];
-            NSLog(@"%@",mutablestr);
+            JXLOG(@"%@",mutablestr);
         }
         [fulladdress addSubview:label];
         
@@ -3529,10 +3529,10 @@
             }
 
             [self dialPhoneNumber:phonenum];
-            NSLog(@"111");
+            JXLOG(@"111");
         }else if (buttonIndex == 1) {
 //            [self showAlert:@"第一项"];
-            NSLog(@"111");
+            JXLOG(@"111");
         }
 
     }else if (actionSheet==webSheet)
@@ -3540,20 +3540,20 @@
         if (buttonIndex == 0) {
 
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[[NSString alloc] initWithFormat:@"http://%@",detail_model.web]]];
-            NSLog(@"111");
+            JXLOG(@"111");
         }else if (buttonIndex == 1) {
             //            [self showAlert:@"第一项"];
-            NSLog(@"111");
+            JXLOG(@"111");
         }
     }else if(actionSheet==JumpwebsiteSheet)
     {
         if (buttonIndex == 0) {
 
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.schoolbox.us/"]];
-            NSLog(@"111");
+            JXLOG(@"111");
         }else if (buttonIndex == 1) {
             //            [self showAlert:@"第一项"];
-            NSLog(@"111");
+            JXLOG(@"111");
         }
     }
     else if (actionSheet==emailSheet)
@@ -3565,7 +3565,7 @@
 
         }else if (buttonIndex == 1) {
             //            [self showAlert:@"第一项"];
-            NSLog(@"111");
+            JXLOG(@"111");
         }
 
     }else if(actionSheet==phoneSheet1)
@@ -3581,22 +3581,22 @@
 
                 }
             }
-            NSLog(@"%@",phonenum);
+            JXLOG(@"%@",phonenum);
             [self dialPhoneNumber:phonenum];
-            NSLog(@"111");
+            JXLOG(@"111");
         }
     }else if(actionSheet==emailSheet1)
     {
 
         if (buttonIndex == 0) {
 
-            NSLog(@"%@",[AdmissionDict objectForKey:@"email"]);
+            JXLOG(@"%@",[AdmissionDict objectForKey:@"email"]);
             [self displayComposerSheet:[AdmissionDict objectForKey:@"email"]];
 
 
         }else if (buttonIndex == 1) {
             //            [self showAlert:@"第一项"];
-            NSLog(@"111");
+            JXLOG(@"111");
         }
         
         
@@ -3606,10 +3606,10 @@
         if (buttonIndex == 0) {
 
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[[NSString alloc] initWithFormat:@"http://%@",___web]]];
-            NSLog(@"111");
+            JXLOG(@"111");
         }else if (buttonIndex == 1) {
             //            [self showAlert:@"第一项"];
-            NSLog(@"111");
+            JXLOG(@"111");
         }
         
     }
@@ -3791,7 +3791,7 @@
 -(void)CreateVerifiedView
 {
     UIImageView *imageview=[self CreateVerifiedBackView];
-    NSLog(@"%@",AdmissionsArr);
+    JXLOG(@"%@",AdmissionsArr);
 
     //320 305 258
 //    [detail_model.is_identification isEqualToString:@"0"]?@"待认证":@"认证",］
@@ -3848,7 +3848,7 @@
     {
 
          headstr=@"screenShcoolView_认证";
-        NSLog(@"%@",AdmissionsArr);
+        JXLOG(@"%@",AdmissionsArr);
         if(AdmissionsArr.count>0)
         {
             NSDictionary *dict=AdmissionsArr[0];
@@ -4205,7 +4205,7 @@
                           [detail_model.is_teamwork isEqualToString:@"0"]?@"未合作":@"合作"
 
                           ];
-    NSLog(@"%@",titleArray);
+    JXLOG(@"%@",titleArray);
 //    [detail_model.is_teamwork isEqualToString:@"0"]?@"未合作":@"合作"
 
     int j=0;
@@ -4312,7 +4312,7 @@
     if(scrollView==_scrollView&&_appear)
     {
         _start_y=scrollView.contentOffset.y;
-        NSLog(@"滚动视图即将开始拖动=%f",scrollView.contentOffset.y);
+        JXLOG(@"滚动视图即将开始拖动=%f",scrollView.contentOffset.y);
         _Dragging=YES;
     }
 
@@ -4326,7 +4326,7 @@
         if(scrollView==_scrollView&&_appear)
         {
 
-            NSLog(@"滚动视图正在滚动=%f",scrollView.contentOffset.y);
+            JXLOG(@"滚动视图正在滚动=%f",scrollView.contentOffset.y);
             if(_start_y<20&&scrollView.contentOffset.y>20)
             {
 
@@ -4846,8 +4846,8 @@
         num_pf.text=detail_model.ratings_avg;
     }
 
-    NSLog(@"%ld",(long)pingfen_num);
-    NSLog(@"111");
+    JXLOG(@"%ld",(long)pingfen_num);
+    JXLOG(@"111");
 
     [self createpingfennum_view];
 
@@ -5345,7 +5345,7 @@
     NSInteger gaibian=tag%10;
     NSInteger index=tag/10;
     NSString *key=dataarr[index];
-    NSLog(@"111");
+    JXLOG(@"111");
 
     NSArray *arr=[showstarDict objectForKey:key];
     for (int i=0;i<arr.count; i++) {

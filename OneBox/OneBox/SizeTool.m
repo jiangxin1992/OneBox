@@ -11,10 +11,10 @@
 @implementation SizeTool
 +(CGSize)sizeOfStr:(NSString *)str andFont:(UIFont *)font andMaxSize:(CGSize)size andLineBreakMode:(NSLineBreakMode)mode
 {
-    NSLog(@"版本号:%f",[[[UIDevice currentDevice]systemVersion]doubleValue]);
+    JXLOG(@"版本号:%f",[[[UIDevice currentDevice]systemVersion]doubleValue]);
     CGSize s;
     if ([[[UIDevice currentDevice]systemVersion]doubleValue]>=7.0) {
-        NSLog(@"ios7以后版本");
+        JXLOG(@"ios7以后版本");
         // NSDictionary *dic=@{NSFontAttributeName:font};
         NSMutableDictionary  *mdic=[NSMutableDictionary dictionary];
         [mdic setObject:[UIColor redColor] forKey:NSForegroundColorAttributeName];
@@ -24,7 +24,7 @@
     }
     else
     {
-        NSLog(@"ios7之前版本");
+        JXLOG(@"ios7之前版本");
         s=[str sizeWithFont:font constrainedToSize:size lineBreakMode:mode];
     }
     return s;

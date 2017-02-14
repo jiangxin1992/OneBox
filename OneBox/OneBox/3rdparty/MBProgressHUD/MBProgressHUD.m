@@ -452,7 +452,7 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 	label.backgroundColor = [UIColor clearColor];
 	label.textColor = [UIColor whiteColor];
 	label.font = [regular getFont:13.0f];
-//    NSLog(@"%d",self.labelFont.pointSize);
+//    JXLOG(@"%d",self.labelFont.pointSize);
 	label.text = self.labelText;
 	[self addSubview:label];
 	

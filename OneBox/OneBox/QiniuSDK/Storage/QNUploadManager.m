@@ -201,7 +201,7 @@
 			recorderKey = _config.recorderKeyGen(key, filePath);
 		}
 
-		NSLog(@"recorder %@", _config.recorder);
+		JXLOG(@"recorder %@", _config.recorder);
 
 		QNResumeUpload *up = [[QNResumeUpload alloc]
 		                      initWithData:data

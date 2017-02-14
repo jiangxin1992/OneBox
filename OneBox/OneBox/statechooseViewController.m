@@ -319,7 +319,7 @@
         }];
         _dictPinyinAndChinese1=[self get_country_dict:data_Result_arr];
         _arrayChar1=[self get_country_arr:_dictPinyinAndChinese1];
-        NSLog(@"111");
+        JXLOG(@"111");
 
     }else
     {

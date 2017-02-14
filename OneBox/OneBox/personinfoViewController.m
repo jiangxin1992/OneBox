@@ -85,7 +85,7 @@
     NSValue *aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
     CGRect keyboardRect = [aValue CGRectValue];
     CGFloat height = CGRectGetHeight(_scrollview.frame)-(214+70)-keyboardRect.size.height;
-    NSLog(@"%f",keyboardRect.size.height);
+    JXLOG(@"%f",keyboardRect.size.height);
 
     UITextView *text0=(UITextView *)[self.view viewWithTag:100];
     UITextView *text1=(UITextView *)[self.view viewWithTag:103];
@@ -159,7 +159,7 @@
             }
             else
             {
-                NSLog(@"不能打开相机");
+                JXLOG(@"不能打开相机");
             }
 
         }
@@ -172,7 +172,7 @@
             }
             else
             {
-                NSLog(@"无法打开相册");
+                JXLOG(@"无法打开相册");
             }
 
 
@@ -266,7 +266,7 @@
 
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错白色" Withtype:1]];
-        NSLog(@"失败");
+        JXLOG(@"失败");
     }];
 
 }
@@ -421,7 +421,7 @@
                         statearr=[_dict objectForKey:@"State"];
 
                     }
-                    NSLog(@"%@",statearr);
+                    JXLOG(@"%@",statearr);
 
                 }else
                 {
@@ -432,8 +432,8 @@
         }
 
     }
-    NSLog(@"%@",statearr);
-    NSLog(@"%@",country);
+    JXLOG(@"%@",statearr);
+    JXLOG(@"%@",country);
 
     if(statearr.count>0)
     {
@@ -466,7 +466,7 @@
                 if([[_dict objectForKey:@"City"] isKindOfClass:[NSArray class]])
                 {
                     cityarr=[_dict objectForKey:@"City"];
-                    NSLog(@"1111");
+                    JXLOG(@"1111");
                 }else
                 {
                     cityarr=[[NSArray alloc] init];
@@ -478,8 +478,8 @@
         }
 
     }
-    NSLog(@"%@",cityarr);
-    NSLog(@"%@",state);
+    JXLOG(@"%@",cityarr);
+    JXLOG(@"%@",state);
 
     if(cityarr.count>0)
     {
@@ -510,7 +510,7 @@
 
         }
     }
-    NSLog(@"%@",city);
+    JXLOG(@"%@",city);
 
 //    country_id,state_id,city_id;
 
@@ -621,7 +621,7 @@
 
             if(i==3||i==4)
             {
-                NSLog(@"%f",CGRectGetMaxY(textfield.frame));
+                JXLOG(@"%f",CGRectGetMaxY(textfield.frame));
 
 
             }
@@ -684,7 +684,7 @@
         upToken = res[@"uptoken"];
 
     } failed:^{
-        NSLog(@"失败");
+        JXLOG(@"失败");
     }];
 
 }
@@ -918,7 +918,7 @@
             [[ToolManager sharedManager] removeProgress];
 
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            NSLog(@"失败");
+            JXLOG(@"失败");
 
             [[ToolManager sharedManager] removeProgress];
             [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错白色" Withtype:1]];

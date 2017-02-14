@@ -229,7 +229,7 @@
                 }
             }
         }
-        NSLog(@"Spacing=%f  font=%f",_Default_Spacing,_Default_font);
+        JXLOG(@"Spacing=%f  font=%f",_Default_Spacing,_Default_font);
         if(CGRectGetWidth(titleLabel.frame)>230&&_Default_font==13.0f)
         {
             titleLabel.frame=CGRectMake(0, 0, CGRectGetWidth(view.frame), CGRectGetHeight(view.frame));
@@ -315,7 +315,7 @@
         [_arrayData addObjectsFromArray:[foundModel parsingData:_dict]];
         banbenview.hidden=NO;
         footview.backgroundColor=_define_backview_color;
-        NSLog(@"%@",_arrayData);
+        JXLOG(@"%@",_arrayData);
         [_tableView reloadData];
     }
 
@@ -345,29 +345,29 @@
 }
 //- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar
 //{
-//    NSLog(@"ShouldBeginEditing");
+//    JXLOG(@"ShouldBeginEditing");
 //    return YES;
 //}
 //- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
 //{
-//    NSLog(@"DidBeginEditing");
+//    JXLOG(@"DidBeginEditing");
 //}
 //- (BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar
 //{
-//    NSLog(@"ShouldEndEditing");
+//    JXLOG(@"ShouldEndEditing");
 //    return YES;
 //}
 //- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
 //{
-//    NSLog(@"DidEndEditing");
+//    JXLOG(@"DidEndEditing");
 //}
 //- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 //{
-//    NSLog(@"DidChange");
+//    JXLOG(@"DidChange");
 //}
 //- (BOOL)searchBar:(UISearchBar *)searchBar shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 //{
-//    NSLog(@"ChangeTextInRange");
+//    JXLOG(@"ChangeTextInRange");
 //    return YES;
 //}
 #pragma mark-tableview
@@ -413,13 +413,13 @@
 //    {
         //因为在searchDC上的_searchBar就是创建searchDC时，由第一个参数指定的_searchBar
         //        NSString *searchCon = _searchBar.text;
-        //        NSLog(@"%@", searchCon);
+        //        JXLOG(@"%@", searchCon);
 
 //        [_arrayResult removeAllObjects];
 //        NSString *title=_searchBar.text;
 //
 //        //遍历数据源数据，找到与当前搜索内容相匹配的数据
-//        NSLog(@"%@",_dictPinyinAndChinese);
+//        JXLOG(@"%@",_dictPinyinAndChinese);
 //
 //        for (foundModel *model in _arrayData) {
 //
@@ -428,7 +428,7 @@
 //
 //                NSRange range1 = [[ChineseToPinyin pinyinFromChiniseString:model.cn_name] rangeOfString:[ChineseToPinyin pinyinFromChiniseString:title]];
 //                NSRange range2 = [[ChineseToPinyin pinyinFromChiniseString:model.en_name] rangeOfString:[ChineseToPinyin pinyinFromChiniseString:title]];
-//                //                    NSLog(@"1111%@",model.city);
+//                //                    JXLOG(@"1111%@",model.city);
 //                NSString *titeeee=model.city;
 //                NSRange range3 = [[ChineseToPinyin pinyinFromChiniseString:titeeee] rangeOfString:[ChineseToPinyin pinyinFromChiniseString:title]];
 //
@@ -444,7 +444,7 @@
 //                }
 //            }
 //        }
-//        NSLog(@"%@",_arrayResult);
+//        JXLOG(@"%@",_arrayResult);
         return 1;
 //    }
 
@@ -465,7 +465,7 @@
 
     }else
     {
-//        NSLog(@"%d",_arrayResult.count);
+//        JXLOG(@"%d",_arrayResult.count);
         return _arrayResult.count;
     }
 
@@ -497,7 +497,7 @@
     if(tableView==_tableView)
     {
 //        NSInteger _section=indexPath.section;
-        NSLog(@"%@",_arrayChar);
+        JXLOG(@"%@",_arrayChar);
 //        NSString *strKey  = [_arrayChar objectAtIndex:_section];
 //        NSMutableArray  *__arr=[[NSMutableArray alloc] initWithArray:[_dictPinyinAndChinese objectForKey:strKey]];
         NSInteger num=indexPath.row;
@@ -515,13 +515,13 @@
 #pragma mark-索引
 //- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
 //{
-//    NSLog(@"%@",_arrayChar);
+//    JXLOG(@"%@",_arrayChar);
 
 //    if(tableView==_tableView)
 //    {
 //        return _arrayChar;
 //    }
-//    NSLog(@"%@",_arrayResult);
+//    JXLOG(@"%@",_arrayResult);
 //    //    [_arrayData addObjectsFromArray:[foundModel parsingData:_dict]];
 //    _dictPinyinAndChinese1= [[NSMutableDictionary alloc] init];
 //
@@ -557,7 +557,7 @@
 //            }
 //        }
 //    }
-//    NSLog(@"%@",_arrayChar1);
+//    JXLOG(@"%@",_arrayChar1);
 
 //    return _arrayChar1;
 //}

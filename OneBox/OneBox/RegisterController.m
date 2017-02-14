@@ -296,7 +296,7 @@
     }
     else if([textfield_password.text length]<6||[textfield_password.text length]>16)
     {
-        [regular alertTitle_Simple:@"密码长度为6到16位之间"];
+        [self presentViewController:[regular alertTitle_Simple:@"密码长度为6到16位之间"] animated:YES completion:nil];
     }
     else
     {
@@ -334,7 +334,7 @@
             
         }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             //        下载失败时，打印错误信息
-            NSLog(@"发生错误！%@",error);
+            JXLOG(@"发生错误！%@",error);
             [regular removeProgress];
         }];
         
@@ -509,7 +509,7 @@
                     if([[dict objectForKey:@"code"] integerValue]==1)
                     {
                         //                [[ToolManager sharedManager] alertTitle_Simple:@"发送cg"];
-                        NSLog(@"111");
+                        JXLOG(@"111");
                     }else
                     {
                         [[ToolManager sharedManager] alertTitle_Simple:[dict objectForKey:@"message"]];

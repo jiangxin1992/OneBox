@@ -69,7 +69,7 @@
         NSDictionary *dict=[NSJSONSerialization  JSONObjectWithData:data options:0 error:nil];
         if([[dict objectForKey:@"code"] integerValue]==1)
         {
-            NSLog(@"111");
+            JXLOG(@"111");
             appleFilemodel=[ApplyFilemodel parsingWithJsonDataForModel:dict];
             [data_dict_must setDictionary:[[dict objectForKey:@"data"] objectForKey:@"documents"]];
             [self setstate];
@@ -247,11 +247,11 @@
     }
     NSMutableDictionary *parameters=[[NSMutableDictionary alloc] init];
     [parameters setObject:_token forKey:@"token"];
-    NSLog(@"titleArr=%@",titleArr);
+    JXLOG(@"titleArr=%@",titleArr);
     for (int i=0; i<titleArr.count; i++) {
         if(i==_index)
         {
-            NSLog(@"%@",data_dict_must);
+            JXLOG(@"%@",data_dict_must);
             NSInteger _obj=0;
             if([[data_dict_must objectForKey:titleArr[i]] integerValue])
             {
@@ -264,7 +264,7 @@
 
         }else
         {
-            NSLog(@"2222%@",titleArr[i]);
+            JXLOG(@"2222%@",titleArr[i]);
             if([((NSString *)titleArr[i])isEqualToString: @"test_report"])
             {
                 if([data_dict_must objectForKey:@"test_report"]==nil)
@@ -274,7 +274,7 @@
 
             }else
             {
-                NSLog(@"2222%@",[data_dict_must objectForKey:titleArr[i]]);
+                JXLOG(@"2222%@",[data_dict_must objectForKey:titleArr[i]]);
                 [parameters setObject:[data_dict_must objectForKey:titleArr[i]] forKey:titleArr[i]];
 
             }

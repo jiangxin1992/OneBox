@@ -23,10 +23,6 @@
 #import "MyMD5.h"
 
 #define Color_placeholder [UIColor colorWithRed:170.0f/255.0f green:230.0f/255.0f blue:245.0f/255.0f alpha:1]
-//#define lightColor [UIColor colorWithRed:79.0f/255.0f green:190.0f/255.0f blue:221.0f/255.0f alpha:0.8]
-//#define darkColor [UIColor colorWithRed:66.0f/255.0f green:162.0f/255.0f blue:189.0f/255.0f alpha:0.8]
-//#define Color_t [UIColor colorWithRed:102.0f/255.0f green:203.0f/255.0f blue:233.0f/255.0f alpha:0.8]
-//#define Color_o [UIColor colorWithRed:172.0f/255.0f green:230.0f/255.0f blue:245.0f/255.0f alpha:1]
 
 @interface LoginViewController ()<UITextFieldDelegate>
 
@@ -84,32 +80,27 @@
 #pragma mark - UIConfig
 -(void)UIConfig
 {
-    UIButton *back_btn=[UIButton buttonWithType:UIButtonTypeCustom];
+    UIButton *back_btn=[UIButton getCustomBtn];
     back_btn.frame=CGRectMake(ScreenWidth-(25+35)*_Scale, 40*_Scale,50*_Scale, 50*_Scale);
-    UIImageView *imageqqq=[[UIImageView alloc] initWithFrame:CGRectMake(0, (CGRectGetWidth(back_btn.frame))/4.0f, (CGRectGetWidth(back_btn.frame))/2.0f, (CGRectGetWidth(back_btn.frame))/2.0f)];
-    imageqqq.image=[UIImage imageNamed:@"login_返回"];
+    UIImageView *imageqqq=[UIImageView getImgWithImageStr:@"login_返回"];
+    imageqqq.frame = CGRectMake(0, (CGRectGetWidth(back_btn.frame))/4.0f, (CGRectGetWidth(back_btn.frame))/2.0f, (CGRectGetWidth(back_btn.frame))/2.0f);
     [back_btn addSubview:imageqqq];
-    
     [back_btn addTarget:self action:@selector(backAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:back_btn];
     
     CGFloat _start_y=0;
-    if(_isPad)
-    {
+    if(_isPad){
         _start_y=(ScreenHeight/2)-80*_Scale;
         
-    }else
-    {
+    }else{
         _start_y=(ScreenHeight/2)-180*_Scale;
     }
+    
     password=[[UITextField alloc] initWithFrame:CGRectMake((ScreenWidth/2)-200*_Scale, _start_y, 400*_Scale, 70*_Scale)];
-    //    password.backgroundColor=[UIColor whiteColor];
     password.placeholder=@" 密 码 ";
     password.returnKeyType=UIReturnKeyDone;
     [password setValue:Color_placeholder forKeyPath:@"_placeholderLabel.textColor"];
     [password setValue:[UIFont boldSystemFontOfSize:12] forKeyPath:@"_placeholderLabel.font"];
-    //    password.backgroundColor=[UIColor colorWithRed:1 green:1 blue:1 alpha:0.2];
-    
     password.delegate=self;
     password.font=[regular getFont:12.0f];
     password.textColor=[UIColor whiteColor];
@@ -117,26 +108,19 @@
     password.secureTextEntry=YES;
     password.delegate=self;
     password.clearButtonMode=UITextFieldViewModeWhileEditing;
-    UIView *dibu1=[[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(password.frame)-10*_Scale, CGRectGetWidth(password.frame), 2*_Scale)];
-    dibu1.backgroundColor=[UIColor colorWithRed:1 green:1 blue:1 alpha:0.2];
+    UIView *dibu1=[UIView getCustomViewWithColor:[UIColor colorWithRed:1 green:1 blue:1 alpha:0.2]];
+    dibu1.frame = CGRectMake(0, CGRectGetHeight(password.frame)-10*_Scale, CGRectGetWidth(password.frame), 2*_Scale);
     [password addSubview:dibu1];
-    
-    //login_显示密码( 未选择)
-    //login_显示密码
-    UIButton *view_left=[UIButton buttonWithType:UIButtonTypeCustom];
+
+    UIButton *view_left=[UIButton getCustomImgBtnWithImageStr:@"login_显示密码( 未选择)" WithSelectedImageStr:@"login_显示密码"];
     view_left.frame=CGRectMake(0, 0, 70*_Scale, CGRectGetHeight(password.frame));
-    [view_left setImage:[UIImage imageNamed:@"login_显示密码( 未选择)"] forState:UIControlStateNormal];
-    [view_left setImage:[UIImage imageNamed:@"login_显示密码"] forState:UIControlStateSelected];
     [view_left setImageEdgeInsets:UIEdgeInsetsMake((CGRectGetHeight(view_left.frame)-22*_Scale)/2.0f, (CGRectGetWidth(view_left.frame)-60*_Scale)/2.0f, (CGRectGetHeight(view_left.frame)-22*_Scale)/2.0f, (CGRectGetWidth(view_left.frame)-60*_Scale)/2.0f)];
-    
     [view_left addTarget:self action:@selector(showpassword:) forControlEvents:UIControlEventTouchUpInside];
     password.rightView=view_left;
     password.rightViewMode = UITextFieldViewModeAlways;
-    
     [self.view addSubview:password];
     
     username=[[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMinX(password.frame), CGRectGetMinY(password.frame)-8*_Scale-CGRectGetHeight(password.frame), CGRectGetWidth(password.frame), CGRectGetHeight(password.frame))];
-    
     username.textColor=[UIColor whiteColor];
     username.placeholder=@" 手 机 号 或 邮 箱 ";
     [username setValue:Color_placeholder forKeyPath:@"_placeholderLabel.textColor"];
@@ -146,51 +130,33 @@
     username.clearButtonMode=UITextFieldViewModeWhileEditing;
     [self.view addSubview:username];
     
-    UIView *dibu2=[[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(username.frame)-10*_Scale, CGRectGetWidth(username.frame), 2*_Scale)];
-    dibu2.backgroundColor=[UIColor colorWithRed:1 green:1 blue:1 alpha:0.2];
+    UIView *dibu2=[UIView getCustomViewWithColor:[UIColor colorWithRed:1 green:1 blue:1 alpha:0.2]];
+    dibu2.frame = CGRectMake(0, CGRectGetHeight(username.frame)-10*_Scale, CGRectGetWidth(username.frame), 2*_Scale);
     [username addSubview:dibu2];
     
     //    留美盒子icon
-    UIImageView *icon=[[UIImageView alloc] initWithFrame:CGRectMake((ScreenWidth/2)-70*_Scale, 95*_Scale, 140*_Scale, 136*_Scale)];
-    icon.image=[UIImage imageNamed:@"login_ICON11"];
+    UIImageView *icon=[UIImageView getImgWithImageStr:@"login_ICON11"];
+    icon.frame=CGRectMake((ScreenWidth/2)-70*_Scale, 95*_Scale, 140*_Scale, 136*_Scale);
     [self.view addSubview:icon];
     
-    
     //    修改btn的frame
-    login=[UIButton buttonWithType:UIButtonTypeCustom];
-    [login setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [login setBackgroundColor:_define_blue_color_login];
-    login.titleLabel.font=[regular getFont:15.0f];
-    [login setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [login setTitle:@"登   录" forState:UIControlStateNormal];
-    [login addTarget:self action:@selector(sumbit_action:) forControlEvents:UIControlEventTouchUpInside];
+    login=[UIButton getCustomTitleBtnWithAlignment:0 WithFont:15.0f WithSpacing:0 WithNormalTitle:@"登   录" WithNormalColor:[UIColor whiteColor] WithSelectedTitle:nil WithSelectedColor:nil];
     login.frame=CGRectMake(CGRectGetMinX(password.frame), CGRectGetMaxY(password.frame)+45*_Scale,CGRectGetWidth(password.frame), (50*_Scale*CGRectGetWidth(password.frame))/(330*_Scale));
-    
+    [login setBackgroundColor:_define_blue_color_login];
+    [login addTarget:self action:@selector(sumbit_action:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:login];
     
     
-    forgetPsw=[UIButton buttonWithType:UIButtonTypeCustom];
-    [forgetPsw setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    //    170 230 245
-    [forgetPsw setTitle:@"忘记密码?" forState:UIControlStateNormal];
+    forgetPsw=[UIButton getCustomTitleBtnWithAlignment:1 WithFont:10.0f WithSpacing:0 WithNormalTitle:@"忘记密码?" WithNormalColor:[UIColor whiteColor] WithSelectedTitle:nil WithSelectedColor:nil];
     [forgetPsw.titleLabel setAttributedText:[regular createAttributeString:@"忘记密码?" andFloat:@(2.0)]];
-    
-    forgetPsw.titleLabel.font=[regular getFont:10.0f];
     [forgetPsw addTarget:self action:@selector(forget_password_action:) forControlEvents:UIControlEventTouchUpInside];
     forgetPsw.frame=CGRectMake(CGRectGetMinX(password.frame), CGRectGetMaxY(login.frame)+10*_Scale, 180*_Scale, 42*_Scale);
-    forgetPsw.contentHorizontalAlignment=UIControlContentHorizontalAlignmentLeft;
-    //    forgetPsw.backgroundColor=[UIColor redColor];
     [self.view addSubview:forgetPsw];
     
     
-    register_btn=[UIButton buttonWithType:UIButtonTypeCustom];
-    //    [register_btn setBackgroundColor:darkColor];
-    [register_btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [register_btn setTitle:@"没有账号?" forState:UIControlStateNormal];
+    register_btn=[UIButton getCustomTitleBtnWithAlignment:2 WithFont:10.0f WithSpacing:0 WithNormalTitle:@"没有账号?" WithNormalColor:[UIColor whiteColor] WithSelectedTitle:nil WithSelectedColor:nil];
     [register_btn.titleLabel setAttributedText:[regular createAttributeString:@"没有账号?" andFloat:@(2.0)]];
-    register_btn.titleLabel.font=[regular getFont:10.0f];
     [register_btn addTarget:self action:@selector(register_action:) forControlEvents:UIControlEventTouchUpInside];
-    register_btn.contentHorizontalAlignment=UIControlContentHorizontalAlignmentRight;
     register_btn.frame=CGRectMake(CGRectGetMaxX(password.frame)-CGRectGetWidth(forgetPsw.frame), CGRectGetMinY(forgetPsw.frame), CGRectGetWidth(forgetPsw.frame), CGRectGetHeight(forgetPsw.frame));
     [self.view addSubview:register_btn];
     
@@ -253,7 +219,6 @@
     }else{
 
         [[NSNotificationCenter defaultCenter] postNotificationName:@"xiaoshi" object:@"other"];
-
     }
 }
 -(void)otheraction:(UIButton*)btn
@@ -298,10 +263,10 @@
     if([username.text isEqualToString:@""]||[password.text isEqualToString:@""])
     {
         //    账号密码中有空值时
-        [regular alertTitle_Simple:@"账号或者密码不能为空"];
+        [self presentViewController:[regular alertTitle_Simple:@"账号或者密码不能为空"] animated:YES completion:nil];
     }else if ([password.text length]<6||[password.text length]>16)
     {
-        [regular alertTitle_Simple:@"密码长度为6到16位之间"];
+        [self presentViewController:[regular alertTitle_Simple:@"密码长度为6到16位之间"] animated:YES completion:nil];
     }else
     {
         if([self validateEmail:username.text])
@@ -321,7 +286,7 @@
     }
     
 }
--(BOOL) validatePhonenum:(NSString *)phonenum
+-(BOOL)validatePhonenum:(NSString *)phonenum
 {
     BOOL b=NO;
     for (int i=0; i<phonenum.length; i++) {
@@ -441,125 +406,7 @@
                 [[ToolManager sharedManager] removeProgress];
                 if([[dict objectForKey:@"code"] integerValue]==1)
                 {
-                    
-                    if(type==SSDKPlatformTypeSinaWeibo||type==SSDKPlatformTypeWechat)
-                    {
-                        [self login_success:dict];
-                    }else if(type==SSDKPlatformSubTypeQZone)
-                    {
-                        NSDictionary *_user = [[dict objectForKey:@"data"] objectForKey:@"user"];
-                        BOOL isAutoLogin = [[EaseMob sharedInstance].chatManager isAutoLoginEnabled];
-                        if (!isAutoLogin) {
-                            [[EaseMob sharedInstance].chatManager asyncLoginWithUsername:[_user objectForKey:@"ease_mob_username"] password:[_user objectForKey:@"ease_mob_password"]
-                                                                              completion:^(NSDictionary *loginInfo, EMError *error) {
-                                                                                  if (!error) {
-                                                                                      // 设置自动登录
-                                                                                      [[EaseMob sharedInstance].chatManager setIsAutoLoginEnabled:YES];
-                                                                                  }
-                                                                                  
-                                                                                  
-                                                                              }onQueue:nil];
-                        }else
-                        {
-                            [[EaseMob sharedInstance].chatManager asyncLoginWithUsername:[_user objectForKey:@"ease_mob_username"] password:[_user objectForKey:@"ease_mob_password"]
-                                                                              completion:^(NSDictionary *loginInfo, EMError *error) {
-                                                                                  if (!error) {
-                                                                                      // 设置自动登录
-                                                                                      [[EaseMob sharedInstance].chatManager setIsAutoLoginEnabled:YES];
-                                                                                  }
-                                                                                  
-                                                                                  
-                                                                              }onQueue:nil];
-                        }
-                        
-                        NSUserDefaults *defaults =[NSUserDefaults standardUserDefaults];
-                        if([defaults objectForKey:@"users"]==nil)
-                        {
-                            [defaults setObject:[[NSMutableArray alloc] init] forKey:@"users"];
-                        }
-                        
-                        [defaults setObject:[_user objectForKey:@"ease_mob_username"] forKey:@"chatname"];
-                        [defaults setObject:[_user objectForKey:@"ease_mob_password"] forKey:@"chatpassword"];
-                        
-                        //将islogin存入defaults中
-                        
-                        [defaults setObject:@"0" forKey:@"hangban"];
-                        [defaults setObject:@"0" forKey:@"mianqian"];
-                        
-                        NSNumber *islogin=[[NSNumber alloc]initWithInt:1];
-                        [defaults setObject:islogin forKey:@"islogin"];
-                        //将username存入defaults中
-                        [defaults setObject:username.text forKey:@"tel"];
-                        [defaults setObject:[_user objectForKey:@"username"] forKey:@"username"];
-                        [defaults setObject:[_user objectForKey:@"token"] forKey:@"token"];
-                        [defaults setObject:[_user objectForKey:@"is_auth"] forKey:@"is_auth"];
-                        //将password存入defaults中
-                        [defaults setObject:password.text forKey:@"password"];
-                        //将uid存入defaults中
-                        [defaults setObject:[_user objectForKey:@"id"] forKey:@"uid"];
-                        //取出头像对应的路径
-                        NSString *imageurl=[[dict objectForKey:@"data"] objectForKey:@"avatar"];
-                        
-                        
-                        NSString *_image_type=nil;
-                        NSString *_image_url=nil;
-                        if([imageurl isEqualToString:@"0"])
-                        {
-                            //当用户还未上传头像时
-                            //将系统默认的头像（成功登录并未上传头像）,转换成nsdata类型的对象，并将该对象保存defaults中
-                            NSData *imageData1 =UIImagePNGRepresentation([UIImage imageNamed:@"headImg_login1"]);
-                            //        UIImagePNGRepresentation[UIImage imageNamed:@"headImg_login1"];
-                            [defaults setObject:imageData1 forKey:@"userImage"];
-                            _image_type=@"0";
-                            _image_url=@"headImg_login1";
-                            
-                        }
-                        else
-                        {
-                            //当用户有上传头像时
-                            //创建头像的完整路径
-                            //        NSString *myURL=[NSString stringWithFormat:@"http://121.40.153.17/api/Public/User/%@",imageurl];
-                            //根据图片路径，下载图片，并保存defaults中（nsdata类型）
-                            [defaults setObject:[NSData dataWithContentsOfURL:[NSURL URLWithString:imageurl]]forKey:@"userImage"];
-                            _image_type=@"1";
-                            _image_url=imageurl;
-                        }
-                        [defaults setObject:[[NSDictionary alloc] initWithObjectsAndKeys:_image_type,@"type",_image_url,@"image",nil] forKey:@"userImageurl"];
-                        
-                        //    保存后隐藏进度条
-                        
-                        [self getui];
-                        
-                        [regular removeProgress];
-                        [self.navigationController setNavigationBarHidden:NO animated:NO];
-                        
-                        [[NSNotificationCenter defaultCenter] postNotificationName:@"updateImg" object:nil];
-                        [[NSNotificationCenter defaultCenter] postNotificationName:@"reload" object:nil];
-#pragma mark-发通知刷新发现美校
-                        [[NSNotificationCenter defaultCenter] postNotificationName:@"changeFound" object:nil];
-                        [[NSNotificationCenter defaultCenter] postNotificationName:@"getnotification" object:nil];
-                        
-                        [[NSNotificationCenter defaultCenter] postNotificationName:@"getmessage" object:nil];
-                        if([self.type isEqualToString:@"userinfo"])
-                        {
-                            [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshList" object:nil];
-                            [[NSNotificationCenter defaultCenter] postNotificationName:@"backlogin" object:nil];
-                            [[NSNotificationCenter defaultCenter] postNotificationName:@"other" object:nil];
-                            
-                        }else if([self.type isEqualToString:@"chat"])
-                        {
-                            [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshList" object:nil];
-                            [[NSNotificationCenter defaultCenter] postNotificationName:@"backlogin" object:nil];
-                            [[NSNotificationCenter defaultCenter] postNotificationName:@"other" object:nil];
-                            
-                        }else if ([self.type isEqualToString:@"other"])
-                        {
-                            [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshList" object:nil];
-                            [[NSNotificationCenter defaultCenter] postNotificationName:@"backlogin" object:nil];
-                            [[NSNotificationCenter defaultCenter] postNotificationName:@"other" object:nil];
-                        }
-                        
-                    }
+                    [self login_success:dict isAuth:YES];
                 }else
                 {
                     [[ToolManager sharedManager] alertTitle_Simple:[dict objectForKey:@"message"]];
@@ -576,8 +423,8 @@
         {
             if(error)
             {
-                //                                   [self presentViewController:[regular alertTitle_Simple:NSLocalizedString(error.description, @"")] animated:YES completion:nil];
-                //                 NSLog(@"分享失败,错误码:%ld,错误描述:%@", (long)[error errorCode], [error errorDescription]);
+                //                [self presentViewController:[regular alertTitle_Simple:NSLocalizedString(error.description, @"")] animated:YES completion:nil];
+                //                 JXLOG(@"分享失败,错误码:%ld,错误描述:%@", (long)[error errorCode], [error errorDescription]);
             }
         }
     }];
@@ -666,8 +513,7 @@
         //        登陆成功
         //        登陆成功调用的方法
 
-        [self login_success:dict];
-
+        [self login_success:dict isAuth:NO];
     }
     else
     {
@@ -676,7 +522,7 @@
     }
 }
 
--(void)login_success:(NSDictionary *)dict
+-(void)login_success:(NSDictionary *)dict isAuth:(BOOL)isAuth
 {
     //将username、password、islogin、uid、userImage保存进NSUserDefaults
     //取出沙盒中的NSUserDefaults
@@ -714,30 +560,27 @@
 
     [defaults setObject:[_user objectForKey:@"ease_mob_username"] forKey:@"chatname"];
     [defaults setObject:[_user objectForKey:@"ease_mob_password"] forKey:@"chatpassword"];
+    
+    //将islogin存入defaults中
+    
+    [defaults setObject:@"0" forKey:@"hangban"];
+    [defaults setObject:@"0" forKey:@"mianqian"];
+    
     NSNumber *islogin=[[NSNumber alloc]initWithInt:1];
     [defaults setObject:islogin forKey:@"islogin"];
     //将username存入defaults中
      [defaults setObject:username.text forKey:@"tel"];
     [defaults setObject:[_user objectForKey:@"username"] forKey:@"username"];
     [defaults setObject:[_user objectForKey:@"token"] forKey:@"token"];
-    [defaults setObject:[_user objectForKey:@"is_auth"] forKey:@"is_auth"];
+    [defaults setObject:[NSNumber numberWithInt:isAuth] forKey:@"is_auth"];
     //将password存入defaults中
     [defaults setObject:password.text forKey:@"password"];
     //将uid存入defaults中
     [defaults setObject:[_user objectForKey:@"id"] forKey:@"uid"];
     //取出头像对应的路径
-    NSString *imageurl=nil;
-    if([NSString isNilOrEmpty:[_user objectForKey:@"avatar"]])
-    {
-        imageurl=@"0";
-    }else
-    {
-        imageurl=[_user objectForKey:@"avatar"];
-    }
-
     NSString *_image_type=nil;
     NSString *_image_url=nil;
-    if([imageurl isEqualToString:@"0"])
+    if([NSString isNilOrEmpty:[_user objectForKey:@"avatar"]])
     {
         //当用户还未上传头像时
         //将系统默认的头像（成功登录并未上传头像）,转换成nsdata类型的对象，并将该对象保存defaults中
@@ -754,9 +597,9 @@
         //创建头像的完整路径
 //        NSString *myURL=[NSString stringWithFormat:@"http://121.40.153.17/api/Public/User/%@",imageurl];
         //根据图片路径，下载图片，并保存defaults中（nsdata类型）
-        [defaults setObject:[NSData dataWithContentsOfURL:[NSURL URLWithString:imageurl]]forKey:@"userImage"];
+        [defaults setObject:[NSData dataWithContentsOfURL:[NSURL URLWithString:[_user objectForKey:@"avatar"]]]forKey:@"userImage"];
         _image_type=@"1";
-        _image_url=imageurl;
+        _image_url=[_user objectForKey:@"avatar"];
     }
     [defaults setObject:[[NSDictionary alloc] initWithObjectsAndKeys:_image_type,@"type",_image_url,@"image",nil] forKey:@"userImageurl"];
    
@@ -814,7 +657,7 @@
                 if([[dict objectForKey:@"code"] integerValue]==1)
                 {
                     //                [[ToolManager sharedManager] alertTitle_Simple:@"发送cg"];
-                    NSLog(@"111");
+                    JXLOG(@"111");
                 }else
                 {
                     [[ToolManager sharedManager] alertTitle_Simple:[dict objectForKey:@"message"]];

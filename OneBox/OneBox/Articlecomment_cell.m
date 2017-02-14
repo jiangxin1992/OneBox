@@ -264,7 +264,7 @@ _width=i==0?170*_Scale:i==1?25*_Scale*17/15:i==2?200*_Scale:(ScreenWidth-_x_p-40
                 [dateFormat setDateFormat:@"YYYY-MM-dd HH:mm:SS"];
                 //    [dateFormat setTimeZone:[NSTimeZone timeZoneWithName:@"Asia/Shanghai"]];
                 NSDate *date = [dateFormat dateFromString:title];
-                NSLog(@"Nsdate=%@",date);
+                JXLOG(@"Nsdate=%@",date);
 
                  [dateFormat setDateFormat:@"MM/dd HH:mm"];
                 NSString *dateTime = [dateFormat stringFromDate:date];

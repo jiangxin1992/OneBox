@@ -226,7 +226,7 @@
 
 -(void)openManageAct:(UIButton *)btn
 {
-    NSLog(@"%d",_isopen);
+    JXLOG(@"%d",_isopen);
     if(!_isopen)
     {
 
@@ -243,7 +243,7 @@
         }
         NSMutableDictionary *parameters=[[NSMutableDictionary alloc] init];
         [parameters setObject:_token forKey:@"token"];
-        NSLog(@"titleArr=%@",titleArr);
+        JXLOG(@"titleArr=%@",titleArr);
         for (int i=0; i<titleArr.count; i++) {
 
                 [parameters setObject:[data_dict_must objectForKey:titleArr[i]] forKey:titleArr[i]];
@@ -394,7 +394,7 @@
         labeltitle.font=[regular getFont:17.0f];
         [colview addSubview:labeltitle];
     }
-    NSLog(@"111");
+    JXLOG(@"111");
     return colview;
 
 }
@@ -468,7 +468,7 @@
         nextcolor=[UIColor colorWithRed:51.0f/255.0f green:204.0f/255.0f blue:204.0f/255.0f alpha:1];
     }
     [_nextBtn setBackgroundColor:nextcolor];
-    NSLog(@"%f %f",_nextBtn.frame.origin.y,ScreenHeight);
+    JXLOG(@"%f %f",_nextBtn.frame.origin.y,ScreenHeight);
     [_nextBtn setTitle:nexttitle forState:UIControlStateNormal];
     _nextBtn.titleLabel.font=[regular getFont:12.0f];
     [_nextBtn.titleLabel setAttributedText:[regular createAttributeString:nexttitle andFloat:@(3)]];
@@ -508,7 +508,7 @@
 
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错白色" Withtype:1]];
-            NSLog(@"失败");
+            JXLOG(@"失败");
         }];
 
 
@@ -538,7 +538,7 @@
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错白色" Withtype:1]];
-            NSLog(@"失败");
+            JXLOG(@"失败");
         }];
         
     }
@@ -755,16 +755,16 @@
             {
                 if((_num>1)&&(_stepnum<2))
                 {
-//                    NSLog(@"_num=%d",_num);
-//                     NSLog(@"_stepnum=%d",_stepnum);
+//                    JXLOG(@"_num=%d",_num);
+//                     JXLOG(@"_stepnum=%d",_stepnum);
 
                     admit_cout++;
                     AdmitCoutArr[_index]=[NSNumber numberWithInteger:_num];
 
                 }else if((_num<2)&&(_stepnum>1))
                 {
-//                    NSLog(@"_num=%d",_num);
-//                    NSLog(@"_stepnum=%d",_stepnum);
+//                    JXLOG(@"_num=%d",_num);
+//                    JXLOG(@"_stepnum=%d",_stepnum);
                     admit_cout--;
                     AdmitCoutArr[_index]=[NSNumber numberWithInteger:_num];
                 }

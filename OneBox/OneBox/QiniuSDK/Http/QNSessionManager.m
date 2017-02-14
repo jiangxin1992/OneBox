@@ -142,7 +142,7 @@
 				path = @"/";
 			}
 			url = [[NSURL alloc] initWithScheme:url.scheme host:ip path:path];
-			NSLog(@"%@", url);
+			JXLOG(@"%@", url);
 			[request setValue:host forHTTPHeaderField:@"Host"];
 		}
 	}

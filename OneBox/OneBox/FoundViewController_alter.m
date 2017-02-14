@@ -186,10 +186,10 @@ _dictPinyinAndChinese = [[NSMutableDictionary alloc] init];
             }
             
             for (NSString *keys in [_dictPinyinAndChinese allKeys]) {
-                //        NSLog(@"%@", [_dictPinyinAndChinese objectForKey:keys]);
-                NSLog(@"%@", keys);
+                //        JXLOG(@"%@", [_dictPinyinAndChinese objectForKey:keys]);
+                JXLOG(@"%@", keys);
                 for (NSString *str in [_dictPinyinAndChinese objectForKey:keys]) {
-                    NSLog(@"%@", str);
+                    JXLOG(@"%@", str);
                 }
             }
             
@@ -236,7 +236,7 @@ _dictPinyinAndChinese = [[NSMutableDictionary alloc] init];
     blockFailure=^(NSError *_error)
     {
         [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错白色" Withtype:1]];
-        NSLog(@"发生错误！%@",_error);
+        JXLOG(@"发生错误！%@",_error);
         if(start==0)
         {
             [_tableView headerEndRefreshing];
@@ -270,7 +270,7 @@ _dictPinyinAndChinese = [[NSMutableDictionary alloc] init];
 }
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
 {
-    NSLog(@"%@",_arrayChar);
+    JXLOG(@"%@",_arrayChar);
 
     return _arrayChar;
 }
@@ -304,7 +304,7 @@ _dictPinyinAndChinese = [[NSMutableDictionary alloc] init];
  */
 - (void)dealloc
 {
-    NSLog(@"MJTableViewController--dealloc---");
+    JXLOG(@"MJTableViewController--dealloc---");
 }
 
 - (void)footerRereshing
@@ -471,7 +471,7 @@ _dictPinyinAndChinese = [[NSMutableDictionary alloc] init];
 //    [[ToolManager sharedManager] createProgress:@"加载中"];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
 
-    NSLog(@"%@",dict);
+    JXLOG(@"%@",dict);
     [manager GET:[[NSString alloc] initWithFormat:@"%@%@",DNS,@"/v1/schools"] parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
 
         NSString *html = operation.responseString;
@@ -570,13 +570,13 @@ _dictPinyinAndChinese = [[NSMutableDictionary alloc] init];
     {
         //因为在searchDC上的_searchBar就是创建searchDC时，由第一个参数指定的_searchBar
         //        NSString *searchCon = _searchBar.text;
-        //        NSLog(@"%@", searchCon);
+        //        JXLOG(@"%@", searchCon);
 
         [_arrayResult removeAllObjects];
          NSString *title=_searchBar.text;
 
         //遍历数据源数据，找到与当前搜索内容相匹配的数据
-//        NSLog(@"%@",_dictPinyinAndChinese);
+//        JXLOG(@"%@",_dictPinyinAndChinese);
 
             for (foundModel *model in _arrayData) {
 
@@ -585,7 +585,7 @@ _dictPinyinAndChinese = [[NSMutableDictionary alloc] init];
 
                     NSRange range1 = [[ChineseToPinyin pinyinFromChiniseString:model.cn_name] rangeOfString:[ChineseToPinyin pinyinFromChiniseString:title]];
                     NSRange range2 = [[ChineseToPinyin pinyinFromChiniseString:model.en_name] rangeOfString:[ChineseToPinyin pinyinFromChiniseString:title]];
-//                    NSLog(@"1111%@",model.city);
+//                    JXLOG(@"1111%@",model.city);
                     NSString *titeeee=model.city;
                     NSRange range3 = [[ChineseToPinyin pinyinFromChiniseString:titeeee] rangeOfString:[ChineseToPinyin pinyinFromChiniseString:title]];
 
@@ -601,7 +601,7 @@ _dictPinyinAndChinese = [[NSMutableDictionary alloc] init];
                         }
                 }
             }
-//        NSLog(@"%@",_arrayResult);
+//        JXLOG(@"%@",_arrayResult);
         return 1;
     }
 
@@ -622,7 +622,7 @@ _dictPinyinAndChinese = [[NSMutableDictionary alloc] init];
 
     }else
     {
-//        NSLog(@"%d",_arrayResult.count);
+//        JXLOG(@"%d",_arrayResult.count);
         return _arrayResult.count;
     }
 
@@ -654,7 +654,7 @@ _dictPinyinAndChinese = [[NSMutableDictionary alloc] init];
     if(tableView==_tableView)
     {
         NSInteger _section=indexPath.section;
-//        NSLog(@"%@",_arrayChar);
+//        JXLOG(@"%@",_arrayChar);
         NSString *strKey  = [_arrayChar objectAtIndex:_section];
         NSMutableArray  *__arr=[[NSMutableArray alloc] initWithArray:[_dictPinyinAndChinese objectForKey:strKey]];
         NSInteger num=indexPath.row;
@@ -1077,7 +1077,7 @@ _dictPinyinAndChinese = [[NSMutableDictionary alloc] init];
 }
 -(void)valueChangedForDoubleSlider:(NMRangeSlider *)slider
 {
-    NSLog(@"up=%f,down=%f",slider.upperValue,slider.lowerValue);
+    JXLOG(@"up=%f,down=%f",slider.upperValue,slider.lowerValue);
     if(slider.tag==5000)
     {
 
@@ -1401,13 +1401,13 @@ _dictPinyinAndChinese = [[NSMutableDictionary alloc] init];
     _scrollview_city.backgroundColor=upviewcity.backgroundColor;
     _scrollview_city.showsVerticalScrollIndicator=YES;
     [upviewcity addSubview:_scrollview_city];
-    NSLog(@"%@",state_id);
+    JXLOG(@"%@",state_id);
 
 
     //    [[ToolManager sharedManager] createProgress:@"加载中"];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:[[NSString alloc] initWithFormat:@"%@%@%@",DNS,@"/v1/us_states/",state_id] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"%@",state_id);
+        JXLOG(@"%@",state_id);
 
         NSString *html = operation.responseString;
         NSData* data=[html dataUsingEncoding:NSUTF8StringEncoding];
@@ -1821,7 +1821,7 @@ _dictPinyinAndChinese = [[NSMutableDictionary alloc] init];
         }
     }
      NSMutableDictionary *_dict=[self getParameters];
-    NSLog(@"%@",_dict);
+    JXLOG(@"%@",_dict);
     NSArray *keyarr=[_dict allKeys];
     if(keyarr.count>2)
     {
@@ -1923,7 +1923,7 @@ _dictPinyinAndChinese = [[NSMutableDictionary alloc] init];
     if(_appear&&scrollView==_tableView)
     {
         _start_y=scrollView.contentOffset.y;
-        NSLog(@"滚动视图即将开始拖动=%f",scrollView.contentOffset.y);
+        JXLOG(@"滚动视图即将开始拖动=%f",scrollView.contentOffset.y);
         _Dragging=YES;
     }
 
@@ -1935,7 +1935,7 @@ _dictPinyinAndChinese = [[NSMutableDictionary alloc] init];
     {
         if(_appear&&scrollView==_tableView)
         {
-            NSLog(@"滚动视图正在滚动=%f",scrollView.contentOffset.y);
+            JXLOG(@"滚动视图正在滚动=%f",scrollView.contentOffset.y);
             if(_start_y<20&&scrollView.contentOffset.y>20)
             {
                 [UIView beginAnimations:@"anmationAppear" context:nil];
@@ -2002,7 +2002,7 @@ _dictPinyinAndChinese = [[NSMutableDictionary alloc] init];
 
     if(_appear&&scrollView==_tableView)
     {
-        NSLog(@"滚动视图结束减速=%f",scrollView.contentOffset.y);
+        JXLOG(@"滚动视图结束减速=%f",scrollView.contentOffset.y);
         _Dragging=NO;
     }
 }

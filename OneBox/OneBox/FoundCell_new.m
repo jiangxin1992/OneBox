@@ -33,7 +33,7 @@
 -(void)FoundAnimation:(NSNotification *)not
 {
 
-    NSLog(@"%ld",(long)[not.object integerValue]);
+    JXLOG(@"%ld",(long)[not.object integerValue]);
     if([[_dict objectForKey:@"row"] integerValue]<[not.object integerValue])
     {
         [self startAnimation];

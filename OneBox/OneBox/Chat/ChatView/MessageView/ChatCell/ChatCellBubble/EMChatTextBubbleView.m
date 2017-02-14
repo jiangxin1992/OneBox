@@ -38,7 +38,7 @@ NSString *const kRouterEventTextURLTapEventName = @"kRouterEventTextURLTapEventN
 //        _textLabel.backgroundColor = [UIColor redColor];
         _textLabel.userInteractionEnabled = NO;
         _textLabel.multipleTouchEnabled = NO;
-        NSLog(@"%@",_model);
+        JXLOG(@"%@",_model);
 
         //
         [self addSubview:_textLabel];
@@ -241,7 +241,7 @@ NSString *const kRouterEventTextURLTapEventName = @"kRouterEventTextURLTapEventN
     
     NSInteger numberOfLines = self.textLabel.numberOfLines > 0 ? MIN(self.textLabel.numberOfLines, CFArrayGetCount(lines)) : CFArrayGetCount(lines);
     
-    //NSLog(@"num lines: %d", numberOfLines);
+    //JXLOG(@"num lines: %d", numberOfLines);
     
     if (numberOfLines == 0) {
         CFRelease(frame);

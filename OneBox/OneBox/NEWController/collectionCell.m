@@ -170,7 +170,7 @@
             }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 [self.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错白色" Withtype:1]];
 
-                NSLog(@"发生错误！%@",error);
+                JXLOG(@"发生错误！%@",error);
 
             }];
             

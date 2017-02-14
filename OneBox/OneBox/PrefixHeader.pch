@@ -1,0 +1,118 @@
+//
+//  PrefixHeader.pch
+//  OneBox
+//
+//  Created by 谢江新 on 15-2-3.
+//  Copyright (c) 2015年 谢江新. AllkIOSVersions rights reserved.
+//
+#import <AlipaySDK/AlipaySDK.h>
+#import "Header.h"
+#define pathImage @"http://121.40.153.17/api/Public/School/"
+#define path_HeadImage @"http://121.40.153.17/api/Public/User/"
+#define _isPad (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+//#define DNS @"http://120.26.192.105:5000"
+//#define DNS @"http://api.abroadbox.cn"
+#define DNS @"http://120.26.192.105:5000"
+//#define DNS @"http://120.26.192.105:4000"
+//#define DNS @"http://10.0.1.11:3000"
+//#define DNS @"http://115.28.54.216:8001"
+
+/*************** @property 属性 ***************/
+
+#define __mu_array(__k__) @property(nonatomic,strong) NSMutableArray *__k__
+
+#define __mu_dict(__k__) @property(nonatomic,strong) NSMutableDictionary *__k__
+
+#define __array(__k__) @property(nonatomic,strong) NSArray *__k__
+
+#define __dict(__k__) @property(nonatomic,strong) NSDictionary *__k__
+
+#define __string(__k__) @property(nonatomic,strong) NSString *__k__
+
+#define __number(__k__) @property(nonatomic,strong) NSNumber *__k__
+
+#define __bool(__k__) @property(nonatomic,assign) BOOL __k__
+
+#define __float(__k__) @property(nonatomic,assign) CGFloat __k__
+
+#define __long(__k__) @property(nonatomic,assign) long __k__
+
+#define __int(__k__) @property(nonatomic,assign) NSInteger __k__
+
+#define __block_null(__k__) @property(nonatomic,copy) void (^__k__)()
+
+#define __block_type(__k__,__type__) @property(nonatomic,copy) void (^__k__)(NSString *__type__)
+
+#define __label(__k__) @property(nonatomic,strong) UILabel *__k__
+
+#define __btn(__k__) @property(nonatomic,strong) UIButton *__k__
+
+#define __view(__k__) @property(nonatomic,strong) UIView *__k__
+
+#define __scrollView(__k__) @property(nonatomic,strong) UIScrollView *__k__
+
+
+#define IS_IPHONE_5 ( fabs( ( double )[ [ UIScreen mainScreen ] bounds ].size.height - ( double )568 ) < DBL_EPSILON )
+#define RGBACOLOR(r,g,b,a) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:(a)]
+//#define _fz @"FZLanTingHei-EL-GBK"
+#define _package /*********可封装*********/
+#define tabbarHeight 49
+#define _margin 2
+#ifndef OneBox_PrefixHeader_pch
+#define OneBox_PrefixHeader_pch
+#define iPhone5 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 1136), [[UIScreen mainScreen] currentMode].size) : NO)
+
+#define ScreenWidth [UIScreen mainScreen].bounds.size.width
+#define ScreenHeight [UIScreen mainScreen].bounds.size.height
+
+#define _Scale [UIScreen mainScreen].bounds.size.width/640.0f
+#define __Scale [UIScreen mainScreen].bounds.size.height/568.0f
+#define kIOSVersions [[[UIDevice currentDevice] systemVersion] floatValue] //获得iOS版本
+
+#define kUIWindow    [[[UIApplication sharedApplication] delegate] window] //获得window
+
+#define kUnderStatusBarStartY (kIOSVersions>=7.0 ? 20 : 0)                 //7.0以上stautsbar不占位置，内容视图的起始位置要往下20
+#define _define_blue_color [UIColor colorWithRed:77.0f/255.0f green:190.0f/255.0f blue:217.0f/255.0f alpha:1]
+#define _define_login_background [UIColor colorWithRed:67.0f/255.0f green:183.0f/255.0f blue:223.0f/255.0f alpha:1]
+#define _define_blue_color_login [UIColor colorWithRed:130.0f/255.0f green:211.0f/255.0f blue:236.0f/255.0f alpha:1]
+#define _define_bluecell_color [UIColor colorWithRed:77.0f/255.0f green:190.0f/255.0f blue:217.0f/255.0f alpha:1]
+#define _define_head_color [UIColor colorWithRed:240.0f/255.0f green:240.0f/255.0f blue:240.0f/255.0f alpha:1]
+#define _define_backview_color [UIColor colorWithRed:244.0f/255.0f green:244.0f/255.0f blue:244.0f/255.0f alpha:1]
+#define _define_cailiao_color [UIColor colorWithRed:252.0f/255.0f green:252.0f/255.0f blue:252.0f/255.0f alpha:1]
+#define _define_cailiao_text_color [UIColor colorWithRed:200.0f/255.0f green:200.0f/255.0f blue:200.0f/255.0f alpha:1]
+#define kIiPhone6 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(750, 1334), [[UIScreen mainScreen] currentMode].size) : NO)
+
+#define kIPhone6Plus ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1242,2208), [[UIScreen mainScreen] currentMode].size) : NO)
+
+#define kIPhone4s ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640,960), [[UIScreen mainScreen] currentMode].size) : NO)
+
+#define kIPhone5s ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640,1136), [[UIScreen mainScreen] currentMode].size) : NO)
+
+#define kScreenSize           [[UIScreen mainScreen] bounds].size                 //(e.g. 320,480)
+#define kScreenWidth          [[UIScreen mainScreen] bounds].size.width           //(e.g. 320)
+#define kScreenHeight  [[UIScreen mainScreen] bounds].size.height
+#define kIOS7OffHeight (kIOSVersions>=7.0 ? 64 : 0)     //设置
+
+#define kApplicationSize      [[UIScreen mainScreen] applicationFrame].size       //(e.g. 320,460)
+#define kApplicationWidth     [[UIScreen mainScreen] applicationFrame].size.width //(e.g. 320)
+#define kApplicationHeight    [[UIScreen mainScreen] applicationFrame].size.height//不包含状态bar的高度(e.g. 460)
+
+#define kStatusBarHeight         20
+#define kNavigationBarHeight     44
+#define kNavigationheightForIOS7 64
+#define kContentHeight           (kApplicationHeight - kNavigationBarHeight)
+#define kTabBarHeight            49
+#define kTableRowTitleSize       14
+#define maxPopLength             215
+
+#define kButtonDefaultWidth (kIPhone4s ? 278 : 288)   //默认输入框宽
+#define kSendSMSButtonWidth  90  //验证码按钮长度
+#define kButtonDefaultHeight 42  //默认输入框&按钮高
+#define kCellDefaultHeight = 44       //默认Cell高度
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+#define PARTNER @"2088911128820093"
+#define SELLER  @"abroadbox@gmail.com"
+#define PRIVATEKEY @"MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBALK+q4q5K8YfBmhq3Jx5INf6FNoSlnxbL2CldLBYgimbZ3X2qopR3Rhr9HEMB5swuT9S31r9g/WNZCmqyT5JA0cf31RFWjSBvMMFMnRoPGjSw1QjIdOTZ/fgTNdFkY6MkDa9hmlO7gLPhdxf4QGMjIU3s7w1gwh6pMZxsgqqaZhLAgMBAAECgYEAq6w1VadDQ6XIocEA4cf0o3qtTEVOA2IQvuIqkLRxT0TSuZmPcgnuL+Z/f5PuOj8xrIALxXh3pP+Hk/1UC15Upf8ahet5/E7CQ6qhUs0OgifS0/RwJKLWa6epjt35PenuIAfweCGEoX17QKn3pUnzAvpYZf9B66Q8tXKxy6bGYQECQQDl/sFdpj9qHjTm/bkkDM09vrQAulGfBqHjXBUDby3D4SuY2N8tpzDW6stPDuEwBs5k4j1ruPOAJBPcwqx+JMMvAkEAxvR3ShhE95vglDq6jp/+Re7od4ELcXjVaQG3bOt4+ns0T23lrj1OpM3U6pa3lhQsStVEpXIwJ3/xQAyoYx4lpQJBAOVfvNj5BCWBGqGESTB60/XQSxSuvNgsdSeanhpetvWzixdUsr+FDmBIqZqe7FZJc22JdFgKjE4vrN9uBzmG0GECQFMiagpLE96HgxNNaxEX589fIkJ1aMu0mzByqCvaRUYdX2FlYZkqQwd4fuS7r+EFcvCeJz4e9eI7gxqpb19jhIUCQAMzwtxirrTbD6sbWinMiFHgdl1r3VUUTtcHhzxilqjGKC4/icrhoInhGVDZmwras+dMXXRAanN/jgwUjVTLHKE="
+#endif

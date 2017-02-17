@@ -101,7 +101,7 @@
 {
 
     NSString *login=nil;
-    if([[NSUserDefaults standardUserDefaults] objectForKey:@"token"]==nil)
+    if(![regular isLogin])
     {
         login=@"0";
     }else
@@ -138,16 +138,7 @@
 
 
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    NSUserDefaults *dict=[NSUserDefaults standardUserDefaults];
-    NSString *__token=nil;
-    if([dict objectForKey:@"token"]==nil)
-    {
-        __token=@"";
-    }else
-    {
-        __token=[dict objectForKey:@"token"];
-    }
-    NSDictionary *parameters=@{@"token":__token};
+    NSDictionary *parameters=@{@"token":[regular getToken]};
      NSString *str=[NSString stringWithFormat:@"%@/v1/order_schools",DNS];
     [manager GET:str parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
 
@@ -199,7 +190,7 @@
 
         }else
         {
-             [[ToolManager sharedManager] alertTitle_Simple:[dict objectForKey:@"message"]];
+             [[ToolManager sharedManager] alertTitle_Simple:[data_dict objectForKey:@"message"]];
         }
 
 
@@ -256,7 +247,7 @@
     {
 //        取消
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-        NSString *Url = [NSString stringWithFormat:@"%@/v1/user_boxes/cancel?token=%@",DNS,[[NSUserDefaults standardUserDefaults] objectForKey:@"token"]];
+        NSString *Url = [NSString stringWithFormat:@"%@/v1/user_boxes/cancel?token=%@",DNS,[regular getToken]];
         NSDictionary *dict=@{@"name":@"order_school"};
         [manager POST:Url parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSString *html = operation.responseString;
@@ -286,7 +277,7 @@
     {
 //        完成
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-        NSString *Url = [NSString stringWithFormat:@"%@/v1/user_boxes/%@?token=%@",DNS,[[NSUserDefaults standardUserDefaults] objectForKey:@"uid"],[[NSUserDefaults standardUserDefaults] objectForKey:@"token"]];
+        NSString *Url = [NSString stringWithFormat:@"%@/v1/user_boxes/%@?token=%@",DNS,[regular getUID],[regular getToken]];
         NSDictionary *dict=@{@"name":@"order_school"};
         [manager PUT:Url parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSString *html = operation.responseString;
@@ -657,25 +648,12 @@
                 break;
             }
         }
-
-
-
-        NSUserDefaults *dict=[NSUserDefaults standardUserDefaults];
         //    删除
         chooseModel *model=_dataArray[index];
 //        [[ToolManager sharedManager] createProgress:@"删除中"];
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
 
-        NSString *_token=nil;
-        if([dict objectForKey:@"token"]==nil)
-        {
-            _token=@"";
-        }else
-        {
-            _token=[dict objectForKey:@"token"];
-        }
-
-        NSDictionary *parameters=@{@"token":_token};
+        NSDictionary *parameters=@{@"token":[regular getToken]};
         NSString *url=[[NSString alloc] initWithFormat:@"%@%@%@",DNS,@"/v1/order_schools/",model.goal_id];
         [manager DELETE:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
 

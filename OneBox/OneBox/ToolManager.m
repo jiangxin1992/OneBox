@@ -469,7 +469,7 @@ static ToolManager *_t = nil;
     navBtn.layer.borderWidth=1;
     navBtn.layer.borderColor=[[UIColor whiteColor] CGColor];
     
-    if([[dict objectForKey:@"islogin"] intValue]==1)
+    if([regular isLogin])
     {
         [navBtn setImage:[UIImage imageWithData:[dict objectForKey:@"userImage"]] forState:UIControlStateNormal];
     }else

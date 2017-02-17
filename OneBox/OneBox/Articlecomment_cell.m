@@ -131,8 +131,7 @@ _width=i==0?170*_Scale:i==1?25*_Scale*17/15:i==2?200*_Scale:(ScreenWidth-_x_p-40
     NSInteger _type=0;
     if(btn.tag-50==1)
     {
-        NSUserDefaults *dict=[NSUserDefaults standardUserDefaults];
-        if([[dict objectForKey:@"islogin"] integerValue])
+        if([regular isLogin])
         {
             if(btn.selected==YES)
             {
@@ -147,14 +146,11 @@ _width=i==0?170*_Scale:i==1?25*_Scale*17/15:i==2?200*_Scale:(ScreenWidth-_x_p-40
         {
             _type=10;
         }
-
-        
         
     }else if(btn.tag-50==3)
     {
 //        删除
-
-
+        
     }
     self.block(_dict[@"rownum"],_type);
 }
@@ -212,10 +208,8 @@ _width=i==0?170*_Scale:i==1?25*_Scale*17/15:i==2?200*_Scale:(ScreenWidth-_x_p-40
             _btn.frame=CGRectMake(_btn.frame.origin.x, CGRectGetMaxY(_content.frame)+10*_Scale, _btn.frame.size.width, _btn.frame.size.height);
             if(i==3)
             {
-                
-                NSUserDefaults *dict=[NSUserDefaults standardUserDefaults];
 
-                NSString *_uid=[[NSString alloc] initWithFormat:@"%ld",(long)[[dict objectForKey:@"uid"] integerValue]];
+                NSString *_uid=[[NSString alloc] initWithFormat:@"%ld",(long)[[regular getUID] integerValue]];
                 if(![_uid isEqualToString:cell_model.user_id])
                 {
                     _btn.selected=YES;

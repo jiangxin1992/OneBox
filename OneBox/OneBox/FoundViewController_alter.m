@@ -416,16 +416,7 @@ _dictPinyinAndChinese = [[NSMutableDictionary alloc] init];
         [dict setObject:[[NSString alloc] initWithFormat:@"%ld",(long)_page] forKey:@"page"];
     }
 
-    NSUserDefaults *____dict=[NSUserDefaults standardUserDefaults];
-    NSString *_token=nil;
-    if([[____dict objectForKey:@"islogin"] integerValue]==1)
-    {
-        _token=[____dict objectForKey:@"token"];
-    }else
-    {
-        _token=@"";
-    }
-    [dict setObject:_token forKey:@"token"];
+    [dict setObject:[regular getToken] forKey:@"token"];
 
     [dict setObject:[[NSString alloc] initWithFormat:@"%@,%@",leftLabel2.text,rightLabel2.text] forKey:@"ap_count"];
     [dict setObject:[[NSString alloc] initWithFormat:@"%@,%@",leftLabel1.text,rightLabel1.text] forKey:@"total_students"];
@@ -457,16 +448,8 @@ _dictPinyinAndChinese = [[NSMutableDictionary alloc] init];
     {
         [dict setObject:[[NSString alloc] initWithFormat:@"%ld",(long)_page] forKey:@"page"];
     }
-    NSUserDefaults *____dict=[NSUserDefaults standardUserDefaults];
-    NSString *_token=nil;
-    if([[____dict objectForKey:@"islogin"] integerValue]==1)
-    {
-        _token=[____dict objectForKey:@"token"];
-    }else
-    {
-        _token=@"";
-    }
-    [dict setObject:_token forKey:@"token"];
+
+    [dict setObject:[regular getToken] forKey:@"token"];
 
 //    [[ToolManager sharedManager] createProgress:@"加载中"];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];

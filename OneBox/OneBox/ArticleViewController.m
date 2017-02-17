@@ -157,7 +157,7 @@
 }
 -(void)pushColView
 {
-    if([[NSUserDefaults standardUserDefaults] objectForKey:@"token"]==nil)
+    if(![regular isLogin])
     {
         LoginViewController*login=[[LoginViewController alloc] init];
         login.type=@"other";
@@ -222,17 +222,8 @@
     NSMutableDictionary *dict=[[NSMutableDictionary alloc] init];
 //    添加page
     [dict setObject:[[NSString alloc] initWithFormat:@"%ld",(long)_page] forKey:@"page"];
-//    添加token
-    NSUserDefaults *_UserDefaults=[NSUserDefaults standardUserDefaults];
-    NSString *_token=nil;
-    if([[_UserDefaults objectForKey:@"islogin"] integerValue]==1)
-    {
-        _token=[_UserDefaults objectForKey:@"token"];
-    }else
-    {
-        _token=@"";
-    }
-    [dict setObject:_token forKey:@"token"];
+
+    [dict setObject:[regular getToken] forKey:@"token"];
 //请求
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:[[NSString alloc] initWithFormat:@"%@%@",DNS,@"/v1/posts"] parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {

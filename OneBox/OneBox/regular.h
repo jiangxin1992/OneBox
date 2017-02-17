@@ -14,6 +14,37 @@
  */
 + (id)sharedManager;
 
+/**
+ * 注册个推
+ */
++ (void)registerGeTui;
+
+/**
+ * 获取用户token
+ */
++ (NSString *)getToken;
+
+/**
+ * 获取用户ID
+ */
++ (id)getUID;
+
+/**
+ * 获取环信的账号密码
+ */
++ (NSString *)getEaseMobUsername;
++ (NSString *)getEaseMobPassword;
+
+/**
+ * 用户是否登录
+ */
++ (BOOL )isLogin;
+
+/**
+ * 是否是第三方登录
+ */
++ (BOOL )isAuth;
+
 /** 用户是否打开推送开关*/
 + (BOOL)isEnableAPNS;
 

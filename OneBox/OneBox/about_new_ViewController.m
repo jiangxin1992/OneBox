@@ -148,7 +148,7 @@
 
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
 
-    NSString *url=[[NSString alloc] initWithFormat:@"%@/v1/user_boxes/is_push?is_push_on=%@&token=%@",DNS,not,[[NSUserDefaults standardUserDefaults] objectForKey:@"token"]];
+    NSString *url=[[NSString alloc] initWithFormat:@"%@/v1/user_boxes/is_push?is_push_on=%@&token=%@",DNS,not,[regular getToken]];
     [manager PUT:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject)  {
         NSString *html = operation.responseString;
         NSData* data=[html dataUsingEncoding:NSUTF8StringEncoding];
@@ -218,7 +218,7 @@
     if (!error && info) {
         JXLOG(@"退出成功");
     }
-    NSDictionary *parameters=@{@"token":[[NSUserDefaults standardUserDefaults] objectForKey:@"token"]};
+    NSDictionary *parameters=@{@"token":[regular getToken]};
     NSString *url=[[NSString alloc] initWithFormat:@"%@%@",DNS,@"/v1/users/login_out"];
     AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc]init];
     [manager POST:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -351,7 +351,8 @@
     upView =[[UIView alloc] init];
 //@[@"账户资料",@"修改密码",@"手机绑定",@"推送通知"]
     NSArray *titleArr=nil;
-    if([[[NSUserDefaults standardUserDefaults] objectForKey:@"is_auth"] integerValue]==1)
+    
+    if([regular isAuth])
     {
         upView.frame=CGRectMake(20*_Scale, 28*_Scale,  CGRectGetWidth(_scrollView.frame)-40*_Scale, 140*_Scale+70*_Scale*2);
         titleArr=@[@"账户资料",@"推送通知"];
@@ -410,7 +411,7 @@
 -(void)submitAction:(UIGestureRecognizer *)ges
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    NSString *Url = [NSString stringWithFormat:@"%@/v1/reports?token=%@",DNS,[[NSUserDefaults standardUserDefaults] objectForKey:@"token"]];
+    NSString *Url = [NSString stringWithFormat:@"%@/v1/reports?token=%@",DNS,[regular getToken]];
     NSDictionary *dict = @{@"content":sugession_content.text};
     [manager POST:Url parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [[self.view viewWithTag:200] removeFromSuperview];
@@ -424,7 +425,7 @@
 
 -(void)main_action:(UIButton *)btn
 {
-    if([[[NSUserDefaults standardUserDefaults] objectForKey:@"is_auth"] integerValue]==1)
+    if([regular isAuth])
     {
         if(btn.tag-100==0)
         {

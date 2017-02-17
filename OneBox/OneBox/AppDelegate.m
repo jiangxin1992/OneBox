@@ -161,11 +161,13 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
     //   4. 用户从另一个设备登录，把当前设备上登陆的用户踢出.
 
     //@"ease_mob_username"] password:[[dict objectForKey:@"data"] objectForKey:@"ease_mob_password"
-    if(([[NSUserDefaults standardUserDefaults] objectForKey:@"ease_mob_username"]!=nil)&&([[NSUserDefaults standardUserDefaults] objectForKey:@"ease_mob_password"]!=nil))
+    
+    if((![NSString isNilOrEmpty:[regular getEaseMobUsername]])&&(![NSString isNilOrEmpty:[regular getEaseMobPassword]]))
     {
         BOOL isAutoLogin = [[EaseMob sharedInstance].chatManager isAutoLoginEnabled];
         if (!isAutoLogin) {
-            [[EaseMob sharedInstance].chatManager asyncLoginWithUsername:[[NSUserDefaults standardUserDefaults] objectForKey:@"ease_mob_username"] password:[[NSUserDefaults standardUserDefaults] objectForKey:@"ease_mob_password"]
+            
+            [[EaseMob sharedInstance].chatManager asyncLoginWithUsername:[regular getEaseMobUsername] password:[regular getEaseMobPassword]
                                                               completion:^(NSDictionary *loginInfo, EMError *error) {
                                                                   if (!error) {
                                                                       // 设置自动登录
@@ -176,7 +178,7 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
                                                               }onQueue:nil];
         }else
         {
-            [[EaseMob sharedInstance].chatManager asyncLoginWithUsername:[[NSUserDefaults standardUserDefaults] objectForKey:@"ease_mob_username"] password:[[NSUserDefaults standardUserDefaults] objectForKey:@"ease_mob_password"]
+            [[EaseMob sharedInstance].chatManager asyncLoginWithUsername:[regular getEaseMobUsername] password:[regular getEaseMobPassword]
                                                               completion:^(NSDictionary *loginInfo, EMError *error) {
                                                                   if (!error) {
                                                                       // 设置自动登录
@@ -461,63 +463,8 @@ static void uncaughtExceptionHandler(NSException *exception) {
 
     // [3]:向个推服务器注册deviceToken
     [GeTuiSdk registerDeviceToken:_deviceToken];
-
-    NSUserDefaults *dict=[NSUserDefaults standardUserDefaults];
-
-
-     NSString *clientId = [GeTuiSdk clientId];
-
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-
-
-    NSString *_token=nil;
-    if([dict objectForKey:@"islogin"]!=[NSNull null])
-    {
-
-        if([[dict objectForKey:@"islogin"] integerValue]!=0)
-        {
-            if([dict objectForKey:@"token"]==nil)
-            {
-
-                _token=@"";
-            }else
-            {
-                _token=[dict objectForKey:@"token"];
-            }
-
-        }else
-        {
-            _token=@"";
-        }
-
-    }else
-    {
-        _token=@"";
-    }
-//    NSString *_token=[dict objectForKey:@"token"];
-    if(clientId!=nil)
-    {
-        NSDictionary *parameters=@{@"token":_token,@"uuid":clientId,@"device_type":@"1"};
-        [manager POST:[[NSString alloc] initWithFormat:@"%@%@",DNS,@"/v1/users/getui_uuid"] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-
-            NSString *html = operation.responseString;
-            NSData* data=[html dataUsingEncoding:NSUTF8StringEncoding];
-            NSDictionary *dict=[NSJSONSerialization  JSONObjectWithData:data options:0 error:nil];
-
-            if([[dict objectForKey:@"code"] integerValue]==1)
-            {
-
-            }else
-            {
-                 [[ToolManager sharedManager] alertTitle_Simple:[dict objectForKey:@"message"]];
-            }
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            [self.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错白色" Withtype:1]];
-        }];
-
-    }
-
-
+    
+    [regular registerGeTui];
 }
 #pragma mark-登记失败
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error

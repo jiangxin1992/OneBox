@@ -462,64 +462,10 @@
 //        [[ToolManager sharedManager] alertTitle_Simple:_deviceToken];
         if(_deviceToken!=nil)
         {
+            
             [GeTuiSdk registerDeviceToken:_deviceToken];
-
-            NSUserDefaults *dict=[NSUserDefaults standardUserDefaults];
-
-            NSString *clientId = [GeTuiSdk clientId];
-            AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-
-            NSString *_token=nil;
-            if([dict objectForKey:@"islogin"]!=[NSNull null])
-            {
-
-                if([[dict objectForKey:@"islogin"] integerValue]!=0)
-                {
-
-                    if([dict objectForKey:@"token"]==nil)
-                    {
-
-                        _token=@"";
-                    }else
-                    {
-                        _token=[dict objectForKey:@"token"];
-                    }
-
-                }else
-                {
-                    _token=@"";
-                }
-
-            }else
-            {
-                _token=@"";
-            }
-            //    NSString *_token=[dict objectForKey:@"token"];
-            if(clientId!=nil)
-            {
-                //        [[ToolManager sharedManager] alertTitle_Simple:[dict objectForKey:@"clientId!=nil"]];
-                NSDictionary *parameters=@{@"token":_token,@"uuid":clientId,@"device_type":@"1"};
-//                [[ToolManager sharedManager] alertTitle_Simple:[[NSString alloc] initWithFormat:@"%@",parameters]];
-                [manager POST:[[NSString alloc] initWithFormat:@"%@%@",DNS,@"/v1/users/getui_uuid"] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-
-                    NSString *html = operation.responseString;
-                    NSData* data=[html dataUsingEncoding:NSUTF8StringEncoding];
-                    NSDictionary *dict=[NSJSONSerialization  JSONObjectWithData:data options:0 error:nil];
-
-                    if([[dict objectForKey:@"code"] integerValue]==1)
-                    {
-                        //                [[ToolManager sharedManager] alertTitle_Simple:@"发送cg"];
-                        JXLOG(@"111");
-                    }else
-                    {
-                        [[ToolManager sharedManager] alertTitle_Simple:[dict objectForKey:@"message"]];
-                    }
-                } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                  [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错蓝色" Withtype:2]];
-                }];
-
-
-            }
+            
+            [regular registerGeTui];
             
         }
         [[NSNotificationCenter defaultCenter] postNotificationName:@"getnotification" object:nil];

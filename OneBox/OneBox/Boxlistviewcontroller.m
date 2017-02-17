@@ -34,7 +34,7 @@
 {
 
     NSString *login=nil;
-    if([[NSUserDefaults standardUserDefaults] objectForKey:@"token"]==nil)
+    if(![regular isLogin])
     {
         login=@"0";
     }else

@@ -147,7 +147,7 @@
         ////        downview.backgroundColor=[UIColor whiteColor];
         //
         //        //((usermodel *)ArrayData[_num])
-        //        NSString *url = [NSString stringWithFormat:@"%@/v1/users/%@?token=%@",DNS,model.user_id,[[NSUserDefaults standardUserDefaults] objectForKey:@"token"]];
+        //        NSString *url = [NSString stringWithFormat:@"%@/v1/users/%@?token=%@",DNS,model.user_id,[regular getToken]];
         //        [HttpRequestManager GET:url complete:^(NSData *data) {
         //
         //            NSDictionary *dict=[NSJSONSerialization  JSONObjectWithData:data options:0 error:nil];
@@ -159,8 +159,8 @@
         //            {
         //                _isguanzhu=YES;
         //            }
-        //            //            [friend_token setString:[[NSUserDefaults standardUserDefaults] objectForKey:@"token"]];
-        //            [friend_token setString:[[dict objectForKey:@"data"] objectForKey:@"token"]];
+        //            //            [friend_token setString:[regular getToken]];
+        //            [friend_token setString:[regular getToken]];
         //
         //
         //            CGFloat ___jiange=(CGRectGetWidth(middle.frame)-80)/3.0f;
@@ -316,7 +316,7 @@
                 }
             }
 
-            NSString *str=[NSString stringWithFormat:@"%@/v1/follows?token=%@",DNS,[[NSUserDefaults standardUserDefaults] objectForKey:@"token"]];
+            NSString *str=[NSString stringWithFormat:@"%@/v1/follows?token=%@",DNS,[regular getToken]];
 
             NSDictionary *para = @{@"followable_id":[NSString stringWithFormat:@"%@",model.user_id],@"followable_type":@"user"};
             AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc]init];
@@ -371,7 +371,7 @@
 
 
 
-            NSString *str=[NSString stringWithFormat:@"%@/v1/follows/cancel?token=%@",DNS,[[NSUserDefaults standardUserDefaults] objectForKey:@"token"]];
+            NSString *str=[NSString stringWithFormat:@"%@/v1/follows/cancel?token=%@",DNS,[regular getToken]];
 
             NSDictionary *para = @{@"followable_id":[NSString stringWithFormat:@"%@",model.user_id],@"followable_type":@"user"};
             AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc]init];
@@ -482,7 +482,7 @@
 //        [ArrayData removeObjectAtIndex:indexPath.section];
 //        [tableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section]  withRowAnimation:UITableViewRowAnimationFade];
 //
-//        NSString *str=[NSString stringWithFormat:@"%@/v1/follows/cancel?token=%@",DNS,[[NSUserDefaults standardUserDefaults] objectForKey:@"token"]];
+//        NSString *str=[NSString stringWithFormat:@"%@/v1/follows/cancel?token=%@",DNS,[regular getToken]];
 //
 //        NSDictionary *para = @{@"locale":@"en",@"followable_id":[NSString stringWithFormat:@"%@",model.user_id],@"followable_type":@"user"};
 //        AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc]init];
@@ -643,7 +643,7 @@
                 model.is_following=YES;
                 NSIndexSet *indexSet=[[NSIndexSet alloc]initWithIndex:indexPathAll.section];
                 [_tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
-                NSString *str=[NSString stringWithFormat:@"%@/v1/follows?token=%@",DNS,[[NSUserDefaults standardUserDefaults] objectForKey:@"token"]];
+                NSString *str=[NSString stringWithFormat:@"%@/v1/follows?token=%@",DNS,[regular getToken]];
 
                 NSDictionary *para = @{@"followable_id":[NSString stringWithFormat:@"%@",model.user_id],@"followable_type":@"user"};
                 AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc]init];
@@ -680,7 +680,7 @@
                 NSIndexSet *indexSet=[[NSIndexSet alloc]initWithIndex:indexPathAll.section];
                 [_tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
 
-                NSString *str=[NSString stringWithFormat:@"%@/v1/follows/cancel?token=%@",DNS,[[NSUserDefaults standardUserDefaults] objectForKey:@"token"]];
+                NSString *str=[NSString stringWithFormat:@"%@/v1/follows/cancel?token=%@",DNS,[regular getToken]];
 
                 NSDictionary *para = @{@"followable_id":[NSString stringWithFormat:@"%@",model.user_id],@"followable_type":@"user"};
                 AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc]init];
@@ -719,7 +719,7 @@
 
 
             AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-            NSDictionary *parameters=[[NSDictionary alloc] initWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] objectForKey:@"token"],@"token",model.user_id,@"user_id",@"user",@"followable_type",@"follower",@"block_type",nil];
+            NSDictionary *parameters=[[NSDictionary alloc] initWithObjectsAndKeys:[regular getToken],@"token",model.user_id,@"user_id",@"user",@"followable_type",@"follower",@"block_type",nil];
             [manager POST:[[NSString alloc] initWithFormat:@"%@/v1/follows/change_block",DNS] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 NSString *html = operation.responseString;
                 NSData* data=[html dataUsingEncoding:NSUTF8StringEncoding];
@@ -771,7 +771,7 @@
 
             }
 
-            NSString *str=[NSString stringWithFormat:@"%@/v1/follows/remove?token=%@",DNS,[[NSUserDefaults standardUserDefaults] objectForKey:@"token"]];
+            NSString *str=[NSString stringWithFormat:@"%@/v1/follows/remove?token=%@",DNS,[regular getToken]];
 
             NSDictionary *para = @{@"user_id":[NSString stringWithFormat:@"%@",model.user_id],@"followable_type":@"user"};
             AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc]init];
@@ -810,7 +810,7 @@
 -(void)RequestData
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    NSDictionary *parameters=[[NSDictionary alloc] initWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] objectForKey:@"token"],@"token",[[NSString alloc] initWithFormat:@"%ld",(long)_page],@"page",nil];
+    NSDictionary *parameters=[[NSDictionary alloc] initWithObjectsAndKeys:[regular getToken],@"token",[[NSString alloc] initWithFormat:@"%ld",(long)_page],@"page",nil];
 
     [manager GET:[[NSString alloc] initWithFormat:@"%@/v1/chats/servers",DNS] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSString *html = operation.responseString;

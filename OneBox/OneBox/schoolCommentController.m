@@ -184,7 +184,7 @@
 
         }else if (type==4)
         {
-            if([[NSUserDefaults standardUserDefaults] objectForKey:@"token"]==nil)
+            if(![regular isLogin])
             {
 //                UIAlertView *alertview=[[ToolManager sharedManager] alertTitle_Simple:@"You are not logged in, please login first."];
 //                alertview.delegate=self;
@@ -237,17 +237,7 @@
             model.had_voted=isparise;
 
             AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-            NSUserDefaults *dict=[NSUserDefaults standardUserDefaults];
-            NSString *_token=nil;
-            if([dict objectForKey:@"token"]==nil)
-            {
-                _token=@"";
-            }else
-            {
-                _token=[dict objectForKey:@"token"];
-            }
-
-            NSDictionary *parameters = @{@"token":_token,@"voteable_id":model.comment_id,@"voteable_type":@"comment"};
+            NSDictionary *parameters = @{@"token":[regular getToken],@"voteable_id":model.comment_id,@"voteable_type":@"comment"};
             [manager POST:[[NSString alloc] initWithFormat:@"%@%@",DNS,__url] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 NSString *html = operation.responseString;
                 NSData* data=[html dataUsingEncoding:NSUTF8StringEncoding];
@@ -306,7 +296,7 @@
 
 //    360 400
     UIImageView *backview=[[UIImageView alloc] init];
-    if([[[NSUserDefaults standardUserDefaults] objectForKey:@"uid"] longValue]==[model.user_id longLongValue])
+    if([[regular getUID] longValue]==[model.user_id longLongValue])
     {
         backview.frame=CGRectMake((CGRectGetWidth(imageGray.frame)-180*_Scale*2)/2.0f, (CGRectGetHeight(imageGray.frame)-156*_Scale*2)/2.0f, 180*_Scale*2,151*_Scale*2);
     }else
@@ -341,7 +331,7 @@
     UIView *downview=[[UIView alloc] init];
     UIView *view=[[UIView alloc] init];
 
-    if([[[NSUserDefaults standardUserDefaults] objectForKey:@"uid"] longValue]==[model.user_id longLongValue])
+    if([[regular getUID] longValue]==[model.user_id longLongValue])
     {
         downview.frame=CGRectMake(0, CGRectGetMaxY(middle.frame), CGRectGetWidth(backview.frame), 0);
         view.frame=CGRectMake(10*_Scale*2, CGRectGetMaxY(middle.frame), CGRectGetWidth(middle.frame)-20*_Scale*2, 0);
@@ -358,7 +348,7 @@
 
     }
 
-    NSString *url = [NSString stringWithFormat:@"%@/v1/users/%@?token=%@",DNS,model.user_id,[[NSUserDefaults standardUserDefaults] objectForKey:@"token"]];
+    NSString *url = [NSString stringWithFormat:@"%@/v1/users/%@?token=%@",DNS,model.user_id,[regular getToken]];
     [HttpRequestManager GET:url complete:^(NSData *data) {
 
         NSDictionary *dict=[NSJSONSerialization  JSONObjectWithData:data options:0 error:nil];
@@ -480,7 +470,7 @@
             arrCase = @[@"follow_normal",@"message_select"];
             arrLabel = @[@"关注",@"消息"];
         }
-        if([[[NSUserDefaults standardUserDefaults] objectForKey:@"uid"] longValue]==[model.user_id longLongValue])
+        if([[regular getUID] longValue]==[model.user_id longLongValue])
         {
             //            [downview removeFromSuperview];
             //            backview.frame=CGRectMake((CGRectGetWidth(imageGray.frame)-180)/2.0f, (CGRectGetHeight(imageGray.frame)-300)/2.0f, 180,218);
@@ -576,7 +566,7 @@
                 }
             }
 
-            NSString *str=[NSString stringWithFormat:@"%@/v1/follows?token=%@",DNS,[[NSUserDefaults standardUserDefaults] objectForKey:@"token"]];
+            NSString *str=[NSString stringWithFormat:@"%@/v1/follows?token=%@",DNS,[regular getToken]];
 
             NSDictionary *para = @{@"followable_id":[NSString stringWithFormat:@"%@",model.user_id],@"followable_type":@"user"};
             AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc]init];
@@ -618,7 +608,7 @@
                     ((UIImageView *)view).image=[UIImage imageNamed:@"message_select"];
                 }
             }
-            NSString *str=[NSString stringWithFormat:@"%@/v1/follows/cancel?token=%@",DNS,[[NSUserDefaults standardUserDefaults] objectForKey:@"token"]];
+            NSString *str=[NSString stringWithFormat:@"%@/v1/follows/cancel?token=%@",DNS,[regular getToken]];
 
             NSDictionary *para = @{@"followable_id":[NSString stringWithFormat:@"%@",model.user_id],@"followable_type":@"user"};
             AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc]init];
@@ -721,9 +711,7 @@
 -(void)removData
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    NSUserDefaults *__dict=[NSUserDefaults standardUserDefaults];
-    NSString *_token=[__dict objectForKey:@"token"];
-    NSDictionary *parameters = @{@"token": _token};
+    NSDictionary *parameters = @{@"token": [regular getToken]};
     comment_model_alter *model= _data_array[alternum];
     NSString *_id=model.comment_id ;
 
@@ -887,8 +875,8 @@ _tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
 -(void)sendAction
 {
     _commentField.text=_commentField1.text;
-    NSUserDefaults *dict=[NSUserDefaults standardUserDefaults];
-    if(![[dict objectForKey:@"islogin"] integerValue])
+
+    if(![regular isLogin])
     {
 //        comment_alertview=[[ToolManager sharedManager] alertTitle_Simple:@"You are not logged in, please login first."];
 //        comment_alertview.delegate=self;
@@ -995,8 +983,7 @@ _tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
 
 //键盘return的时候发送 发送评论的请求
 - (BOOL)textFieldShouldReturn:(UITextField *)theTextField {
-    NSUserDefaults *dict=[NSUserDefaults standardUserDefaults];
-    if(![[dict objectForKey:@"islogin"] integerValue])
+    if(![regular isLogin])
     {
 //        comment_alertview=[[ToolManager sharedManager] alertTitle_Simple:@"You are not logged in, please login first."];
 //        comment_alertview.delegate=self;
@@ -1015,18 +1002,9 @@ _tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
 //发送评论
 -(void)sendComment
 {
-    NSUserDefaults *dict=[NSUserDefaults standardUserDefaults];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    NSString *_token=nil;
-    if([dict objectForKey:@"token"]==nil)
-    {
-        _token=@"";
-    }else
-    {
-        _token=[dict objectForKey:@"token"];
-    }
 
-    NSDictionary *parameters=@{@"commentable_id":_sid,@"commentable_type":@"school",@"content":_commentField1.text,@"token":_token};
+    NSDictionary *parameters=@{@"commentable_id":_sid,@"commentable_type":@"school",@"content":_commentField1.text,@"token":[regular getToken]};
 
     [manager POST:[[NSString alloc] initWithFormat:@"%@%@",DNS,@"/v1/comments"] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
 
@@ -1061,17 +1039,8 @@ _tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
 {
     [_height_array removeAllObjects];
     [_data_array removeAllObjects];
-    NSUserDefaults *dict=[NSUserDefaults standardUserDefaults];
-    NSString *_token=nil;
-    if([dict objectForKey:@"token"]==nil)
-    {
-        _token=@"";
-    }else
-    {
-        _token=[dict objectForKey:@"token"];
-    }
-
-    NSDictionary *parameters=@{@"token":_token,@"commentable_id":_sid,@"commentable_type":@"school"};
+    
+    NSDictionary *parameters=@{@"token":[regular getToken],@"commentable_id":_sid,@"commentable_type":@"school"};
 
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:[[NSString alloc] initWithFormat:@"%@%@",DNS,@"/v1/comments"] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {

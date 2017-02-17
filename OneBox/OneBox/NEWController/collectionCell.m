@@ -81,22 +81,11 @@
 
             [self.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"已取消目标" WithImg:@"Prompt_取消目标" Withtype:1]];
 #pragma mark-删除目标学校
-//            删除
-            NSUserDefaults *dict=[NSUserDefaults standardUserDefaults];
             //    删除
 
             AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
 
-            NSString *_token=nil;
-            if([dict objectForKey:@"token"]==nil)
-            {
-                _token=@"";
-            }else
-            {
-                _token=[dict objectForKey:@"token"];
-            }
-
-            NSDictionary *parameters=@{@"token":_token};
+            NSDictionary *parameters=@{@"token":[regular getToken]};
             NSString *url=[[NSString alloc] initWithFormat:@"%@%@%ld",DNS,@"/v1/order_schools/",(long)is_order_school];
             [manager DELETE:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
 
@@ -129,17 +118,8 @@
             //    设定请求类型未post
             [request setHTTPMethod:@"POST"];
             //    创建包体
-            NSUserDefaults *dict=[NSUserDefaults standardUserDefaults];
-            NSString *_token=nil;
-            if([dict objectForKey:@"token"]==nil)
-            {
-                _token=@"";
-            }else
-            {
-                _token=[dict objectForKey:@"token"];
-            }
-
-            NSString *bodyStr=[[NSString alloc] initWithFormat:@"school_id=%@&token=%@",model.sid,_token];
+            
+            NSString *bodyStr=[[NSString alloc] initWithFormat:@"school_id=%@&token=%@",model.sid,[regular getToken]];
             //    加入包体
             request.HTTPBody=[bodyStr dataUsingEncoding:NSUTF8StringEncoding];
 

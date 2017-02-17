@@ -110,7 +110,7 @@
 
         NSString *upData = [dateFormatter stringFromDate:alert_date];
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-        NSString *Url = [NSString stringWithFormat:@"%@/v1/user_boxes/go_visa?token=%@",DNS,[[NSUserDefaults standardUserDefaults] objectForKey:@"token"]];
+        NSString *Url = [NSString stringWithFormat:@"%@/v1/user_boxes/go_visa?token=%@",DNS,[regular getToken]];
         NSDictionary *dict = @{@"go_visa_at":upData};
         [manager POST:Url parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSString *html = operation.responseString;
@@ -231,8 +231,7 @@
 {
 //
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    NSUserDefaults *dict=[NSUserDefaults standardUserDefaults];
-    NSDictionary *parameters=@{@"token":[dict objectForKey:@"token"]};
+    NSDictionary *parameters=@{@"token":[regular getToken]};
 
     [manager GET:[[NSString alloc] initWithFormat:@"%@/v1/app_settings/consulates",DNS] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSString *html = operation.responseString;
@@ -408,7 +407,7 @@
 #pragma mark-请求面签时间数据
 -(void)requestTimeData
 {
-    NSString *timeUrl = [NSString stringWithFormat:@"%@/v1/user_boxes/go_visa?token=%@",DNS,[[NSUserDefaults standardUserDefaults] objectForKey:@"token"]];
+    NSString *timeUrl = [NSString stringWithFormat:@"%@/v1/user_boxes/go_visa?token=%@",DNS,[regular getToken]];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
 
     [manager POST:timeUrl parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -707,7 +706,7 @@
     {
         //        取消
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-        NSString *Url = [NSString stringWithFormat:@"%@/v1/user_boxes/cancel?token=%@",DNS,[[NSUserDefaults standardUserDefaults] objectForKey:@"token"]];
+        NSString *Url = [NSString stringWithFormat:@"%@/v1/user_boxes/cancel?token=%@",DNS,[regular getToken]];
         NSDictionary *dict=@{@"name":@"go_visa"};
         [manager POST:Url parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSString *html = operation.responseString;
@@ -738,7 +737,7 @@
     {
         //        完成
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-        NSString *Url = [NSString stringWithFormat:@"%@/v1/user_boxes/%@?token=%@",DNS,[[NSUserDefaults standardUserDefaults] objectForKey:@"uid"],[[NSUserDefaults standardUserDefaults] objectForKey:@"token"]];
+        NSString *Url = [NSString stringWithFormat:@"%@/v1/user_boxes/%@?token=%@",DNS,[regular getUID],[regular getToken]];
         NSDictionary *dict=@{@"name":@"go_visa"};
         [manager PUT:Url parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSString *html = operation.responseString;

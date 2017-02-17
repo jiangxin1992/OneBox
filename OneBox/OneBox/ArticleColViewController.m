@@ -314,27 +314,17 @@
 -(void)requestData
 {
 //    创建参数列表
-    NSMutableDictionary *dict=[[NSMutableDictionary alloc] init];
-//    添加page
-    [dict setObject:[[NSString alloc] initWithFormat:@"%ld",(long)_page] forKey:@"page"];
-//    添加token
-    NSUserDefaults *_UserDefaults=[NSUserDefaults standardUserDefaults];
-    NSString *_token=nil;
-    if([[_UserDefaults objectForKey:@"islogin"] integerValue]==1)
-    {
-        _token=[_UserDefaults objectForKey:@"token"];
-    }else
-    {
-        _token=@"";
-    }
-    [dict setObject:_token forKey:@"token"];
-//请求
+    NSDictionary *_parameters=@{
+                                @"page":@(_page)
+                                ,@"token":[regular getToken]
+                                };
+    
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:[[NSString alloc] initWithFormat:@"%@/v1/posts/user_follow_posts?token=%@",DNS,_token] parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager GET:[[NSString alloc] initWithFormat:@"%@/v1/posts/user_follow_posts",DNS] parameters:_parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSString *html = operation.responseString;
         NSData* data=[html dataUsingEncoding:NSUTF8StringEncoding];
         NSDictionary *dict=[NSJSONSerialization  JSONObjectWithData:data options:0 error:nil];
-//        请求成功后的处理
+        
         blockSuccess(dict);
         [[ToolManager sharedManager] removeProgress];
 

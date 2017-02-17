@@ -358,7 +358,7 @@ _package
 {
 
     NSString *login=nil;
-    if([[NSUserDefaults standardUserDefaults] objectForKey:@"token"]==nil)
+    if(![regular isLogin])
     {
         login=@"0";
     }else
@@ -884,16 +884,8 @@ _package
 //    添加page
     [dict setObject:[[NSString alloc] initWithFormat:@"%ld",(long)_page] forKey:@"page"];
 //    添加token
-    NSUserDefaults *_UserDefaults=[NSUserDefaults standardUserDefaults];
-    NSString *_token=nil;
-    if([[_UserDefaults objectForKey:@"islogin"] integerValue]==1)
-    {
-        _token=[_UserDefaults objectForKey:@"token"];
-    }else
-    {
-        _token=@"";
-    }
-    [dict setObject:_token forKey:@"token"];
+
+    [dict setObject:[regular getToken] forKey:@"token"];
 //请求
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:[[NSString alloc] initWithFormat:@"%@%@",DNS,@"/v2/app_modules"] parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -1365,16 +1357,7 @@ _package
         [dict setObject:[[NSString alloc] initWithFormat:@"%ld",(long)_page] forKey:@"page"];
     }
 
-    NSUserDefaults *____dict=[NSUserDefaults standardUserDefaults];
-    NSString *_token=nil;
-    if([[____dict objectForKey:@"islogin"] integerValue]==1)
-    {
-        _token=[____dict objectForKey:@"token"];
-    }else
-    {
-        _token=@"";
-    }
-    [dict setObject:_token forKey:@"token"];
+    [dict setObject:[regular getToken] forKey:@"token"];
 
 //    total_students_min
 //    ap_count_max

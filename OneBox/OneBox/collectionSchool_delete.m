@@ -71,18 +71,9 @@
 -(void)loadData
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    NSUserDefaults *dict=[NSUserDefaults standardUserDefaults];
-    NSString *_token=nil;
-    if([dict objectForKey:@"token"]==nil)
-    {
-        _token=@"";
-    }else
-    {
-        _token=[dict objectForKey:@"token"];
-    }
 
     NSString *url=@"/v1/follows";
-    NSDictionary *parameters = @{@"token":_token,@"followable_type":@"school",@"page":[[NSString alloc] initWithFormat:@"%ld",(long)_page]};
+    NSDictionary *parameters = @{@"token":[regular getToken],@"followable_type":@"school",@"page":[[NSString alloc] initWithFormat:@"%ld",(long)_page]};
 
     [manager GET:[[NSString alloc] initWithFormat:@"%@%@",DNS,url] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
 
@@ -177,18 +168,9 @@
 
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-        NSUserDefaults *dict=[NSUserDefaults standardUserDefaults];
-        NSString *_token=nil;
-        if([dict objectForKey:@"token"]==nil)
-        {
-            _token=@"";
-        }else
-        {
-            _token=[dict objectForKey:@"token"];
-        }
-
+        
         foundModel *model=dataArray[indexPath.section-1];
-        NSDictionary *parameters=@{@"followable_id":model.sid,@"followable_type":@"school",@"token":_token};
+        NSDictionary *parameters=@{@"followable_id":model.sid,@"followable_type":@"school",@"token":[regular getToken]};
         [manager POST:[[NSString alloc] initWithFormat:@"%@%@",DNS,@"/v1/follows/cancel"] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
 
             NSString *html = operation.responseString;

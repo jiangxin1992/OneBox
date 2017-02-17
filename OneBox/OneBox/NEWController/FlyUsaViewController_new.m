@@ -68,7 +68,7 @@
 }
 -(void)requestStepData
 {
-    NSString *newsDetailUrl = [NSString stringWithFormat:@"%@/v1/user_fly_infos?token=%@",DNS,[[NSUserDefaults standardUserDefaults] objectForKey:@"token"]];
+    NSString *newsDetailUrl = [NSString stringWithFormat:@"%@/v1/user_fly_infos?token=%@",DNS,[regular getToken]];
     [HttpRequestManager GET:newsDetailUrl complete:^(NSData *data) {
         NSString *str = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         JXLOG(@"%@",str);
@@ -105,8 +105,7 @@
 -(void)getmustData
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    NSUserDefaults *dict=[NSUserDefaults standardUserDefaults];
-    NSDictionary *parameters=@{@"token":[dict objectForKey:@"token"]};
+    NSDictionary *parameters=@{@"token":[regular getToken]};
     [manager GET:[[NSString alloc] initWithFormat:@"%@%@",DNS,@"/v1/users/show_apply_documents"] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
 
         NSString *html = operation.responseString;
@@ -196,10 +195,9 @@
     UIButton *btn1=(UIButton *)[self.view viewWithTag:_index+100];
 
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    NSUserDefaults *dict=[NSUserDefaults standardUserDefaults];
 
     NSMutableDictionary *parameters=[[NSMutableDictionary alloc] init];
-    [parameters setObject:[dict objectForKey:@"token"] forKey:@"token"];
+    [parameters setObject:[regular getToken] forKey:@"token"];
     JXLOG(@"titleArr=%@",titleArr_must);
     for (int i=0; i<titleArr_must.count; i++) {
 
@@ -417,7 +415,7 @@
     {
         //        取消
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-        NSString *Url = [NSString stringWithFormat:@"%@/v1/user_boxes/cancel?token=%@",DNS,[[NSUserDefaults standardUserDefaults] objectForKey:@"token"]];
+        NSString *Url = [NSString stringWithFormat:@"%@/v1/user_boxes/cancel?token=%@",DNS,[regular getToken]];
         NSDictionary *dict=@{@"name":@"go_us"};
         [manager POST:Url parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSString *html = operation.responseString;
@@ -447,7 +445,7 @@
     {
         //        完成
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-        NSString *Url = [NSString stringWithFormat:@"%@/v1/user_boxes/%@?token=%@",DNS,[[NSUserDefaults standardUserDefaults] objectForKey:@"uid"],[[NSUserDefaults standardUserDefaults] objectForKey:@"token"]];
+        NSString *Url = [NSString stringWithFormat:@"%@/v1/user_boxes/%@?token=%@",DNS,[regular getUID],[regular getToken]];
         NSDictionary *dict=@{@"name":@"go_us"};
         [manager PUT:Url parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSString *html = operation.responseString;
@@ -498,7 +496,7 @@
 #pragma mark-请求面签时间数据
 -(void)requestTimeData
 {
-    NSString *timeUrl = [NSString stringWithFormat:@"%@/v1/user_fly_infos?token=%@",DNS,[[NSUserDefaults standardUserDefaults] objectForKey:@"token"]];
+    NSString *timeUrl = [NSString stringWithFormat:@"%@/v1/user_fly_infos?token=%@",DNS,[regular getToken]];
 
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
 
@@ -667,7 +665,7 @@
 
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         NSString *Url = [NSString stringWithFormat:@"%@/v1/user_fly_infos/:1",DNS];
-        NSDictionary *paraDict =[[NSDictionary alloc] initWithObjectsAndKeys:upData,@"fly_at",[[NSUserDefaults standardUserDefaults] objectForKey:@"token"],@"token",nil];
+        NSDictionary *paraDict =[[NSDictionary alloc] initWithObjectsAndKeys:upData,@"fly_at",[regular getToken],@"token",nil];
         [manager PUT:Url parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSString *html = operation.responseString;
             NSData* data=[html dataUsingEncoding:NSUTF8StringEncoding];
@@ -745,13 +743,7 @@
                     });
                 }
 
-
-
-
-
-
-
-
+                
                 NSUserDefaults *_defaults=[NSUserDefaults standardUserDefaults];
                 [_defaults setObject:@"0" forKey:@"hangban"];
                 qianTimeLabel.text = upData;
@@ -933,7 +925,7 @@
 - (void)flyBtnClick:(UIButton *)button
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    NSString *Url = [NSString stringWithFormat:@"%@/v1/user_fly_infos/step?token=%@",DNS,[[NSUserDefaults standardUserDefaults] objectForKey:@"token"]];
+    NSString *Url = [NSString stringWithFormat:@"%@/v1/user_fly_infos/step?token=%@",DNS,[regular getToken]];
     NSDictionary *dict = @{@"step":@(button.tag - 100)};
     [manager PUT:Url parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
 
@@ -1013,7 +1005,7 @@
 {
 
     NSString *login=nil;
-    if([[NSUserDefaults standardUserDefaults] objectForKey:@"token"]==nil)
+    if(![regular isLogin])
     {
         login=@"0";
     }else

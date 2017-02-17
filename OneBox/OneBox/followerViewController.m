@@ -72,7 +72,7 @@
 
         //    360 400
         UIImageView *backview=[[UIImageView alloc] init];
-        if([[[NSUserDefaults standardUserDefaults] objectForKey:@"uid"] longValue]==[model.user_id longLongValue])
+        if([[regular getUID] longValue]==[model.user_id longLongValue])
         {
             backview.frame=CGRectMake((CGRectGetWidth(imageGray.frame)-180*2*_Scale)/2.0f, (CGRectGetHeight(imageGray.frame)-156*2*_Scale)/2.0f, 180*2*_Scale,151*2*_Scale);
 
@@ -101,7 +101,7 @@
         UIView *downview=[[UIView alloc] init];
         UIView *view=[[UIView alloc] init];
 
-        if([[[NSUserDefaults standardUserDefaults] objectForKey:@"uid"] longValue]==[model.user_id longLongValue])
+        if([[regular getUID] longValue]==[model.user_id longLongValue])
         {
             downview.frame=CGRectMake(0, CGRectGetMaxY(middle.frame), CGRectGetWidth(backview.frame), 0);
             view.frame=CGRectMake(10*2*_Scale, CGRectGetMaxY(middle.frame), CGRectGetWidth(middle.frame)-20*2*_Scale, 0);
@@ -120,7 +120,7 @@
             [backview addSubview:view];
         }
 
-        NSString *url = [NSString stringWithFormat:@"%@/v1/users/%@?token=%@",DNS,model.user_id,[[NSUserDefaults standardUserDefaults] objectForKey:@"token"]];
+        NSString *url = [NSString stringWithFormat:@"%@/v1/users/%@?token=%@",DNS,model.user_id,[regular getToken]];
         [HttpRequestManager GET:url complete:^(NSData *data) {
 
             NSDictionary *dict=[NSJSONSerialization  JSONObjectWithData:data options:0 error:nil];
@@ -249,7 +249,7 @@
                 arrCase = @[@"box_choose_添加1",@"message_select"];
                 arrLabel = @[@"关注",@"消息"];
             }
-            if([[[NSUserDefaults standardUserDefaults] objectForKey:@"uid"] longValue]==[model.user_id longLongValue])
+            if([[regular getUID] longValue]==[model.user_id longLongValue])
             {
                 //            [downview removeFromSuperview];
                 //            backview.frame=CGRectMake((CGRectGetWidth(imageGray.frame)-180)/2.0f, (CGRectGetHeight(imageGray.frame)-300)/2.0f, 180,218);
@@ -367,7 +367,7 @@
                 }
             }
 
-            NSString *str=[NSString stringWithFormat:@"%@/v1/follows?token=%@",DNS,[[NSUserDefaults standardUserDefaults] objectForKey:@"token"]];
+            NSString *str=[NSString stringWithFormat:@"%@/v1/follows?token=%@",DNS,[regular getToken]];
 
             NSDictionary *para = @{@"followable_id":[NSString stringWithFormat:@"%@",model.user_id],@"followable_type":@"user"};
             AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc]init];
@@ -419,7 +419,7 @@
 
 
 
-            NSString *str=[NSString stringWithFormat:@"%@/v1/follows/cancel?token=%@",DNS,[[NSUserDefaults standardUserDefaults] objectForKey:@"token"]];
+            NSString *str=[NSString stringWithFormat:@"%@/v1/follows/cancel?token=%@",DNS,[regular getToken]];
 
             NSDictionary *para = @{@"followable_id":[NSString stringWithFormat:@"%@",model.user_id],@"followable_type":@"user"};
             AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc]init];

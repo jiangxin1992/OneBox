@@ -153,7 +153,7 @@
     _isfirstlogin=YES;
     self.navigationController.navigationBar.barTintColor =[UIColor colorWithRed:70.0f/255.0f green:195.0f/255.0f blue:247.0f/255.0f alpha:1];
     self.view.backgroundColor=_define_backview_color;
-    NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(backloginout) name:@"backloginout" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(xiaoshi:) name:@"xiaoshi" object:nil];
 
@@ -161,7 +161,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(delete_col:) name:@"delete_col" object:nil];
 
     [self createScrollView];
-    if([[defaults objectForKey:@"islogin"] integerValue]==1)
+    if([regular isLogin])
     {
         //        登录了
         [self loginui];
@@ -213,7 +213,7 @@
 -(void)login_Action
 {
 
-    if([[NSUserDefaults standardUserDefaults] objectForKey:@"token"]==nil)
+    if(![regular isLogin])
     {
         LoginViewController*login=[[LoginViewController alloc] init];
         login.type=@"userinfo";
@@ -352,7 +352,7 @@
 #pragma mark-获取粉丝数
 -(void)getData
 {
-    NSString *url = [NSString stringWithFormat:@"%@/v1/users/%@?token=%@",DNS,[[NSUserDefaults standardUserDefaults] objectForKey:@"uid"],[[NSUserDefaults standardUserDefaults] objectForKey:@"token"]];
+    NSString *url = [NSString stringWithFormat:@"%@/v1/users/%@?token=%@",DNS,[regular getUID],[regular getToken]];
     [HttpRequestManager GET:url complete:^(NSData *data) {
         id res = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
         NSDictionary *_dict=(NSDictionary*)res;
@@ -706,13 +706,15 @@
     [super viewWillAppear:animated];
     [MobClick beginLogPageView:@"userInfoViewController"];
     [[CustomTabbarController sharedManager] tabbarAppear];
-    if((!_isfirstlogin)&&[[NSUserDefaults standardUserDefaults] objectForKey:@"token"]!=nil)
+    if([regular isLogin])
     {
-        [self getData];
-    }
-    if(_isfirstlogin&&[[NSUserDefaults standardUserDefaults] objectForKey:@"token"]!=nil)
-    {
-        _isfirstlogin=NO;
+        if(_isfirstlogin)
+        {
+            _isfirstlogin=NO;
+        }else
+        {
+            [self getData];
+        }
     }
 }
 
@@ -1107,7 +1109,7 @@
 - (void)uploadImage:(NSString *)key
 {
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-        NSString *Url = [NSString stringWithFormat:@"%@/v1/users/%@?token=%@",DNS,[[NSUserDefaults standardUserDefaults] objectForKey:@"uid"],[[NSUserDefaults standardUserDefaults] objectForKey:@"token"]];
+        NSString *Url = [NSString stringWithFormat:@"%@/v1/users/%@?token=%@",DNS,[regular getUID],[regular getToken]];
     NSDictionary *dict = @{@"avatar":key};
         [manager PUT:Url parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
 
@@ -1194,7 +1196,7 @@
     {
         JXLOG(@"++++");
         NSUserDefaults *defaults =[NSUserDefaults standardUserDefaults];
-        if([[defaults objectForKey:@"islogin"]intValue]==1)
+        if([regular isLogin])
         {
             //            UIStoryboard *user=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
             //            ViewController* userView=[user instantiateViewControllerWithIdentifier:@"ViewController"];

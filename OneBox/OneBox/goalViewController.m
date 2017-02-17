@@ -275,16 +275,8 @@
 -(void)requestData
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    NSUserDefaults *dict=[NSUserDefaults standardUserDefaults];
-    NSString *_token=nil;
-    if([dict objectForKey:@"token"]==nil)
-    {
-        _token=@"";
-    }else
-    {
-        _token=[dict objectForKey:@"token"];
-    }
-    NSDictionary *parameters=@{@"token":_token};
+    
+    NSDictionary *parameters=@{@"token":[regular getToken]};
     NSString *str=[NSString stringWithFormat:@"%@/v1/order_schools",DNS];
     [manager GET:str parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
 
@@ -333,7 +325,7 @@
             }
         }else
         {
-             [[ToolManager sharedManager] alertTitle_Simple:[dict objectForKey:@"message"]];
+             [[ToolManager sharedManager] alertTitle_Simple:[data_dict objectForKey:@"message"]];
         }
 
         [[ToolManager sharedManager] removeProgress];

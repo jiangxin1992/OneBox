@@ -67,7 +67,7 @@
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
 
-    [manager GET:[[NSString alloc] initWithFormat:@"%@%@%@",DNS,@"/v1/users/online_servers?token=",[[NSUserDefaults standardUserDefaults] objectForKey:@"token"]] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager GET:[[NSString alloc] initWithFormat:@"%@%@%@",DNS,@"/v1/users/online_servers?token=",[regular getToken]] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
 
         NSString *html = operation.responseString;
         NSData* data=[html dataUsingEncoding:NSUTF8StringEncoding];

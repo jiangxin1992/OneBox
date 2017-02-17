@@ -269,13 +269,15 @@
         [self presentViewController:[regular alertTitle_Simple:@"密码长度为6到16位之间"] animated:YES completion:nil];
     }else
     {
-        if([self validateEmail:username.text])
+        
+        if([regular emailVerify:username.text])
         {
             //        判断是否为邮箱
             [self loginAction:@"email"];
             
-        }else if([self validatePhonenum:username.text])
+        }else if([regular phoneVerify:username.text])
         {
+            
             //        判断是否为手机格式
             [self loginAction:@"cell"];
         }else
@@ -285,103 +287,6 @@
         //    初步格式判断正确后，进行后台交互
     }
     
-}
--(BOOL)validatePhonenum:(NSString *)phonenum
-{
-    BOOL b=NO;
-    for (int i=0; i<phonenum.length; i++) {
-        char a=[phonenum characterAtIndex:i];
-        if(a<='9'&&a>='0')
-        {
-            
-        }else
-        {
-            b=NO;
-            return b;
-        }
-    }
-    return  b=YES;
-}
-//email格式验证函数
-- (BOOL) validateEmail: (NSString *) candidate {
-    NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
-    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
-    return [emailTest evaluateWithObject:candidate];
-}
-- (BOOL)checkTel:(NSString *)str{
-    if ([str length] == 0) {
-        
-        //        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"" message:@"请输入手机号" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        
-        //        [alert show];
-        
-        return NO;
-    }
-    NSString *regex = @"^((13[0-9])|(147)|(15[^4,\\D])|(18[0,5-9]))\\d{8}$";
-    NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
-    BOOL isMatch = [pred evaluateWithObject:str];
-    if (!isMatch) {
-        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"请输入正确的手机号码" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        [alert show];
-        return NO;
-    }
-    return YES;
-}
-- (BOOL)isMobileNumber:(NSString *)mobileNum{
-    /**
-     * 手机号码
-     * 移动：134[0-8],135,136,137,138,139,150,151,157,158,159,182,187,188
-     * 联通：130,131,132,152,155,156,185,186
-     * 电信：133,1349,153,180,189
-     */
-    NSString * MOBILE = @"^1(3[0-9]|5[0-35-9]|8[025-9])\\d{8}$";
-    /**
-     10 * 中国移动：China Mobile
-     11 * 134[0-8],135,136,137,138,139,150,151,157,158,159,182,187,188
-     12 */
-    NSString * CM = @"^1(34[0-8]|(3[5-9]|5[017-9]|8[278])\\d)\\d{7}$";
-    /**
-     15 * 中国联通：China Unicom
-     16 * 130,131,132,152,155,156,185,186
-     17 */
-    NSString * CU = @"^1(3[0-2]|5[256]|8[56])\\d{8}$";
-    /**
-     20 * 中国电信：China Telecom
-     21 * 133,1349,153,180,189
-     22 */
-    NSString * CT = @"^1((33|53|8[09])[0-9]|349)\\d{7}$";
-    /**
-     25 * 大陆地区固话及小灵通
-     26 * 区号：010,020,021,022,023,024,025,027,028,029
-     27 * 号码：七位或八位
-     28 */
-    // NSString * PHS = @"^0(10|2[0-5789]|\\d{3})\\d{7,8}$";
-    
-    NSPredicate *regextestmobile = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", MOBILE];
-    NSPredicate *regextestcm = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", CM];
-    NSPredicate *regextestcu = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", CU];
-    NSPredicate *regextestct = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", CT];
-    
-    if (([regextestmobile evaluateWithObject:mobileNum] == YES)
-        || ([regextestcm evaluateWithObject:mobileNum] == YES)
-        || ([regextestct evaluateWithObject:mobileNum] == YES)
-        || ([regextestcu evaluateWithObject:mobileNum] == YES))
-    {
-        return YES;
-    }
-    else
-    {
-        return NO;
-    }
-    
-}
-- (BOOL)textFieldShouldReturn:(UITextField *)theTextField {
-    if(theTextField==password){
-        
-        [self sumbit_action:[UIButton new]];
-    }
-    [theTextField resignFirstResponder];
-    return YES;
 }
 #pragma mark - 第三方登录
 - (void)reloadStateWithType:(SSDKPlatformType)type{
@@ -605,68 +510,15 @@
    
     //    保存后隐藏进度条
     [regular removeProgress];
-    [self getui];
+    [regular registerGeTui];
     [self.navigationController setNavigationBarHidden:NO animated:NO];
     NSString * _deviceToken=[[NSUserDefaults standardUserDefaults] objectForKey:@"deviceToken"];
 //    [[ToolManager sharedManager] alertTitle_Simple:_deviceToken];
     if(_deviceToken!=nil)
     {
         [GeTuiSdk registerDeviceToken:_deviceToken];
-
-        NSUserDefaults *dict=[NSUserDefaults standardUserDefaults];
-
-        NSString *clientId = [GeTuiSdk clientId];
-        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-
-        NSString *_token=nil;
-        if([dict objectForKey:@"islogin"]!=[NSNull null])
-        {
-
-            if([[dict objectForKey:@"islogin"] integerValue]!=0)
-            {
-
-                if([dict objectForKey:@"token"]==nil)
-                {
-
-                    _token=@"";
-                }else
-                {
-                    _token=[dict objectForKey:@"token"];
-                }
-
-            }else
-            {
-                _token=@"";
-            }
-
-        }else
-        {
-            _token=@"";
-        }
-
-        if(clientId!=nil)
-        {
-
-            NSDictionary *parameters=@{@"token":_token,@"uuid":clientId,@"device_type":@"1"};
-            [manager POST:[[NSString alloc] initWithFormat:@"%@%@",DNS,@"/v1/users/getui_uuid"] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-
-                NSString *html = operation.responseString;
-                NSData* data=[html dataUsingEncoding:NSUTF8StringEncoding];
-                NSDictionary *dict=[NSJSONSerialization  JSONObjectWithData:data options:0 error:nil];
-
-                if([[dict objectForKey:@"code"] integerValue]==1)
-                {
-                    //                [[ToolManager sharedManager] alertTitle_Simple:@"发送cg"];
-                    JXLOG(@"111");
-                }else
-                {
-                    [[ToolManager sharedManager] alertTitle_Simple:[dict objectForKey:@"message"]];
-                }
-            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错蓝色" Withtype:2]];
-            }];
-            
-        }
+        
+        [regular registerGeTui];
         
     }
 
@@ -696,54 +548,14 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:@"backlogin" object:nil];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"other" object:nil];
     }}
--(void)getui
-{
-    NSUserDefaults *dict=[NSUserDefaults standardUserDefaults];
-    NSString *clientId = [dict objectForKey:@"clientId"];
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    NSString *_token=nil;
-
-
-    if(clientId!=nil)
-    {
-
-        if([dict objectForKey:@"islogin"]!=[NSNull null])
-        {
-
-            if([[dict objectForKey:@"islogin"] integerValue]!=0)
-            {
-                _token=[dict objectForKey:@"token"];
-            }else
-            {
-                _token=@"";
-            }
-            
-        }else
-        {
-            _token=@"";
-        }
-
-        NSDictionary *parameters=@{@"token":_token,@"uuid":clientId,@"device_type":@"1"};
-
-        [manager POST:[[NSString alloc] initWithFormat:@"%@%@",DNS,@"/v1/users/getui_uuid"] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-
-            NSString *html = operation.responseString;
-            NSData* data=[html dataUsingEncoding:NSUTF8StringEncoding];
-            NSDictionary *dict=[NSJSONSerialization  JSONObjectWithData:data options:0 error:nil];
-
-            if([[dict objectForKey:@"code"] integerValue]==1)
-            {
-
-            }else
-            {
-                [[ToolManager sharedManager] alertTitle_Simple:[dict objectForKey:@"message"]];
-            }
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错蓝色" Withtype:2]];
-        }];
-
+#pragma mark - UITextFieldDelegate
+- (BOOL)textFieldShouldReturn:(UITextField *)theTextField {
+    if(theTextField==password){
+        
+        [self sumbit_action:[UIButton new]];
     }
-
+    [theTextField resignFirstResponder];
+    return YES;
 }
 #pragma mark - Other
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
@@ -766,10 +578,6 @@
     [super viewWillDisappear:animated];
     [MobClick endLogPageView:@"LoginViewController"];
     [self.navigationController setNavigationBarHidden:NO animated:NO];
-}
-- (void)applicationDidEnterBackground:(UIApplication *)application
-{
-
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

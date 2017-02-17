@@ -122,7 +122,7 @@
         
         AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc]init];
         manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-        NSDictionary *parameters=@{@"token":[[NSUserDefaults standardUserDefaults] objectForKey:@"token"],@"password":content1,@"new_password":content2};
+        NSDictionary *parameters=@{@"token":[regular getToken],@"password":content1,@"new_password":content2};
         [manager POST:[[NSString alloc] initWithFormat:@"%@/v1/users/change_password",DNS] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSString *html = operation.responseString;
             NSData* data=[html dataUsingEncoding:NSUTF8StringEncoding];

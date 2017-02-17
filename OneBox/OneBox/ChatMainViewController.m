@@ -327,9 +327,9 @@
 
     }else if(btn.tag-100==1)
     {
-        if([[NSUserDefaults standardUserDefaults] objectForKey:@"token"]==nil)
+        if(![regular isLogin])
         {
-            [[ToolManager sharedManager] alertTitle_Simple:@"Not login"];
+            [[ToolManager sharedManager] alertTitle_Simple:@"请先登录"];
 
         }else
         {
@@ -560,15 +560,12 @@
     self.tabBarController.tabBar.hidden=YES;
     [[CustomTabbarController sharedManager] tabbarAppear];
 
-    if([[NSUserDefaults standardUserDefaults] objectForKey:@"token"]==nil)
+    if(![regular isLogin])
     {
         LoginViewController*login=[[LoginViewController alloc] init];
         login.type=@"chat";
         [self presentModalViewController:login animated:YES];
     }
-
-
-
 }
 
 /*

@@ -144,7 +144,7 @@
 {
     /*********************跳转视图*********************/
 
-    if ([self boolLogin])
+    if ([regular isLogin])
     {
         NSInteger _tag=btn.tag-100;
         if(_tag==0)
@@ -521,11 +521,11 @@
 }
 - (void)requsetData
 {
-    if([[NSUserDefaults standardUserDefaults] objectForKey:@"token"]!=nil)
+    if([regular isLogin])
     {
         /****************获取当前进行状态******************/
-        NSString *_token=[[NSUserDefaults standardUserDefaults] objectForKey:@"token"];;
-        NSString *url = [NSString stringWithFormat:@"%@/v1/user_boxes?token=%@",DNS,_token];
+
+        NSString *url = [NSString stringWithFormat:@"%@/v1/user_boxes?token=%@",DNS,[regular getToken]];
         [HttpRequestManager GET:url complete:^(NSData *data) {
             res = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
             if([[res objectForKey:@"code"] integerValue]==1)
@@ -654,18 +654,7 @@
     [label sizeToFit];
     return CGRectGetHeight(label.frame);
 }
-- (BOOL)boolLogin
-{
-    NSUserDefaults *dict=[NSUserDefaults standardUserDefaults];
-    NSInteger islogin=[dict integerForKey:@"islogin"];
-    if (islogin) {
-        return YES;
-    }
-    else
-    {
-        return NO;
-    }
-}
+
 -(void)login_action
 {
     LoginViewController*login=[[LoginViewController alloc] init];

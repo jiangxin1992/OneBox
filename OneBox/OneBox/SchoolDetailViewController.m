@@ -377,16 +377,8 @@
 -(void)loadAllData
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    NSUserDefaults *dict=[NSUserDefaults standardUserDefaults];
-    NSString *_token=nil;
-    if([dict objectForKey:@"token"]==nil)
-    {
-        _token=@"";
-    }else
-    {
-        _token=[dict objectForKey:@"token"];
-    }
-    NSDictionary *parameters=@{@"token":_token};
+  
+    NSDictionary *parameters=@{@"token":[regular getToken]};
     NSString *url=[[NSString alloc] initWithFormat:@"%@%@%@",DNS,@"/v3/schools/",_sid];
     [manager GET:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
@@ -438,7 +430,7 @@
 
 
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:[[NSString alloc] initWithFormat:@"%@%@",DNS,@"/v2/schools/user_school_info"] parameters:@{@"school_id":_sid,@"token":[[NSUserDefaults standardUserDefaults] objectForKey:@"token"]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager GET:[[NSString alloc] initWithFormat:@"%@%@",DNS,@"/v2/schools/user_school_info"] parameters:@{@"school_id":_sid,@"token":[regular getToken]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSString *html = operation.responseString;
         NSData* data=[html dataUsingEncoding:NSUTF8StringEncoding];
         NSDictionary *dict=[NSJSONSerialization  JSONObjectWithData:data options:0 error:nil];
@@ -516,7 +508,7 @@
 {
 
 
-    if([[NSUserDefaults standardUserDefaults] objectForKey:@"token"]==nil)
+    if(![regular isLogin])
     {
         LoginViewController*login=[[LoginViewController alloc] init];
         login.type=@"other";
@@ -1059,7 +1051,7 @@
 //发起聊天
 -(void)help_action:(UIButton *)btn
 {
-    if([[NSUserDefaults standardUserDefaults] objectForKey:@"token"]!=nil)
+    if([regular isLogin])
     {
         ChatViewController *chatVC = [[ChatViewController alloc] initWithChatter:kefu_model.ease_mob_username isGroup:NO];
         [chatVC setH_title:kefu_model.username];
@@ -1750,9 +1742,8 @@
 }
 -(void)goalBtnAction:(UIButton *)btn
 {
-    NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults] ;
 
-    if([[defaults objectForKey:@"islogin"] integerValue]==0)
+    if(![regular isLogin])
     {
 //        UIAlertView *alertview=[[ToolManager sharedManager] alertTitle_Simple:@"用户还未登录，请先登录"];
 //        alertview.delegate=self;
@@ -1766,18 +1757,10 @@
             addGoalBtn.selected=NO;
             //            删除目标学校
             [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"已取消目标" WithImg:@"Prompt_取消目标" Withtype:1]];
-            NSUserDefaults *dict=[NSUserDefaults standardUserDefaults];
-            //    删除
-            NSString *_token=nil;
-            if([dict objectForKey:@"token"]==nil)
-            {
-                _token=@"";
-            }else
-            {
-                _token=[dict objectForKey:@"token"];
-            }
 
-            NSDictionary *parameters=@{@"token":_token};
+            //    删除
+            
+            NSDictionary *parameters=@{@"token":[regular getToken]};
 
             NSString *url=[[NSString alloc] initWithFormat:@"%@%@%ld",DNS,@"/v1/order_schools/",(long)_is_order_school];
 
@@ -1824,16 +1807,7 @@
             [request setHTTPMethod:@"POST"];
             //    创建包体
 
-            NSString *_token=nil;
-            NSUserDefaults *dict=[NSUserDefaults standardUserDefaults];
-            if([[dict objectForKey:@"islogin"] integerValue]==0)
-            {
-                _token=@"";
-            }else
-            {
-                _token=[dict objectForKey:@"token"];
-            }
-            NSString *bodyStr=[[NSString alloc] initWithFormat:@"school_id=%@&token=%@",_sid,_token];
+            NSString *bodyStr=[[NSString alloc] initWithFormat:@"school_id=%@&token=%@",_sid,[regular getToken]];
             //    加入包体
             request.HTTPBody=[bodyStr dataUsingEncoding:NSUTF8StringEncoding];
 
@@ -4419,9 +4393,8 @@
 
 -(void)collection_action:(UIButton *)btn
 {
-
-    NSUserDefaults *dict=[NSUserDefaults standardUserDefaults];
-    if([[dict objectForKey:@"islogin"] integerValue])
+    
+    if([regular isLogin])
     {
         NSString *showtitle=nil;
         NSString *showimg=nil;
@@ -4451,18 +4424,8 @@
         {
             url=@"/v1/follows";
         }
-
-        NSString *_token=nil;
-        if([dict objectForKey:@"token"]==nil)
-        {
-            _token=@"";
-        }else
-        {
-            _token=[dict objectForKey:@"token"];
-        }
-
-
-        NSDictionary *parameters=@{@"followable_type":@"school",@"followable_id":_sid,@"token":_token};
+        
+        NSDictionary *parameters=@{@"followable_type":@"school",@"followable_id":_sid,@"token":[regular getToken]};
 
 
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -4505,8 +4468,7 @@
 }
 -(void)praise_action:(UIButton *)btn
 {
-    NSUserDefaults *dict=[NSUserDefaults standardUserDefaults];
-    if([[dict objectForKey:@"islogin"] integerValue])
+    if([regular isLogin])
     {
         NSString *showtitle=nil;
         NSString *showimg=nil;
@@ -4536,16 +4498,8 @@
         {
             url=@"/v1/votes";
         }
-        NSString *_token=nil;
-        if([dict objectForKey:@"token"]==nil)
-        {
-            _token=@"";
-        }else
-        {
-            _token=[dict objectForKey:@"token"];
-        }
 
-        NSDictionary *parameters=@{@"voteable_type":@"school",@"voteable_id":_sid,@"token":_token};
+        NSDictionary *parameters=@{@"voteable_type":@"school",@"voteable_id":_sid,@"token":[regular getToken]};
 
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         [manager POST:[[NSString alloc] initWithFormat:@"%@%@",DNS,url] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -4932,15 +4886,7 @@
     }
     [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"评星成功" WithImg:@"Prompt_评星成功" Withtype:1]];
 
-    NSString *_token=nil;
-    if([[NSUserDefaults standardUserDefaults] objectForKey:@"token"]==nil)
-    {
-        _token=@"";
-    }else
-    {
-        _token=[[NSUserDefaults standardUserDefaults] objectForKey:@"token"];
-    }
-    NSDictionary *parameters=@{@"school_id":_sid,@"token":_token,@"user_ratings":stardataDict};
+    NSDictionary *parameters=@{@"school_id":_sid,@"token":[regular getToken],@"user_ratings":stardataDict};
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager POST:[[NSString alloc] initWithFormat:@"%@/v1/ratings/user_rating_school",DNS] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSString *html = operation.responseString;
@@ -5014,7 +4960,7 @@
 }
 -(void)showAlertStar
 {
-    if([[NSUserDefaults standardUserDefaults] objectForKey:@"token"]!=nil)
+    if([regular isLogin])
     {
         stardataDict=[[NSMutableDictionary alloc] init];
         UIView *view=[self showAlertStarView];
@@ -5203,16 +5149,8 @@
 -(void)requestUserStarAvg
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    NSUserDefaults *dict=[NSUserDefaults standardUserDefaults];
-    NSString *_token=nil;
-    if([dict objectForKey:@"token"]==nil)
-    {
-        _token=@"";
-    }else
-    {
-        _token=[dict objectForKey:@"token"];
-    }
-    NSDictionary *parameters=@{@"token":_token,@"school_id":_sid};
+
+    NSDictionary *parameters=@{@"token":[regular getToken],@"school_id":_sid};
     [manager GET:[[NSString alloc] initWithFormat:@"%@%@",DNS,@"/v1/schools/user_ratings"] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
 
         NSString *html = operation.responseString;
@@ -5438,7 +5376,7 @@
     [self.view addSubview:web];
     [self UIConfig];
 
-    if([[NSUserDefaults standardUserDefaults] objectForKey:@"token"])
+    if([regular isLogin])
     {
         [self requestUserDataisFirst:YES];
     }

@@ -47,7 +47,7 @@
 {
 
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:[[NSString alloc] initWithFormat:@"%@/v1/users/cell_code",DNS] parameters:@{@"token":[[NSUserDefaults standardUserDefaults] objectForKey:@"token"]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager GET:[[NSString alloc] initWithFormat:@"%@/v1/users/cell_code",DNS] parameters:@{@"token":[regular getToken]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSString *html = operation.responseString;
         NSData* data=[html dataUsingEncoding:NSUTF8StringEncoding];
         NSDictionary *dict=[NSJSONSerialization  JSONObjectWithData:data options:0 error:nil];
@@ -272,7 +272,7 @@
 //        }
 
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-        NSDictionary *pushdict=@{@"cell":_newphonenum_text.text,@"token":[[NSUserDefaults standardUserDefaults] objectForKey:@"token"],@"cell_code":_code};
+        NSDictionary *pushdict=@{@"cell":_newphonenum_text.text,@"token":[regular getToken],@"cell_code":_code};
         [manager POST:[[NSString alloc] initWithFormat:@"%@/v1/users/send_bind_cell_message",DNS] parameters:pushdict success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSString *html = operation.responseString;
             NSData* data=[html dataUsingEncoding:NSUTF8StringEncoding];
@@ -366,7 +366,7 @@
     {
         NSString *_code=_country_code_btn.titleLabel.text;
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-        NSDictionary *dict=@{@"cell":_newphonenum_text.text,@"token":[[NSUserDefaults standardUserDefaults] objectForKey:@"token"],@"code":_yanzheng_text.text,@"cell_code":_code};
+        NSDictionary *dict=@{@"cell":_newphonenum_text.text,@"token":[regular getToken],@"code":_yanzheng_text.text,@"cell_code":_code};
         [manager POST:[[NSString alloc] initWithFormat:@"%@/v1/users/bind_cell",DNS] parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSString *html = operation.responseString;
             NSData* data=[html dataUsingEncoding:NSUTF8StringEncoding];

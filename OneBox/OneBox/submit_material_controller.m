@@ -52,17 +52,8 @@
 {
 
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    NSUserDefaults *dict=[NSUserDefaults standardUserDefaults];
-    NSString *_token=nil;
-    if([dict objectForKey:@"token"]==nil)
-    {
-        _token=@"";
-    }else
-    {
-        _token=[dict objectForKey:@"token"];
-
-    }
-    NSDictionary *parameters=@{@"token":_token};
+    
+    NSDictionary *parameters=@{@"token":[regular getToken]};
     [manager GET:[[NSString alloc] initWithFormat:@"%@%@",DNS,@"/v1/users/show_apply_documents"] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSString *html = operation.responseString;
         NSData* data=[html dataUsingEncoding:NSUTF8StringEncoding];
@@ -236,17 +227,9 @@
     UIButton *btn1=(UIButton *)[self.view viewWithTag:_index+100];
     //    [[ToolManager sharedManager] createProgress:@"提交中"];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    NSUserDefaults *dict=[NSUserDefaults standardUserDefaults];
-    NSString *_token=nil;
-    if([dict objectForKey:@"token"]==nil)
-    {
-        _token=@"";
-    }else
-    {
-        _token=[dict objectForKey:@"token"];
-    }
+    
     NSMutableDictionary *parameters=[[NSMutableDictionary alloc] init];
-    [parameters setObject:_token forKey:@"token"];
+    [parameters setObject:[regular getToken] forKey:@"token"];
     JXLOG(@"titleArr=%@",titleArr);
     for (int i=0; i<titleArr.count; i++) {
         if(i==_index)

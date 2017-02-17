@@ -28,7 +28,7 @@
 {
 
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:[[NSString alloc] initWithFormat:@"%@/v1/users/user_email",DNS] parameters:@{@"token":[[NSUserDefaults standardUserDefaults] objectForKey:@"token"]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager GET:[[NSString alloc] initWithFormat:@"%@/v1/users/user_email",DNS] parameters:@{@"token":[regular getToken]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSString *html = operation.responseString;
         NSData* data=[html dataUsingEncoding:NSUTF8StringEncoding];
         NSDictionary *dict=[NSJSONSerialization  JSONObjectWithData:data options:0 error:nil];
@@ -191,7 +191,7 @@
     }else
     {
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-        [manager POST:[[NSString alloc] initWithFormat:@"%@/v1/users/bind_email",DNS] parameters:@{@"email":new_email.text,@"token":[[NSUserDefaults standardUserDefaults] objectForKey:@"token"]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [manager POST:[[NSString alloc] initWithFormat:@"%@/v1/users/bind_email",DNS] parameters:@{@"email":new_email.text,@"token":[regular getToken]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSString *html = operation.responseString;
             NSData* data=[html dataUsingEncoding:NSUTF8StringEncoding];
             NSDictionary *dict=[NSJSONSerialization  JSONObjectWithData:data options:0 error:nil];

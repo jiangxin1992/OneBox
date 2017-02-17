@@ -206,8 +206,9 @@
 }
 - (void)uploadImage:(NSString *)key
 {
+    
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    NSString *Url = [NSString stringWithFormat:@"%@/v1/users/%@?token=%@",DNS,[[NSUserDefaults standardUserDefaults] objectForKey:@"uid"],[[NSUserDefaults standardUserDefaults] objectForKey:@"token"]];
+    NSString *Url = [NSString stringWithFormat:@"%@/v1/users/%@?token=%@",DNS,[regular getUID],[regular getToken]];
     NSDictionary *dict = @{@"avatar":key};
     [manager PUT:Url parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
 
@@ -741,7 +742,7 @@
 }
 -(void)getData
 {
-    NSString *url = [NSString stringWithFormat:@"%@/v1/users/%@?token=%@",DNS,[[NSUserDefaults standardUserDefaults] objectForKey:@"uid"],[[NSUserDefaults standardUserDefaults] objectForKey:@"token"]];
+    NSString *url = [NSString stringWithFormat:@"%@/v1/users/%@?token=%@",DNS,[regular getUID],[regular getToken]];
     [HttpRequestManager GET:url complete:^(NSData *data) {
         id res = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
         NSDictionary *_dict=(NSDictionary*)res;
@@ -882,7 +883,7 @@
 #pragma mark-保存用户信息
 
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-        NSString *Url = [NSString stringWithFormat:@"%@/v1/users/%@?token=%@",DNS,[[NSUserDefaults standardUserDefaults] objectForKey:@"uid"],[[NSUserDefaults standardUserDefaults] objectForKey:@"token"]];
+        NSString *Url = [NSString stringWithFormat:@"%@/v1/users/%@?token=%@",DNS,[regular getUID],[regular getToken]];
         NSInteger gender=0;
 
         if(((UIButton *)[self.view viewWithTag:200]).selected==NO&&((UIButton *)[self.view viewWithTag:201]).selected==NO)

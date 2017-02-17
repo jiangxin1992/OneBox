@@ -93,7 +93,7 @@
 -(void)sendAction
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    NSString *Url = [NSString stringWithFormat:@"%@/v1/reports?token=%@",DNS,[[NSUserDefaults standardUserDefaults] objectForKey:@"token"]];
+    NSString *Url = [NSString stringWithFormat:@"%@/v1/reports?token=%@",DNS,[regular getToken]];
     NSDictionary *dict = @{@"content":textView.text};
     [manager POST:Url parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSString *html = operation.responseString;

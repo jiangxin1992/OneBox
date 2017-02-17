@@ -880,16 +880,7 @@
     [parameters setValue:key3 forKey:@"apply_grade"];
 //    apply_grade
 //    boarding_day
-    NSUserDefaults *dict=[NSUserDefaults standardUserDefaults];
-    NSString *_token=nil;
-    if([dict objectForKey:@"token"]==nil)
-    {
-        _token=@"";
-    }else
-    {
-        _token=[dict objectForKey:@"token"];
-    }
-    [parameters setValue:_token forKey:@"token"];
+    [parameters setValue:[regular getToken] forKey:@"token"];
 
     if(![city_id isEqualToString:@"0"])
     {
@@ -1053,16 +1044,7 @@
 
     //    apply_grade
     //    boarding_day
-    NSUserDefaults *dict=[NSUserDefaults standardUserDefaults];
-    NSString *_token=nil;
-    if([dict objectForKey:@"token"]==nil)
-    {
-        _token=@"";
-    }else
-    {
-        _token=[dict objectForKey:@"token"];
-    }
-    [parameters setValue:_token forKey:@"token"];
+    [parameters setValue:[regular getToken] forKey:@"token"];
     JXLOG(@"%@  %@",state_id,city_id);
     if(![city_id isEqualToString:@"0"])
     {
@@ -1575,18 +1557,8 @@
 -(void)request_grade
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    NSUserDefaults *dict=[NSUserDefaults standardUserDefaults];
-    NSString *_token=nil;
-    if([dict objectForKey:@"token"]==nil)
-    {
-        _token=@"";
-    }else
-    {
-        _token=[dict objectForKey:@"token"];
-    }
-
-
-    [manager GET:[[NSString alloc] initWithFormat:@"%@%@",DNS,@"/v1/students"] parameters:@{@"token":_token} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    
+    [manager GET:[[NSString alloc] initWithFormat:@"%@%@",DNS,@"/v1/students"] parameters:@{@"token":[regular getToken]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
 
         NSString *html = operation.responseString;
         NSData* data=[html dataUsingEncoding:NSUTF8StringEncoding];

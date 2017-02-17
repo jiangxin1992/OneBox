@@ -5,11 +5,16 @@
 //  Created by 谢江新 on 15-2-3.
 //  Copyright (c) 2015年 谢江新. All rights reserved.
 //
-#import "KVNProgress.h"
+
 #import "regular.h"
+
+#import "KVNProgress.h"
+
+#import <CommonCrypto/CommonDigest.h>
 #import "NSString+extra.h"
 #import "Tools.h"
-#import <CommonCrypto/CommonDigest.h>
+#import "GeTuiSdk.h"
+
 @implementation regular
 
 static regular *_t = nil;
@@ -26,6 +31,56 @@ static regular *_t = nil;
         }
     }
     return _t;
+}
++ (void)registerGeTui{
+    NSString *clientId = [GeTuiSdk clientId];
+    if(![NSString isNilOrEmpty:clientId])
+    {
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        NSDictionary *parameters=@{@"token":[regular getToken],@"uuid":clientId,@"device_type":@"1"};
+        [manager POST:[[NSString alloc] initWithFormat:@"%@%@",DNS,@"/v1/users/getui_uuid"] parameters:parameters success:nil failure:nil];
+    }
+}
++ (NSString *)getToken{
+    
+    NSUserDefaults *dict = [NSUserDefaults standardUserDefaults];
+    NSString *token = [dict objectForKey:@"token"];
+    if([regular isLogin]){
+        if(![NSString isNilOrEmpty:token]){
+            return token;
+        }
+    }
+    return @"";
+}
++ (id)getUID
+{
+    NSUserDefaults *dict = [NSUserDefaults standardUserDefaults];
+    if([dict objectForKey:@"uid"])
+    {
+        return [dict objectForKey:@"uid"];
+    }
+    return @"";
+}
++ (NSString *)getEaseMobUsername
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"ease_mob_username"];
+}
++ (NSString *)getEaseMobPassword
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"ease_mob_password"];
+}
++ (BOOL )isLogin{
+    NSUserDefaults *dict=[NSUserDefaults standardUserDefaults];
+    if([dict objectForKey:@"islogin"])
+    {
+        return [[dict objectForKey:@"islogin"] boolValue];
+    }
+    return NO;
+}
++ (BOOL )isAuth
+{
+    NSUserDefaults *dict=[NSUserDefaults standardUserDefaults];
+    return [[dict objectForKey:@"is_auth"] boolValue];
 }
 +(BOOL)isEnableAPNS
 {
@@ -594,7 +649,7 @@ static regular *_t = nil;
     navBtn.layer.cornerRadius=navBtn.frame.size.width/2.0f;
     navBtn.layer.borderWidth=2.0f;
     navBtn.layer.borderColor=[[UIColor whiteColor] CGColor];
-    if([[dict objectForKey:@"islogin"] intValue]==1)
+    if([regular isLogin])
     {
         //        [navBtn setImage:[UIImage imageWithData:[dict objectForKey:@"userImage"]] forState:UIControlStateNormal];
         if(([dict objectForKey:@"userImage"]==[NSNull null])||([dict objectForKey:@"userImage"]==nil))
@@ -629,14 +684,14 @@ static regular *_t = nil;
     text.delegate = delegate;
     //    text.accessibilityLabel = accessibilityLabel;
     text.tag = tag;
+    
     //    text.backgroundColor = [UIColor blackColor];
     return text;
 }
 
 //+ (void)checkLogin
 //{
-//    JXLOG(@"islogin%ld",[[[NSUserDefaults standardUserDefaults] objectForKey:@"islogin"] integerValue]);
-//    if([[[NSUserDefaults standardUserDefaults] objectForKey:@"islogin"] integerValue] == 1){
+//    if([regular isLogin]){
 ////        [regular createProgress:@"登录中"];
 //
 //        //    判断格式是否正确

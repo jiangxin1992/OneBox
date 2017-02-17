@@ -651,7 +651,7 @@
 
     }
 
-    [manager POST:[[NSString alloc] initWithFormat:@"%@/v1/users/user_info_for_ease",DNS] parameters:@{@"uuids":_uuids,@"token":[[NSUserDefaults standardUserDefaults] objectForKey:@"token"]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager POST:[[NSString alloc] initWithFormat:@"%@/v1/users/user_info_for_ease",DNS] parameters:@{@"uuids":_uuids,@"token":[regular getToken]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSString *html = operation.responseString;
         NSData* data=[html dataUsingEncoding:NSUTF8StringEncoding];
         NSDictionary *dict=[NSJSONSerialization  JSONObjectWithData:data options:0 error:nil];

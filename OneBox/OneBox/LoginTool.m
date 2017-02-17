@@ -29,15 +29,6 @@
 +(NSDictionary *)getCallbackParameters:(SSDKUser *)user
 {
     NSDictionary *parameters = nil;
-    NSUserDefaults *dict=[NSUserDefaults standardUserDefaults];
-    NSString *_token=nil;
-    if([dict objectForKey:@"token"]==nil)
-    {
-        _token=@"";
-    }else
-    {
-        _token=[dict objectForKey:@"token"];
-    }
     NSString *_avatar = @"";
     if(![NSString isNilOrEmpty:user.icon])
     {
@@ -53,7 +44,7 @@
     {
         _mark = user.aboutMe;
     }
-    parameters=@{@"token":_token
+    parameters=@{@"token":[regular getToken]
                  ,@"uid":user.uid
                  ,@"avatar":_avatar
                  ,@"sex":@(user.gender)

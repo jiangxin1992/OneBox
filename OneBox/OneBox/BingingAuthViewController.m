@@ -39,7 +39,7 @@
 }
 -(void)getData
 {
-    NSString *url = [NSString stringWithFormat:@"%@/v1/users/%@?token=%@",DNS,[[NSUserDefaults standardUserDefaults] objectForKey:@"uid"],[[NSUserDefaults standardUserDefaults] objectForKey:@"token"]];
+    NSString *url = [NSString stringWithFormat:@"%@/v1/users/%@?token=%@",DNS,[regular getUID],[regular getToken]];
     [HttpRequestManager GET:url complete:^(NSData *data) {
         id res = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
         NSDictionary *_dict=(NSDictionary*)res;
@@ -127,7 +127,7 @@
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
 
-    [manager POST:[[NSString alloc] initWithFormat:@"%@/v1/users/cancel_auth_bind",DNS] parameters:@{@"token":[[NSUserDefaults standardUserDefaults] objectForKey:@"token"],@"provider":provider} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager POST:[[NSString alloc] initWithFormat:@"%@/v1/users/cancel_auth_bind",DNS] parameters:@{@"token":[regular getToken],@"provider":provider} success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSString *html = operation.responseString;
         NSData* data=[html dataUsingEncoding:NSUTF8StringEncoding];
         NSDictionary *dict=[NSJSONSerialization  JSONObjectWithData:data options:0 error:nil];
@@ -293,7 +293,7 @@
                 
             }
             
-            parameters=@{@"userinfo":user.rawData,@"uid": user.uid,@"provider":provide,@"token":[[NSUserDefaults standardUserDefaults] objectForKey:@"token"]};
+            parameters=@{@"userinfo":user.rawData,@"uid": user.uid,@"provider":provide,@"token":[regular getToken]};
             
             [manager POST:[[NSString alloc] initWithFormat:@"%@/v1/users/auth_bind",DNS] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject)  {
                 [[ToolManager sharedManager] removeProgress];

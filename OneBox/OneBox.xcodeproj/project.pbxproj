@@ -2382,6 +2382,32 @@
 			name = Comment;
 			sourceTree = "<group>";
 		};
+		3F9585FD1E56BEE1004A5AC2 /* 评论 */ = {
+			isa = PBXGroup;
+			children = (
+				5354B09A1C2BE20B0066CF24 /* Articlecomment_cell.h */,
+				5354B09B1C2BE20B0066CF24 /* Articlecomment_cell.m */,
+				5354B0951C2BE1BD0066CF24 /* ArticleCommentController.h */,
+				5354B0941C2BE1BD0066CF24 /* ArticleCommentController.m */,
+			);
+			name = "评论";
+			sourceTree = "<group>";
+		};
+		3F9585FF1E56BF05004A5AC2 /* 文章页 */ = {
+			isa = PBXGroup;
+			children = (
+				5366E15C1C1FC9060036A960 /* ArticleCell.h */,
+				5366E15E1C1FC9060036A960 /* ArticleCell.m */,
+				5354B0D21C30DEB30066CF24 /* ArticleColViewController.h */,
+				5354B0D31C30DEB30066CF24 /* ArticleColViewController.m */,
+				5366E1521C1FC13F0036A960 /* ArticleViewController.h */,
+				5366E1531C1FC13F0036A960 /* ArticleViewController.m */,
+				532E16811C2B9879003FC026 /* ArticleDetailViewController.h */,
+				532E16821C2B9879003FC026 /* ArticleDetailViewController.m */,
+			);
+			name = "文章页";
+			sourceTree = "<group>";
+		};
 		5308232F1A824764004306D1 /* KVNProgress */ = {
 			isa = PBXGroup;
 			children = (
@@ -2886,8 +2912,6 @@
 		537F1D2A1C1927D500331419 /* 工具类 */ = {
 			isa = PBXGroup;
 			children = (
-				537A924B1B0079160002BDBF /* regular.h */,
-				537A924C1B0079160002BDBF /* regular.m */,
 				66C7323B1AC2AA5B002BCBB9 /* ToolManager.h */,
 				66C7323C1AC2AA5B002BCBB9 /* ToolManager.m */,
 			);
@@ -3007,6 +3031,8 @@
 		53A13C9A1A80775E009108DE /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				537A924B1B0079160002BDBF /* regular.h */,
+				537A924C1B0079160002BDBF /* regular.m */,
 				53A13DC41A81CC2D009108DE /* Main */,
 				53B5379D1A7F742F0095C129 /* School */,
 				538591B01B16BC5A0059301B /* 引导页 */,
@@ -3225,18 +3251,8 @@
 		53A68B681C1E9BC8004F9791 /* 文章 */ = {
 			isa = PBXGroup;
 			children = (
-				5354B0D21C30DEB30066CF24 /* ArticleColViewController.h */,
-				5354B0D31C30DEB30066CF24 /* ArticleColViewController.m */,
-				5354B09A1C2BE20B0066CF24 /* Articlecomment_cell.h */,
-				5354B09B1C2BE20B0066CF24 /* Articlecomment_cell.m */,
-				5354B0951C2BE1BD0066CF24 /* ArticleCommentController.h */,
-				5354B0941C2BE1BD0066CF24 /* ArticleCommentController.m */,
-				5366E15C1C1FC9060036A960 /* ArticleCell.h */,
-				5366E15E1C1FC9060036A960 /* ArticleCell.m */,
-				5366E1521C1FC13F0036A960 /* ArticleViewController.h */,
-				5366E1531C1FC13F0036A960 /* ArticleViewController.m */,
-				532E16811C2B9879003FC026 /* ArticleDetailViewController.h */,
-				532E16821C2B9879003FC026 /* ArticleDetailViewController.m */,
+				3F9585FF1E56BF05004A5AC2 /* 文章页 */,
+				3F9585FD1E56BEE1004A5AC2 /* 评论 */,
 			);
 			name = "文章";
 			sourceTree = "<group>";

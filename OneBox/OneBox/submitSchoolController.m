@@ -69,17 +69,8 @@
 {
 
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    NSUserDefaults *dict=[NSUserDefaults standardUserDefaults];
-    NSString *_token=nil;
-    if([dict objectForKey:@"token"]==nil)
-    {
-        _token=@"";
-    }else
-    {
-        _token=[dict objectForKey:@"token"];
-
-    }
-    NSDictionary *parameters=@{@"token":_token};
+    
+    NSDictionary *parameters=@{@"token":[regular getToken]};
     [manager GET:[[NSString alloc] initWithFormat:@"%@%@",DNS,@"/v1/users/show_apply_documents"] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSString *html = operation.responseString;
         NSData* data=[html dataUsingEncoding:NSUTF8StringEncoding];
@@ -130,17 +121,8 @@
 
 //    [[ToolManager sharedManager] createProgress:@"加载中"];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    NSUserDefaults *dict=[NSUserDefaults standardUserDefaults];
-    NSString *_token=nil;
-    if([dict objectForKey:@"token"]==nil)
-    {
-        _token=@"";
-    }else
-    {
-        _token=[dict objectForKey:@"token"];
-    }
-
-    NSDictionary *parameters=@{@"token":_token};
+    
+    NSDictionary *parameters=@{@"token":[regular getToken]};
     NSString *str=[NSString stringWithFormat:@"%@/v1/order_schools",DNS];
 
     [manager GET:str parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -168,7 +150,7 @@
 
 //             [regular removeProgress];
              [indicator stopAnimationWithLoadText:@"loading..." withType:YES];
-             [[ToolManager sharedManager] alertTitle_Simple:[dict objectForKey:@"message"]];
+             [[ToolManager sharedManager] alertTitle_Simple:[data_dict objectForKey:@"message"]];
         }
 
 
@@ -229,20 +211,10 @@
     JXLOG(@"%d",_isopen);
     if(!_isopen)
     {
-
-
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-        NSUserDefaults *dict=[NSUserDefaults standardUserDefaults];
-        NSString *_token=nil;
-        if([dict objectForKey:@"token"]==nil)
-        {
-            _token=@"";
-        }else
-        {
-            _token=[dict objectForKey:@"token"];
-        }
+        
         NSMutableDictionary *parameters=[[NSMutableDictionary alloc] init];
-        [parameters setObject:_token forKey:@"token"];
+        [parameters setObject:[regular getToken] forKey:@"token"];
         JXLOG(@"titleArr=%@",titleArr);
         for (int i=0; i<titleArr.count; i++) {
 
@@ -487,7 +459,7 @@
     {
         //        取消
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-        NSString *Url = [NSString stringWithFormat:@"%@/v1/user_boxes/cancel?token=%@",DNS,[[NSUserDefaults standardUserDefaults] objectForKey:@"token"]];
+        NSString *Url = [NSString stringWithFormat:@"%@/v1/user_boxes/cancel?token=%@",DNS,[regular getToken]];
         NSDictionary *dict=@{@"name":@"apply_school"};
         [manager POST:Url parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSString *html = operation.responseString;
@@ -517,7 +489,7 @@
     {
         //        完成
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-        NSString *Url = [NSString stringWithFormat:@"%@/v1/user_boxes/%@?token=%@",DNS,[[NSUserDefaults standardUserDefaults] objectForKey:@"uid"],[[NSUserDefaults standardUserDefaults] objectForKey:@"token"]];
+        NSString *Url = [NSString stringWithFormat:@"%@/v1/user_boxes/%@?token=%@",DNS,[regular getUID],[regular getToken]];
         NSDictionary *dict=@{@"name":@"apply_school"};
         [manager PUT:Url parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSString *html = operation.responseString;
@@ -695,17 +667,8 @@
     chooseModel *model=dataArray[_index];
 
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    NSUserDefaults *dict=[NSUserDefaults standardUserDefaults];
-    NSString *_token=nil;
-    if([dict objectForKey:@"token"]==nil)
-    {
-        _token=@"";
-    }else
-    {
-        _token=[dict objectForKey:@"token"];
-    }
-
-    NSDictionary *parameters=@{@"token":_token,@"step_no":[NSNumber numberWithInteger:_num]};
+    
+    NSDictionary *parameters=@{@"token":[regular getToken],@"step_no":[NSNumber numberWithInteger:_num]};
 
     [manager PUT:[[NSString alloc] initWithFormat:@"%@%@%@",DNS,@"/v1/order_schools/",model.goal_id] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSString *html = operation.responseString;

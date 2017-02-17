@@ -74,7 +74,7 @@
 
          AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
 
-        [manager DELETE:[[NSString alloc] initWithFormat:@"%@/v1/push_messages/%@",DNS,((notificationModel *)dataArr[indexPath.section]).NOT_ID] parameters:@{@"token":[[NSUserDefaults standardUserDefaults] objectForKey:@"token"]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [manager DELETE:[[NSString alloc] initWithFormat:@"%@/v1/push_messages/%@",DNS,((notificationModel *)dataArr[indexPath.section]).NOT_ID] parameters:@{@"token":[regular getToken]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSString *html = operation.responseString;
             NSData* data=[html dataUsingEncoding:NSUTF8StringEncoding];
             NSDictionary *dict=[NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
@@ -223,17 +223,9 @@
 -(void)requestData
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    NSUserDefaults *dict=[NSUserDefaults standardUserDefaults];
-    NSString *_token=nil;
-    if([dict objectForKey:@"token"]==nil)
-    {
-        _token=@"";
-    }else
-    {
-        _token=[dict objectForKey:@"token"];
-    }
+    
     NSDictionary *parameter=[[NSDictionary alloc] initWithObjectsAndKeys:[[NSString alloc] initWithFormat:@"%ld",(long)_page],@"page",nil];
-    [manager GET:[[NSString alloc] initWithFormat:@"%@%@%@",DNS,@"/v1/push_messages?token=",_token] parameters:parameter success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager GET:[[NSString alloc] initWithFormat:@"%@%@%@",DNS,@"/v1/push_messages?token=",[regular getToken]] parameters:parameter success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSString *html = operation.responseString;
         NSData* data=[html dataUsingEncoding:NSUTF8StringEncoding];
 //        NSDictionary *datadict=[NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];

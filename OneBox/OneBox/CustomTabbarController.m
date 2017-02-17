@@ -399,7 +399,7 @@ static CustomTabbarController *tabbarController = nil;
     btnarr=[[NSMutableArray alloc] init];
     self.delegate=self;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(selectItem1) name:@"selectmap" object:nil];
-    if([[[NSUserDefaults standardUserDefaults] objectForKey:@"islogin"] integerValue]==1)
+    if([regular isLogin])
     {
         NSString *isnot=nil;
         if ([self isAllowedNotification]) {
@@ -410,7 +410,7 @@ static CustomTabbarController *tabbarController = nil;
             isnot=@"0";
 
         }
-        NSString *url=[[NSString alloc] initWithFormat:@"%@/v1/user_boxes/is_push?is_push_on=%@&token=%@",DNS,isnot,[[NSUserDefaults standardUserDefaults] objectForKey:@"token"]];
+        NSString *url=[[NSString alloc] initWithFormat:@"%@/v1/user_boxes/is_push?is_push_on=%@&token=%@",DNS,isnot,[regular getToken]];
 
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         [manager PUT:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject)  {
@@ -501,10 +501,10 @@ static CustomTabbarController *tabbarController = nil;
 }
 -(void)getunreadnum
 {
-    if([[NSUserDefaults standardUserDefaults] objectForKey:@"token"]!=nil)
+    if([regular isLogin])
     {
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-        NSDictionary *parameters=[[NSDictionary alloc] initWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] objectForKey:@"token"],@"token",nil];
+        NSDictionary *parameters=[[NSDictionary alloc] initWithObjectsAndKeys:[regular getToken],@"token",nil];
         [manager GET:[[NSString alloc] initWithFormat:@"%@/v1/push_messages/no_read_pm_count",DNS] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSString *html = operation.responseString;
             NSData* data=[html dataUsingEncoding:NSUTF8StringEncoding];

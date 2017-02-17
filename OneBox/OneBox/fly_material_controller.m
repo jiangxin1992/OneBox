@@ -184,9 +184,8 @@
 -(void)requestCailiaoData
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    NSUserDefaults *dict=[NSUserDefaults standardUserDefaults];
 
-    NSDictionary *parameters=@{@"token":[dict objectForKey:@"token"]};
+    NSDictionary *parameters=@{@"token":[regular getToken]};
     [manager GET:[[NSString alloc] initWithFormat:@"%@%@",DNS,@"/v1/users/show_apply_documents"] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSString *html = operation.responseString;
         NSData* data=[html dataUsingEncoding:NSUTF8StringEncoding];
@@ -297,9 +296,8 @@
 
     //    [[ToolManager sharedManager] createProgress:@"提交中"];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    NSUserDefaults *dict=[NSUserDefaults standardUserDefaults];
     NSMutableDictionary *parameters=[[NSMutableDictionary alloc] init];
-    [parameters setObject:[dict objectForKey:@"token"] forKey:@"token"];
+    [parameters setObject:[regular getToken] forKey:@"token"];
     //    JXLOG(@"titleArr=%@",titleArr);
 
     for (int i=0; i<arr111.count; i++) {

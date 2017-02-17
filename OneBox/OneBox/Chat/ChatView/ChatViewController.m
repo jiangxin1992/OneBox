@@ -326,7 +326,7 @@
     if(_is_server)
     {
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-        NSDictionary *parameters=@{@"server_id":_uid,@"token":[[NSUserDefaults standardUserDefaults] objectForKey:@"token"]};
+        NSDictionary *parameters=@{@"server_id":_uid,@"token":[regular getToken]};
         [manager POST:[[NSString alloc] initWithFormat:@"%@/v1/chats/close_server_chat",DNS] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
             JXLOG(@"111");
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -437,7 +437,7 @@
             {
                 //            如果是专案，告诉后台
                 AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-                NSDictionary *parameters=@{@"server_id":_uid,@"token":[[NSUserDefaults standardUserDefaults] objectForKey:@"token"]};
+                NSDictionary *parameters=@{@"server_id":_uid,@"token":[regular getToken]};
                 [manager POST:[[NSString alloc] initWithFormat:@"%@/v1/chats/open_server_chat",DNS] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
 
                     JXLOG(@"111");
@@ -1035,7 +1035,7 @@
      }];
 
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    NSDictionary *_parameters=@{@"token":[[NSUserDefaults standardUserDefaults] objectForKey:@"token"]};
+    NSDictionary *_parameters=@{@"token":[regular getToken]};
     [manager POST:[[NSString alloc] initWithFormat:@"%@/v1/chats/recive_msg",DNS] parameters:_parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         JXLOG(@"111");
 
@@ -1658,7 +1658,7 @@
         JXLOG(@"%@",msg_id);
 
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-        NSDictionary *_parameters=@{@"token":[[NSUserDefaults standardUserDefaults] objectForKey:@"token"],@"target_user_id":_uid,@"msg_id":msg_id} ;
+        NSDictionary *_parameters=@{@"token":[regular getUID],@"target_user_id":_uid,@"msg_id":msg_id} ;
         [manager GET:[[NSString alloc] initWithFormat:@"%@/v1/chats/history_msg",DNS] parameters:_parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSString *html = operation.responseString;
             NSData* data=[html dataUsingEncoding:NSUTF8StringEncoding];

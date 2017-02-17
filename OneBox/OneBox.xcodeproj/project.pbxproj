@@ -2261,6 +2261,127 @@
 			name = "NSDate+Formatter";
 			sourceTree = "<group>";
 		};
+		3F9585F01E56BA79004A5AC2 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3F9585F11E56BA85004A5AC2 /* Main */,
+				3F9585F91E56BB58004A5AC2 /* School */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		3F9585F11E56BA85004A5AC2 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				3F9585F21E56BA8A004A5AC2 /* 文章 */,
+				3F9585F31E56BA9A004A5AC2 /* UserInfo */,
+				3F9585F41E56BAD3004A5AC2 /* ChatCtn */,
+				3F9585F51E56BAF4004A5AC2 /* Box */,
+				3F9585F81E56BB38004A5AC2 /* Found */,
+			);
+			name = Main;
+			sourceTree = "<group>";
+		};
+		3F9585F21E56BA8A004A5AC2 /* 文章 */ = {
+			isa = PBXGroup;
+			children = (
+				5354B0851C2BA1A60066CF24 /* ArticleDetailModel.h */,
+				5354B0861C2BA1A60066CF24 /* ArticleDetailModel.m */,
+				5366E15B1C1FC9060036A960 /* ArticleModel.h */,
+				5366E15D1C1FC9060036A960 /* ArticleModel.m */,
+			);
+			name = "文章";
+			sourceTree = "<group>";
+		};
+		3F9585F31E56BA9A004A5AC2 /* UserInfo */ = {
+			isa = PBXGroup;
+			children = (
+				53F977691BB3BC9E004FC0B7 /* notificationModel.h */,
+				53F9776A1BB3BC9E004FC0B7 /* notificationModel.m */,
+				53FFA0941B26E9EA0012504A /* MyInfo.h */,
+				53FFA0951B26E9EA0012504A /* MyInfo.m */,
+			);
+			name = UserInfo;
+			sourceTree = "<group>";
+		};
+		3F9585F41E56BAD3004A5AC2 /* ChatCtn */ = {
+			isa = PBXGroup;
+			children = (
+				53F976E31BB295F7004FC0B7 /* usermodel.h */,
+				53F976E41BB295F7004FC0B7 /* usermodel.m */,
+			);
+			name = ChatCtn;
+			sourceTree = "<group>";
+		};
+		3F9585F51E56BAF4004A5AC2 /* Box */ = {
+			isa = PBXGroup;
+			children = (
+				3F9585F71E56BB19004A5AC2 /* 申请进度 */,
+				3F9585F61E56BB10004A5AC2 /* 目标学校 */,
+			);
+			name = Box;
+			sourceTree = "<group>";
+		};
+		3F9585F61E56BB10004A5AC2 /* 目标学校 */ = {
+			isa = PBXGroup;
+			children = (
+				537493111B05A9AC00922BE9 /* chooseModel.h */,
+				537493121B05A9AC00922BE9 /* chooseModel.m */,
+			);
+			name = "目标学校";
+			sourceTree = "<group>";
+		};
+		3F9585F71E56BB19004A5AC2 /* 申请进度 */ = {
+			isa = PBXGroup;
+			children = (
+				536731F41B0B1E6F008B29DD /* ApplyFilemodel.h */,
+				536731F51B0B1E6F008B29DD /* ApplyFilemodel.m */,
+			);
+			name = "申请进度";
+			sourceTree = "<group>";
+		};
+		3F9585F81E56BB38004A5AC2 /* Found */ = {
+			isa = PBXGroup;
+			children = (
+				535D5E4C1C167C6B00470F7F /* foundModel_new.h */,
+				535D5E4D1C167C6B00470F7F /* foundModel_new.m */,
+				66C67D161AC40B780054B28D /* foundModel.h */,
+				66C67D121AC40B780054B28D /* foundModel.m */,
+			);
+			name = Found;
+			sourceTree = "<group>";
+		};
+		3F9585F91E56BB58004A5AC2 /* School */ = {
+			isa = PBXGroup;
+			children = (
+				3F9585FB1E56BB91004A5AC2 /* Comment */,
+				3F9585FA1E56BB86004A5AC2 /* school */,
+			);
+			name = School;
+			sourceTree = "<group>";
+		};
+		3F9585FA1E56BB86004A5AC2 /* school */ = {
+			isa = PBXGroup;
+			children = (
+				53F977A51BB505E1004FC0B7 /* surveyModel.h */,
+				53F977A61BB505E1004FC0B7 /* surveyModel.m */,
+				53050D1E1AFB4B330066ABC8 /* schoolDetailModel.h */,
+				53050D1F1AFB4B330066ABC8 /* schoolDetailModel.m */,
+				53F977A21BB5054C004FC0B7 /* graduationModel.h */,
+				53F977A31BB5054C004FC0B7 /* graduationModel.m */,
+			);
+			name = school;
+			sourceTree = "<group>";
+		};
+		3F9585FB1E56BB91004A5AC2 /* Comment */ = {
+			isa = PBXGroup;
+			children = (
+				53CE563C1AFF27FF00813C95 /* comment_model_alter.h */,
+				53CE563D1AFF27FF00813C95 /* comment_model_alter.m */,
+			);
+			name = Comment;
+			sourceTree = "<group>";
+		};
 		5308232F1A824764004306D1 /* KVNProgress */ = {
 			isa = PBXGroup;
 			children = (
@@ -2402,31 +2523,10 @@
 			children = (
 				53947F6A1C5725BE007C5A28 /* submit_material_controller.h */,
 				53947F6B1C5725BE007C5A28 /* submit_material_controller.m */,
-				536731F31B0B1E5A008B29DD /* model */,
 				53F828661B1EF932002D9409 /* submitSchoolController.h */,
 				53F828671B1EF932002D9409 /* submitSchoolController.m */,
 			);
 			name = "申请进度";
-			sourceTree = "<group>";
-		};
-		536731F31B0B1E5A008B29DD /* model */ = {
-			isa = PBXGroup;
-			children = (
-				536731F41B0B1E6F008B29DD /* ApplyFilemodel.h */,
-				536731F51B0B1E6F008B29DD /* ApplyFilemodel.m */,
-			);
-			name = model;
-			sourceTree = "<group>";
-		};
-		536F2D5B1AC4656C00A33DEA /* model */ = {
-			isa = PBXGroup;
-			children = (
-				535D5E4C1C167C6B00470F7F /* foundModel_new.h */,
-				535D5E4D1C167C6B00470F7F /* foundModel_new.m */,
-				66C67D161AC40B780054B28D /* foundModel.h */,
-				66C67D121AC40B780054B28D /* foundModel.m */,
-			);
-			name = model;
 			sourceTree = "<group>";
 		};
 		536F2D5C1AC4657A00A33DEA /* cell */ = {
@@ -2451,21 +2551,11 @@
 		5374930F1B05A97400922BE9 /* 主界面 */ = {
 			isa = PBXGroup;
 			children = (
-				537493101B05A98E00922BE9 /* model */,
 				53F828611B1EF8F1002D9409 /* chooseSchoolController.h */,
 				53F828621B1EF8F1002D9409 /* chooseSchoolController.m */,
 				53D240CB1B09913B00EA3C15 /* 学术档案 */,
 			);
 			name = "主界面";
-			sourceTree = "<group>";
-		};
-		537493101B05A98E00922BE9 /* model */ = {
-			isa = PBXGroup;
-			children = (
-				537493111B05A9AC00922BE9 /* chooseModel.h */,
-				537493121B05A9AC00922BE9 /* chooseModel.m */,
-			);
-			name = model;
 			sourceTree = "<group>";
 		};
 		537F1D071C18375000331419 /* 签证去 */ = {
@@ -2498,19 +2588,6 @@
 				537F1D261C19242000331419 /* cell */,
 			);
 			name = "粉丝关注列表";
-			sourceTree = "<group>";
-		};
-		537F1D0A1C191CE200331419 /* model */ = {
-			isa = PBXGroup;
-			children = (
-				53F977A51BB505E1004FC0B7 /* surveyModel.h */,
-				53F977A61BB505E1004FC0B7 /* surveyModel.m */,
-				53050D1E1AFB4B330066ABC8 /* schoolDetailModel.h */,
-				53050D1F1AFB4B330066ABC8 /* schoolDetailModel.m */,
-				53F977A21BB5054C004FC0B7 /* graduationModel.h */,
-				53F977A31BB5054C004FC0B7 /* graduationModel.m */,
-			);
-			name = model;
 			sourceTree = "<group>";
 		};
 		537F1D0B1C191CF600331419 /* pagecontroller */ = {
@@ -2552,7 +2629,6 @@
 				53FFA0971B26EA500012504A /* userInfoViewController.h */,
 				53FFA0981B26EA500012504A /* userInfoViewController.m */,
 				3F90A86D1E52EFDF00DBEF1A /* userInfoViewController.xib */,
-				53A270051B1851390013A6CD /* model */,
 				537F1D181C1920EA00331419 /* 目标录取界面 */,
 				537F1D131C191EF900331419 /* 建议 */,
 			);
@@ -2896,15 +2972,6 @@
 			name = MyPoint;
 			sourceTree = "<group>";
 		};
-		538591F01A9C9B04006D785E /* model */ = {
-			isa = PBXGroup;
-			children = (
-				53CE563C1AFF27FF00813C95 /* comment_model_alter.h */,
-				53CE563D1AFF27FF00813C95 /* comment_model_alter.m */,
-			);
-			name = model;
-			sourceTree = "<group>";
-		};
 		538591F41A9DB449006D785E /* cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -3057,15 +3124,6 @@
 			name = DBImage;
 			sourceTree = "<group>";
 		};
-		53A270051B1851390013A6CD /* model */ = {
-			isa = PBXGroup;
-			children = (
-				53FFA0941B26E9EA0012504A /* MyInfo.h */,
-				53FFA0951B26E9EA0012504A /* MyInfo.m */,
-			);
-			name = model;
-			sourceTree = "<group>";
-		};
 		53A2701D1B1852340013A6CD /* QiniuSDK */ = {
 			isa = PBXGroup;
 			children = (
@@ -3173,10 +3231,6 @@
 				5354B09B1C2BE20B0066CF24 /* Articlecomment_cell.m */,
 				5354B0951C2BE1BD0066CF24 /* ArticleCommentController.h */,
 				5354B0941C2BE1BD0066CF24 /* ArticleCommentController.m */,
-				5354B0851C2BA1A60066CF24 /* ArticleDetailModel.h */,
-				5354B0861C2BA1A60066CF24 /* ArticleDetailModel.m */,
-				5366E15B1C1FC9060036A960 /* ArticleModel.h */,
-				5366E15D1C1FC9060036A960 /* ArticleModel.m */,
 				5366E15C1C1FC9060036A960 /* ArticleCell.h */,
 				5366E15E1C1FC9060036A960 /* ArticleCell.m */,
 				5366E1521C1FC13F0036A960 /* ArticleViewController.h */,
@@ -3264,6 +3318,7 @@
 		53B5372A1A7F465D0095C129 /* OneBox */ = {
 			isa = PBXGroup;
 			children = (
+				3F9585F01E56BA79004A5AC2 /* Model */,
 				53A13C9A1A80775E009108DE /* Controller */,
 				3F90A8371E52D7AA00DBEF1A /* Category */,
 				53B537821A7F4B640095C129 /* Class */,
@@ -3338,7 +3393,6 @@
 				53B61BBC1C461B8300561AED /* 在线专案 */,
 				537F1D281C19260A00331419 /* 跳转视图 */,
 				536F2D5C1AC4657A00A33DEA /* cell */,
-				536F2D5B1AC4656C00A33DEA /* model */,
 			);
 			name = Found;
 			sourceTree = "<group>";
@@ -3423,7 +3477,6 @@
 			children = (
 				53CF3DEA1B39002200BCD8DD /* detail */,
 				537F1D0B1C191CF600331419 /* pagecontroller */,
-				537F1D0A1C191CE200331419 /* model */,
 			);
 			name = school;
 			sourceTree = "<group>";
@@ -3434,7 +3487,6 @@
 				53B537B31A7F75510095C129 /* schoolCommentController.h */,
 				53B537B41A7F75510095C129 /* schoolCommentController.m */,
 				538591F41A9DB449006D785E /* cell */,
-				538591F01A9C9B04006D785E /* model */,
 			);
 			name = Comment;
 			sourceTree = "<group>";
@@ -4875,18 +4927,8 @@
 				537F1D211C19236C00331419 /* 粉丝 */,
 				537F1D241C19239600331419 /* 群组 */,
 				537F1D231C19239100331419 /* 专案 */,
-				53F976E21BB295EB004FC0B7 /* model */,
 			);
 			name = "好友列表";
-			sourceTree = "<group>";
-		};
-		53F976E21BB295EB004FC0B7 /* model */ = {
-			isa = PBXGroup;
-			children = (
-				53F976E31BB295F7004FC0B7 /* usermodel.h */,
-				53F976E41BB295F7004FC0B7 /* usermodel.m */,
-			);
-			name = model;
 			sourceTree = "<group>";
 		};
 		53F977621BB3BC93004FC0B7 /* 推送列表 */ = {
@@ -4896,8 +4938,6 @@
 				53F977641BB3BC9E004FC0B7 /* NotificationController.m */,
 				53F977661BB3BC9E004FC0B7 /* NotificationCell.h */,
 				53F977671BB3BC9E004FC0B7 /* NotificationCell.m */,
-				53F977691BB3BC9E004FC0B7 /* notificationModel.h */,
-				53F9776A1BB3BC9E004FC0B7 /* notificationModel.m */,
 				53F9776B1BB3BC9E004FC0B7 /* NOTContentViewController.h */,
 				53F9776C1BB3BC9E004FC0B7 /* NOTContentViewController.m */,
 			);

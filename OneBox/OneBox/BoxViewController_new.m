@@ -261,7 +261,7 @@
 - (void)shareBtnPress:(UIButton *)btn
 {
 
-    app1 = [ShareSDK isClientInstalled:SSDKPlatformSubTypeWechatSession];
+    app1 = [ShareSDK isClientInstalled:SSDKPlatformTypeWechat];
     app2 = [ShareSDK isClientInstalled:SSDKPlatformSubTypeQQFriend];
 
     UIView *fatherView=nil;

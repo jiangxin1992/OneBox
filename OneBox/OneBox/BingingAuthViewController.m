@@ -204,7 +204,7 @@
 }
 -(void)bangding:(UIButton *)btn
 {
-    BOOL _isinstall=[ShareSDK isClientInstalled:SSDKPlatformSubTypeWechatSession];
+    BOOL _isinstall=[ShareSDK isClientInstalled:SSDKPlatformTypeWechat];
 
     if(btn.tag-300==0)
     {

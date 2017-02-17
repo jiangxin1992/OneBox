@@ -160,7 +160,7 @@
     register_btn.frame=CGRectMake(CGRectGetMaxX(password.frame)-CGRectGetWidth(forgetPsw.frame), CGRectGetMinY(forgetPsw.frame), CGRectGetWidth(forgetPsw.frame), CGRectGetHeight(forgetPsw.frame));
     [self.view addSubview:register_btn];
     
-    BOOL app1 = [ShareSDK isClientInstalled:SSDKPlatformSubTypeWechatSession];
+    BOOL app1 = [ShareSDK isClientInstalled:SSDKPlatformTypeWechat];
     if(app1)
     {
         ohterimagename=@[@"login_微博",@"login_wechat",@"login_QQ"];

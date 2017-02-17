@@ -549,7 +549,7 @@
 }
 -(void)disjianpan
 {
-    [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+    [regular dismissKeyborad];
 }
 -(void)UIConfig
 {
@@ -938,7 +938,7 @@
 }
 -(void)viewWillDisappear:(BOOL)animated
 {
-    [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+    [regular dismissKeyborad];
     [super viewWillDisappear:animated];
     [MobClick endLogPageView:@"personinfoViewController"];
 }

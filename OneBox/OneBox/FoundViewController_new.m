@@ -401,7 +401,7 @@ _package
 //键盘消失
 -(void)headviewAction
 {
-    [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+    [regular dismissKeyborad];
 }
 #pragma mark*创建三个按钮
 -(void)createThreeBtn
@@ -1878,7 +1878,7 @@ _package
     if(!bKeyBoardHide)
     {
 //        当键盘为出现状态时，触发 键盘消失方法
-        [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+        [regular dismissKeyborad];
 
     }else
     {

@@ -82,12 +82,12 @@
 }
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+    [regular dismissKeyborad];
 
 }
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
-     [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+     [regular dismissKeyborad];
 
 }
 -(void)sendAction

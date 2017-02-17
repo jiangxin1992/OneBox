@@ -258,7 +258,7 @@
 -(void)sumbit_action:(UIButton *)btn
 {
     
-    [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+    [regular dismissKeyborad];
     //    post前进行判断，用户名、密码格式是否正确
     if([username.text isEqualToString:@""]||[password.text isEqualToString:@""])
     {
@@ -561,7 +561,7 @@
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     //    收回键盘
-    [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+    [regular dismissKeyborad];
 }
 
 -(void)viewWillAppear:(BOOL)animated

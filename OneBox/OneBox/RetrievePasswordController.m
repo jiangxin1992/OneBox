@@ -343,9 +343,7 @@
 }
 -(void)yanzheng:(UIButton *)btn
 {
-    
-
-    [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+    [regular dismissKeyborad];
     if([textfield_email.text isEqualToString:@""])
     {
 
@@ -435,7 +433,7 @@
 -(void)submit:(UIButton *)btn
 {
 
-    [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+    [regular dismissKeyborad];
 
     if(![self validatePhonenum:textfield_email.text])
     {
@@ -581,7 +579,7 @@
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     //    收回键盘
-    [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+    [regular dismissKeyborad];
 }
 
 

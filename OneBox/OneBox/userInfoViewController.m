@@ -931,14 +931,14 @@
     {
         arrayName = @[@(22),@(23),@(1),@(24),@(6),@(18)];
     }
-    JXLOG(@"ssss%ld",(long)[arrayName[btn.tag - 9000] integerValue]);
+    JXLOG(@"ssss%ld",(long)[arrayName[btn.tag - 2000] integerValue]);
     
     //1、创建分享参数（必要）
     NSMutableDictionary *shareParams = [NSMutableDictionary dictionary];
     [shareParams SSDKSetupShareParamsByText:@"［留美盒子］美国高中都在这 .\n\n＊美校大数据\n多维度信息,全方位评价,深度定义全貌,作出最好留学决策\n\n＊校方直达\n直达官网,直拨电话,直发邮件,接触校方和招生官,全面互动无障碍\n\n＊四步留美\n智慧美盒,选校 申请 签证 飞赴美利坚,带你完成申校赴美之旅\n\n点击下载 \nhttps://appsto.re/cn/HYZ77.i" images:nil url:[NSURL URLWithString:@"https://appsto.re/cn/HYZ77.i"] title:@"‘留美盒子’  美国高中都在这！" type:SSDKContentTypeAuto];
     
     [shareParams SSDKEnableUseClientShare];
-    NSInteger platformType = [arrayName[btn.tag - 9000] integerValue];
+    NSInteger platformType = [arrayName[btn.tag - 2000] integerValue];
     //2、分享
     [ShareSDK share:(long)platformType parameters:shareParams onStateChanged:^(SSDKResponseState state, NSDictionary *userData, SSDKContentEntity *contentEntity, NSError *error) {
         switch (state) {
@@ -950,26 +950,35 @@
             case SSDKResponseStateSuccess:
             {
                 [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"分享成功" WithImg:@"Prompt_提交成功" Withtype:1]];
+                break;
             }
             case SSDKResponseStateFail:
             {
-                if(platformType==18)
+                if(![NSString isNilOrEmpty:[[error.userInfo objectForKey:@"user_data"] objectForKey:@"error"]])
                 {
-                    [[ToolManager sharedManager] alertTitle_Simple:@"请设置邮件账户"];
-                }else if (platformType==24)
+                    [[ToolManager sharedManager] alertTitle_Simple:[[error.userInfo objectForKey:@"user_data"] objectForKey:@"error"]];
+                }else if(![NSString isNilOrEmpty:[error.userInfo objectForKey:@"error_message"]])
                 {
-                    [[ToolManager sharedManager] alertTitle_Simple:@"请安装QQ客户端"];
-                    
-                }else if(platformType==6)
-                {
-                    [[ToolManager sharedManager] alertTitle_Simple:@"请安装QQ空间客户端"];
-                }else if (platformType==1)
-                {
-                    if(error.code==20019)
-                    {
-                        [[ToolManager sharedManager] alertTitle_Simple:@"请不要分享重复的内容"];
-                    }
+                    [[ToolManager sharedManager] alertTitle_Simple:[error.userInfo objectForKey:@"error_message"]];
                 }
+//                if(platformType==18)
+//                {
+//                    [[ToolManager sharedManager] alertTitle_Simple:@"请设置邮件账户"];
+//                }else if (platformType==24)
+//                {
+//                    [[ToolManager sharedManager] alertTitle_Simple:@"请安装QQ客户端"];
+//                    
+//                }else if(platformType==6)
+//                {
+//                    [[ToolManager sharedManager] alertTitle_Simple:@"请安装QQ空间客户端"];
+//                }else if (platformType==1)
+//                {
+//                    if(error.code==20019)
+//                    {
+//                        [[ToolManager sharedManager] alertTitle_Simple:@"请不要分享重复的内容"];
+//                    }
+//                }
+                break;
             }
             case SSDKResponseStateCancel:
             {

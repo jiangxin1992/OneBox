@@ -897,13 +897,13 @@ _tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
 }
 -(void)cancelAction
 {
-    [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+    [regular dismissKeyborad];
     _commentField.text=_commentField1.text;
 }
 //_tableview被tap时调用的方法，然后隐藏键盘
 -(void)return_KeyBoard
 {
-    [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+    [regular dismissKeyborad];
     _commentField.text=_commentField1.text;
     
 }
@@ -1021,7 +1021,7 @@ _tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
             [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"提交成功" WithImg:@"Prompt_提交成功" Withtype:1]];
             [[ToolManager sharedManager] removeProgress];
 
-            [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+            [regular dismissKeyborad];
 
         }else
         {

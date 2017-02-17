@@ -284,7 +284,7 @@
 
 -(void)submitAction:(UIButton *)btn
 {
-   [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+   [regular dismissKeyborad];
     UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:nil message:@" " delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
 //textfield_nickname:i==1?textfield_password:textfield_email;
     //输入验证
@@ -494,7 +494,7 @@
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     //    收回键盘
-    [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+    [regular dismissKeyborad];
 }
 #pragma mark-return后隐藏键盘
 -(void)viewWillAppear:(BOOL)animated

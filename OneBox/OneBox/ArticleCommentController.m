@@ -397,10 +397,7 @@
 }
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-//    if(t)
-    [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
-
-
+    [regular dismissKeyborad];
 }
 -(void)xiaoshi
 {
@@ -860,7 +857,6 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
 
-//    [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
     if(alertView==isdelete)
     {
         if(buttonIndex==1)
@@ -995,7 +991,7 @@
 
 -(void)cancelAction
 {
-    [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+    [regular dismissKeyborad];
      _commentField.text=_commentField1.text;
 }
 //创建各个视图
@@ -1085,7 +1081,7 @@ _tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
 //_tableview被tap时调用的方法，然后隐藏键盘
 -(void)return_KeyBoard
 {
-    [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+    [regular dismissKeyborad];
     _commentField.text=_commentField1.text;
 }
 #define mark - tableView代理方法
@@ -1205,7 +1201,7 @@ _tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
             [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"提交成功" WithImg:@"Prompt_提交成功" Withtype:1]];
             
             [[ToolManager sharedManager] removeProgress];
-            [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+            [regular dismissKeyborad];
 
         }else
         {

@@ -154,7 +154,7 @@
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     //    收回键盘
-    [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+    [regular dismissKeyborad];
 }
 -(void)viewWillAppear:(BOOL)animated
 {

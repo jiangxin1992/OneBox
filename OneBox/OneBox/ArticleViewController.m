@@ -429,7 +429,7 @@
     if(!bKeyBoardHide)
     {
 //        当键盘为出现状态时，触发 键盘消失方法
-        [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+        [regular dismissKeyborad];
 
     }else
     {

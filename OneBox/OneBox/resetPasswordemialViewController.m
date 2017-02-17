@@ -141,14 +141,14 @@
 -(void)sumbit_action:(UIButton *)btn
 {
 
-    [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+    [regular dismissKeyborad];
     
     if(![self validateEmail:username.text])
     {
         [self presentViewController:[regular alertTitle_Simple:@"请输入正确格式的邮箱。"] animated:YES completion:nil];
     }else
     {
-        [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+        [regular dismissKeyborad];
 
         [[ToolManager sharedManager] createProgress:@"提交中..."];
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -194,7 +194,7 @@
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     //    收回键盘
-    [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+    [regular dismissKeyborad];
 }
 
 #pragma mark-return后隐藏键盘

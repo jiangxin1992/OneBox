@@ -1314,26 +1314,35 @@
             case SSDKResponseStateSuccess:
             {
                 [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"分享成功" WithImg:@"Prompt_提交成功" Withtype:1]];
+                break;
             }
             case SSDKResponseStateFail:
             {
-                if(platformType==18)
+                if(![NSString isNilOrEmpty:[[error.userInfo objectForKey:@"user_data"] objectForKey:@"error"]])
                 {
-                    [[ToolManager sharedManager] alertTitle_Simple:@"请设置邮件账户"];
-                }else if (platformType==24)
+                    [[ToolManager sharedManager] alertTitle_Simple:[[error.userInfo objectForKey:@"user_data"] objectForKey:@"error"]];
+                }else if(![NSString isNilOrEmpty:[error.userInfo objectForKey:@"error_message"]])
                 {
-                    [[ToolManager sharedManager] alertTitle_Simple:@"请安装QQ客户端"];
-                    
-                }else if(platformType==6)
-                {
-                    [[ToolManager sharedManager] alertTitle_Simple:@"请安装QQ空间客户端"];
-                }else if (platformType==1)
-                {
-                    if(error.code==20019)
-                    {
-                        [[ToolManager sharedManager] alertTitle_Simple:@"请不要分享重复的内容"];
-                    }
+                    [[ToolManager sharedManager] alertTitle_Simple:[error.userInfo objectForKey:@"error_message"]];
                 }
+//                if(platformType==18)
+//                {
+//                    [[ToolManager sharedManager] alertTitle_Simple:@"请设置邮件账户"];
+//                }else if (platformType==24)
+//                {
+//                    [[ToolManager sharedManager] alertTitle_Simple:@"请安装QQ客户端"];
+//                    
+//                }else if(platformType==6)
+//                {
+//                    [[ToolManager sharedManager] alertTitle_Simple:@"请安装QQ空间客户端"];
+//                }else if (platformType==1)
+//                {
+//                    if(error.code==20019)
+//                    {
+//                        [[ToolManager sharedManager] alertTitle_Simple:@"请不要分享重复的内容"];
+//                    }
+//                }
+                break;
             }
             case SSDKResponseStateCancel:
             {

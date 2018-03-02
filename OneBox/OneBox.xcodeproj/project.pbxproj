@@ -263,7 +263,6 @@
 		53F2D9651B1F073E000A5183 /* MYIntroductionPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F2D9631B1F073E000A5183 /* MYIntroductionPanel.m */; };
 		53F828641B1EF8F1002D9409 /* chooseSchoolController.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F828621B1EF8F1002D9409 /* chooseSchoolController.m */; };
 		53F828691B1EF932002D9409 /* submitSchoolController.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F828671B1EF932002D9409 /* submitSchoolController.m */; };
-		53F973881BB2917F004FC0B7 /* libEaseMobClientSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 53F973851BB2917F004FC0B7 /* libEaseMobClientSDK.a */; };
 		53F973891BB2917F004FC0B7 /* EaseMob.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 53F973871BB2917F004FC0B7 /* EaseMob.bundle */; };
 		53F973911BB29414004FC0B7 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 53F973901BB29414004FC0B7 /* Settings.bundle */; };
 		53F973991BB2946F004FC0B7 /* account.png in Resources */ = {isa = PBXBuildFile; fileRef = 53F973951BB2946F004FC0B7 /* account.png */; };
@@ -1281,7 +1280,6 @@
 		53F973801BB2917F004FC0B7 /* EMNetworkMonitorDefs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMNetworkMonitorDefs.h; sourceTree = "<group>"; };
 		53F973821BB2917F004FC0B7 /* EMError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMError.h; sourceTree = "<group>"; };
 		53F973831BB2917F004FC0B7 /* EMErrorDefs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMErrorDefs.h; sourceTree = "<group>"; };
-		53F973851BB2917F004FC0B7 /* libEaseMobClientSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libEaseMobClientSDK.a; sourceTree = "<group>"; };
 		53F973871BB2917F004FC0B7 /* EaseMob.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = EaseMob.bundle; sourceTree = "<group>"; };
 		53F9738A1BB291C8004FC0B7 /* libstdc++.6.0.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.0.9.dylib"; path = "usr/lib/libstdc++.6.0.9.dylib"; sourceTree = SDKROOT; };
 		53F9738C1BB291E5004FC0B7 /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
@@ -1936,7 +1934,6 @@
 				66C731671AC13D25002BCBB9 /* libssl.a in Frameworks */,
 				66C731661AC13D25002BCBB9 /* libcrypto.a in Frameworks */,
 				3F2581BE1E51E5E50004B573 /* MOBFoundation.framework in Frameworks */,
-				53F973881BB2917F004FC0B7 /* libEaseMobClientSDK.a in Frameworks */,
 				53B771D31C4F424600F20085 /* AlipaySDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2158,6 +2155,13 @@
 				3F2581AA1E51E5E50004B573 /* ShareSDKConnector.framework */,
 			);
 			path = Required;
+			sourceTree = "<group>";
+		};
+		3F3337EE2048E40200371713 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = lib;
 			sourceTree = "<group>";
 		};
 		3F90A8371E52D7AA00DBEF1A /* Category */ = {
@@ -3748,8 +3752,8 @@
 		53F9731B1BB2917F004FC0B7 /* EaseMobSDK环信 */ = {
 			isa = PBXGroup;
 			children = (
+				3F3337EE2048E40200371713 /* lib */,
 				53F9731C1BB2917F004FC0B7 /* include */,
-				53F973841BB2917F004FC0B7 /* lib */,
 				53F973861BB2917F004FC0B7 /* resources */,
 			);
 			name = "EaseMobSDK环信";
@@ -3997,14 +4001,6 @@
 				53F973831BB2917F004FC0B7 /* EMErrorDefs.h */,
 			);
 			path = ErrorManager;
-			sourceTree = "<group>";
-		};
-		53F973841BB2917F004FC0B7 /* lib */ = {
-			isa = PBXGroup;
-			children = (
-				53F973851BB2917F004FC0B7 /* libEaseMobClientSDK.a */,
-			);
-			path = lib;
 			sourceTree = "<group>";
 		};
 		53F973861BB2917F004FC0B7 /* resources */ = {

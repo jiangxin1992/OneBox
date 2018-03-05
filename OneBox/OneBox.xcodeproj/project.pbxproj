@@ -758,6 +758,8 @@
 		3F9586141E56EB12004A5AC2 /* libc++abi.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++abi.tbd"; path = "usr/lib/libc++abi.tbd"; sourceTree = SDKROOT; };
 		3F9586161E56EB1B004A5AC2 /* libz.1.2.5.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.2.5.tbd; path = usr/lib/libz.1.2.5.tbd; sourceTree = SDKROOT; };
 		3F9586181E56EB2F004A5AC2 /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
+		3FBF5138204D4D6B0091CA09 /* GexinSdk.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GexinSdk.h; sourceTree = "<group>"; };
+		3FBF5139204D4D6C0091CA09 /* GXSdkError.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXSdkError.h; sourceTree = "<group>"; };
 		3FE75F19204CE729000C7BAC /* libEaseMobClientSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libEaseMobClientSDK.a; sourceTree = "<group>"; };
 		53050D1E1AFB4B330066ABC8 /* schoolDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = schoolDetailModel.h; sourceTree = "<group>"; };
 		53050D1F1AFB4B330066ABC8 /* schoolDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = schoolDetailModel.m; sourceTree = "<group>"; };
@@ -1698,8 +1700,6 @@
 		53FFA0951B26E9EA0012504A /* MyInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyInfo.m; sourceTree = "<group>"; };
 		53FFA0971B26EA500012504A /* userInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = userInfoViewController.h; sourceTree = "<group>"; };
 		53FFA0981B26EA500012504A /* userInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = userInfoViewController.m; sourceTree = "<group>"; };
-		53FFC52A1B0C889700D643D4 /* GexinSdk.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = GexinSdk.h; path = ../../GexinSdk.h; sourceTree = "<group>"; };
-		53FFC52B1B0C889700D643D4 /* GXSdkError.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = GXSdkError.h; path = ../../GXSdkError.h; sourceTree = "<group>"; };
 		53FFC52C1B0C88A700D643D4 /* libGexinSdk-1.1.1.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libGexinSdk-1.1.1.a"; path = "../libGexinSdk-1.1.1.a"; sourceTree = "<group>"; };
 		53FFC5321B0C939B00D643D4 /* InfoPlist.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = InfoPlist.strings; path = ../OneBox/InfoPlist.strings; sourceTree = "<group>"; };
 		53FFC5331B0C939B00D643D4 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = Localizable.strings; path = ../OneBox/Localizable.strings; sourceTree = "<group>"; };
@@ -2347,6 +2347,8 @@
 		530991F91B4A93FB0079675F /* 个推 */ = {
 			isa = PBXGroup;
 			children = (
+				3FBF5138204D4D6B0091CA09 /* GexinSdk.h */,
+				3FBF5139204D4D6C0091CA09 /* GXSdkError.h */,
 				530992031B4A9B830079675F /* include */,
 				530992061B4A9B830079675F /* libGeTuiSdk-1.2.0.a */,
 			);
@@ -2410,16 +2412,6 @@
 				537F1D191C19226C00331419 /* 获取城市code */,
 			);
 			name = RetrievePassword;
-			sourceTree = "<group>";
-		};
-		53555EFB1BD88EF90044D3E1 /* 友盟 */ = {
-			isa = PBXGroup;
-			children = (
-				53FFC52A1B0C889700D643D4 /* GexinSdk.h */,
-				53FFC52B1B0C889700D643D4 /* GXSdkError.h */,
-			);
-			name = "友盟";
-			path = EaseMobSDK;
 			sourceTree = "<group>";
 		};
 		535D5E581C16AFB300470F7F /* 城市类型 */ = {
@@ -2969,7 +2961,6 @@
 				3F25817E1E51E5E50004B573 /* ShareSDK */,
 				53B7715D1C4F3C1200F20085 /* ZFB */,
 				530991F91B4A93FB0079675F /* 个推 */,
-				53555EFB1BD88EF90044D3E1 /* 友盟 */,
 				53F9731B1BB2917F004FC0B7 /* EaseMobSDK环信 */,
 			);
 			name = SDK;

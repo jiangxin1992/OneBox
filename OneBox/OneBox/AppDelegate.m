@@ -25,6 +25,8 @@
 #import "AppDelegate.h"
 #import "CustomTabbarController.h"
 
+#import "MYIntroductionPanel.h"
+#import "MYIntroductionView.h"
 
 #define kAppId           @"aLuGPVna2MAoAVtfbB66a3"
 #define kAppKey          @"6yfaRLwDyZ8PDrfpkFULe"
@@ -33,25 +35,29 @@
 NSString* const NotificationCategoryIdent  = @"ACTIONABLE";
 NSString* const NotificationActionOneIdent = @"ACTION_ONE";
 NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
-@interface AppDelegate ()
+
+@interface AppDelegate ()<UIScrollViewDelegate,MYIntroductionDelegate>
+
+@property (strong, nonatomic) CustomTabbarController *viewController;
+
+@property (strong, nonatomic) GexinSdk *gexinPusher;
+
+@property (retain, nonatomic) NSString *appKey;
+@property (retain, nonatomic) NSString *appSecret;
+@property (retain, nonatomic) NSString *appID;
+@property (retain, nonatomic) NSString *clientId;
+@property (assign, nonatomic) SdkStatus sdkStatus;
+
+@property (assign, nonatomic) int lastPayloadIndex;
+@property (retain, nonatomic) NSString *payloadId;
+
 @end
 
 @implementation AppDelegate
 {
     BOOL isOut;
+    NSString *_deviceToken;
 }
-@synthesize window = _window;
-@synthesize viewController = _viewController;
-
-@synthesize gexinPusher = _gexinPusher;
-@synthesize appKey = _appKey;
-@synthesize appSecret = _appSecret;
-@synthesize appID = _appID;
-@synthesize clientId = _clientId;
-@synthesize sdkStatus = _sdkStatus;
-@synthesize lastPayloadIndex = _lastPaylodIndex;
-@synthesize payloadId = _payloadId;
-
 
 - (void)registerRemoteNotification {
 
@@ -495,20 +501,6 @@ static void uncaughtExceptionHandler(NSException *exception) {
     return YES;
 }
 
-
-
-
-
-
-//- (void)testSendMessage
-//{
-//    UIViewController *sendMessageView = [[SendMessageController alloc] initWithNibName:@"SendMessageController" bundle:nil];
-//    [_naviController pushViewController:sendMessageView animated:YES];
-//    [sendMessageView release];
-//}
-
-
-
 #pragma mark - GexinSdkDelegate
 - (void)GexinSdkDidRegisterClient:(NSString *)clientId
 {
@@ -631,21 +623,6 @@ static void uncaughtExceptionHandler(NSException *exception) {
     [GeTuiSdk unbindAlias:aAlias];
 }
 
-- (void)testSdkFunction
-{
-//    UIViewController *funcsView = [[TestFunctionController alloc] initWithNibName:@"TestFunctionController" bundle:nil];
-//    [_naviController pushViewController:funcsView animated:YES];
-//    [funcsView release];
-}
-
-- (void)testGetClientId {
-    NSString *clientId = [GeTuiSdk clientId];
-
-//    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"当前的CID" message:clientId delegate:nil cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
-//    [alertView show];
-//    [alertView release];
-}
-
 #pragma mark - GexinSdkDelegate
 - (void)GeTuiSdkDidRegisterClient:(NSString *)clientId
 {
@@ -675,13 +652,13 @@ static void uncaughtExceptionHandler(NSException *exception) {
                                             encoding:NSUTF8StringEncoding];
     }
 
-    NSString *record = [NSString stringWithFormat:@"%d, %@, %@", ++_lastPaylodIndex, [self formateTime:[NSDate date]], payloadMsg];
+    NSString *record = [NSString stringWithFormat:@"%d, %@, %@", ++_lastPayloadIndex, [self formateTime:[NSDate date]], payloadMsg];
 
-//    [[ToolManager sharedManager] alertTitle_Simple:[NSString stringWithFormat:@"%d, %@, %@", ++_lastPaylodIndex, [self formateTime:[NSDate date]], payloadMsg]];
+//    [[ToolManager sharedManager] alertTitle_Simple:[NSString stringWithFormat:@"%d, %@, %@", ++_lastPayloadIndex, [self formateTime:[NSDate date]], payloadMsg]];
 
     [[NSNotificationCenter defaultCenter] postNotificationName:@"getnotification" object:nil];
     [_viewController logMsg:record];
-    [_viewController updateMsgCount:_lastPaylodIndex];
+    [_viewController updateMsgCount:_lastPayloadIndex];
 //    [[ToolManager sharedManager] alertTitle_Simple:[[NSString alloc] initWithFormat:@"task id : %@, messageId:%@", taskId, aMsgId]];
 
 

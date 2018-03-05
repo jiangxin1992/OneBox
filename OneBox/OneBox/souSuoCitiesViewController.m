@@ -128,12 +128,20 @@
 - (void)setupRefresh
 {
     // 1.下拉刷新(进入刷新状态就会调用self的headerRereshing)
-    [_tableView addHeaderWithTarget:self action:@selector(headerRereshing)];
-
-    [_tableView headerBeginRefreshing];
+    WeakSelf(ws);
+    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [ws headerRereshing];
+    }];
+    _tableView.mj_header = header;
+    _tableView.mj_header.automaticallyChangeAlpha = YES;
+    header.lastUpdatedTimeLabel.hidden = YES;
 
     // 2.上拉加载更多(进入刷新状态就会调用self的footerRereshing)
-    [_tableView addFooterWithTarget:self action:@selector(footerRereshing)];
+    _tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        [ws footerRereshing];
+    }];
+
+    [_tableView.mj_header beginRefreshing];
 
 }
 - (void)footerRereshing
@@ -169,8 +177,8 @@
     NSDictionary *parameters=@{@"areas":[_cityNameDict objectForKey:@"city_names"],@"page":[[NSString alloc] initWithFormat:@"%ld",(long)_page]};
     [manager GET:[[NSString alloc] initWithFormat:@"%@/v2/schools/schools_by_areas",DNS] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
 
-        [_tableView headerEndRefreshing];
-        [_tableView footerEndRefreshing];
+        [_tableView.mj_header endRefreshing];
+        [_tableView.mj_footer endRefreshing];
 
         NSString *html = operation.responseString;
         NSData* data=[html dataUsingEncoding:NSUTF8StringEncoding];

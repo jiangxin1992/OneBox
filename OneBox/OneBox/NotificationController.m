@@ -22,7 +22,7 @@
 
 @implementation NotificationController
 {
-    UITableView *_tableview;
+    UITableView *_tableView;
     NSMutableArray *dataArr;
     NSInteger _page;
     UIView *nofollow;
@@ -50,7 +50,7 @@
             if(!model.is_readed)
             {
                 model.is_readed=YES;
-                [_tableview reloadData];
+                [_tableView reloadData];
             }
         }
     }
@@ -82,7 +82,7 @@
             {
 
                 [dataArr removeObjectAtIndex:indexPath.section];
-                [_tableview reloadData];
+                [_tableView reloadData];
 
 
             }else
@@ -149,7 +149,7 @@
 }
 - (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _tableview.bounds.size.width, 2*_Scale)] ;
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _tableView.bounds.size.width, 2*_Scale)] ;
     headerView.backgroundColor=_define_backview_color;
     return headerView;
 }
@@ -163,14 +163,14 @@
 
 -(void)CreateTableview
 {
-    _tableview=[[UITableView alloc] initWithFrame:CGRectMake(_margin, 0, ScreenWidth-2*_margin, ScreenHeight+kTabBarHeight) style:UITableViewStylePlain];
-    _tableview.delegate=self;
-    _tableview.dataSource=self;
-    _tableview.backgroundColor=self.view.backgroundColor;
-    _tableview.separatorStyle=UITableViewCellSeparatorStyleNone;
-    _tableview.sectionIndexBackgroundColor = [UIColor clearColor];
-    _tableview.sectionIndexColor = self.view.backgroundColor;
-    [self.view addSubview:_tableview];
+    _tableView=[[UITableView alloc] initWithFrame:CGRectMake(_margin, 0, ScreenWidth-2*_margin, ScreenHeight+kTabBarHeight) style:UITableViewStylePlain];
+    _tableView.delegate=self;
+    _tableView.dataSource=self;
+    _tableView.backgroundColor=self.view.backgroundColor;
+    _tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
+    _tableView.sectionIndexBackgroundColor = [UIColor clearColor];
+    _tableView.sectionIndexColor = self.view.backgroundColor;
+    [self.view addSubview:_tableView];
     [self setupRefresh];
     [self CreateNofollowerView];
 }
@@ -198,12 +198,20 @@
 - (void)setupRefresh
 {
     // 1.下拉刷新(进入刷新状态就会调用self的headerRereshing)
-    [_tableview addHeaderWithTarget:self action:@selector(headerRereshing)];
-
-    [_tableview headerBeginRefreshing];
+    WeakSelf(ws);
+    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [ws headerRereshing];
+    }];
+    _tableView.mj_header = header;
+    _tableView.mj_header.automaticallyChangeAlpha = YES;
+    header.lastUpdatedTimeLabel.hidden = YES;
 
     // 2.上拉加载更多(进入刷新状态就会调用self的footerRereshing)
-    [_tableview addFooterWithTarget:self action:@selector(footerRereshing)];
+    _tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        [ws footerRereshing];
+    }];
+
+    [_tableView.mj_header beginRefreshing];
 
 }
 #pragma mark 开始进入刷新状态
@@ -243,16 +251,16 @@
         {
             nofollow.hidden=YES;
             [dataArr addObjectsFromArray:arr];
-            [_tableview reloadData];
+            [_tableView reloadData];
 
         }
 
-        [_tableview headerEndRefreshing];
-        [_tableview footerEndRefreshing];
+        [_tableView.mj_header endRefreshing];
+        [_tableView.mj_footer endRefreshing];
 
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [_tableview headerEndRefreshing];
-        [_tableview footerEndRefreshing];
+        [_tableView.mj_header endRefreshing];
+        [_tableView.mj_footer endRefreshing];
         [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错白色" Withtype:1]];
     }];
 }

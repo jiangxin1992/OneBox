@@ -749,29 +749,36 @@
  */
 - (void)setupRefresh
 {
-    [_tableView headerBeginRefreshing];
     // 1.下拉刷新(进入刷新状态就会调用self的headerRereshing)
-    [_tableView addHeaderWithTarget:self action:@selector(headerRereshing)];
-
-
+    WeakSelf(ws);
+    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [ws headerRereshing];
+    }];
+    _tableView.mj_header = header;
+    _tableView.mj_header.automaticallyChangeAlpha = YES;
+    header.lastUpdatedTimeLabel.hidden = YES;
 
     // 2.上拉加载更多(进入刷新状态就会调用self的footerRereshing)
-    [_tableView addFooterWithTarget:self action:@selector(footRereshing)];
+    _tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        [ws footerRereshing];
+    }];
+
+    [_tableView.mj_header beginRefreshing];
 
 }
--(void)footRereshing
+-(void)footerRereshing
 {
 //    [[ToolManager sharedManager] alertTitle_Simple:@"没有更多了"];
 
 
 //[ToolManager sharedManager]
-    [_tableView footerEndRefreshing];
+    [_tableView.mj_footer endRefreshing];
 }
 - (void)headerRereshing
 {
 
 //    [[ToolManager sharedManager] alertTitle_Simple:@"没有更多了"];
-    [_tableView headerEndRefreshing];
+    [_tableView.mj_header endRefreshing];
 
 //    [_data_array removeAllObjects];
 //    [self prepareData];

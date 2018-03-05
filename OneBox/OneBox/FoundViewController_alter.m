@@ -213,21 +213,21 @@ _dictPinyinAndChinese = [[NSMutableDictionary alloc] init];
                         {
             NSString *countStr=(NSString *)_dict[@"count"];
             count=[countStr intValue];
-            [_tableView headerEndRefreshing];
+            [_tableView.mj_header endRefreshing];
                         }else
                         {
                             count=0;
                             [_arrayData removeAllObjects];
                             [_arrayChar removeAllObjects];
                             [_arrayResult removeAllObjects];
-                            [_tableView headerEndRefreshing];
+                            [_tableView.mj_header endRefreshing];
             
                         }
 
             
         }else
         {
-            [_tableView footerEndRefreshing];
+            [_tableView.mj_footer endRefreshing];
         }
         [[ToolManager sharedManager] removeProgress];
         
@@ -239,11 +239,11 @@ _dictPinyinAndChinese = [[NSMutableDictionary alloc] init];
         JXLOG(@"发生错误！%@",_error);
         if(start==0)
         {
-            [_tableView headerEndRefreshing];
+            [_tableView.mj_header endRefreshing];
             
         }else
         {
-            [_tableView footerEndRefreshing];
+            [_tableView.mj_footer endRefreshing];
         }
     };
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(navBarReset) name:@"navBarReset" object:nil];
@@ -281,12 +281,20 @@ _dictPinyinAndChinese = [[NSMutableDictionary alloc] init];
 - (void)setupRefresh
 {
     // 1.下拉刷新(进入刷新状态就会调用self的headerRereshing)
-    [_tableView addHeaderWithTarget:self action:@selector(headerRereshing)];
-    
-    [_tableView headerBeginRefreshing];
+    WeakSelf(ws);
+    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [ws headerRereshing];
+    }];
+    _tableView.mj_header = header;
+    _tableView.mj_header.automaticallyChangeAlpha = YES;
+    header.lastUpdatedTimeLabel.hidden = YES;
     
     // 2.上拉加载更多(进入刷新状态就会调用self的footerRereshing)
-    [_tableView addFooterWithTarget:self action:@selector(footerRereshing)];
+    _tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        [ws footerRereshing];
+    }];
+
+    [_tableView.mj_header beginRefreshing];
     
 }
 - (void)headerRereshing
@@ -464,7 +472,7 @@ _dictPinyinAndChinese = [[NSMutableDictionary alloc] init];
         [[ToolManager sharedManager] removeProgress];
 
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [_tableView headerEndRefreshing];
+        [_tableView.mj_header endRefreshing];
        [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错白色" Withtype:1]];
         [[ToolManager sharedManager] removeProgress];
     }];

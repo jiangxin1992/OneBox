@@ -44,13 +44,22 @@
 - (void)setupRefresh
 {
     // 1.下拉刷新(进入刷新状态就会调用self的headerRereshing)
-    [_tableView addHeaderWithTarget:self action:@selector(headerRereshing)];
+    WeakSelf(ws);
+    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [ws headerRereshing];
+    }];
+    _tableView.mj_header = header;
+    _tableView.mj_header.automaticallyChangeAlpha = YES;
+    header.lastUpdatedTimeLabel.hidden = YES;
 
-    [_tableView headerBeginRefreshing];
+    [_tableView.mj_header beginRefreshing];
 
     // 2.上拉加载更多(进入刷新状态就会调用self的footerRereshing)
-    [_tableView addFooterWithTarget:self action:@selector(footerRereshing)];
+    _tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        [ws footerRereshing];
+    }];
 
+    [_tableView.mj_header beginRefreshing];
 }
 - (void)headerRereshing
 {
@@ -106,16 +115,16 @@
             }
 
 
-            [_tableView headerEndRefreshing];
-            [_tableView footerEndRefreshing];
+            [_tableView.mj_header endRefreshing];
+            [_tableView.mj_footer endRefreshing];
             [_tableView reloadData];
 
 
         }else
         {
 
-            [_tableView headerEndRefreshing];
-            [_tableView footerEndRefreshing];
+            [_tableView.mj_header endRefreshing];
+            [_tableView.mj_footer endRefreshing];
              [[ToolManager sharedManager] alertTitle_Simple:[dict objectForKey:@"message"]];
 
         }
@@ -123,8 +132,8 @@
         [[ToolManager sharedManager] removeProgress];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错白色" Withtype:1]];
-        [_tableView headerEndRefreshing];
-        [_tableView footerEndRefreshing];
+        [_tableView.mj_header endRefreshing];
+        [_tableView.mj_footer endRefreshing];
         JXLOG(@"Error: %@", error);
         [[ToolManager sharedManager] removeProgress];
     }];

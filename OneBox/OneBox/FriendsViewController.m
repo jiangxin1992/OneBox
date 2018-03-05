@@ -425,7 +425,7 @@
 -(void)updateImg
 {
     [ArrayData removeAllObjects];
-    [_tableView headerBeginRefreshing];
+    [_tableView.mj_header beginRefreshing];
 }
 -(void)backloginout
 {
@@ -452,13 +452,20 @@
 - (void)setupRefresh
 {
     // 1.下拉刷新(进入刷新状态就会调用self的headerRereshing)
-    [_tableView addHeaderWithTarget:self action:@selector(headerRereshing)];
-
-    [_tableView headerBeginRefreshing];
+    WeakSelf(ws);
+    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [ws headerRereshing];
+    }];
+    _tableView.mj_header = header;
+    _tableView.mj_header.automaticallyChangeAlpha = YES;
+    header.lastUpdatedTimeLabel.hidden = YES;
 
     // 2.上拉加载更多(进入刷新状态就会调用self的footerRereshing)
-    [_tableView addFooterWithTarget:self action:@selector(footerRereshing)];
-    
+    _tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        [ws footerRereshing];
+    }];
+
+    [_tableView.mj_header beginRefreshing];
 }
 #pragma mark 开始进入刷新状态
 - (void)headerRereshing
@@ -882,11 +889,11 @@
         {
 //            [[ToolManager sharedManager] alertTitle_Simple:[dict objectForKey:@"message"]];
         }
-        [_tableView headerEndRefreshing];
-        [_tableView footerEndRefreshing];
+        [_tableView.mj_header endRefreshing];
+        [_tableView.mj_footer endRefreshing];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [_tableView headerEndRefreshing];
-        [_tableView footerEndRefreshing];
+        [_tableView.mj_header endRefreshing];
+        [_tableView.mj_footer endRefreshing];
         [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错白色" Withtype:1]];
     }];
 }

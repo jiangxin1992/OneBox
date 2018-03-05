@@ -16,6 +16,11 @@
 //#define DNS @"http://10.0.1.11:3000"
 //#define DNS @"http://115.28.54.216:8001"
 
+/** 弱指针 */
+#define WeakSelf(ws) __weak __typeof(&*self)ws = self
+/** 强指针 */
+#define StrongSelf(weakSelf)  __strong __typeof(weakSelf)strongSelf = weakSelf;
+
 //自定义log（调试阶段打印,发布阶段不打印）
 #ifdef DEBUG
 

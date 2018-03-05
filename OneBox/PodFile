@@ -11,5 +11,6 @@ target 'OneBox' do
  pod 'BlocksKit', '2.2.5’
  pod 'Bugly', '2.5.0’
  pod 'MJRefresh', '3.1.15.3'
+ pod 'Qiniu', '7.2.3’
 end
 

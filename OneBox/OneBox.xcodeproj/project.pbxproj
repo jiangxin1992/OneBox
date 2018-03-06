@@ -2653,7 +2653,6 @@
 				5389077C1C28F82700D43CE0 /* area.json */,
 				530E79CE1BEC5DEA00EE974B /* country_code.plist */,
 				532A25551AC418AE0078117F /* state_city.plist */,
-				53B5372C1A7F465D0095C129 /* Info.plist */,
 				53A8CD031B0C72FD00AE8618 /* PushConfig.plist */,
 			);
 			name = plist;
@@ -2931,6 +2930,7 @@
 		53B5372B1A7F465D0095C129 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				53B5372C1A7F465D0095C129 /* Info.plist */,
 				3F25812B1E51D61C0004B573 /* icon */,
 				3F2580F01E51D5EE0004B573 /* 动画 */,
 				538591B31B16BD580059301B /* plist */,

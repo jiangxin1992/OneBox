@@ -293,7 +293,9 @@
     //现实授权信息，包括授权ID、授权有效期等。
     //此处可以在用户进入应用的时候直接调用，如授权信息不为空且不过期可帮用户自动实现登录。
     [ShareSDK cancelAuthorize:type];
-    [ShareSDK getUserInfo:type onStateChanged:^(SSDKResponseState state, SSDKUser *user, NSError *error) {
+    [ShareSDK getUserInfo:type
+           onStateChanged:^(SSDKResponseState state, SSDKUser *user, NSError *error)
+    {
         if (state == SSDKResponseStateSuccess)
         {
             [regular createProgress:@"登录中"];
@@ -323,9 +325,7 @@
                 [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错蓝色" Withtype:2]];
                 [regular removeProgress];
             }];
-        }
-        else
-        {
+        }else{
             if(error)
             {
                 //                [self presentViewController:[regular alertTitle_Simple:NSLocalizedString(error.description, @"")] animated:YES completion:nil];

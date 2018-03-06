@@ -18,7 +18,7 @@
 #import "CustomTabbarController.h"
 
 #import "LoginTool.h"
-#import "GeTuiSdk.h"
+#import <GTSDK/GeTuiSdk.h>
 #import "KVNProgress.h"
 #import "MyMD5.h"
 

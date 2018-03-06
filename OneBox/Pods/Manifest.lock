@@ -15,6 +15,7 @@ PODS:
     - BlocksKit/Core
     - BlocksKit/DynamicDelegate
   - Bugly (2.5.0)
+  - GTSDK (2.1.0.0-noidfa)
   - HappyDNS (0.3.12)
   - Masonry (1.1.0)
   - MJExtension (3.0.13)
@@ -25,6 +26,7 @@ PODS:
 DEPENDENCIES:
   - BlocksKit (= 2.2.5)
   - Bugly (= 2.5.0)
+  - GTSDK (= 2.1.0.0-noidfa)
   - Masonry (= 1.1.0)
   - MJExtension (= 3.0.13)
   - MJRefresh (= 3.1.15.3)
@@ -33,12 +35,13 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   BlocksKit: 7f422b971407001178d181a43b99014ea2591fe6
   Bugly: 3ca9f255c01025582df26f9222893b383c7e4b4e
+  GTSDK: 940f6eb5191f7655499c3ec0d6c6f034b84f3f85
   HappyDNS: 691a3041128055d09866f86e6e9ca90f24da1f18
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MJExtension: 5932755f451458eefa24239358817f8d291240c7
   MJRefresh: b48380ae2b927b46c4ef000de9adb8dc748e1df7
   Qiniu: ae0fea1cc379fae1560d8748ac537e0fbeb8626e
 
-PODFILE CHECKSUM: 1ca2bfc038d79f090592cd3db09ce13cfe1047df
+PODFILE CHECKSUM: 19a43051feede15f47b0345736231b6aa364e556
 
 COCOAPODS: 1.3.1

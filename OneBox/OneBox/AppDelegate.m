@@ -5,6 +5,10 @@
 //  Created by 谢江新 on 15-2-2.
 //  Copyright (c) 2015年 谢江新. All rights reserved.
 
+#import "AppDelegate.h"
+
+#import <UserNotifications/UserNotifications.h>
+
 #import <AlipaySDK/AlipaySDK.h>
 
 #import <ShareSDK/ShareSDK.h>
@@ -22,31 +26,28 @@
 //新浪微博SDK需要在项目Build Settings中的Other Linker Flags添加"-ObjC"
 
 #import "EaseMob.h"
-#import "AppDelegate.h"
 #import "CustomTabbarController.h"
 
 #import "MYIntroductionPanel.h"
 #import "MYIntroductionView.h"
 
-#define kAppId           @"aLuGPVna2MAoAVtfbB66a3"
-#define kAppKey          @"6yfaRLwDyZ8PDrfpkFULe"
-#define kAppSecret       @"HpDuxiSFdmA4GJfHwq3u74"
+#define kGtAppId           @"aLuGPVna2MAoAVtfbB66a3"
+#define kGtAppKey          @"6yfaRLwDyZ8PDrfpkFULe"
+#define kGtAppSecret       @"HpDuxiSFdmA4GJfHwq3u74"
+
 #define NotifyActionKey "NotifyAction"
 NSString* const NotificationCategoryIdent  = @"ACTIONABLE";
 NSString* const NotificationActionOneIdent = @"ACTION_ONE";
 NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
 
-@interface AppDelegate ()<UIScrollViewDelegate,MYIntroductionDelegate>
+@interface AppDelegate ()<UIScrollViewDelegate,MYIntroductionDelegate,UNUserNotificationCenterDelegate>
 
 @property (strong, nonatomic) CustomTabbarController *viewController;
-
-@property (strong, nonatomic) GexinSdk *gexinPusher;
 
 @property (retain, nonatomic) NSString *appKey;
 @property (retain, nonatomic) NSString *appSecret;
 @property (retain, nonatomic) NSString *appID;
 @property (retain, nonatomic) NSString *clientId;
-@property (assign, nonatomic) SdkStatus sdkStatus;
 
 @property (assign, nonatomic) int lastPayloadIndex;
 @property (retain, nonatomic) NSString *payloadId;
@@ -58,102 +59,18 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
     BOOL isOut;
     NSString *_deviceToken;
 }
-
-- (void)registerRemoteNotification {
-
-#ifdef __IPHONE_8_0
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) {
-        //IOS8 新的通知机制category注册
-        UIMutableUserNotificationAction *action1;
-        action1 = [[UIMutableUserNotificationAction alloc] init];
-        [action1 setActivationMode:UIUserNotificationActivationModeBackground];
-        [action1 setTitle:@"取消"];
-        [action1 setIdentifier:NotificationActionOneIdent];
-        [action1 setDestructive:NO];
-        [action1 setAuthenticationRequired:NO];
-
-        UIMutableUserNotificationAction *action2;
-        action2 = [[UIMutableUserNotificationAction alloc] init];
-        [action2 setActivationMode:UIUserNotificationActivationModeBackground];
-        [action2 setTitle:@"回复"];
-        [action2 setIdentifier:NotificationActionTwoIdent];
-        [action2 setDestructive:NO];
-        [action2 setAuthenticationRequired:NO];
-
-        UIMutableUserNotificationCategory *actionCategory;
-        actionCategory = [[UIMutableUserNotificationCategory alloc] init];
-        [actionCategory setIdentifier:NotificationCategoryIdent];
-        [actionCategory setActions:@[action1, action2]
-                        forContext:UIUserNotificationActionContextDefault];
-
-        NSSet *categories = [NSSet setWithObject:actionCategory];
-        UIUserNotificationType types = (UIUserNotificationTypeAlert|
-                                        UIUserNotificationTypeSound|
-                                        UIUserNotificationTypeBadge);
-
-        UIUserNotificationSettings *settings;
-        settings = [UIUserNotificationSettings settingsForTypes:types categories:categories];
-        [[UIApplication sharedApplication] registerForRemoteNotifications];
-        [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
-
-
-
-    } else {
-        UIRemoteNotificationType apn_type = (UIRemoteNotificationType)(UIRemoteNotificationTypeAlert|
-                                                                       UIRemoteNotificationTypeSound|
-                                                                       UIRemoteNotificationTypeBadge);
-        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:apn_type];
-    }
-#else
-    UIRemoteNotificationType apn_type = (UIRemoteNotificationType)(UIRemoteNotificationTypeAlert|
-                                                                   UIRemoteNotificationTypeSound|
-                                                                   UIRemoteNotificationTypeBadge);
-    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:apn_type];
-#endif
-    
-}
-- (NSUInteger)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window{
-    return UIInterfaceOrientationMaskPortrait;
-}
-
-
-//接收本地推送
-- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification{
-
-    NSDictionary *userInfo = notification.userInfo;
-    //    [[ToolManager sharedManager] alertTitle_Simple:[[NSString alloc] initWithFormat:@"收到1=%@",userInfo]];
-
-    if (_viewController) {
-        //        [[ToolManager sharedManager] alertTitle_Simple:[[NSString alloc] initWithFormat:@"收到2=%@",userInfo]];
-        [_viewController didReceiveLocalNotification:notification];
-    }
-}
+#pragma mark - 生命周期
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
+    // 友盟统计,在环信sdk中被引用
+    [MobClick startWithAppkey:@"56245bf667e58e115b002eb0" reportPolicy:BATCH channelId:@""];
 
-    [MobClick startWithAppkey:@"56245bf667e58e115b002eb0" reportPolicy:BATCH   channelId:@""];
-
-
-
-    //     [1]:使用APPID/APPKEY/APPSECRENT创建个推实例
-    [self startSdkWith:kAppId appKey:kAppKey appSecret:kAppSecret];
-
-    // [2]:注册APNS
+    // 通过个推平台分配的appId、 appKey 、appSecret 启动SDK，注：该方法需要在主线程中调用
+    [GeTuiSdk startSdkWithAppId:kGtAppId appKey:kGtAppKey appSecret:kGtAppSecret delegate:self];
+    // 注册 APNs
     [self registerRemoteNotification];
 
-    // [2-EXT]: 获取启动时收到的APN数据
-    NSDictionary*message=[launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
-
-    if (message) {
-
-//        NSString*payloadMsg = [message objectForKey:@"payload"];
-//
-//        NSString*record = [NSString stringWithFormat:@"[APN]%@,%@",[NSDate date],payloadMsg];
-//
-//        [_viewController logMsg:record];
-
-    }
-
+    // 启动环信sdk
     [[EaseMob sharedInstance] registerSDKWithAppKey:@"onebox2015#abroadboxios" apnsCertName:@"onebox_push"];
     [[EaseMob sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
 
@@ -208,12 +125,12 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
         #if version<8
         //注册本地推送
         [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound categories:nil]];
-
-#endif
+        #endif
     }
-
 //    [RCIM initWithAppKey:@"c9kqb3rdk7iej" deviceToken:nil];
         // 设置好友信息提供者。
+
+
     /**
      *  设置ShareSDK的appKey，如果尚未在ShareSDK官网注册过App，请移步到http://mob.com/login 登录后台进行应用注册
      *  在将生成的AppKey传入到此方法中。
@@ -300,21 +217,256 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
 
     return YES;
 }
+- (void)applicationWillResignActive:(UIApplication *)application {
+    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
+    // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+}
 
+- (void)applicationDidEnterBackground:(UIApplication *)application {
+    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
+    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    [[EaseMob sharedInstance] applicationDidEnterBackground:application];
+}
+
+- (void)applicationWillEnterForeground:(UIApplication *)application {
+    //    app进入后台时候 让导航栏恢复原样
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"navBarReset" object:self];
+    [[EaseMob sharedInstance] applicationWillEnterForeground:application];
+    NSUInteger _unreadnum=[[EaseMob sharedInstance].chatManager loadTotalUnreadMessagesCountFromDatabase];
+    if(_unreadnum)
+    {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"qiehuan" object:self];
+    }
+    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+}
+
+- (void)applicationDidBecomeActive:(UIApplication *)application {
+
+    [GeTuiSdk resetBadge]; //重置角标计数
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0]; // APP 清空角标
+
+    // [EXT] 重新上线
+    [GeTuiSdk startSdkWithAppId:kGtAppId appKey:kGtAppKey appSecret:kGtAppSecret delegate:self];
+}
+
+- (void)applicationWillTerminate:(UIApplication *)application {
+    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    [[EaseMob sharedInstance] applicationWillTerminate:application];
+}
+#pragma mark - 用户通知(推送) _自定义方法
+
+/** 注册 APNs */
+- (void)registerRemoteNotification {
+    /*
+     警告：Xcode8 需要手动开启"TARGETS -> Capabilities -> Push Notifications"
+     */
+
+    /*
+     警告：该方法需要开发者自定义，以下代码根据 APP 支持的 iOS 系统不同，代码可以对应修改。
+     以下为演示代码，注意根据实际需要修改，注意测试支持的 iOS 系统都能获取到 DeviceToken
+     */
+    if ([[UIDevice currentDevice].systemVersion floatValue] >= 10.0) {
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_10_0 // Xcode 8编译会调用
+        UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+        center.delegate = self;
+        [center requestAuthorizationWithOptions:(UNAuthorizationOptionBadge | UNAuthorizationOptionSound | UNAuthorizationOptionAlert | UNAuthorizationOptionCarPlay) completionHandler:^(BOOL granted, NSError *_Nullable error) {
+            if (!error) {
+                JXLOG(@"request authorization succeeded!");
+            }
+        }];
+
+        [[UIApplication sharedApplication] registerForRemoteNotifications];
+#else // Xcode 7编译会调用
+        UIUserNotificationType types = (UIUserNotificationTypeAlert | UIUserNotificationTypeSound | UIUserNotificationTypeBadge);
+        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:types categories:nil];
+        [[UIApplication sharedApplication] registerForRemoteNotifications];
+        [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+#endif
+    } else if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) {
+        UIUserNotificationType types = (UIUserNotificationTypeAlert | UIUserNotificationTypeSound | UIUserNotificationTypeBadge);
+        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:types categories:nil];
+        [[UIApplication sharedApplication] registerForRemoteNotifications];
+        [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+    } else {
+        UIRemoteNotificationType apn_type = (UIRemoteNotificationType)(UIRemoteNotificationTypeAlert |
+                                                                       UIRemoteNotificationTypeSound |
+                                                                       UIRemoteNotificationTypeBadge);
+        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:apn_type];
+    }
+}
+#pragma mark - 用户通知(推送)回调 _IOS 8.0以上使用
+
+/** 已登记用户通知 */
+- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings {
+    // 注册远程通知（推送）
+    [application registerForRemoteNotifications];
+}
+- (void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+    /// Background Fetch 恢复SDK 运行
+    [GeTuiSdk resume];
+    completionHandler(UIBackgroundFetchResultNewData);
+}
+
+#pragma mark - APP运行中接收到通知(推送)处理
+
+/** APP已经接收到“远程”通知(推送) - (App运行在后台/App运行在前台) */
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    application.applicationIconBadgeNumber = 0; // 标签
+
+    JXLOG(@"\n>>>[Receive RemoteNotification]:%@\n\n", userInfo);
+}
+
+/** APP已经接收到“远程”通知(推送) - 透传推送消息  */
+-(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult result))completionHandler {
+    [[UIApplication sharedApplication] cancelAllLocalNotifications];
+    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"getnotification" object:nil];
+    // 将收到的APNs信息传给个推统计
+    [GeTuiSdk handleRemoteNotification:userInfo];
+    completionHandler(UIBackgroundFetchResultNewData);
+}
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_10_0
+
+//  iOS 10: App在前台获取到通知
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler {
+
+    JXLOG(@"willPresentNotification：%@", notification.request.content.userInfo);
+
+    // 根据APP需要，判断是否要提示用户Badge、Sound、Alert
+    completionHandler(UNNotificationPresentationOptionBadge | UNNotificationPresentationOptionSound | UNNotificationPresentationOptionAlert);
+}
+
+//  iOS 10: 点击通知进入App时触发，在该方法内统计有效用户点击数
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)())completionHandler {
+
+    [[UIApplication sharedApplication] cancelAllLocalNotifications];
+    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"getnotification" object:nil];
+    // [ GTSdk ]：将收到的APNs信息传给个推统计
+    [GeTuiSdk handleRemoteNotification:response.notification.request.content.userInfo];
+    completionHandler(UIBackgroundFetchResultNewData);
+}
+
+#endif
+
+//接收本地推送
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification{
+
+    //    NSDictionary *userInfo = notification.userInfo;
+    //    [[ToolManager sharedManager] alertTitle_Simple:[[NSString alloc] initWithFormat:@"收到1=%@",userInfo]];
+
+    if (_viewController) {
+        //        [[ToolManager sharedManager] alertTitle_Simple:[[NSString alloc] initWithFormat:@"收到2=%@",userInfo]];
+        [_viewController didReceiveLocalNotification:notification];
+    }
+}
+
+#pragma mark - 远程通知(推送)回调
+
+/** 远程通知注册成功委托 */
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken
+{
+    [[EaseMob sharedInstance] application:application didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
+
+    // 获得token并存入
+    NSString *token = [[deviceToken description] stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
+    _deviceToken = [token stringByReplacingOccurrencesOfString:@" " withString:@""] ;
+    [[NSUserDefaults standardUserDefaults] setObject:_deviceToken forKey:@"deviceToken"];
+
+    // [3]:向个推服务器注册deviceToken
+    [GeTuiSdk registerDeviceToken:_deviceToken];
+    
+    [regular registerGeTui];
+}
+/** 远程通知注册失败委托 */
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+    JXLOG(@"\n>>>[DeviceToken Error]:%@\n\n", error.description);
+}
+#pragma mark - GeTuiSdkDelegate
+/** SDK启动成功返回cid */
+- (void)GeTuiSdkDidRegisterClient:(NSString *)clientId {
+
+    // [4-EXT-1]: 个推SDK已注册，返回clientId
+    JXLOG(@"\n>>>[GeTuiSdk RegisterClient]:%@\n\n", clientId);
+}
+
+/** SDK遇到错误回调 */
+- (void)GeTuiSdkDidOccurError:(NSError *)error {
+    // [EXT]:个推错误报告，集成步骤发生的任何错误都在这里通知，如果集成后，无法正常收到消息，查看这里的通知。
+    JXLOG(@"\n>>>[GexinSdk error]:%@\n\n", [error localizedDescription]);
+}
+
+/** SDK收到透传消息回调 */
+- (void)GeTuiSdkDidReceivePayloadData:(NSData *)payloadData andTaskId:(NSString *)taskId andMsgId:(NSString *)msgId andOffLine:(BOOL)offLine fromGtAppId:(NSString *)appId {
+    //收到个推消息
+    NSString *payloadMsg = nil;
+    if (payloadData) {
+        payloadMsg = [[NSString alloc] initWithBytes:payloadData.bytes length:payloadData.length encoding:NSUTF8StringEncoding];
+    }
+
+    NSString *msg = [NSString stringWithFormat:@"taskId=%@,messageId:%@,payloadMsg:%@%@",taskId,msgId, payloadMsg,offLine ? @"<离线消息>" : @""];
+    JXLOG(@"\n>>>[GexinSdk ReceivePayload]:%@\n\n", msg);
+}
+/** SDK收到sendMessage消息回调 */
+- (void)GeTuiSdkDidSendMessage:(NSString *)messageId result:(int)result {
+    // [4-EXT]:发送上行消息结果反馈
+    NSString *msg = [NSString stringWithFormat:@"sendmessage=%@,result=%d", messageId, result];
+    JXLOG(@"\n>>>[GexinSdk DidSendMessage]:%@\n\n", msg);
+}
+
+/** SDK运行状态通知 */
+- (void)GeTuiSDkDidNotifySdkState:(SdkStatus)aStatus {
+    // [EXT]:通知SDK运行状态
+    JXLOG(@"\n>>>[GexinSdk SdkState]:%u\n\n", aStatus);
+    [_viewController updateStatusView:self];
+}
+
+/** SDK设置推送模式回调 */
+- (void)GeTuiSdkDidSetPushMode:(BOOL)isModeOff error:(NSError *)error {
+    if (error) {
+        JXLOG(@"\n>>>[GexinSdk SetModeOff Error]:%@\n\n", [error localizedDescription]);
+        return;
+    }
+
+    JXLOG(@"\n>>>[GexinSdk SetModeOff]:%@\n\n", isModeOff ? @"开启" : @"关闭");
+}
+#pragma mark - 支付宝回调
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation
+{
+    if ([url.host isEqualToString:@"safepay"]) {
+        //跳转支付宝钱包进行支付，处理支付结果
+        [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
+            JXLOG(@"result = %@",resultDic);
+        }];
+    }
+    return YES;
+}
+
+// NOTE: 9.0以后使用新API接口
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString*, id> *)options{
+    if ([url.host isEqualToString:@"safepay"]) {
+        //跳转支付宝钱包进行支付，处理支付结果
+        [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
+            JXLOG(@"result = %@",resultDic);
+        }];
+    }
+    return YES;
+}
+
+#pragma mark - SomeAction
 static void uncaughtExceptionHandler(NSException *exception) {
     JXLOG(@"CRASH: %@", exception);
     JXLOG(@"Stack Trace: %@", [exception callStackSymbols]);
 }
-//去主页
-//-(void)gotoMain{
-//    //如果第一次进入没有文件，我们就创建这个文件
-//    NSFileManager *manager=[NSFileManager defaultManager];
-//    //判断 我是否创建了文件，如果没创建 就创建这个文件（这种情况就运行一次，也就是第一次启动程序的时候）
-//    if (![manager fileExistsAtPath:[NSHomeDirectory() stringByAppendingString:@"aa.txt"]]) {
-//        [manager createFileAtPath:[NSHomeDirectory() stringByAppendingString:@"aa.txt"] contents:nil attributes:nil];
-//    }
-//
-//}
+-(NSString*) formateTime:(NSDate*) date {
+    NSDateFormatter* formatter = [[NSDateFormatter alloc]init];
+    [formatter setDateFormat:@"HH:mm:ss"];
+    NSString* dateTime = [formatter stringFromDate:date];
+    return dateTime;
+}
 //假引导页面
 -(void)makeLaunchView{
 
@@ -362,21 +514,18 @@ static void uncaughtExceptionHandler(NSException *exception) {
     else if (finishType == MYFinishTypeSwipeOut){
         JXLOG(@"Did Finish Introduction By Swiping Out");
     }
-
 }
 -(void)introductionDidChangeToPanel:(MYIntroductionPanel *)panel withIndex:(NSInteger)panelIndex{
-    JXLOG(@"%@ \nPanelIndex: %d", panel.Description, panelIndex);
+    JXLOG(@"%@ \nPanelIndex: %ld", panel.Description, (long)panelIndex);
 }
 
-#pragma mark scrollView的代理
+#pragma mark - scrollView的代理
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
     //这里是在滚动的时候判断 我滚动到哪张图片了，如果滚动到了最后一张图片，那么
     //如果在往下面滑动的话就该进入到主界面了，我这里利用的是偏移量来判断的，当
     //一共五张图片，所以当图片全部滑完后 又像后多滑了30 的时候就做下一个动作
     if (scrollView.contentOffset.x>3*320+30) {
-
         isOut=YES;//这是我声明的一个全局变量Bool 类型的，初始值为no，当达到我需求的条件时将值改为yes
-
     }
 }
 //停止滑动
@@ -390,304 +539,8 @@ static void uncaughtExceptionHandler(NSException *exception) {
         }completion:^(BOOL finished) {
             [scrollView  removeFromSuperview];//将scrollView移除
             //            [self gotoMain];//进入主界面
-            
         } ];
-    }  
-    
-}
-- (void)applicationWillResignActive:(UIApplication *)application {
-    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-    // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
-}
-
-- (void)applicationDidEnterBackground:(UIApplication *)application {
-
-    [self stopSdk];
-    // [EXT] APP进入后台时，通知个推SDK进入后台
-    [GeTuiSdk enterBackground];
-    [[EaseMob sharedInstance] applicationDidEnterBackground:application];
-
-}
-
-- (void)applicationWillEnterForeground:(UIApplication *)application {
-    //    app进入后台时候 让导航栏恢复原样
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"navBarReset" object:self];
-    [[EaseMob sharedInstance] applicationWillEnterForeground:application];
-    NSUInteger _unreadnum=[[EaseMob sharedInstance].chatManager loadTotalUnreadMessagesCountFromDatabase];
-    if(_unreadnum)
-    {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"qiehuan" object:self];
     }
-    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-}
-
-- (void)applicationDidBecomeActive:(UIApplication *)application {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-//    [self startSdkWith:_appID appKey:_appKey appSecret:_appSecret];
-    [[UIApplication sharedApplication] cancelAllLocalNotifications];
-    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
-
-    // [EXT] 重新上线
-    [self startSdkWith:_appID appKey:_appKey appSecret:_appSecret];
-}
-
-- (void)applicationWillTerminate:(UIApplication *)application {
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-    [[EaseMob sharedInstance] applicationWillTerminate:application];
-}
-
-
-
-- (BOOL)application:(UIApplication *)application
-            openURL:(NSURL *)url
-  sourceApplication:(NSString *)sourceApplication
-         annotation:(id)annotation
-{
-    if ([url.host isEqualToString:@"safepay"]) {
-        //跳转支付宝钱包进行支付，处理支付结果
-        [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
-            JXLOG(@"result = %@",resultDic);
-        }];
-    }
-    return YES;
-}
-
-
-
-#pragma mark-个推
-#pragma mark-登记
-- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken
-{
-    [[EaseMob sharedInstance] application:application didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
-    NSString *token = [[deviceToken description] stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
-    //    [_deviceToken release];
-    _deviceToken = [token stringByReplacingOccurrencesOfString:@" " withString:@""] ;
-    if([[NSUserDefaults standardUserDefaults] objectForKey:@"deviceToken"]==nil)
-    {
-        [[NSUserDefaults standardUserDefaults] setObject:_deviceToken forKey:@"deviceToken"];
-    }
-
-    // [3]:向个推服务器注册deviceToken
-    [GeTuiSdk registerDeviceToken:_deviceToken];
-    
-    [regular registerGeTui];
-}
-#pragma mark-登记失败
-- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
-{
-    // [3-EXT]:如果APNS注册失败，通知个推服务器
-    [GeTuiSdk registerDeviceToken:@""];
-
-//    [_viewController logMsg:[NSString stringWithFormat:@"didFailToRegisterForRemoteNotificationsWithError:%@", [error localizedDescription]]];
-}
-
-
-
-
-- (void)stopSdk
-{
-//    [GeTuiSdk enterBackground];
-    [GeTuiSdk enterBackground];
-}
-
-- (BOOL)checkSdkInstance
-{
-    if (!_gexinPusher) {
-//        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"错误" message:@"SDK未启动" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
-//        [alertView show];
-
-        return NO;
-    }
-    return YES;
-}
-
-#pragma mark - GexinSdkDelegate
-- (void)GexinSdkDidRegisterClient:(NSString *)clientId
-{
-    // [4-EXT-1]: 个推SDK已注册
-    _sdkStatus = SdkStatusStarted;
-
-
-    [_viewController updateStatusView:self];
-
-    //    [self stopSdk];
-}
-#pragma mark-收到个推消息
-- (void)GexinSdkDidReceivePayload:(NSString *)payloadId fromApplication:(NSString *)appId
-{
-    // [4]: 收到个推消息
-
-
-
-//    NSData *payload = [_gexinPusher retrivePayloadById:payloadId];
-//    NSString *payloadMsg = nil;
-//    if (payload) {
-//        payloadMsg = [[NSString alloc] initWithBytes:payload.bytes
-//                                              length:payload.length
-//                                            encoding:NSUTF8StringEncoding];
-//    }
-
-
-
-
-
-}
-
-- (void)GexinSdkDidSendMessage:(NSString *)messageId result:(int)result {
-    // [4-EXT]:发送上行消息结果反馈
-//    NSString *record = [NSString stringWithFormat:@"Received sendmessage:%@ result:%d", messageId, result];
-//    [_viewController logMsg:record];
-}
-
-- (void)GexinSdkDidOccurError:(NSError *)error
-{
-    // [EXT]:个推错误报告，集成步骤发生的任何错误都在这里通知，如果集成后，无法正常收到消息，查看这里的通知。
-//    [_viewController logMsg:[NSString stringWithFormat:@">>>[GexinSdk error]:%@", [error localizedDescription]]];
-}
-#pragma mark - background fetch  唤醒
-- (void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
-
-    //[5] Background Fetch 恢复SDK 运行
-    [GeTuiSdk resume];
-    completionHandler(UIBackgroundFetchResultNewData);
-}
-
-
-
-- (NSString*)dictionaryToJson:(NSDictionary *)dic
-
-{
-
-    NSError *parseError = nil;
-
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:&parseError];
-
-    return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-    
-}
-
-
-#pragma mark-收到透传消息
--(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult result))completionHandler {
-    [[UIApplication sharedApplication] cancelAllLocalNotifications];
-    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"getnotification" object:nil];
-    completionHandler(UIBackgroundFetchResultNewData);
-}
-
-- (void)startSdkWith:(NSString *)appID appKey:(NSString *)appKey appSecret:(NSString *)appSecret
-{
-
-    //    _appID = [appID retain];
-    //    _appKey = [appKey retain];
-    //    _appSecret = [appSecret retain];
-
-    NSError *err = nil;
-
-    //[1-1]:通过 AppId、 appKey 、appSecret 启动SDK
-    [GeTuiSdk startSdkWithAppId:appID appKey:appKey appSecret:appSecret delegate:self error:&err];
-
-    //[1-2]:设置是否后台运行开关
-    [GeTuiSdk runBackgroundEnable:YES];
-    //[1-3]:设置电子围栏功能，开启LBS定位服务 和 是否允许SDK 弹出用户定位请求
-    [GeTuiSdk lbsLocationEnable:YES andUserVerify:YES];
-
-    if (err) {
-//        [_viewController logMsg:[NSString stringWithFormat:@"%@", [err localizedDescription]]];
-    }
-    
-}
-
-- (void)setDeviceToken:(NSString *)aToken
-{
-
-    [GeTuiSdk registerDeviceToken:aToken];
-}
-
-- (BOOL)setTags:(NSArray *)aTags error:(NSError **)error
-{
-    return [GeTuiSdk setTags:aTags];
-}
-
-- (NSString *)sendMessage:(NSData *)body error:(NSError **)error {
-
-    return [GeTuiSdk sendMessage:body error:error];
-}
-
-- (void)bindAlias:(NSString *)aAlias {
-    [GeTuiSdk bindAlias:aAlias];
-}
-
-- (void)unbindAlias:(NSString *)aAlias {
-
-    [GeTuiSdk unbindAlias:aAlias];
-}
-
-#pragma mark - GexinSdkDelegate
-- (void)GeTuiSdkDidRegisterClient:(NSString *)clientId
-{
-    // [4-EXT-1]: 个推SDK已注册，返回clientId
-//    [_clientId release];
-//    _clientId = [clientId retain];
-
-    if (_deviceToken) {
-        [GeTuiSdk registerDeviceToken:_deviceToken];
-    }
-}
-#pragma mark-收到个推消息
-- (void)GeTuiSdkDidReceivePayload:(NSString *)payloadId andTaskId:(NSString *)taskId andMessageId:(NSString *)aMsgId fromApplication:(NSString *)appId
-{
-    
-    // [4]: 收到个推消息
-//    [_payloadId release];
-//    _payloadId = [payloadId retain];
-
-
-    NSData* payload = [GeTuiSdk retrivePayloadById:payloadId];
-
-    NSString *payloadMsg = nil;
-    if (payload) {
-        payloadMsg = [[NSString alloc] initWithBytes:payload.bytes
-                                              length:payload.length
-                                            encoding:NSUTF8StringEncoding];
-    }
-
-    NSString *record = [NSString stringWithFormat:@"%d, %@, %@", ++_lastPayloadIndex, [self formateTime:[NSDate date]], payloadMsg];
-
-//    [[ToolManager sharedManager] alertTitle_Simple:[NSString stringWithFormat:@"%d, %@, %@", ++_lastPayloadIndex, [self formateTime:[NSDate date]], payloadMsg]];
-
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"getnotification" object:nil];
-    [_viewController logMsg:record];
-    [_viewController updateMsgCount:_lastPayloadIndex];
-//    [[ToolManager sharedManager] alertTitle_Simple:[[NSString alloc] initWithFormat:@"task id : %@, messageId:%@", taskId, aMsgId]];
-
-
-
-}
-
-- (void)GeTuiSdkDidSendMessage:(NSString *)messageId result:(int)result {
-    // [4-EXT]:发送上行消息结果反馈
-//    NSString *record = [NSString stringWithFormat:@"Received sendmessage:%@ result:%d", messageId, result];
-//    [_viewController logMsg:record];
-}
-
-- (void)GeTuiSdkDidOccurError:(NSError *)error
-{
-    // [EXT]:个推错误报告，集成步骤发生的任何错误都在这里通知，如果集成后，无法正常收到消息，查看这里的通知。
-//    [_viewController logMsg:[NSString stringWithFormat:@">>>[GexinSdk error]:%@", [error localizedDescription]]];
-}
-
-- (void)GeTuiSDkDidNotifySdkState:(SdkStatus)aStatus {
-    // [EXT]:通知SDK运行状态
-    _sdkStatus = aStatus;
-    [_viewController updateStatusView:self];
-}
-
--(NSString*) formateTime:(NSDate*) date {
-    NSDateFormatter* formatter = [[NSDateFormatter alloc]init];
-    [formatter setDateFormat:@"HH:mm:ss"];
-    NSString* dateTime = [formatter stringFromDate:date];
-    return dateTime;
 }
 
 @end

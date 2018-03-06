@@ -101,7 +101,6 @@
 		530823361A8247A8004306D1 /* KVNProgressView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 530823351A8247A8004306D1 /* KVNProgressView.xib */; };
 		5308233C1A8247BD004306D1 /* UIImage+KVNImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 530823391A8247BD004306D1 /* UIImage+KVNImageEffects.m */; };
 		5308233D1A8247BD004306D1 /* UIImage+KVNEmpty.m in Sources */ = {isa = PBXBuildFile; fileRef = 5308233B1A8247BD004306D1 /* UIImage+KVNEmpty.m */; };
-		530992071B4A9B830079675F /* libGeTuiSdk-1.2.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 530992061B4A9B830079675F /* libGeTuiSdk-1.2.0.a */; };
 		530A54C41A8C50C50048EEEB /* Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 530A54C31A8C50C50048EEEB /* Tools.m */; };
 		530ADAE41B09A9DC00BFE726 /* academicRecordModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 530ADAE31B09A9DC00BFE726 /* academicRecordModel.m */; };
 		530E79CF1BEC5DEA00EE974B /* country_code.plist in Resources */ = {isa = PBXBuildFile; fileRef = 530E79CE1BEC5DEA00EE974B /* country_code.plist */; };
@@ -758,8 +757,6 @@
 		3F9586141E56EB12004A5AC2 /* libc++abi.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++abi.tbd"; path = "usr/lib/libc++abi.tbd"; sourceTree = SDKROOT; };
 		3F9586161E56EB1B004A5AC2 /* libz.1.2.5.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.2.5.tbd; path = usr/lib/libz.1.2.5.tbd; sourceTree = SDKROOT; };
 		3F9586181E56EB2F004A5AC2 /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
-		3FBF5138204D4D6B0091CA09 /* GexinSdk.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GexinSdk.h; sourceTree = "<group>"; };
-		3FBF5139204D4D6C0091CA09 /* GXSdkError.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXSdkError.h; sourceTree = "<group>"; };
 		3FE75F19204CE729000C7BAC /* libEaseMobClientSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libEaseMobClientSDK.a; sourceTree = "<group>"; };
 		53050D1E1AFB4B330066ABC8 /* schoolDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = schoolDetailModel.h; sourceTree = "<group>"; };
 		53050D1F1AFB4B330066ABC8 /* schoolDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = schoolDetailModel.m; sourceTree = "<group>"; };
@@ -771,9 +768,6 @@
 		5308233A1A8247BD004306D1 /* UIImage+KVNEmpty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+KVNEmpty.h"; sourceTree = "<group>"; };
 		5308233B1A8247BD004306D1 /* UIImage+KVNEmpty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+KVNEmpty.m"; sourceTree = "<group>"; };
 		5308237B1A8272DD004306D1 /* Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Header.h; sourceTree = "<group>"; };
-		530992041B4A9B830079675F /* GeTuiSdk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeTuiSdk.h; sourceTree = "<group>"; };
-		530992051B4A9B830079675F /* GeTuiSdkError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeTuiSdkError.h; sourceTree = "<group>"; };
-		530992061B4A9B830079675F /* libGeTuiSdk-1.2.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libGeTuiSdk-1.2.0.a"; sourceTree = "<group>"; };
 		530A54C21A8C50C50048EEEB /* Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tools.h; sourceTree = "<group>"; };
 		530A54C31A8C50C50048EEEB /* Tools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tools.m; sourceTree = "<group>"; };
 		530ADAE21B09A9DC00BFE726 /* academicRecordModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = academicRecordModel.h; sourceTree = "<group>"; };
@@ -1816,7 +1810,6 @@
 				53F976081BB29501004FC0B7 /* libopencore-amrwb.a in Frameworks */,
 				66BEED3F1AB2ADE500C1F5AC /* OpenGLES.framework in Frameworks */,
 				3F2581B51E51E5E50004B573 /* SMSConnector.framework in Frameworks */,
-				530992071B4A9B830079675F /* libGeTuiSdk-1.2.0.a in Frameworks */,
 				66C731671AC13D25002BCBB9 /* libssl.a in Frameworks */,
 				66C731661AC13D25002BCBB9 /* libcrypto.a in Frameworks */,
 				3F2581BE1E51E5E50004B573 /* MOBFoundation.framework in Frameworks */,
@@ -2342,26 +2335,6 @@
 				66AF3F211AA44B9F00F92C6D /* SizeTool.m */,
 			);
 			name = regular;
-			sourceTree = "<group>";
-		};
-		530991F91B4A93FB0079675F /* 个推 */ = {
-			isa = PBXGroup;
-			children = (
-				3FBF5138204D4D6B0091CA09 /* GexinSdk.h */,
-				3FBF5139204D4D6C0091CA09 /* GXSdkError.h */,
-				530992031B4A9B830079675F /* include */,
-				530992061B4A9B830079675F /* libGeTuiSdk-1.2.0.a */,
-			);
-			name = "个推";
-			sourceTree = "<group>";
-		};
-		530992031B4A9B830079675F /* include */ = {
-			isa = PBXGroup;
-			children = (
-				530992041B4A9B830079675F /* GeTuiSdk.h */,
-				530992051B4A9B830079675F /* GeTuiSdkError.h */,
-			);
-			path = include;
 			sourceTree = "<group>";
 		};
 		530A54C11A8C50B50048EEEB /* Tools */ = {
@@ -2960,7 +2933,6 @@
 			children = (
 				3F25817E1E51E5E50004B573 /* ShareSDK */,
 				53B7715D1C4F3C1200F20085 /* ZFB */,
-				530991F91B4A93FB0079675F /* 个推 */,
 				53F9731B1BB2917F004FC0B7 /* EaseMobSDK环信 */,
 			);
 			name = SDK;

@@ -12,5 +12,7 @@ target 'OneBox' do
  pod 'Bugly', '2.5.0’
  pod 'MJRefresh', '3.1.15.3'
  pod 'Qiniu', '7.2.3’
+
+ pod 'GTSDK', '2.1.0.0-noidfa' # 无 idfa版本
 end
 

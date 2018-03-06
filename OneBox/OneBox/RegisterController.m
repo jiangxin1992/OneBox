@@ -10,7 +10,7 @@
 
 #import "webViewController.h"
 
-#import "GeTuiSdk.h"
+#import <GTSDK/GeTuiSdk.h>
 #import "MyMD5.h"
 
 #define Color_tp [UIColor colorWithRed:170.0f/255.0f green:230.0f/255.0f blue:245.0f/255.0f alpha:1]

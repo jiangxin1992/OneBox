@@ -8,7 +8,7 @@
 
 #import "RegisterEmailController.h"
 
-#import "GeTuiSdk.h"
+#import <GTSDK/GeTuiSdk.h>
 #import "MyMD5.h"
 
 #import "webViewController.h"

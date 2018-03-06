@@ -13,7 +13,7 @@
 #import <CommonCrypto/CommonDigest.h>
 #import "NSString+extra.h"
 #import "Tools.h"
-#import "GeTuiSdk.h"
+#import <GTSDK/GeTuiSdk.h>
 
 @implementation regular
 

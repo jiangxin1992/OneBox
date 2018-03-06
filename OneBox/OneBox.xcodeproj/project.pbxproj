@@ -699,6 +699,7 @@
 		3F9586141E56EB12004A5AC2 /* libc++abi.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++abi.tbd"; path = "usr/lib/libc++abi.tbd"; sourceTree = SDKROOT; };
 		3F9586161E56EB1B004A5AC2 /* libz.1.2.5.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.2.5.tbd; path = usr/lib/libz.1.2.5.tbd; sourceTree = SDKROOT; };
 		3F9586181E56EB2F004A5AC2 /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
+		3FCD89D2204E7C96004AF13A /* OneBox.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OneBox.entitlements; sourceTree = "<group>"; };
 		3FE75F19204CE729000C7BAC /* libEaseMobClientSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libEaseMobClientSDK.a; sourceTree = "<group>"; };
 		53050D1E1AFB4B330066ABC8 /* schoolDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = schoolDetailModel.h; sourceTree = "<group>"; };
 		53050D1F1AFB4B330066ABC8 /* schoolDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = schoolDetailModel.m; sourceTree = "<group>"; };
@@ -2915,6 +2916,7 @@
 		53B5372A1A7F465D0095C129 /* OneBox */ = {
 			isa = PBXGroup;
 			children = (
+				3FCD89D2204E7C96004AF13A /* OneBox.entitlements */,
 				3F9585F01E56BA79004A5AC2 /* Model */,
 				53A13C9A1A80775E009108DE /* Controller */,
 				3F90A8371E52D7AA00DBEF1A /* Category */,
@@ -4609,6 +4611,9 @@
 							com.apple.BackgroundModes = {
 								enabled = 1;
 							};
+							com.apple.Push = {
+								enabled = 1;
+							};
 						};
 					};
 					53B537401A7F465D0095C129 = {
@@ -5421,6 +5426,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = NO;
+				CODE_SIGN_ENTITLEMENTS = OneBox/OneBox.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
@@ -5484,6 +5490,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = NO;
+				CODE_SIGN_ENTITLEMENTS = OneBox/OneBox.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;

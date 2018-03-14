@@ -44,6 +44,7 @@
 		3F2581361E51D6240004B573 /* iconpad@120.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F2581301E51D6240004B573 /* iconpad@120.png */; };
 		3F2581371E51D6240004B573 /* iconpad@152.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F2581311E51D6240004B573 /* iconpad@152.png */; };
 		3F25817D1E51E5900004B573 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F25817C1E51E5900004B573 /* JavaScriptCore.framework */; };
+		3F4A7A2B20591CAE005FF374 /* Foundtion+JRLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F4A7A2A20591CAD005FF374 /* Foundtion+JRLog.m */; };
 		3F4B1E071DE3DCC4000867D0 /* screenShcoolView_城市_city.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F4B1E031DE3DCC4000867D0 /* screenShcoolView_城市_city.png */; };
 		3F4B1E081DE3DCC4000867D0 /* screenShcoolView_城镇_town.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F4B1E041DE3DCC4000867D0 /* screenShcoolView_城镇_town.png */; };
 		3F4B1E091DE3DCC4000867D0 /* screenShcoolView_郊区_outskirt.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F4B1E051DE3DCC4000867D0 /* screenShcoolView_郊区_outskirt.png */; };
@@ -646,6 +647,7 @@
 		3F2581301E51D6240004B573 /* iconpad@120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconpad@120.png"; sourceTree = "<group>"; };
 		3F2581311E51D6240004B573 /* iconpad@152.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconpad@152.png"; sourceTree = "<group>"; };
 		3F25817C1E51E5900004B573 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		3F4A7A2A20591CAD005FF374 /* Foundtion+JRLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Foundtion+JRLog.m"; sourceTree = "<group>"; };
 		3F4B1E031DE3DCC4000867D0 /* screenShcoolView_城市_city.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "screenShcoolView_城市_city.png"; sourceTree = "<group>"; };
 		3F4B1E041DE3DCC4000867D0 /* screenShcoolView_城镇_town.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "screenShcoolView_城镇_town.png"; sourceTree = "<group>"; };
 		3F4B1E051DE3DCC4000867D0 /* screenShcoolView_郊区_outskirt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "screenShcoolView_郊区_outskirt.png"; sourceTree = "<group>"; };
@@ -1819,6 +1821,7 @@
 		3F90A8371E52D7AA00DBEF1A /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				3F4A7A2A20591CAD005FF374 /* Foundtion+JRLog.m */,
 				3F90A8721E53267200DBEF1A /* NSDate+Formatter */,
 				3F90A86C1E52D8B000DBEF1A /* NSString+extra */,
 				3F90A8671E52D85C00DBEF1A /* UIView+Frame */,
@@ -5041,6 +5044,7 @@
 				53F976021BB29501004FC0B7 /* TTGlobalUICommon.m in Sources */,
 				53F975CF1BB29501004FC0B7 /* EMCDDeviceManager+Remind.m in Sources */,
 				53F976051BB29501004FC0B7 /* wav.mm in Sources */,
+				3F4A7A2B20591CAE005FF374 /* Foundtion+JRLog.m in Sources */,
 				53F975E91BB29501004FC0B7 /* UIImage+EMGIF.m in Sources */,
 				538CB7D21AFA13A300C27431 /* AFURLSessionManager.m in Sources */,
 				538BC7FB1B15A7AC00B12646 /* FoundViewController_alter.m in Sources */,

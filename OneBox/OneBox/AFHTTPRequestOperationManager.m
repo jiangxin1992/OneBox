@@ -98,12 +98,15 @@
                                                        failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
     NSError *serializationError = nil;
+//    URLString = [URLString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
     NSMutableURLRequest *request = [self.requestSerializer requestWithMethod:method URLString:[[NSURL URLWithString:URLString relativeToURL:self.baseURL] absoluteString] parameters:parameters error:&serializationError];
     if (serializationError) {
         if (failure) {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wgnu"
             dispatch_async(self.completionQueue ?: dispatch_get_main_queue(), ^{
+                JXLOG(@"----------Http响应----------\n");
+                JXLOG(@"----------Http响应error：%@\n",serializationError);
                 failure(nil, serializationError);
             });
 #pragma clang diagnostic pop
@@ -139,6 +142,12 @@
                         success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                         failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
+    JXLOG(@"----------Http请求----------\n");
+
+    JXLOG(@"----------Http请求Body：%@\n", parameters);
+
+    JXLOG(@"----------Http请求Url：%@\n", URLString);
+
     AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithHTTPMethod:@"GET" URLString:URLString parameters:parameters success:success failure:failure];
 
     [self.operationQueue addOperation:operation];
@@ -167,6 +176,12 @@
                          success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                          failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
+    JXLOG(@"----------Http请求----------\n");
+
+    JXLOG(@"----------Http请求Body：%@\n", parameters);
+
+    JXLOG(@"----------Http请求Url：%@\n", URLString);
+
     AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithHTTPMethod:@"POST" URLString:URLString parameters:parameters success:success failure:failure];
 
     [self.operationQueue addOperation:operation];
@@ -180,6 +195,12 @@
                          success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                          failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
+    JXLOG(@"----------Http请求----------\n");
+
+    JXLOG(@"----------Http请求Body：%@\n", parameters);
+
+    JXLOG(@"----------Http请求Url：%@\n", URLString);
+
     NSError *serializationError = nil;
     NSMutableURLRequest *request = [self.requestSerializer multipartFormRequestWithMethod:@"POST" URLString:[[NSURL URLWithString:URLString relativeToURL:self.baseURL] absoluteString] parameters:parameters constructingBodyWithBlock:block error:&serializationError];
     if (serializationError) {
@@ -207,6 +228,12 @@
                         success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                         failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
+    JXLOG(@"----------Http请求----------\n");
+
+    JXLOG(@"----------Http请求Body：%@\n", parameters);
+
+    JXLOG(@"----------Http请求Url：%@\n", URLString);
+
     AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithHTTPMethod:@"PUT" URLString:URLString parameters:parameters success:success failure:failure];
 
     [self.operationQueue addOperation:operation];
@@ -219,6 +246,12 @@
                           success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                           failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
+    JXLOG(@"----------Http请求----------\n");
+
+    JXLOG(@"----------Http请求Body：%@\n", parameters);
+
+    JXLOG(@"----------Http请求Url：%@\n", URLString);
+
     AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithHTTPMethod:@"PATCH" URLString:URLString parameters:parameters success:success failure:failure];
 
     [self.operationQueue addOperation:operation];
@@ -231,6 +264,12 @@
                            success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                            failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
+    JXLOG(@"----------Http请求----------\n");
+
+    JXLOG(@"----------Http请求Body：%@\n", parameters);
+
+    JXLOG(@"----------Http请求Url：%@\n", URLString);
+
     AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithHTTPMethod:@"DELETE" URLString:URLString parameters:parameters success:success failure:failure];
 
     [self.operationQueue addOperation:operation];

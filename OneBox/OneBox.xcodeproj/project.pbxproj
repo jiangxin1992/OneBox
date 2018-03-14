@@ -48,6 +48,7 @@
 		3F4B1E081DE3DCC4000867D0 /* screenShcoolView_城镇_town.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F4B1E041DE3DCC4000867D0 /* screenShcoolView_城镇_town.png */; };
 		3F4B1E091DE3DCC4000867D0 /* screenShcoolView_郊区_outskirt.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F4B1E051DE3DCC4000867D0 /* screenShcoolView_郊区_outskirt.png */; };
 		3F4B1E0A1DE3DCC4000867D0 /* screenShcoolView_乡村_village.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F4B1E061DE3DCC4000867D0 /* screenShcoolView_乡村_village.png */; };
+		3F7FFABE2058F90500137125 /* libEaseMobClientSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F7FFABD2058F90500137125 /* libEaseMobClientSDK.a */; };
 		3F90A8361E52D01800DBEF1A /* LoginTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F90A8351E52D01800DBEF1A /* LoginTool.m */; };
 		3F90A83F1E52D7DE00DBEF1A /* UIImageView+CornerRadius.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F90A83E1E52D7DE00DBEF1A /* UIImageView+CornerRadius.m */; };
 		3F90A8431E52D7EB00DBEF1A /* NSDate+Custom.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F90A8421E52D7EB00DBEF1A /* NSDate+Custom.m */; };
@@ -73,7 +74,6 @@
 		3F9586151E56EB12004A5AC2 /* libc++abi.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F9586141E56EB12004A5AC2 /* libc++abi.tbd */; };
 		3F9586171E56EB1B004A5AC2 /* libz.1.2.5.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F9586161E56EB1B004A5AC2 /* libz.1.2.5.tbd */; };
 		3F9586191E56EB2F004A5AC2 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F9586181E56EB2F004A5AC2 /* libicucore.tbd */; };
-		3FE75F1A204CE729000C7BAC /* libEaseMobClientSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FE75F19204CE729000C7BAC /* libEaseMobClientSDK.a */; };
 		53050D201AFB4B330066ABC8 /* schoolDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 53050D1F1AFB4B330066ABC8 /* schoolDetailModel.m */; };
 		530823331A824794004306D1 /* KVNProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = 530823321A824794004306D1 /* KVNProgress.m */; };
 		530823361A8247A8004306D1 /* KVNProgressView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 530823351A8247A8004306D1 /* KVNProgressView.xib */; };
@@ -162,7 +162,6 @@
 		53B537371A7F465D0095C129 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 53B537351A7F465D0095C129 /* Main.storyboard */; };
 		53B537391A7F465D0095C129 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 53B537381A7F465D0095C129 /* Images.xcassets */; };
 		53B5373C1A7F465D0095C129 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 53B5373A1A7F465D0095C129 /* LaunchScreen.xib */; };
-		53B537481A7F465D0095C129 /* OneBoxTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B537471A7F465D0095C129 /* OneBoxTests.m */; };
 		53B5375E1A7F48D40095C129 /* CustomTabbarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B5375C1A7F48D40095C129 /* CustomTabbarController.m */; };
 		53B5375F1A7F48D40095C129 /* CustomTabbarController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 53B5375D1A7F48D40095C129 /* CustomTabbarController.xib */; };
 		53B537621A7F49040095C129 /* TabbarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B537611A7F49040095C129 /* TabbarItem.m */; };
@@ -609,16 +608,6 @@
 		66C7323D1AC2AA5B002BCBB9 /* ToolManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 66C7323C1AC2AA5B002BCBB9 /* ToolManager.m */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		53B537421A7F465D0095C129 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 53B537201A7F465D0095C129 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 53B537271A7F465D0095C129;
-			remoteInfo = OneBox;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		01C0DF303A3DAAD7CF87D24C /* libPods-OneBox.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-OneBox.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F2580F11E51D5F60004B573 /* archive-in1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "archive-in1.png"; sourceTree = "<group>"; };
@@ -661,6 +650,7 @@
 		3F4B1E041DE3DCC4000867D0 /* screenShcoolView_城镇_town.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "screenShcoolView_城镇_town.png"; sourceTree = "<group>"; };
 		3F4B1E051DE3DCC4000867D0 /* screenShcoolView_郊区_outskirt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "screenShcoolView_郊区_outskirt.png"; sourceTree = "<group>"; };
 		3F4B1E061DE3DCC4000867D0 /* screenShcoolView_乡村_village.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "screenShcoolView_乡村_village.png"; sourceTree = "<group>"; };
+		3F7FFABD2058F90500137125 /* libEaseMobClientSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libEaseMobClientSDK.a; sourceTree = "<group>"; };
 		3F90A8341E52D01800DBEF1A /* LoginTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginTool.h; sourceTree = "<group>"; };
 		3F90A8351E52D01800DBEF1A /* LoginTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginTool.m; sourceTree = "<group>"; };
 		3F90A83D1E52D7DE00DBEF1A /* UIImageView+CornerRadius.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+CornerRadius.h"; sourceTree = "<group>"; };
@@ -700,7 +690,6 @@
 		3F9586161E56EB1B004A5AC2 /* libz.1.2.5.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.2.5.tbd; path = usr/lib/libz.1.2.5.tbd; sourceTree = SDKROOT; };
 		3F9586181E56EB2F004A5AC2 /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
 		3FCD89D2204E7C96004AF13A /* OneBox.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OneBox.entitlements; sourceTree = "<group>"; };
-		3FE75F19204CE729000C7BAC /* libEaseMobClientSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libEaseMobClientSDK.a; sourceTree = "<group>"; };
 		53050D1E1AFB4B330066ABC8 /* schoolDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = schoolDetailModel.h; sourceTree = "<group>"; };
 		53050D1F1AFB4B330066ABC8 /* schoolDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = schoolDetailModel.m; sourceTree = "<group>"; };
 		530823311A824794004306D1 /* KVNProgress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KVNProgress.h; sourceTree = "<group>"; };
@@ -867,7 +856,6 @@
 		53B537361A7F465D0095C129 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		53B537381A7F465D0095C129 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = ../OneBox/Images.xcassets; sourceTree = "<group>"; };
 		53B5373B1A7F465D0095C129 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		53B537411A7F465D0095C129 /* OneBoxTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OneBoxTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		53B537471A7F465D0095C129 /* OneBoxTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OneBoxTests.m; sourceTree = "<group>"; };
 		53B5375B1A7F48D40095C129 /* CustomTabbarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTabbarController.h; sourceTree = "<group>"; };
 		53B5375C1A7F48D40095C129 /* CustomTabbarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTabbarController.m; sourceTree = "<group>"; };
@@ -1705,10 +1693,10 @@
 				3F95860B1E56EADE004A5AC2 /* libsqlite3.tbd in Frameworks */,
 				3F9586091E56EAD3004A5AC2 /* libxml2.tbd in Frameworks */,
 				3F9586071E56EAC8004A5AC2 /* libiconv.tbd in Frameworks */,
-				3FE75F1A204CE729000C7BAC /* libEaseMobClientSDK.a in Frameworks */,
 				3F9586051E56EABB004A5AC2 /* libresolv.tbd in Frameworks */,
 				3F9586031E56EA8D004A5AC2 /* libz.tbd in Frameworks */,
 				3F9586011E56EA81004A5AC2 /* libstdc++.tbd in Frameworks */,
+				3F7FFABE2058F90500137125 /* libEaseMobClientSDK.a in Frameworks */,
 				3F25817D1E51E5900004B573 /* JavaScriptCore.framework in Frameworks */,
 				66BEED511AB2AE7E00C1F5AC /* CoreGraphics.framework in Frameworks */,
 				66AF3F9C1AA5B7EC00F92C6D /* ImageIO.framework in Frameworks */,
@@ -1743,13 +1731,6 @@
 				66C731661AC13D25002BCBB9 /* libcrypto.a in Frameworks */,
 				53B771D31C4F424600F20085 /* AlipaySDK.framework in Frameworks */,
 				20A32801465A4014FF29F97D /* libPods-OneBox.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		53B5373E1A7F465D0095C129 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1827,10 +1808,10 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		3F3337EE2048E40200371713 /* lib */ = {
+		3F7FFABC2058F90500137125 /* lib */ = {
 			isa = PBXGroup;
 			children = (
-				3FE75F19204CE729000C7BAC /* libEaseMobClientSDK.a */,
+				3F7FFABD2058F90500137125 /* libEaseMobClientSDK.a */,
 			);
 			path = lib;
 			sourceTree = "<group>";
@@ -2907,7 +2888,6 @@
 			isa = PBXGroup;
 			children = (
 				53B537281A7F465D0095C129 /* OneBox.app */,
-				53B537411A7F465D0095C129 /* OneBoxTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -3282,7 +3262,7 @@
 		53F9731B1BB2917F004FC0B7 /* EaseMobSDK环信 */ = {
 			isa = PBXGroup;
 			children = (
-				3F3337EE2048E40200371713 /* lib */,
+				3F7FFABC2058F90500137125 /* lib */,
 				53F9731C1BB2917F004FC0B7 /* include */,
 				53F973861BB2917F004FC0B7 /* resources */,
 			);
@@ -4577,24 +4557,6 @@
 			productReference = 53B537281A7F465D0095C129 /* OneBox.app */;
 			productType = "com.apple.product-type.application";
 		};
-		53B537401A7F465D0095C129 /* OneBoxTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 53B5374E1A7F465D0095C129 /* Build configuration list for PBXNativeTarget "OneBoxTests" */;
-			buildPhases = (
-				53B5373D1A7F465D0095C129 /* Sources */,
-				53B5373E1A7F465D0095C129 /* Frameworks */,
-				53B5373F1A7F465D0095C129 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				53B537431A7F465D0095C129 /* PBXTargetDependency */,
-			);
-			name = OneBoxTests;
-			productName = OneBoxTests;
-			productReference = 53B537411A7F465D0095C129 /* OneBoxTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -4607,6 +4569,7 @@
 					53B537271A7F465D0095C129 = {
 						CreatedOnToolsVersion = 6.1;
 						DevelopmentTeam = 8S92E4NW68;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -4615,11 +4578,6 @@
 								enabled = 1;
 							};
 						};
-					};
-					53B537401A7F465D0095C129 = {
-						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = 3X8L45J75T;
-						TestTargetID = 53B537271A7F465D0095C129;
 					};
 				};
 			};
@@ -4638,7 +4596,6 @@
 			projectRoot = "";
 			targets = (
 				53B537271A7F465D0095C129 /* OneBox */,
-				53B537401A7F465D0095C129 /* OneBoxTests */,
 			);
 		};
 /* End PBXProject section */
@@ -4919,13 +4876,6 @@
 				53F975FC1BB29501004FC0B7 /* MWPhotoBrowser.bundle in Resources */,
 				53F974A31BB294BA004FC0B7 /* VoiceSearchFeedback018@2x.png in Resources */,
 				53F973BC1BB29495004FC0B7 /* tabbar_chats@2x.png in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		53B5373F1A7F465D0095C129 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5276,23 +5226,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		53B5373D1A7F465D0095C129 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				53B537481A7F465D0095C129 /* OneBoxTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		53B537431A7F465D0095C129 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 53B537271A7F465D0095C129 /* OneBox */;
-			targetProxy = 53B537421A7F465D0095C129 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		53B537351A7F465D0095C129 /* Main.storyboard */ = {
@@ -5342,8 +5276,8 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "Don‘t code sign";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Don‘t code sign";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -5397,8 +5331,8 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "Don‘t code sign";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Don‘t code sign";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -5429,6 +5363,7 @@
 				CODE_SIGN_ENTITLEMENTS = OneBox/OneBox.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				DEVELOPMENT_TEAM = 8S92E4NW68;
 				ENABLE_BITCODE = NO;
@@ -5477,7 +5412,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.onebox.boxs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "00e60fb7-18a7-47b4-8731-d6e70d89e2fa";
+				PROVISIONING_PROFILE_SPECIFIER = onebox.Development;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};
@@ -5491,8 +5427,9 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = NO;
 				CODE_SIGN_ENTITLEMENTS = OneBox/OneBox.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = YES;
 				DEVELOPMENT_TEAM = 8S92E4NW68;
 				ENABLE_BITCODE = NO;
@@ -5541,51 +5478,10 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.onebox.boxs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "00e60fb7-18a7-47b4-8731-d6e70d89e2fa";
+				PROVISIONING_PROFILE_SPECIFIER = onebox.Distribution;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "armv7 armv7s arm64";
-			};
-			name = Release;
-		};
-		53B5374F1A7F465D0095C129 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = OneBoxTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.OneBox.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OneBox.app/OneBox";
-			};
-			name = Debug;
-		};
-		53B537501A7F465D0095C129 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = OneBoxTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.OneBox.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OneBox.app/OneBox";
 			};
 			name = Release;
 		};
@@ -5606,15 +5502,6 @@
 			buildConfigurations = (
 				53B5374C1A7F465D0095C129 /* Debug */,
 				53B5374D1A7F465D0095C129 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		53B5374E1A7F465D0095C129 /* Build configuration list for PBXNativeTarget "OneBoxTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				53B5374F1A7F465D0095C129 /* Debug */,
-				53B537501A7F465D0095C129 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -326,9 +326,7 @@
     }else
     {
         imagename=@"设置";
-        
     }
-
     [setBtn setImage:[UIImage imageNamed:imagename] forState:UIControlStateNormal];
     [setBtn addTarget:self action:@selector(setBtnPress:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc] initWithCustomView:setBtn];
@@ -520,8 +518,8 @@
 }
 -(void)UIConfig
 {
-
-    self.navigationItem.titleView=[regular returnNavView:@" 我的" withmaxwidth:230];
+    UIView *navView = [regular returnNavView:@" 我的" withmaxwidth:230];
+    self.navigationItem.titleView=navView;
     iconImage = [[UIView alloc] init];
     iconImage.frame = CGRectMake(10,20*_Scale, ScreenWidth-20, 590*_Scale);
     UIImageView *upview=[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(iconImage.frame), 362*_Scale)];
@@ -578,7 +576,7 @@
     /*********************************/
 
 
-     NSData *headImg_data=[[NSUserDefaults standardUserDefaults] objectForKey:@"userImage"];
+    NSData *headImg_data=[[NSUserDefaults standardUserDefaults] objectForKey:@"userImage"];
 //    h 44 r 154
     icon = [[UIImageView alloc] initWithImage:[UIImage imageWithData:headImg_data]];
     icon.frame=CGRectMake((CGRectGetWidth(iconImage.frame)-154*_Scale)/2.0f, 44*_Scale, 154*_Scale, 154*_Scale);

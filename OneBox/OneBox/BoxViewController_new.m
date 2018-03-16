@@ -72,6 +72,7 @@
     [_btn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
     _btn.frame=CGRectMake(0, 100, 90, 90);
     [_btn addTarget:self action:@selector(pay:) forControlEvents:UIControlEventTouchUpInside];
+    _btn.hidden = YES;
     [self CreateView];
 }
 -(void)CreateView

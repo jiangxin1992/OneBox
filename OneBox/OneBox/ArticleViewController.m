@@ -123,7 +123,7 @@
     self.view.backgroundColor=_define_backview_color;
 //    添加标题
 
-    self.navigationItem.titleView=[regular returnNavView:@"新知"  withmaxwidth:200];
+    self.navigationItem.titleView=[regular returnNavView:@"发现" withmaxwidth:200];
 //   应对导航栏黑线问题（异常）
     if ([self.navigationController.navigationBar respondsToSelector:@selector( setBackgroundImage:forBarMetrics:)]){
         NSArray *list=self.navigationController.navigationBar.subviews;

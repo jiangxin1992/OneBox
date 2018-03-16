@@ -897,9 +897,9 @@ _package
 //请求
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:[[NSString alloc] initWithFormat:@"%@%@",DNS,@"/v2/app_modules"] parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
+
 //        请求成功后的处理
-        blockSuccess(dict);
+        blockSuccess((NSDictionary *)responseObject);
         [[ToolManager sharedManager] removeProgress];
 
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

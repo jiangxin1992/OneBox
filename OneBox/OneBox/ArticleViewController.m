@@ -146,6 +146,8 @@
 {
     _rightBarbtn=[UIButton buttonWithType:UIButtonTypeCustom];
     [_rightBarbtn setImage:[UIImage imageNamed:@"article_icon_收藏"] forState:UIControlStateNormal];
+    [_rightBarbtn setBackgroundImage:[UIImage imageNamed:@"article_icon_收藏"] forState:UIControlStateNormal];
+    _rightBarbtn.contentMode = UIViewContentModeScaleAspectFill;
     _rightBarbtn.frame=CGRectMake(0, 0, 18, 18);
     [_rightBarbtn addTarget:self action:@selector(pushColView) forControlEvents:UIControlEventTouchUpInside];
 

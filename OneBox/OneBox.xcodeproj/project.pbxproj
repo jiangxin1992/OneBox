@@ -799,7 +799,7 @@
 		53922B151B4BD7010079ECA3 /* QianViewController_new.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = QianViewController_new.m; path = NEWController/QianViewController_new.m; sourceTree = "<group>"; };
 		53922B1F1B4CB5130079ECA3 /* FlyUsaViewController_new.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FlyUsaViewController_new.h; path = NEWController/FlyUsaViewController_new.h; sourceTree = "<group>"; };
 		53922B201B4CB5130079ECA3 /* FlyUsaViewController_new.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FlyUsaViewController_new.m; path = NEWController/FlyUsaViewController_new.m; sourceTree = "<group>"; };
-		53947F5F1C55E864007C5A28 /* box_main_gif@2x.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = "box_main_gif@2x.gif"; path = "../OneBox/box_main_gif@2x.gif"; sourceTree = "<group>"; };
+		53947F5F1C55E864007C5A28 /* box_main_gif@2x.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "box_main_gif@2x.gif"; sourceTree = "<group>"; };
 		53947F671C5722B9007C5A28 /* Boxlistviewcontroller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Boxlistviewcontroller.h; sourceTree = "<group>"; };
 		53947F681C5722B9007C5A28 /* Boxlistviewcontroller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Boxlistviewcontroller.m; sourceTree = "<group>"; };
 		53947F6A1C5725BE007C5A28 /* submit_material_controller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = submit_material_controller.h; sourceTree = "<group>"; };
@@ -852,11 +852,11 @@
 		53B490801B56352A00814F1A /* bangdanCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = bangdanCell.m; sourceTree = "<group>"; };
 		53B537281A7F465D0095C129 /* OneBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OneBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		53B5372C1A7F465D0095C129 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		53B5372D1A7F465D0095C129 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = main.m; path = ../OneBox/main.m; sourceTree = "<group>"; };
+		53B5372D1A7F465D0095C129 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		53B5372F1A7F465D0095C129 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		53B537301A7F465D0095C129 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		53B537361A7F465D0095C129 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		53B537381A7F465D0095C129 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = ../OneBox/Images.xcassets; sourceTree = "<group>"; };
+		53B537381A7F465D0095C129 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		53B5373B1A7F465D0095C129 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		53B537471A7F465D0095C129 /* OneBoxTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OneBoxTests.m; sourceTree = "<group>"; };
 		53B5375B1A7F48D40095C129 /* CustomTabbarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTabbarController.h; sourceTree = "<group>"; };
@@ -1628,8 +1628,8 @@
 		53FFA0971B26EA500012504A /* userInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = userInfoViewController.h; sourceTree = "<group>"; };
 		53FFA0981B26EA500012504A /* userInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = userInfoViewController.m; sourceTree = "<group>"; };
 		53FFC52C1B0C88A700D643D4 /* libGexinSdk-1.1.1.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libGexinSdk-1.1.1.a"; path = "../libGexinSdk-1.1.1.a"; sourceTree = "<group>"; };
-		53FFC5321B0C939B00D643D4 /* InfoPlist.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = InfoPlist.strings; path = ../OneBox/InfoPlist.strings; sourceTree = "<group>"; };
-		53FFC5331B0C939B00D643D4 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = Localizable.strings; path = ../OneBox/Localizable.strings; sourceTree = "<group>"; };
+		53FFC5321B0C939B00D643D4 /* InfoPlist.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = InfoPlist.strings; sourceTree = "<group>"; };
+		53FFC5331B0C939B00D643D4 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		66AF3F201AA44B9F00F92C6D /* SizeTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SizeTool.h; sourceTree = "<group>"; };
 		66AF3F211AA44B9F00F92C6D /* SizeTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SizeTool.m; sourceTree = "<group>"; };
 		66AF3F931AA5B78600F92C6D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -2913,6 +2913,13 @@
 		53B5372B1A7F465D0095C129 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				53FFC5321B0C939B00D643D4 /* InfoPlist.strings */,
+				53FFC5331B0C939B00D643D4 /* Localizable.strings */,
+				53B537381A7F465D0095C129 /* Images.xcassets */,
+				53B5372D1A7F465D0095C129 /* main.m */,
+				53B5373A1A7F465D0095C129 /* LaunchScreen.xib */,
+				53B537351A7F465D0095C129 /* Main.storyboard */,
+				53947F5F1C55E864007C5A28 /* box_main_gif@2x.gif */,
 				53B5372C1A7F465D0095C129 /* Info.plist */,
 				3F25812B1E51D61C0004B573 /* icon */,
 				3F2580F01E51D5EE0004B573 /* 动画 */,
@@ -2937,15 +2944,8 @@
 		53B537451A7F465D0095C129 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				53947F5F1C55E864007C5A28 /* box_main_gif@2x.gif */,
 				53F973901BB29414004FC0B7 /* Settings.bundle */,
 				53B537471A7F465D0095C129 /* OneBoxTests.m */,
-				53FFC5321B0C939B00D643D4 /* InfoPlist.strings */,
-				53FFC5331B0C939B00D643D4 /* Localizable.strings */,
-				53B537381A7F465D0095C129 /* Images.xcassets */,
-				53B5372D1A7F465D0095C129 /* main.m */,
-				53B5373A1A7F465D0095C129 /* LaunchScreen.xib */,
-				53B537351A7F465D0095C129 /* Main.storyboard */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";

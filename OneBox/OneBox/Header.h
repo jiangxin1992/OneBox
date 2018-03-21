@@ -18,13 +18,14 @@
 #import "UIViewController+DismissKeyboard.h"
 #import "NSString+extra.h"
 #import "UIColor+Hex.h"
+#import "UILabel+Custom.h"
+#import "NSDate+Formatter.h"
 #import "UIButton+Custom.h"
 #import "UIButton+EnlargeEdge.h"
 #import "UIImageView+Custom.h"
 #import "UITextField+Custom.h"
-#import "UILabel+DD_Custom.h"
+#import "UILabel+Custom.h"
 #import "UIView+Custom.h"
-#import "NSDate+Formatter.h"
 
 /*************** Custom ***************/
 #import "regular.h"

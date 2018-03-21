@@ -27,6 +27,7 @@
 #import "chooseSchoolController.h"
 #import "submitSchoolController.h"
 #import "CustomTabbarController.h"
+#import "BoxHelpViewController.h"
 
 #import "MyInfo.h"
 #import "Order.h"
@@ -73,7 +74,20 @@
     _btn.frame=CGRectMake(0, 100, 90, 90);
     [_btn addTarget:self action:@selector(pay:) forControlEvents:UIControlEventTouchUpInside];
     _btn.hidden = YES;
+
     [self CreateView];
+
+    UIButton *userHelpButton = [UIButton getCustomImgBtnWithImageStr:@"使用说明" WithSelectedImageStr:nil];
+    [self.view addSubview:userHelpButton];
+    [userHelpButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.height.mas_equalTo(35);
+        make.right.mas_equalTo(-47);
+        make.bottom.mas_equalTo(-30-kTabBarHeight);
+    }];
+    [userHelpButton addTarget:self action:@selector(userHelpAction) forControlEvents:UIControlEventTouchUpInside];
+}
+-(void)userHelpAction{
+    [self.navigationController pushViewController:[BoxHelpViewController new] animated:YES];
 }
 -(void)CreateView
 {
@@ -138,8 +152,6 @@
 
         _y_p+=_jiange+_diameter+_labelheight;
     }
-    /*********************视图的创建*********************/
-
 }
 -(void)go_step_action:(UIButton*)btn
 {

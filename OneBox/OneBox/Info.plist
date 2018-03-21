@@ -12,17 +12,6 @@
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleGetInfoString</key>
 	<string></string>
-	<key>CFBundleIconFile</key>
-	<string></string>
-	<key>CFBundleIconFiles</key>
-	<array>
-		<string>Icon@x.png</string>
-		<string>Icon@3x.png</string>
-		<string>Icon@2x.png</string>
-		<string>iconpad@152.png</string>
-		<string>iconpad@120.png</string>
-		<string>iconpad@76.png</string>
-	</array>
 	<key>CFBundleIdentifier</key>
 	<string>com.onebox.boxs</string>
 	<key>CFBundleInfoDictionaryVersion</key>

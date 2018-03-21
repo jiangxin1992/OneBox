@@ -142,7 +142,7 @@
     [self.contentView addSubview:imagebackview];
     
     titleview=[[UIImageView alloc] initWithFrame:CGRectMake(0, 360*_Scale, ScreenWidth, 0)];
-    titleview.image=[UIImage imageNamed:@"article_back"];
+    titleview.image=[UIImage imageNamed:@"article_back_new"];
     
     [self.contentView addSubview:titleview];
     

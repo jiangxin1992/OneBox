@@ -49,7 +49,6 @@
 		3F4B1E081DE3DCC4000867D0 /* screenShcoolView_城镇_town.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F4B1E041DE3DCC4000867D0 /* screenShcoolView_城镇_town.png */; };
 		3F4B1E091DE3DCC4000867D0 /* screenShcoolView_郊区_outskirt.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F4B1E051DE3DCC4000867D0 /* screenShcoolView_郊区_outskirt.png */; };
 		3F4B1E0A1DE3DCC4000867D0 /* screenShcoolView_乡村_village.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F4B1E061DE3DCC4000867D0 /* screenShcoolView_乡村_village.png */; };
-		3F7FFABE2058F90500137125 /* libEaseMobClientSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F7FFABD2058F90500137125 /* libEaseMobClientSDK.a */; };
 		3F90A8361E52D01800DBEF1A /* LoginTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F90A8351E52D01800DBEF1A /* LoginTool.m */; };
 		3F90A83F1E52D7DE00DBEF1A /* UIImageView+CornerRadius.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F90A83E1E52D7DE00DBEF1A /* UIImageView+CornerRadius.m */; };
 		3F90A8431E52D7EB00DBEF1A /* NSDate+Custom.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F90A8421E52D7EB00DBEF1A /* NSDate+Custom.m */; };
@@ -75,6 +74,7 @@
 		3F9586151E56EB12004A5AC2 /* libc++abi.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F9586141E56EB12004A5AC2 /* libc++abi.tbd */; };
 		3F9586171E56EB1B004A5AC2 /* libz.1.2.5.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F9586161E56EB1B004A5AC2 /* libz.1.2.5.tbd */; };
 		3F9586191E56EB2F004A5AC2 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F9586181E56EB2F004A5AC2 /* libicucore.tbd */; };
+		3FF879B02062330800E7A451 /* libEaseMobClientSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FF879AF2062330700E7A451 /* libEaseMobClientSDK.a */; };
 		53050D201AFB4B330066ABC8 /* schoolDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 53050D1F1AFB4B330066ABC8 /* schoolDetailModel.m */; };
 		530823331A824794004306D1 /* KVNProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = 530823321A824794004306D1 /* KVNProgress.m */; };
 		530823361A8247A8004306D1 /* KVNProgressView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 530823351A8247A8004306D1 /* KVNProgressView.xib */; };
@@ -652,7 +652,6 @@
 		3F4B1E041DE3DCC4000867D0 /* screenShcoolView_城镇_town.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "screenShcoolView_城镇_town.png"; sourceTree = "<group>"; };
 		3F4B1E051DE3DCC4000867D0 /* screenShcoolView_郊区_outskirt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "screenShcoolView_郊区_outskirt.png"; sourceTree = "<group>"; };
 		3F4B1E061DE3DCC4000867D0 /* screenShcoolView_乡村_village.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "screenShcoolView_乡村_village.png"; sourceTree = "<group>"; };
-		3F7FFABD2058F90500137125 /* libEaseMobClientSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libEaseMobClientSDK.a; sourceTree = "<group>"; };
 		3F90A8341E52D01800DBEF1A /* LoginTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginTool.h; sourceTree = "<group>"; };
 		3F90A8351E52D01800DBEF1A /* LoginTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginTool.m; sourceTree = "<group>"; };
 		3F90A83D1E52D7DE00DBEF1A /* UIImageView+CornerRadius.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+CornerRadius.h"; sourceTree = "<group>"; };
@@ -692,6 +691,7 @@
 		3F9586161E56EB1B004A5AC2 /* libz.1.2.5.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.2.5.tbd; path = usr/lib/libz.1.2.5.tbd; sourceTree = SDKROOT; };
 		3F9586181E56EB2F004A5AC2 /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
 		3FCD89D2204E7C96004AF13A /* OneBox.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OneBox.entitlements; sourceTree = "<group>"; };
+		3FF879AF2062330700E7A451 /* libEaseMobClientSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libEaseMobClientSDK.a; sourceTree = "<group>"; };
 		53050D1E1AFB4B330066ABC8 /* schoolDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = schoolDetailModel.h; sourceTree = "<group>"; };
 		53050D1F1AFB4B330066ABC8 /* schoolDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = schoolDetailModel.m; sourceTree = "<group>"; };
 		530823311A824794004306D1 /* KVNProgress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KVNProgress.h; sourceTree = "<group>"; };
@@ -1698,7 +1698,7 @@
 				3F9586051E56EABB004A5AC2 /* libresolv.tbd in Frameworks */,
 				3F9586031E56EA8D004A5AC2 /* libz.tbd in Frameworks */,
 				3F9586011E56EA81004A5AC2 /* libstdc++.tbd in Frameworks */,
-				3F7FFABE2058F90500137125 /* libEaseMobClientSDK.a in Frameworks */,
+				3FF879B02062330800E7A451 /* libEaseMobClientSDK.a in Frameworks */,
 				3F25817D1E51E5900004B573 /* JavaScriptCore.framework in Frameworks */,
 				66BEED511AB2AE7E00C1F5AC /* CoreGraphics.framework in Frameworks */,
 				66AF3F9C1AA5B7EC00F92C6D /* ImageIO.framework in Frameworks */,
@@ -1808,14 +1808,6 @@
 				01C0DF303A3DAAD7CF87D24C /* libPods-OneBox.a */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		3F7FFABC2058F90500137125 /* lib */ = {
-			isa = PBXGroup;
-			children = (
-				3F7FFABD2058F90500137125 /* libEaseMobClientSDK.a */,
-			);
-			path = lib;
 			sourceTree = "<group>";
 		};
 		3F90A8371E52D7AA00DBEF1A /* Category */ = {
@@ -2091,6 +2083,14 @@
 				532E16821C2B9879003FC026 /* ArticleDetailViewController.m */,
 			);
 			name = "文章页";
+			sourceTree = "<group>";
+		};
+		3FF879AE2062330700E7A451 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				3FF879AF2062330700E7A451 /* libEaseMobClientSDK.a */,
+			);
+			path = lib;
 			sourceTree = "<group>";
 		};
 		5308232F1A824764004306D1 /* KVNProgress */ = {
@@ -3265,7 +3265,7 @@
 		53F9731B1BB2917F004FC0B7 /* EaseMobSDK环信 */ = {
 			isa = PBXGroup;
 			children = (
-				3F7FFABC2058F90500137125 /* lib */,
+				3FF879AE2062330700E7A451 /* lib */,
 				53F9731C1BB2917F004FC0B7 /* include */,
 				53F973861BB2917F004FC0B7 /* resources */,
 			);

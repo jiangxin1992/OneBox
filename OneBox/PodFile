@@ -16,15 +16,15 @@ target 'OneBox' do
  pod 'GTSDK', '2.1.0.0-noidfa' # 无 idfa版本
 
  # 主模块(必须)
- pod 'mob_sharesdk', '4.0.9’
+ pod 'mob_sharesdk', '4.1.1’
 
  # 平台SDK模块(对照一下平台，需要的加上。如果只需要QQ、微信、新浪微博，只需要以下3行)
- pod 'mob_sharesdk/ShareSDKPlatforms/QQ', '4.0.9’
- pod 'mob_sharesdk/ShareSDKPlatforms/SinaWeibo', '4.0.9’
- pod 'mob_sharesdk/ShareSDKPlatforms/WeChat', '4.0.9’  
- pod 'mob_sharesdk/ShareSDKPlatforms/Copy', '4.0.9’
+ pod 'mob_sharesdk/ShareSDKPlatforms/QQ', '4.1.1’
+ pod 'mob_sharesdk/ShareSDKPlatforms/SinaWeibo', '4.1.1’
+ pod 'mob_sharesdk/ShareSDKPlatforms/WeChat', '4.1.1’  
+ pod 'mob_sharesdk/ShareSDKPlatforms/Copy', '4.1.1’
 
- pod 'mob_sharesdk/ShareSDKExtension', '4.0.9’
+ pod 'mob_sharesdk/ShareSDKExtension', '4.1.1’
 
 end
 

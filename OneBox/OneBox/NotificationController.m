@@ -163,14 +163,21 @@
 
 -(void)CreateTableview
 {
-    _tableView=[[UITableView alloc] initWithFrame:CGRectMake(_margin, 0, ScreenWidth-2*_margin, ScreenHeight+kTabBarHeight) style:UITableViewStylePlain];
+    _tableView=[[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+    [self.view addSubview:_tableView];
+    [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(_margin);
+        make.right.mas_equalTo(-_margin);
+        make.top.mas_equalTo(0);
+        make.bottom.mas_equalTo(self.mas_bottomLayoutGuideTop).with.offset(0);
+    }];
     _tableView.delegate=self;
     _tableView.dataSource=self;
     _tableView.backgroundColor=self.view.backgroundColor;
     _tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
     _tableView.sectionIndexBackgroundColor = [UIColor clearColor];
     _tableView.sectionIndexColor = self.view.backgroundColor;
-    [self.view addSubview:_tableView];
+
     [self setupRefresh];
     [self CreateNofollowerView];
 }

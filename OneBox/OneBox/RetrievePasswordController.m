@@ -133,14 +133,15 @@
     textfield_email.clearButtonMode=UITextFieldViewModeWhileEditing;
     //    给导航栏添加标题
 
-    UIButton *back_btn=[UIButton buttonWithType:UIButtonTypeCustom];
-    back_btn.frame=CGRectMake(ScreenWidth-(25+35)*_Scale, 40*_Scale,50*_Scale, 50*_Scale);
-    UIImageView *imageqqq=[[UIImageView alloc] initWithFrame:CGRectMake(0, (CGRectGetWidth(back_btn.frame))/4.0f, (CGRectGetWidth(back_btn.frame))/2.0f, (CGRectGetWidth(back_btn.frame))/2.0f)];
-    imageqqq.image=[UIImage imageNamed:@"login_返回"];
-    [back_btn addSubview:imageqqq];
-
+    UIButton *back_btn=[UIButton getCustomImgBtnWithImageStr:@"login_返回" WithSelectedImageStr:nil];
+    [self.view addSubview:back_btn];
+    [back_btn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.width.mas_equalTo(50*_Scale);
+        make.top.mas_equalTo(self.mas_topLayoutGuideBottom).with.offset(20*_Scale);
+        make.right.mas_equalTo(-55*_Scale);
+    }];
     [back_btn addTarget:self action:@selector(backAction:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:back_btn];    //    留美盒子icon
+    back_btn.imageEdgeInsets = UIEdgeInsetsMake(12.5*_Scale, 12.5*_Scale, 12.5*_Scale, 12.5*_Scale);
 
     CGFloat _y_p=230*_Scale;
 
@@ -315,7 +316,7 @@
 {
     _time--;
 
-    [get_yanzheng setTitle:[[NSString alloc] initWithFormat:@"%lds",(long)_time] forState:UIControlStateSelected];
+    [get_yanzheng setTitle:[[NSString alloc] initWithFormat:@"%ds",_time] forState:UIControlStateSelected];
     if(!_time)
     {
 

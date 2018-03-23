@@ -244,16 +244,18 @@
 #pragma mark*创建tableview
 -(void)createtableview
 {
-    _tableview=[[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight+kTabBarHeight) style:UITableViewStylePlain];
+    _tableview=[[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+    [self.view addSubview:_tableview];
     _tableview.delegate=self;
     _tableview.dataSource=self;
     _tableview.separatorStyle=UITableViewCellSeparatorStyleNone;
-
     _tableview.sectionIndexBackgroundColor = [UIColor clearColor];
     _tableview.sectionIndexColor = [UIColor colorWithRed:204.0f/255.0f green:204.0f/255.0f blue:204.0f/255.0f alpha:1];
     _tableview.backgroundColor=_define_backview_color;
-    [self.view addSubview:_tableview];
-
+    [_tableview mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.top.mas_equalTo(0);
+        make.bottom.mas_equalTo(self.mas_bottomLayoutGuideTop).with.offset(0);
+    }];
 }
 #pragma mark*创建SearchBar
 - (void)createSearchBar

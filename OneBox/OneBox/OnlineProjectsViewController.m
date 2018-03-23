@@ -376,7 +376,7 @@
     [self RequestData];
     backview.hidden=YES;
     _scrollview.hidden=NO;
-    _scrollview.frame=CGRectMake(0, 64, ScreenWidth, ScreenHeight-64);
+    _scrollview.frame=CGRectMake(0, kStatusBarAndNavigationBarHeight, ScreenWidth, ScreenHeight-kStatusBarAndNavigationBarHeight);
 }
 -(void)prepare
 {

@@ -487,8 +487,8 @@
 -(void)createScrollView
 {
     
-    _scrollView=[[UIScrollView alloc] initWithFrame:CGRectMake(0, 64, ScreenWidth, ScreenHeight-64-kTabBarHeight)];
-    _scrollView.contentSize=CGSizeMake(ScreenWidth, ScreenHeight-64-kTabBarHeight);
+    _scrollView=[[UIScrollView alloc] initWithFrame:CGRectMake(0, kStatusBarAndNavigationBarHeight, ScreenWidth, ScreenHeight-64-kTabBarHeight)];
+    _scrollView.contentSize=CGSizeMake(ScreenWidth, ScreenHeight-kStatusBarAndNavigationBarHeight-kTabBarHeight);
     [self.view addSubview:_scrollView];
 }
 -(void)mubiao_action:(UIGestureRecognizer *)ges

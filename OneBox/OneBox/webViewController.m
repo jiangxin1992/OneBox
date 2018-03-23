@@ -69,37 +69,28 @@
     {
         _dict=[dict copy];
 
-         self.view.backgroundColor= _define_backview_color;
-        UIImageView *daohang=[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 64)];
+        self.view.backgroundColor= _define_backview_color;
+
+        UIImageView *daohang=[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, kStatusBarAndNavigationBarHeight)];
         [self.view addSubview:daohang];
         daohang.image=[UIImage imageNamed:@"导航底图"];
         daohang.userInteractionEnabled=YES;
 
-        UILabel *label_title=[[UILabel alloc] initWithFrame:CGRectMake((ScreenWidth-250)/2.0f, CGRectGetHeight(daohang.frame)-40, 250, 30)];
+        UILabel *label_title=[[UILabel alloc] initWithFrame:CGRectMake((ScreenWidth-250)/2.0f, kStatusBarHeight, 250, kNavigationBarHeight)];
         label_title.font=[regular getFont:16.0f];
 
         [label_title setAttributedText:[regular createAttributeString:[_dict objectForKey:@"title"] andFloat:@(9.0/3.0)]];
         label_title.textColor=[UIColor whiteColor];
         label_title.textAlignment=1;
         [daohang addSubview:label_title];
-        if(!_isPad)
-        {
-            [label_title sizeToFit];
 
-            label_title.frame=CGRectMake((ScreenWidth-250)/2.0f, 60*_Scale-((CGRectGetHeight(label_title.frame)-30*_Scale))/2.0f, 250, CGRectGetHeight(label_title.frame));
-
-        }
-
-
-
-        UIButton *backbtn=[UIButton buttonWithType:UIButtonTypeCustom];
-        backbtn.frame=CGRectMake(0, 0, 64, 64);
+        UIButton *backbtn=[UIButton getCustomImgBtnWithImageStr:@"返回箭头" WithSelectedImageStr:nil];
+        backbtn.frame=CGRectMake(0, kStatusBarHeight, kNavigationBarHeight, kNavigationBarHeight);
         [backbtn addTarget:self action:@selector(popviewAction) forControlEvents:UIControlEventTouchUpInside];
         [daohang addSubview:backbtn];
-        UIImageView *icon=[[UIImageView alloc] initWithFrame:CGRectMake(14, 30, 10, 15)];
-        [icon setImage:[UIImage imageNamed:@"返回箭头"]];
-        [backbtn addSubview:icon];
-        web=[[UIWebView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(daohang.frame), ScreenWidth, ScreenHeight-64)];
+
+
+        web=[[UIWebView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(daohang.frame), ScreenWidth, ScreenHeight-kStatusBarAndNavigationBarHeight)];
         [self.view addSubview:web];
         [self loadData];
 

@@ -45,14 +45,15 @@
 {
 //    self.view.backgroundColor=[UIColor colorWithRed:86.0f/255.0f green:190.0f/255.0f blue:215.0f/255.0f alpha:1];
 
-    UIButton *back_btn=[UIButton buttonWithType:UIButtonTypeCustom];
-    back_btn.frame=CGRectMake(ScreenWidth-(25+35)*_Scale, 40*_Scale,50*_Scale, 50*_Scale);
-    UIImageView *imageqqq=[[UIImageView alloc] initWithFrame:CGRectMake(0, (CGRectGetWidth(back_btn.frame))/4.0f, (CGRectGetWidth(back_btn.frame))/2.0f, (CGRectGetWidth(back_btn.frame))/2.0f)];
-    imageqqq.image=[UIImage imageNamed:@"login_返回"];
-    [back_btn addSubview:imageqqq];
-
-    [back_btn addTarget:self action:@selector(backAction:) forControlEvents:UIControlEventTouchUpInside];
+    UIButton *back_btn=[UIButton getCustomImgBtnWithImageStr:@"login_返回" WithSelectedImageStr:nil];
     [self.view addSubview:back_btn];
+    [back_btn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.width.mas_equalTo(50*_Scale);
+        make.top.mas_equalTo(self.mas_topLayoutGuideBottom).with.offset(20*_Scale);
+        make.right.mas_equalTo(-55*_Scale);
+    }];
+    [back_btn addTarget:self action:@selector(backAction:) forControlEvents:UIControlEventTouchUpInside];
+    back_btn.imageEdgeInsets = UIEdgeInsetsMake(12.5*_Scale, 12.5*_Scale, 12.5*_Scale, 12.5*_Scale);
     
 
     username=[[UITextField alloc] initWithFrame:CGRectMake((ScreenWidth-400*_Scale)/2.0f, 336*_Scale, 400*_Scale, 50*_Scale)];

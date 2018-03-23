@@ -89,7 +89,7 @@
             if(kIPhone4s)
             {
                 imageStr=[NSString stringWithFormat:@"%@?imageView2/1/w/320/h/180",model.thumb_url];
-            }else if(kIPhone5s||kIiPhone6)
+            }else if(kIPhone5s||kIPhone6)
             {
                 imageStr=[NSString stringWithFormat:@"%@?imageView2/1/w/640/h/360",model.thumb_url];
             }else
@@ -116,7 +116,7 @@
             if(kIPhone4s)
             {
                 imageStr=[NSString stringWithFormat:@"%@?imageView2/1/w/320/h/180",model.thumb_url];
-            }else if(kIPhone5s||kIiPhone6)
+            }else if(kIPhone5s||kIPhone6)
             {
                 imageStr=[NSString stringWithFormat:@"%@?imageView2/1/w/640/h/360",model.thumb_url];
             }else
@@ -209,7 +209,7 @@
             if(kIPhone4s)
             {
                 imageStr=[NSString stringWithFormat:@"%@?imageView2/1/w/320/h/180",model.thumb_url];
-            }else if(kIPhone5s||kIiPhone6)
+            }else if(kIPhone5s||kIPhone6)
             {
                 imageStr=[NSString stringWithFormat:@"%@?imageView2/1/w/640/h/360",model.thumb_url];
             }else

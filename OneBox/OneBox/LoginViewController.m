@@ -80,14 +80,16 @@
 #pragma mark - UIConfig
 -(void)UIConfig
 {
-    UIButton *back_btn=[UIButton getCustomBtn];
-    back_btn.frame=CGRectMake(ScreenWidth-(25+35)*_Scale, 40*_Scale,50*_Scale, 50*_Scale);
-    UIImageView *imageqqq=[UIImageView getImgWithImageStr:@"login_返回"];
-    imageqqq.frame = CGRectMake(0, (CGRectGetWidth(back_btn.frame))/4.0f, (CGRectGetWidth(back_btn.frame))/2.0f, (CGRectGetWidth(back_btn.frame))/2.0f);
-    [back_btn addSubview:imageqqq];
-    [back_btn addTarget:self action:@selector(backAction:) forControlEvents:UIControlEventTouchUpInside];
+    UIButton *back_btn=[UIButton getCustomImgBtnWithImageStr:@"login_返回" WithSelectedImageStr:nil];
     [self.view addSubview:back_btn];
-    
+    [back_btn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.width.mas_equalTo(50*_Scale);
+        make.top.mas_equalTo(self.mas_topLayoutGuideBottom).with.offset(20*_Scale);
+        make.right.mas_equalTo(-55*_Scale);
+    }];
+    [back_btn addTarget:self action:@selector(backAction:) forControlEvents:UIControlEventTouchUpInside];
+    back_btn.imageEdgeInsets = UIEdgeInsetsMake(12.5*_Scale, 12.5*_Scale, 12.5*_Scale, 12.5*_Scale);
+
     CGFloat _start_y=0;
     if(_isPad){
         _start_y=(ScreenHeight/2)-80*_Scale;
@@ -97,6 +99,7 @@
     }
     
     password=[[UITextField alloc] initWithFrame:CGRectMake((ScreenWidth/2)-200*_Scale, _start_y, 400*_Scale, 70*_Scale)];
+    [self.view addSubview:password];
     password.placeholder=@" 密 码 ";
     password.returnKeyType=UIReturnKeyDone;
     [password setValue:Color_placeholder forKeyPath:@"_placeholderLabel.textColor"];
@@ -118,7 +121,6 @@
     [view_left addTarget:self action:@selector(showpassword:) forControlEvents:UIControlEventTouchUpInside];
     password.rightView=view_left;
     password.rightViewMode = UITextFieldViewModeAlways;
-    [self.view addSubview:password];
     
     username=[[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMinX(password.frame), CGRectGetMinY(password.frame)-8*_Scale-CGRectGetHeight(password.frame), CGRectGetWidth(password.frame), CGRectGetHeight(password.frame))];
     username.textColor=[UIColor whiteColor];
@@ -136,9 +138,14 @@
     
     //    留美盒子icon
     UIImageView *icon=[UIImageView getImgWithImageStr:@"login_ICON11"];
-    icon.frame=CGRectMake((ScreenWidth/2)-70*_Scale, 95*_Scale, 140*_Scale, 136*_Scale);
     [self.view addSubview:icon];
-    
+    [icon mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.mas_equalTo(140*_Scale);
+        make.height.mas_equalTo(136*_Scale);
+        make.top.mas_equalTo(self.mas_topLayoutGuideBottom).with.offset(95*_Scale);
+        make.centerX.mas_equalTo(self.view);
+    }];
+
     //    修改btn的frame
     login=[UIButton getCustomTitleBtnWithAlignment:0 WithFont:15.0f WithSpacing:0 WithNormalTitle:@"登   录" WithNormalColor:[UIColor whiteColor] WithSelectedTitle:nil WithSelectedColor:nil];
     login.frame=CGRectMake(CGRectGetMinX(password.frame), CGRectGetMaxY(password.frame)+45*_Scale,CGRectGetWidth(password.frame), (50*_Scale*CGRectGetWidth(password.frame))/(330*_Scale));

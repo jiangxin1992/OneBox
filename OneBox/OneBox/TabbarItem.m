@@ -41,19 +41,19 @@
     if(self.type==1)
     {
         //为box的时候
-        return CGRectMake((ScreenWidth/5.0f-32)/2.0f, (kTabBarHeight-32)/2.0f, 32, 32);
+        return CGRectMake((ScreenWidth/5.0f-32)/2.0f, (kInteractionHeight-32)/2.0f, 32, 32);
     }else if(self.type==0)
     {
-        return CGRectMake((ScreenWidth/5.0f-32)/2.0f, (kTabBarHeight-32)/2.0f, 32 , 32);
+        return CGRectMake((ScreenWidth/5.0f-32)/2.0f, (kInteractionHeight-32)/2.0f, 32 , 32);
     }else if(self.type==2)
     {
-        return CGRectMake((ScreenWidth/5.0f-18)/2.0f, (kTabBarHeight-18)/2.0f, 18 , 18);
+        return CGRectMake((ScreenWidth/5.0f-18)/2.0f, (kInteractionHeight-18)/2.0f, 18 , 18);
     }else if(self.type==4)
     {
-        return CGRectMake((ScreenWidth/5.0f-18)/2.0f, (kTabBarHeight-18)/2.0f, 18 , 18);
+        return CGRectMake((ScreenWidth/5.0f-18)/2.0f, (kInteractionHeight-18)/2.0f, 18 , 18);
     }else
     {
-        return CGRectMake((ScreenWidth/5.0f-30)/2.0f, (kTabBarHeight-30)/2.0f, 30 , 30);
+        return CGRectMake((ScreenWidth/5.0f-30)/2.0f, (kInteractionHeight-30)/2.0f, 30 , 30);
     }
 
 }

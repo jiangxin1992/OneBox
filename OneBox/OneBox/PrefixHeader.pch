@@ -95,29 +95,35 @@
 /*************** SIZE ***************/
 #define IS_RETINA ([[UIScreen mainScreen] scale] >= 2.0)
 
-#define kStatusBarHeight         20 //状态栏高度
+#define kStatusBarHeight         (kIPhoneX ? 44.f:20.f) //状态栏高度
 
-#define kNavigationBarHeight     44 //导航栏高度
+#define kAddStatusBarHeight         (kIPhoneX ? 24.f:0.f) //kIPhoneX状态栏高度差
 
-#define kNavHeight     64 //导航栏高度+状态栏高度
+#define kNavigationBarHeight     44.f //导航栏高度
 
-#define kTabBarHeight 49 //tabbar高度
+#define kStatusBarAndNavigationBarHeight     (kIPhoneX ? 88.f : 64.f) //导航栏高度+状态栏高度
+
+#define kTabBarHeight (kIPhoneX ? (49.f + 34.f) : 49.f) //tabbar高度
+
+#define kInteractionHeight 49.f //底部交互高度
 
 #define ScreenHeight [UIScreen mainScreen].bounds.size.height //当前设备屏幕高
 
 #define ScreenWidth [UIScreen mainScreen].bounds.size.width //当前设备屏幕宽
 
+#define kIPhoneX ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125, 2436), [[UIScreen mainScreen] currentMode].size) : NO)//判断是否为5.8英寸屏幕
+
 #define kIPhone6Plus ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1242,2208), [[UIScreen mainScreen] currentMode].size) : NO) //判断是否为5.5英寸屏幕
 
-#define kIiPhone6 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(750, 1334), [[UIScreen mainScreen] currentMode].size) : NO) //判断是否为4.7寸屏幕
+#define kIPhone6 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(750, 1334), [[UIScreen mainScreen] currentMode].size) : NO) //判断是否为4.7寸屏幕
 
 #define kIPhone5s ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640,1136), [[UIScreen mainScreen] currentMode].size) : NO) //判断是否为4英寸屏幕
 
 #define kIPhone4s ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640,960), [[UIScreen mainScreen] currentMode].size) : NO) //判断是否3.5英寸屏幕
 
-#define IsPhone6_gt kIPhone6Plus||kIiPhone6 //判断当前设备是否为iPhone 6以上
+#define IsPhone6_gt kIPhone6Plus||kIPhone6 //判断当前设备是否为iPhone 6以上
 
-#define IsPhone5_gt kIPhone6Plus||kIiPhone6||kIPhone5s //判断当前设备是否为iPhone 5以上
+#define IsPhone5_gt kIPhone6Plus||kIPhone6||kIPhone5s //判断当前设备是否为iPhone 5以上
 
 #define _isPad (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) //是否是pad
 
@@ -134,8 +140,8 @@
 #define OneBox_PrefixHeader_pch
 
 #define iPhone5 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 1136), [[UIScreen mainScreen] currentMode].size) : NO)
-#define _Scale [UIScreen mainScreen].bounds.size.width/640.0f
-#define __Scale [UIScreen mainScreen].bounds.size.height/568.0f
+#define _Scale ([UIScreen mainScreen].bounds.size.width/640.0f)
+#define __Scale ([UIScreen mainScreen].bounds.size.height/568.0f)
 
 #define kUIWindow    [[[UIApplication sharedApplication] delegate] window] //获得window
 

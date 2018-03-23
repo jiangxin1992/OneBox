@@ -670,7 +670,7 @@ static CustomTabbarController *tabbarController = nil;
             }
             item.type=12;
         }
-        item.frame = CGRectMake(buttonWidth*i, 0, buttonWidth, kTabBarHeight);
+        item.frame = CGRectMake(buttonWidth*i, 0, buttonWidth, kInteractionHeight);
         //item.backgroundColor=[UIColor redColor];
         //        设置item的frame，标题，normal和select的图片
 
@@ -737,11 +737,15 @@ static CustomTabbarController *tabbarController = nil;
 -(void)createTabbar
 {
 //     对_tabbar进行初始化，并进行ui布局
-    _tabbar = [[UIImageView alloc]initWithFrame:CGRectMake(0, [[UIScreen mainScreen]bounds].size.height - kTabBarHeight, [[UIScreen mainScreen]bounds].size.width, kTabBarHeight)];
+    _tabbar = [[UIImageView alloc]initWithFrame:CGRectZero];
+    [self.view addSubview:_tabbar];
     _tabbar.image = [UIImage imageNamed:@"found_activity_菜单栏"];
     _tabbar.userInteractionEnabled = YES;
-    [self.view addSubview:_tabbar];
-//    _tabbar.alpha = 0.8;
+    [_tabbar mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.and.right.mas_equalTo(0);
+        make.bottom.mas_equalTo(self.view).with.offset(0);
+        make.height.mas_equalTo(IsPhone6_gt?(kTabBarHeight+16):kTabBarHeight);
+    }];
 }
 -(void)tabbarAppear
 {

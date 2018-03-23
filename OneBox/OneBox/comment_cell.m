@@ -317,7 +317,7 @@ _width=i==0?170*_Scale:i==1?25*_Scale*17/15:i==2?200*_Scale:(ScreenWidth-_x_p-40
 
 }
 - (void)awakeFromNib {
-    // Initialization code
+    [super awakeFromNib];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

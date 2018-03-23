@@ -22,24 +22,27 @@
 #define foundCellHeight 360*_Scale
 
 @interface ArticleViewController ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
+
+@property (nonatomic, strong) UIButton *rightBarbtn;
+@property (nonatomic, assign) NSInteger Record_cell_num;
+@property (nonatomic, assign) CGFloat min_offset;
+@property (nonatomic, strong) UITableView *tableView;
+//    开始
+@property (nonatomic, assign) BOOL isfirst_choose;//是否是第一次打开筛选视图
+//    滑动image
+@property (nonatomic, assign) BOOL nav_donghua;//记录导航栏是否滑动上去（是否消失）
+@property (nonatomic, assign) CGFloat start_y;//表示tableview开始拖动时候的起始位置
+@property (nonatomic, assign) BOOL Dragging;//表示tableview开始拖动，记录拖动的开始
+@property (nonatomic, assign) BOOL appear;
+@property (nonatomic, assign) NSInteger page;//记录当前page
+
+@property (nonatomic, strong) NSMutableArray *arrayData;//存放页面的数据
+
 @end
 
 @implementation ArticleViewController
 {
-    UIButton *_rightBarbtn;
-    NSInteger _Record_cell_num;
-    CGFloat _min_offset;
-    UITableView *_tableView;//tableview
     BOOL bKeyBoardHide;//判断键盘显示状态
-    //    开始
-    BOOL _isfirst_choose;//是否是第一次打开筛选视图
-    //    滑动image
-    BOOL _nav_donghua;//记录导航栏是否滑动上去（是否消失）
-    CGFloat _start_y;//表示tableview开始拖动时候的起始位置
-    BOOL _Dragging;//表示tableview开始拖动，记录拖动的开始
-    BOOL _appear;
-    NSInteger _page;//记录当前page
-    NSMutableArray *_arrayData;//存放页面的数据
     void (^blockSuccess)(NSDictionary *dict);//主界面数据请求成功后调用
 }
 
@@ -97,9 +100,10 @@
 {
     [self PrepareData];//一些数据的初始化
     [self PrepareUI];//一些初始化UI的准备
+    WeakSelf(ws);
     changeBlock=^(NSInteger row)
     {
-        ((ArticleModel *)[_arrayData objectAtIndex:row]).isapp=YES;
+        ((ArticleModel *)[ws.arrayData objectAtIndex:row]).isapp=YES;
     };
 }
 -(void)PrepareData
@@ -259,14 +263,15 @@
 }
 -(void)SuccessBlock
 {
+    WeakSelf(ws);
     blockSuccess=^(NSDictionary *_dict)
     {
 //        刷新动画收起
-        [_tableView.mj_header endRefreshing];
-        [_tableView.mj_footer endRefreshing];
-        if(_page==1)
+        [ws.tableView.mj_header endRefreshing];
+        [ws.tableView.mj_footer endRefreshing];
+        if(ws.page==1)
         {
-            [_arrayData removeAllObjects];
+            [ws.arrayData removeAllObjects];
         }
 
 //        数据处理，获取模型数组
@@ -275,11 +280,11 @@
 
         if(getdata.count>0)
         {
-            [_arrayData addObjectsFromArray:getdata];
-            [_tableView reloadData];
+            [ws.arrayData addObjectsFromArray:getdata];
+            [ws.tableView reloadData];
         }else
         {
-            [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"没有更多了" WithImg:@"Prompt_提交成功" Withtype:1]];
+            [ws.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"没有更多了" WithImg:@"Prompt_提交成功" Withtype:1]];
         }
     };
 }
@@ -466,7 +471,7 @@
     if(_arrayData.count==indexPath.section)
     {
         static NSString *cellid=@"cellid";
-        UITableViewCell *cell=[tableView dequeueReusableHeaderFooterViewWithIdentifier:cellid];
+        UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:cellid];
         if(!cell)
         {
             cell=[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellid];

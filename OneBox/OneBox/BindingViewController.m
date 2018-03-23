@@ -12,6 +12,8 @@
 
 @interface BindingViewController ()
 
+@property (nonatomic, strong) UIButton *country_code_btn;
+
 @end
 
 @implementation BindingViewController
@@ -23,7 +25,6 @@
     
     BOOL _ischange;
     NSMutableString *cell;
-    UIButton *_country_code_btn;
     UITextField *_newphonenum_text;
     UIButton *_yanzheng_btn;
     UITextField *_yanzheng_text;
@@ -34,11 +35,11 @@
     [super viewDidLoad];
     [self prepare];
     [self requestdata];
+    WeakSelf(ws);
     codeBlock=^(NSString *code)
     {
 //        记录国家code
-
-        [_country_code_btn setTitle:[[NSString alloc] initWithFormat:@"+%@",code] forState:UIControlStateNormal];
+        [ws.country_code_btn setTitle:[[NSString alloc] initWithFormat:@"+%@",code] forState:UIControlStateNormal];
     };
     // Do any additional setup after loading the view from its nib.
 }

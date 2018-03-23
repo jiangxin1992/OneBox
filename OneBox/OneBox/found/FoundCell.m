@@ -202,8 +202,8 @@
     return  self;
 }
 - (void)awakeFromNib {
+    [super awakeFromNib];
     [self UIConfig];
-
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

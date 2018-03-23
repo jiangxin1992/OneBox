@@ -24,58 +24,51 @@
 
 //评论的view的高度（发表评论）
 #define commentHeight 70*_Scale
+//comment_model_alter
+//_tableView
 
 @interface ArticleCommentController ()<UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate,UITextFieldDelegate,UITextViewDelegate>
-{
+
+@property (nonatomic, strong) NSMutableArray *data_array;//    用于存放model的数组（为cell的model）
+@property (nonatomic, strong) NSMutableArray *height_array;//    用于存放各个cell高度的始祖
+
+@property (nonatomic, strong) UIAlertView *isdelete;//    删除时的确认视图
+@property (nonatomic, assign) NSInteger alternum;
+@property (nonatomic, assign) NSInteger nownum;
+@end
+
+@implementation ArticleCommentController{
     YYAnimationIndicator *indicator;
     UIView *nocomment;
 
     NSMutableString *friend_token;
     NSMutableArray *btnarr;
     BOOL _isguanzhu;
-//     用于获得评论请求时。表示从哪个评论开始
+    //     用于获得评论请求时。表示从哪个评论开始
     NSInteger _start;
-//    该学校被评论的数量
+    //    该学校被评论的数量
     NSInteger _comment_count;
-    
-//    用于存放model的数组（为cell的model）
-    NSMutableArray *_data_array;
-//    用于存放各个cell高度的始祖
-    NSMutableArray *_height_array;
 
-//    存放赞按钮的数组
+    //    存放赞按钮的数组
     NSMutableArray *_praise_array;
 
-//    用户block回调时。表示当前触发的cell
-    NSInteger alternum;
-//    判断是否是第一次出现
-//    BOOL _isCreate;
-    
-//    tableview
-    
-//    删除时的确认视图
-    UIAlertView *isdelete;
-//    当登录失败时，跳出的确认视图，用于跳转到登录界面
+    //    判断是否是第一次出现
+    //    BOOL _isCreate;
+
+    //    tableview
+    //    当登录失败时，跳出的确认视图，用于跳转到登录界面
     UIAlertView *reload_alertview;
-//    评论框的背景view
+    //    评论框的背景view
     UIView *_commentview;
-//    评论框
+    //    评论框
     UITextField *_commentField;
     UITextView *_commentField1;
-    
+
     UIImageView *imageGray;
 
-//    UIAlertView *comment_alertview;
-
-    NSInteger _nownum;
     NSString *token;
     UIAlertView *view_guanzhu;
-
-    
 }
-@end
-
-@implementation ArticleCommentController
 
 -(void)xiaoshi:(NSNotification *)not
 {
@@ -274,7 +267,7 @@
 {
     _nownum=0;
     _islogin=YES;
-    alternum=0;
+    self.alternum=0;
 
     _start=0;
     self.view.backgroundColor=_define_backview_color;
@@ -293,6 +286,7 @@
 //进行cell的删除或者点赞的动作
 -(void)my_block
 {
+    WeakSelf(ws);
     changeBlock=^(NSNumber *rownum,NSInteger type)
     {
         NSInteger _num=[rownum integerValue];
@@ -301,10 +295,10 @@
         {
             
             //             删除
-            isdelete=[[UIAlertView alloc] initWithTitle:nil message:@"是否删除评论" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Yes",nil];
-            [isdelete show];
+            ws.isdelete=[[UIAlertView alloc] initWithTitle:nil message:@"是否删除评论" delegate:ws cancelButtonTitle:@"Cancel" otherButtonTitles:@"Yes",nil];
+            [ws.isdelete show];
 
-            alternum=_num;
+            ws.alternum=_num;
 
         }else if (type==4)
         {
@@ -312,21 +306,21 @@
             {
 //                UIAlertView *alertview=[[ToolManager sharedManager] alertTitle_Simple:@"You are not logged in, please login first."];
 //                alertview.delegate=self;
-                [self login_action];
+                [ws login_action];
             }else
             {
-                _nownum=[rownum integerValue];
-                [self iconClick:rownum];
+                ws.nownum=[rownum integerValue];
+                [ws iconClick:rownum];
             }
         }else if(type==10)
         {
 //            UIAlertView *alertview=[[ToolManager sharedManager] alertTitle_Simple:@"用户还未登录，请先登录"];
 //            alertview.delegate=self;
-            [self login_action];
+            [ws login_action];
         }
         else
         {
-            comment_model_alter *model=_data_array[_num];
+            comment_model_alter *model=ws.data_array[_num];
             NSInteger _parise_n=model.votes_count ;
             BOOL isparise=NO;
             NSString *__url=nil;
@@ -353,7 +347,7 @@
                 showimg=@"Prompt_已点赞";
             }
 
-            [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:showtitle WithImg:showimg Withtype:1]];
+            [ws.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:showtitle WithImg:showimg Withtype:1]];
             model.votes_count=_parise_n;
             model.had_voted=isparise;
 
@@ -378,14 +372,14 @@
                 }
 
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错白色" Withtype:1]];
+                [ws.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错白色" Withtype:1]];
                 [[ToolManager sharedManager] removeProgress];
             }];
         }
         
         NSIndexPath *indexPath=[NSIndexPath indexPathForRow:_num inSection:0];
         
-        [_tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
+        [ws.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
     };
 
 }
@@ -857,7 +851,7 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
 
-    if(alertView==isdelete)
+    if(alertView==_isdelete)
     {
         if(buttonIndex==1)
         {
@@ -891,7 +885,7 @@
 //    [regular createProgress:@"删除中"];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSDictionary *parameters = @{@"token": [regular getToken]};
-    comment_model_alter *model= _data_array[alternum];
+    comment_model_alter *model= _data_array[_alternum];
     NSString *_id=model.comment_id ;
 
     [manager DELETE:[[NSString alloc] initWithFormat:@"%@%@%@",DNS,@"/v1/comments/",_id] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {

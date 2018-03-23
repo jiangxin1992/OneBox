@@ -25,7 +25,7 @@
     return  self;
 }
 - (void)awakeFromNib {
-
+    [super awakeFromNib];
 }
 -(void)setDict:(NSDictionary *)dict
 {

@@ -19,25 +19,29 @@
 #define foundCellHeight 360*_Scale
 
 @interface ArticleColViewController ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
+
+@property (nonatomic ,strong) UIButton *leftBarbtn;
+@property (nonatomic ,assign) NSInteger Record_cell_num;
+@property (nonatomic ,assign) CGFloat min_offset;
+@property (nonatomic ,strong) UITableView *tableView;
+@property (nonatomic ,strong) UIView *nofollow;
+
+//    开始
+@property (nonatomic ,assign) BOOL isfirst_choose;//是否是第一次打开筛选视图
+//    滑动image
+@property (nonatomic ,assign) BOOL nav_donghua;//记录导航栏是否滑动上去（是否消失）
+@property (nonatomic ,assign) CGFloat start_y;//表示tableview开始拖动时候的起始位置
+@property (nonatomic ,assign) BOOL Dragging;//表示tableview开始拖动，记录拖动的开始
+@property (nonatomic ,assign) BOOL appear;
+@property (nonatomic ,assign) NSInteger page;//记录当前page
+@property (nonatomic ,strong) NSMutableArray *arrayData;//存放页面的数据
+
+@property (nonatomic ,assign) BOOL bKeyBoardHide;//判断键盘显示状态
+
 @end
 
 @implementation ArticleColViewController
 {
-    UIView *nofollow;
-    UIButton *_leftBarbtn;
-    NSInteger _Record_cell_num;
-    CGFloat _min_offset;
-    UITableView *_tableView;//tableview
-    BOOL bKeyBoardHide;//判断键盘显示状态
-    //    开始
-    BOOL _isfirst_choose;//是否是第一次打开筛选视图
-    //    滑动image
-    BOOL _nav_donghua;//记录导航栏是否滑动上去（是否消失）
-    CGFloat _start_y;//表示tableview开始拖动时候的起始位置
-    BOOL _Dragging;//表示tableview开始拖动，记录拖动的开始
-    BOOL _appear;
-    NSInteger _page;//记录当前page
-    NSMutableArray *_arrayData;//存放页面的数据
     void (^blockSuccess)(NSDictionary *dict);//主界面数据请求成功后调用
 }
 
@@ -63,12 +67,12 @@
 //键盘消失时候调用
 -(void)keyboardWillHide:(NSNotification *)notification
 {
-    bKeyBoardHide = YES;
+    self.bKeyBoardHide = YES;
 }
 //键盘出现时候调用
 -(void)keyboardWillShow:(NSNotification *)notification
 {
-    bKeyBoardHide = NO;
+    self.bKeyBoardHide = NO;
 }
 
 #pragma mark*导航栏重置
@@ -87,10 +91,11 @@
 {
     [self PrepareData];//一些数据的初始化
     [self PrepareUI];//一些初始化UI的准备
+    WeakSelf(ws);
     changeBlock=^(NSInteger row)
     {
-        JXLOG(@"%@",_arrayData);
-        ((ArticleModel *)[_arrayData objectAtIndex:row]).isapp=YES;
+        JXLOG(@"%@",ws.arrayData);
+        ((ArticleModel *)[ws.arrayData objectAtIndex:row]).isapp=YES;
     };
     alterBlock=^(ArticleModel *model,BOOL isdelete)
     {
@@ -101,8 +106,8 @@
             BOOL _in_here=NO;
             NSInteger _index=0;
 
-            for (int i=0; i<_arrayData.count; i++) {
-                ArticleModel *_model=[_arrayData objectAtIndex:i];
+            for (int i=0; i<ws.arrayData.count; i++) {
+                ArticleModel *_model=[ws.arrayData objectAtIndex:i];
                 if([_model.m_id isEqualToString:model.m_id])
                 {
                     _in_here=YES;
@@ -111,15 +116,15 @@
             }
             if(_in_here)
             {
-                [_arrayData removeObjectAtIndex:_index];
+                [ws.arrayData removeObjectAtIndex:_index];
             }
 
         }else
         {
 //            增加
-            [_arrayData insertObject:model atIndex:0];
+            [ws.arrayData insertObject:model atIndex:0];
         }
-        [_tableView reloadData];
+        [ws.tableView reloadData];
 
     };
 }
@@ -127,7 +132,7 @@
 {
     _Record_cell_num=0;
     _page=1;
-    bKeyBoardHide=YES;//开始时候键盘为隐藏状态
+    self.bKeyBoardHide=YES;//开始时候键盘为隐藏状态
     _appear=YES;
     _Dragging=NO;
     _nav_donghua=NO;
@@ -183,20 +188,20 @@
 }
 -(void)CreateNofollowerView
 {
-    nofollow=[[UIView alloc] initWithFrame:CGRectMake(0,(ScreenHeight-330*_Scale)/2.0f-kTabBarHeight-70*_Scale, ScreenWidth, 330*_Scale)];
-    [self.view addSubview:nofollow];
+    self.nofollow=[[UIView alloc] initWithFrame:CGRectMake(0,(ScreenHeight-330*_Scale)/2.0f-kTabBarHeight-70*_Scale, ScreenWidth, 330*_Scale)];
+    [self.view addSubview:_nofollow];
 
-    UIImageView *imageview=[[UIImageView alloc] initWithFrame:CGRectMake((CGRectGetWidth(nofollow.frame)-105*_Scale)/2.0f, 105*_Scale, 105*_Scale, 105*_Scale)];
+    UIImageView *imageview=[[UIImageView alloc] initWithFrame:CGRectMake((CGRectGetWidth(_nofollow.frame)-105*_Scale)/2.0f, 105*_Scale, 105*_Scale, 105*_Scale)];
     imageview.image=[UIImage imageNamed:@"article_no_文章"];
-    [nofollow addSubview:imageview];
+    [_nofollow addSubview:imageview];
 
-    UILabel *label=[[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(imageview.frame), CGRectGetWidth(nofollow.frame), CGRectGetHeight(nofollow.frame)-CGRectGetMaxY(imageview.frame))];
-    [nofollow addSubview:label];
+    UILabel *label=[[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(imageview.frame), CGRectGetWidth(_nofollow.frame), CGRectGetHeight(_nofollow.frame)-CGRectGetMaxY(imageview.frame))];
+    [_nofollow addSubview:label];
     label.font=[regular getFont:13.0f];
         [label setAttributedText:[regular createAttributeString:@"还没有收藏哦" andFloat:@(3.0)]];
     label.textAlignment=1;
     label.textColor=[UIColor colorWithRed:150.0f/255.0f green:150.0f/255.0f  blue:150.0f/255.0f  alpha:1];
-    nofollow.hidden=YES;
+    _nofollow.hidden=YES;
 }
 #pragma mark*创建TableView
 -(void)createTableView
@@ -349,14 +354,15 @@
 }
 -(void)SuccessBlock
 {
+    WeakSelf(ws);
     blockSuccess=^(NSDictionary *_dict)
     {
 //        刷新动画收起
-        [_tableView.mj_header endRefreshing];
-        [_tableView.mj_footer endRefreshing];
-        if(_page==1)
+        [ws.tableView.mj_header endRefreshing];
+        [ws.tableView.mj_footer endRefreshing];
+        if(ws.page==1)
         {
-            [_arrayData removeAllObjects];
+            [ws.arrayData removeAllObjects];
         }
 
 //数据处理，获取模型数组
@@ -365,21 +371,20 @@
 
         if(getdata.count>0)
         {
-            [_arrayData addObjectsFromArray:getdata];
-            [_tableView reloadData];
+            [ws.arrayData addObjectsFromArray:getdata];
+            [ws.tableView reloadData];
             
         }else
         {
-            [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"没有更多了" WithImg:@"Prompt_提交成功" Withtype:1]];
+            [ws.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"没有更多了" WithImg:@"Prompt_提交成功" Withtype:1]];
         }
-        if(_arrayData.count)
+        if(ws.arrayData.count)
         {
-            nofollow.hidden=YES;
+            ws.nofollow.hidden=YES;
         }else
         {
-            nofollow.hidden=NO;
+            ws.nofollow.hidden=NO;
         }
-
     };
 
 }
@@ -544,7 +549,7 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 
-    if(!bKeyBoardHide)
+    if(!_bKeyBoardHide)
     {
 //        当键盘为出现状态时，触发 键盘消失方法
         [regular dismissKeyborad];
@@ -576,7 +581,7 @@
     if(_arrayData.count==indexPath.section)
     {
         static NSString *cellid=@"cellid";
-        UITableViewCell *cell=[tableView dequeueReusableHeaderFooterViewWithIdentifier:cellid];
+        UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:cellid];
         if(!cell)
         {
             cell=[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellid];

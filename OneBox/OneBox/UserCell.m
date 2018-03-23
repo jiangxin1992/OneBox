@@ -309,7 +309,7 @@ static NSString * const kTableViewCellContentView = @"UITableViewCellContentView
 }
 
 - (void)awakeFromNib {
-    // Initialization code
+    [super awakeFromNib];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

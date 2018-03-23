@@ -194,10 +194,11 @@
 #pragma mark-刷新个人信息
 -(void)block
 {
+    WeakSelf(ws);
     updataInfo=^(NSDictionary *dict)
     {
 
-        [(UILabel *)[self.view viewWithTag:3000] setAttributedText:[regular createAttributeString:[dict objectForKey:@"username"] andFloat:@(2.0)]];
+        [(UILabel *)[ws.view viewWithTag:3000] setAttributedText:[regular createAttributeString:[dict objectForKey:@"username"] andFloat:@(2.0)]];
         NSString *_citystr=nil;
         if([dict objectForKey:@"city"]==nil||[[dict objectForKey:@"city"] isEqualToString:@""])
         {

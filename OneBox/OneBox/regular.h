@@ -193,7 +193,7 @@
  * title标题内容
  * 点击OK回调
  */
-+(UIAlertController *)alertTitle_Simple:(NSString *)title WithBlock:(void(^)())block;
++(UIAlertController *)alertTitle_Simple:(NSString *)title WithBlock:(void(^)(void))block;
 
 /**
  * 获取alert视图
@@ -201,7 +201,7 @@
  * 点击OK回调
  * 带了个取消
  */
-+(UIAlertController *)alertTitleCancel_Simple:(NSString *)title WithBlock:(void(^)())block;
++(UIAlertController *)alertTitleCancel_Simple:(NSString *)title WithBlock:(void(^)(void))block;
 
 /**
  * 网络错误下的alert视图

@@ -58,9 +58,9 @@
 - (void)keyboardWillHide:(NSNotification *)not
 {
 
-    NSDictionary *userInfo = [not userInfo];
-    NSValue *aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
-    CGRect keyboardRect = [aValue CGRectValue];
+//    NSDictionary *userInfo = [not userInfo];
+//    NSValue *aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
+//    CGRect keyboardRect = [aValue CGRectValue];
 //    int height = keyboardRect.size.height;
 
         NSDictionary *dict = not.userInfo;

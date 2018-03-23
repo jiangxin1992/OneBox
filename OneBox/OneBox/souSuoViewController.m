@@ -644,7 +644,7 @@
     if(_arrayData.count==indexPath.section)
     {
         static NSString *cellid=@"cellid";
-        UITableViewCell *cell=[tableView dequeueReusableHeaderFooterViewWithIdentifier:cellid];
+        UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:cellid];
         if(!cell)
         {
             cell=[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellid];

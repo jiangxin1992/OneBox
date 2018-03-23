@@ -12,7 +12,7 @@
 #import "KVNProgress.h"
 @implementation ToolManager
 {
-    void (^_block)();
+    void (^_block)(void);
     UIImageView *backview;
 }
 

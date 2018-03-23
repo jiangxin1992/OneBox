@@ -551,7 +551,7 @@
     labelcon.textAlignment=1;
     labelcon.textColor=[UIColor whiteColor];
     labelcon.font=[regular get_en_Font:25.0f];
-    labelcon.text=[[NSString alloc] initWithFormat:@"%d",index+1];
+    labelcon.text=[[NSString alloc] initWithFormat:@"%ld",index+1];
     [imageview addSubview:labelcon];
     [_upview addSubview:imageview];
     

@@ -5,8 +5,6 @@
 //  Created by 谢江新 on 15/3/2.
 //  Copyright (c) 2015年 谢江新. All rights reserved.
 //
-#import "MyMD5.h"
-#import "KVNProgress.h"
 #import <Foundation/Foundation.h>
 
 @interface ToolManager : NSObject
@@ -15,7 +13,7 @@
 +(BOOL)is_right_locationWithLong:(double)_long WithLat:(double)_lat;
 +(id)sharedManager;
 + (BOOL)validateMobile:(NSString *)mobileNum;
--(void)loginWithSuccess:(void (^)(NSDictionary *))success failure:(void (^)(NSError *))failure pastdue:(void(^)())pastdue;
+-(void)loginWithSuccess:(void (^)(NSDictionary *))success failure:(void (^)(NSError *))failure pastdue:(void(^)(void))pastdue;
 //封装的数据请求
 -(void) NetworkRequest:(NSString *)path bodyStr:(NSString *)body ispost:(BOOL )_ispost success:(void (^)(NSDictionary *))success failure:(void (^)(NSError *))failure;
 

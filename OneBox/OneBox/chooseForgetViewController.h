@@ -7,12 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-typedef  void(^bl)();
+typedef  void(^bl)(void);
 @interface chooseForgetViewController : UIViewController
 {
-    void(^resetpasswordBlock)();
-    void(^resetpasswordBlock2)();
-    void(^disblock)();
+    void(^resetpasswordBlock)(void);
+    void(^resetpasswordBlock2)(void);
+    void(^disblock)(void);
 }
 
 __string(type);

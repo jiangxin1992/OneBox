@@ -192,8 +192,8 @@ NSArray *contentArray2=@[model.setup_year,model.total_students,model.ap_count,mo
     return  self;
 }
 - (void)awakeFromNib {
+    [super awakeFromNib];
     [self UIConfig];
-    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

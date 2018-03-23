@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-typedef  void(^bl)();
+typedef  void(^bl)(void);
 
 @interface RegisterController : UIViewController
 {
-    void(^disblock)();
+    void(^disblock)(void);
 }
 
 @property (nonatomic,copy)bl block;

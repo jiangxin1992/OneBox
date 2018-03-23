@@ -33,7 +33,7 @@
 
 - (void)awakeFromNib
 {
-    // Initialization code
+    [super awakeFromNib];
 }
 
 -(void)layoutSubviews

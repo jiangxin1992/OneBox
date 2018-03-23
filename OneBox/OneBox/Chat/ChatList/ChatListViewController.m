@@ -491,7 +491,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     JXLOG(@"%@",turearr);
-    JXLOG(@" %d",indexPath.row);
+    JXLOG(@" %ld",(long)indexPath.row);
     if(turearr.count)
     {
         NSDictionary *__ddd=[[NSDictionary alloc] initWithObjectsAndKeys:(EMConversation *)[self.dataSource objectAtIndex:indexPath.row],@"con",[turearr objectAtIndex:indexPath.row],@"title",nil];
@@ -643,7 +643,8 @@
 
         if(i!=(muarr.count-1))
         {
-            [_uuids appendFormat:[[NSString alloc] initWithFormat:@"%@,",_sss]];
+            NSString *appendStr = [[NSString alloc] initWithFormat:@"%@,",_sss];
+            [_uuids appendString:appendStr];
         }else
         {
             [_uuids appendString:_sss];

@@ -119,7 +119,7 @@
 
             if(dict[@"ap_count"]!=[NSNull null])
             {
-                model.ap_count=[[NSString alloc] initWithFormat:@"%d",[dict[@"ap_count"] integerValue]];
+                model.ap_count=[[NSString alloc] initWithFormat:@"%ld",[dict[@"ap_count"] integerValue]];
             }else
             {
                 model.ap_count=@"";

@@ -202,7 +202,7 @@
     UIView *rightView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, 130*_Scale, CGRectGetHeight(textfield_email.frame))];
     get_yanzheng=[UIButton buttonWithType:UIButtonTypeCustom];
     get_yanzheng.frame=CGRectMake(0, (CGRectGetHeight(textfield_email.frame)-(130*_Scale*44.0f)/130.0f)/2.0f, 130*_Scale, (130*_Scale*44.0f)/130.0f);
-    remainTime=[[NSMutableString alloc] initWithFormat:@"%ds",_time];
+    remainTime=[[NSMutableString alloc] initWithFormat:@"%lds",(long)_time];
     [get_yanzheng setTitle:remainTime forState:UIControlStateSelected];
     [get_yanzheng addTarget:self action:@selector(yanzheng:) forControlEvents:UIControlEventTouchUpInside];
     [get_yanzheng setBackgroundImage:[UIImage imageNamed:@"获取验证码"] forState:UIControlStateNormal];
@@ -315,7 +315,7 @@
 {
     _time--;
 
-    [get_yanzheng setTitle:[[NSString alloc] initWithFormat:@"%ds",_time] forState:UIControlStateSelected];
+    [get_yanzheng setTitle:[[NSString alloc] initWithFormat:@"%lds",(long)_time] forState:UIControlStateSelected];
     if(!_time)
     {
 

@@ -6,7 +6,7 @@
 //  Copyright (c) 2015年 谢江新. All rights reserved.
 //
 
-typedef  void(^bl)();
+typedef  void(^bl)(void);
 #import <UIKit/UIKit.h>
 
 @interface webViewController : UIViewController

@@ -12,7 +12,7 @@
 
 @property (nonatomic,copy) NSString *url;
 @property (nonatomic,copy) void(^completecb)(NSData *);
-@property (nonatomic,copy) void(^failedcb)();
+@property (nonatomic,copy) void(^failedcb)(void);
 
 
 -(void)startRequest;
@@ -22,7 +22,7 @@
 
 @interface HttpRequestManager : NSObject
 
-+(void)GET:(NSString *)url complete:(void(^)(NSData *))completeCB failed:(void(^)())failedCB;
++(void)GET:(NSString *)url complete:(void(^)(NSData *))completeCB failed:(void(^)(void))failedCB;
 
 @end
 

@@ -10,8 +10,8 @@
 
 @interface LoginViewController : UIViewController
 {
-    void(^resetpasswordBlock)();
-    void(^registerBlock)();
+    void(^resetpasswordBlock)(void);
+    void(^registerBlock)(void);
 }
 
 @property (nonatomic,copy)NSString *type;

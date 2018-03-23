@@ -8,12 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-typedef  void(^bl)();
+typedef  void(^bl)(void);
 
 @interface RetrievePasswordController : UIViewController
 {
-    void(^registerBlock)();
-    void(^registerBlock2)();
+    void(^registerBlock)(void);
+    void(^registerBlock2)(void);
 }
 
 __string(type1);

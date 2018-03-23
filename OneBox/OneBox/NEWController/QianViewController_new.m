@@ -814,19 +814,19 @@
                     break;
                 }
             }
-            MKMapItem *mylocation = [MKMapItem mapItemForCurrentLocation];
+//            MKMapItem *mylocation = [MKMapItem mapItemForCurrentLocation];
 
 
 
             //当前经维度
 
-            float currentLatitude=mylocation.placemark.location.coordinate.latitude;
+//            float currentLatitude=mylocation.placemark.location.coordinate.latitude;
+//
+//            float currentLongitude=mylocation.placemark.location.coordinate.longitude;
 
-            float currentLongitude=mylocation.placemark.location.coordinate.longitude;
 
 
-
-            CLLocationCoordinate2D coords1 = CLLocationCoordinate2DMake(currentLatitude,currentLongitude);
+//            CLLocationCoordinate2D coords1 = CLLocationCoordinate2DMake(currentLatitude,currentLongitude);
 
 
 

@@ -8,13 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-typedef  void(^bl)();
+typedef  void(^bl)(void);
 
 @interface chooseRegisterViewController : UIViewController
 {
-    void(^disblock)();
-    void(^resetpasswordBlock)();
-    void(^resetpasswordBlock2)();
+    void(^disblock)(void);
+    void(^resetpasswordBlock)(void);
+    void(^resetpasswordBlock2)(void);
 }
 
 __string(type);

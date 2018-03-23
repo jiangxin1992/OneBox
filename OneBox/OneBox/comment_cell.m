@@ -122,7 +122,7 @@ _width=i==0?170*_Scale:i==1?25*_Scale*17/15:i==2?200*_Scale:(ScreenWidth-_x_p-40
 -(void)tapAction:(UIGestureRecognizer *)sender
 {
     
-        NSInteger _num=[_dict[@"rownum"] integerValue];
+//        NSInteger _num=[_dict[@"rownum"] integerValue];
         self.block(_dict[@"rownum"],4);
 
 
@@ -159,7 +159,7 @@ _width=i==0?170*_Scale:i==1?25*_Scale*17/15:i==2?200*_Scale:(ScreenWidth-_x_p-40
 
 
     }
-     NSInteger _num=[_dict[@"rownum"] integerValue];
+//     NSInteger _num=[_dict[@"rownum"] integerValue];
     self.block(_dict[@"rownum"],_type);
 }
 -(void)setDict:(NSDictionary *)dict
@@ -245,7 +245,7 @@ _width=i==0?170*_Scale:i==1?25*_Scale*17/15:i==2?200*_Scale:(ScreenWidth-_x_p-40
 
             if(i==2)
             {
-                _label.text=[[NSString alloc] initWithFormat:@"  %d",cell_model.votes_count ];
+                _label.text=[[NSString alloc] initWithFormat:@"  %ld",(long)cell_model.votes_count ];
                  _label.font=[regular get_en_Font:10.0f];
                 
             }else if(i==0)

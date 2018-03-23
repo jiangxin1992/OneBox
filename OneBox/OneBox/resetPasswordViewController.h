@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-typedef  void(^bl)();
+typedef  void(^bl)(void);
 
 @interface resetPasswordViewController : UIViewController
 

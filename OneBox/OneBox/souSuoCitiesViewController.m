@@ -25,7 +25,6 @@
 #define foundCellHeight_card 400*_Scale
 
 @interface souSuoCitiesViewController ()<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate>
-
 @end
 
 @implementation souSuoCitiesViewController

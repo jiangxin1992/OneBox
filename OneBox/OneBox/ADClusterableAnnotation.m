@@ -17,7 +17,7 @@
 - (id)initWithDictionary:(NSDictionary *)dictionary {
     self = [super init];
     if (self) {
-        _name = [[NSString alloc] initWithFormat:@"%d",[[dictionary objectForKey:@"id"] integerValue]];
+        _name = [[NSString alloc] initWithFormat:@"%ld",[[dictionary objectForKey:@"id"] integerValue]];
         _dict=dictionary;
         self.coordinate = CLLocationCoordinate2DMake([[dictionary objectForKey:@"latitude"] doubleValue], [[dictionary objectForKey:@"longtitude"] doubleValue]);
     }

@@ -970,12 +970,16 @@
         _y_p1=-kTabBarHeight;
     }
 
-    _scrollView=[[UIScrollView alloc] initWithFrame:CGRectMake(0, _y_p, ScreenWidth, ScreenHeight+kTabBarHeight-_y_p+_y_p1)];
+    _scrollView=[[UIScrollView alloc] initWithFrame:CGRectZero];
+    [self.view addSubview:_scrollView];
+//    CGRectMake(0, _y_p, ScreenWidth, ScreenHeight+kTabBarHeight-_y_p+_y_p1)
+    [_scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(self.view);
+    }];
     _scrollView.backgroundColor=_define_backview_color;
     _scrollView.showsVerticalScrollIndicator=YES;
     _scrollView.contentSize=CGSizeMake(ScreenWidth, ScreenHeight-64);
     _scrollView.delegate=self;
-    [self.view addSubview:_scrollView];
 }
 //根据偏移量做判断，改变addbtn的位置
 - (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset NS_AVAILABLE_IOS(5_0)
@@ -1018,7 +1022,7 @@
             //在这做一些修改，包括对视图的坐标，大小，以及颜色的修改,透明度的修改
             //这些修改将会以动画的形式显示
 #pragma mark-动画往上
-            _addbtn.frame=CGRectMake(CGRectGetMinX(_addbtn.frame), _rect_add.origin.y-100*_Scale, CGRectGetWidth(_addbtn.frame), CGRectGetHeight(_addbtn.frame));
+            _addbtn.frame=CGRectMake(CGRectGetMinX(_addbtn.frame), _rect_add.origin.y-100*_Scale - (kIPhoneX?34.f:0.f), CGRectGetWidth(_addbtn.frame), CGRectGetHeight(_addbtn.frame));
             if(_deleteAct)
             {
                 _nextBtn.frame=CGRectMake(20, _scrollView.contentSize.height-100*_Scale, CGRectGetWidth(_nextBtn.frame), _nextBtn_height);
@@ -1050,7 +1054,7 @@
             //在这做一些修改，包括对视图的坐标，大小，以及颜色的修改,透明度的修改
             //这些修改将会以动画的形式显示
 
-            _addbtn.frame=CGRectMake(CGRectGetMinX(_addbtn.frame), _rect_add.origin.y-100*_Scale, CGRectGetWidth(_addbtn.frame), CGRectGetHeight(_addbtn.frame));
+            _addbtn.frame=CGRectMake(CGRectGetMinX(_addbtn.frame), _rect_add.origin.y-100*_Scale - (kIPhoneX?34.f:0.f), CGRectGetWidth(_addbtn.frame), CGRectGetHeight(_addbtn.frame));
 
 
             //                if(_dataArray.count<=2)
@@ -1135,7 +1139,7 @@
             _cardArray=[[NSMutableArray alloc] init];
             max_y=0;
             [self UIConfig];
-    _scrollView.frame=CGRectMake(CGRectGetMinX(_scrollView.frame), CGRectGetMinY(_scrollView.frame)+64, CGRectGetWidth(_scrollView.frame), CGRectGetHeight(_scrollView.frame)-64-kTabBarHeight);
+//    _scrollView.frame=CGRectMake(CGRectGetMinX(_scrollView.frame), CGRectGetMinY(_scrollView.frame)+64, CGRectGetWidth(_scrollView.frame), CGRectGetHeight(_scrollView.frame)-64-kTabBarHeight);
 
 }
 -(void)viewWillDisappear:(BOOL)animated

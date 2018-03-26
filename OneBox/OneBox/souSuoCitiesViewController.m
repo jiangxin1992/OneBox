@@ -24,7 +24,7 @@
 #define foundCellHeight 184*_Scale
 #define foundCellHeight_card 400*_Scale
 
-@interface souSuoCitiesViewController ()<UITableViewDataSource,UITableViewDelegate>
+@interface souSuoCitiesViewController ()<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate>
 @end
 
 @implementation souSuoCitiesViewController
@@ -48,6 +48,10 @@
     NSInteger count;
     //    data
     NSMutableData *_receiveData;
+    //搜索栏
+    UISearchBar *_searchBar;
+    //搜索结果展示控制器 ，经常和UISearchBar配合使用
+    UISearchDisplayController *_searchDC;
 
     //搜索结果数据
     NSMutableArray *_arrayResult;
@@ -68,6 +72,7 @@
     BOOL _nav_donghua;
     UIButton *_leftBarbtn;
     BOOL _is_suoyin;//是否点击索引
+    
 }
 
 - (void)viewDidLoad {
@@ -96,6 +101,10 @@
     //    创建tableview
     [self createTableView];
     [self setupRefresh];
+    //    创建搜索栏
+//    [self createSearchBar];
+    //    创建搜索结果显示器
+//    [self createSearchDisplayCtrl];
 
 }
 #pragma mark-导航栏重置
@@ -144,6 +153,12 @@
     [self requestData];
 }
 
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+{
+
+    //    [self sectionIndexTitlesForTableView:_searchBar.]
+
+}
 #pragma mark*请求数据
 -(void)requestData
 {
@@ -410,6 +425,21 @@
 {
     [self.navigationController popViewControllerAnimated:YES];
 }
+- (void)createSearchDisplayCtrl
+{
+    //创建搜索结果显示控制器
+    //参数 1: 将控制器与参数1指定的搜索栏相关联
+    //参数 2 : 指定控制器的显示位置，（当前控制器显示在哪个视图控制器上）
+    //当用户点击到_searchBar时，searchDC就会显示，同时searchDC将_searchBar移到searchDC，再将_searchBar的取消按钮设为可见
+    _searchDC = [[UISearchDisplayController alloc] initWithSearchBar:_searchBar contentsController:self];
+
+
+    //设置控制器的tableview的搜索结果数据源代理
+    _searchDC.searchResultsDataSource = self;
+    //设置控制器的tableview的代理
+    _searchDC.searchResultsDelegate = self;
+
+}
 
 -(void)createTableView
 {
@@ -453,6 +483,58 @@
     
 }
 
+- (void)createSearchBar
+{
+//    UIView *headview=[[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 44)];
+//    headview.backgroundColor=[UIColor redColor];
+//    [_tableView addSubview:headview];
+    _searchBar = [[UISearchBar alloc] init];
+    _searchBar.backgroundColor=[UIColor clearColor];
+    _searchBar.frame = CGRectMake(0, 64, ScreenWidth, 44);
+    _searchBar.delegate=self;
+    [self.view addSubview:_searchBar];
+    //    _searchBar.searc
+    [_searchBar setSearchFieldBackgroundImage:[UIImage imageNamed:@"found_school_所在州所在城市筛选框"] forState:UIControlStateNormal];
+    _searchBar.backgroundImage=[UIImage imageNamed:@"hehehehe"];
+
+
+    //    [_searchBar setImage:[UIImage imageNamed:@"found_school_所在州所在城市筛选框"] forSearchBarIcon:UISearchBarIconSearch state:UIControlStateNormal];
+    //     UITextField *searchField = [_searchBar valueForKey:@"_searchField"];
+    //     searchField.textColor = [UIColor blackColor];
+    //    [searchField setValue:[UIColor blackColor] forKeyPath:@"_placeholderLabel.textColor"];
+    //    [[_searchBar.subviews objectAtIndex:0]removeFromSuperview];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"found_school_2_选中底图.png"]];
+    imageView.frame=_searchBar.frame;
+    _searchBar.placeholder=@"输入城市或者学校名字 试试吧";
+    UITextField *searchField = [_searchBar valueForKey:@"_searchField"];
+
+    searchField.font=(kIOSVersions>=9.0? [UIFont systemFontOfSize:11.0f]:[UIFont fontWithName:@"Helvetica Neue" size:11.0f]);
+    searchField.leftView.alpha=0.5;
+
+    [searchField setValue:[UIColor colorWithRed:220.0f/255.0f green:220.0f/255.0f blue:220.0f/255.0f alpha:1] forKeyPath:@"_placeholderLabel.textColor"];
+
+    //    [[_searchBar.subviews objectAtIndex:0]removeFromSuperview];
+
+    //_searchBar.textInputMode
+    //    _searchBar.
+    //     [_searchBar setValue:[UIColor blackColor] forKeyPath:@"_placeholderLabel.textColor"];
+    //[_searchBar set]
+    [_searchBar insertSubview:imageView atIndex:1];
+
+
+    //    _searchBar.delegate = self;
+    _searchBar.searchBarStyle=UISearchBarStyleDefault;
+    //设置搜索栏取消按钮是否显示
+    //        _searchBar.showsCancelButton = YES;
+    //将搜索栏添加到视图控制器的主视图上
+    //效果是,搜索栏不会随着表视图的滚动而滚动
+    //    [self.view addSubview:_searchBar];
+    //将搜索栏添加到表视图的表头视图上
+    //效果是,搜索栏会随着表视图的滚动而滚动
+//    [headview addSubview:_searchBar];
+//    [self.view addSubview:];
+    _tableView.tableHeaderView = _searchBar;
+}
 #pragma mark-检测当前偏移量
 
 - (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView
@@ -696,8 +778,67 @@
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    NSInteger _count=_arrayChar.count;
-    return _count;
+    if(tableView==_tableView)
+    {
+        NSInteger _count=_arrayChar.count;
+        return _count;
+    }else
+    {
+        //因为在searchDC上的_searchBar就是创建searchDC时，由第一个参数指定的_searchBar
+        //        NSString *searchCon = _searchBar.text;
+        //        JXLOG(@"%@", searchCon);
+
+        [_arrayResult removeAllObjects];
+        NSString *title=_searchBar.text;
+
+        //遍历数据源数据，找到与当前搜索内容相匹配的数据
+        JXLOG(@"%@",_dictPinyinAndChinese);
+
+        for (foundModel *model in _arrayData) {
+
+            if(![title isEqualToString:@""])
+            {
+                NSRange range1;
+                NSRange range2;
+                NSRange range3;
+
+                NSString *title1=nil;
+                if([self IsChinese:title])
+                {
+
+                    title1=title;
+                    range1 = [model.cn_name rangeOfString:title1];
+                    range2 = [model.en_name rangeOfString:title1];
+                    NSString *titeeee=model.city;
+                    range3 = [titeeee rangeOfString:title1];
+                }else
+                {
+                    title1=[ChineseToPinyin pinyinFromChiniseString:title];
+                    range1 = [[ChineseToPinyin pinyinFromChiniseString:model.cn_name] rangeOfString:title1];
+                    range2 = [[ChineseToPinyin pinyinFromChiniseString:model.en_name] rangeOfString:title1];
+                    NSString *titeeee=model.city;
+                    range3 = [[ChineseToPinyin pinyinFromChiniseString:titeeee] rangeOfString:title1];
+
+                }
+
+
+
+                if(((range1.location != NSNotFound)||(range2.location!=NSNotFound))&&(![model.en_name isEqualToString:@""])&&(![model.cn_name isEqualToString:@""]))
+                {
+                    [_arrayResult addObject:model];
+                }else if(![model.city isEqualToString:@""])
+                {
+                    if((range3.location!=NSNotFound))
+                    {
+                        [_arrayResult addObject:model];
+                    }
+                }
+            }
+        }
+        JXLOG(@"%@",_arrayResult);
+        return 1;
+    }
+
 }
 -(BOOL)IsChinese:(NSString *)str { for(int i=0; i< [str length];i++){ int a = [str characterAtIndex:i]; if( a > 0x4e00 && a < 0x9fff)
 { return YES;
@@ -750,9 +891,24 @@
 
         }
         cell_card.selectionStyle=UITableViewCellSelectionStyleNone;
-        cell_card.block=self.sousuoBlock;
-        NSDictionary *_dict=[[NSDictionary alloc] initWithObjectsAndKeys:[[_dictPinyinAndChinese objectForKey:[_arrayChar objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row],@"model",[NSNumber numberWithInteger:indexPath.row],@"row",[NSNumber numberWithInteger:indexPath.section],@"section",@"1",@"type",[_arrayChar objectAtIndex:indexPath.section],@"char",[NSNumber numberWithBool:_is_suoyin],@"suoyin",[NSNumber numberWithInteger:_m_row],@"m_row",[NSNumber numberWithInteger:_m_section],@"m_section",nil];
-        cell_card.dict=_dict;
+        if(tableView==_tableView)
+        {
+            cell_card.block=self.sousuoBlock;
+            NSDictionary *_dict=[[NSDictionary alloc] initWithObjectsAndKeys:[[_dictPinyinAndChinese objectForKey:[_arrayChar objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row],@"model",[NSNumber numberWithInteger:indexPath.row],@"row",[NSNumber numberWithInteger:indexPath.section],@"section",@"1",@"type",[_arrayChar objectAtIndex:indexPath.section],@"char",[NSNumber numberWithBool:_is_suoyin],@"suoyin",[NSNumber numberWithInteger:_m_row],@"m_row",[NSNumber numberWithInteger:_m_section],@"m_section",nil];
+            cell_card.dict=_dict;
+        }else
+        {
+            tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
+            if(![_searchBar.text isEqualToString:@""])
+            {
+                NSDictionary *_dict=[[NSDictionary alloc] initWithObjectsAndKeys:[[_dictPinyinAndChinese1 objectForKey:[_arrayChar1 objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row],@"model",[NSNumber numberWithInteger:indexPath.row],@"row",[NSNumber numberWithInteger:indexPath.section],@"section",@"2",@"type",[_arrayChar1 objectAtIndex:indexPath.section],@"char",[NSNumber numberWithBool:_is_suoyin],@"suoyin",nil];
+                cell_card.block=self.sousuoBlock;
+                cell_card.dict=_dict;
+
+            }else
+            {
+            }
+        }
         return cell_card;
 
     }else
@@ -764,11 +920,54 @@
             cell=[[FoundCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellid];
         }
         cell.selectionStyle=UITableViewCellSelectionStyleNone;
-        cell.model =[[_dictPinyinAndChinese objectForKey:[_arrayChar objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row];
+        if(tableView==_tableView)
+        {
+            cell.model =[[_dictPinyinAndChinese objectForKey:[_arrayChar objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row];
+        }else
+        {
+
+            if(![_searchBar.text isEqualToString:@""])
+            {
+                cell.model = [[_dictPinyinAndChinese1 objectForKey:[_arrayChar1 objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row];
+            }else
+            {
+            }
+        }
         cell.selectionStyle=UITableViewCellSelectionStyleNone;
         return cell;
         
     }
+
+//    static NSString *cellid=@"cell";
+//    FoundCell *cell=[tableView dequeueReusableCellWithIdentifier:cellid ];
+//    if(!cell)
+//    {
+//        cell=[[FoundCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellid];
+//
+//    }
+//    cell.selectionStyle=UITableViewCellSelectionStyleNone;
+//    if(tableView==_tableView)
+//    {
+//        if( _arrayData.count>0)
+//        {
+//            NSInteger _section=indexPath.section;
+//            JXLOG(@"%@",_arrayChar);
+//            NSString *strKey  = [_arrayChar objectAtIndex:_section];
+//            NSMutableArray  *__arr=[[NSMutableArray alloc] initWithArray:[_dictPinyinAndChinese objectForKey:strKey]];
+//            NSInteger num=indexPath.row;
+//            foundModel *model=__arr[num];
+//            cell.model =model;
+//        }
+//
+//
+//        //    cell.model=_arrayData[indexPath.row];
+//    }else
+//    {
+//
+//        tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
+//        cell.model = [_arrayResult objectAtIndex:indexPath.row];
+//    }
+//    return cell;
 }
 #pragma mark-索引
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView

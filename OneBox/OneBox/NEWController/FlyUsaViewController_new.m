@@ -383,22 +383,6 @@
             [backview addSubview:comptleView];
             [comptleView addTarget:self action:@selector(submitcailiao:) forControlEvents:UIControlEventTouchUpInside];
 
-//            UIImageView *icon=[[UIImageView alloc] initWithFrame:CGRectMake((CGRectGetWidth(compele_btn.frame)-80*_Scale)/2.0f, 10, 80*_Scale, 80*_Scale)];
-//            //        icon.userInteractionEnabled=YES;
-//            icon.image=[UIImage imageNamed:@"cailiao_check"];
-//            [compele_btn addSubview:icon];
-//            //        icon.backgroundColor=[UIColor yellowColor];
-//
-//            UILabel *titlelabel=[[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(icon.frame), CGRectGetWidth(compele_btn.frame), CGRectGetHeight(compele_btn.frame)-CGRectGetMaxY(icon.frame))];
-//            //        titlelabel.userInteractionEnabled=YES;
-//            //        titlelabel.backgroundColor=[UIColor blueColor];
-//            [compele_btn addSubview:titlelabel];
-//            [titlelabel setAttributedText:[regular createAttributeString:@"点击完成本材料" andFloat:@(3.0)]];
-//            [titlelabel setFont:[regular getFont:11.0f]];
-//            titlelabel.textAlignment=1;
-//            titlelabel.textColor=[UIColor colorWithRed:27.0f/255.0f green:186.0f/255.0f blue:144.0f/255.0f alpha:1];
-
-
         }else
         {
             //        submitcailiao

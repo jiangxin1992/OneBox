@@ -212,7 +212,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(xiaoshi:) name:@"xiaoshi" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(other) name:@"other" object:nil];
     [self prepareData];
-    _scrollView=[[UIScrollView alloc] initWithFrame:CGRectMake(_margin, _margin, ScreenWidth-2*_margin, ScreenHeight-2*_margin+49-100*_Scale)];
+    _scrollView=[[UIScrollView alloc] initWithFrame:CGRectMake(_margin, _margin, ScreenWidth-2*_margin, ScreenHeight-2*_margin+49-100*_Scale - (kIPhoneX?34.f:0))];
 //    _scrollView.scrollsToTop=YES;
     _scrollView.showsVerticalScrollIndicator=YES;
     _scrollView.backgroundColor=_define_backview_color;
@@ -1392,8 +1392,9 @@
 -(void)createtabbar
 {
 
-    _tabbar=[[UIView alloc] initWithFrame:CGRectMake(0, ScreenHeight-100*_Scale, ScreenWidth, 100*_Scale)];
+    _tabbar=[[UIView alloc] initWithFrame:CGRectMake(0, ScreenHeight-100*_Scale-(kIPhoneX?34.f:0.f), ScreenWidth, 100*_Scale+(kIPhoneX?34.f:0.f))];
     [self.view addSubview:_tabbar];
+    _tabbar.backgroundColor =_define_white_color;
 
     CGFloat _button_width=CGRectGetWidth(_tabbar.frame)/5.0f;
 
@@ -1408,7 +1409,7 @@
             btn=[UIButton buttonWithType:UIButtonTypeCustom];
         }
         btn.backgroundColor=[UIColor whiteColor];
-        btn.frame=CGRectMake(_button_width*i, 0, _button_width, CGRectGetHeight(_tabbar.frame));
+        btn.frame=CGRectMake(_button_width*i, 0, _button_width, 100*_Scale);
         btn.tag=7000+i;
         NSString *normalImgName=i==0?@"school_tabbar_评星":i==1?@"school_tabbar_赞":i==2?@"school_tabbar_添加":i==3?@"school_tabbar_喜欢":@"school_tabbar_评论";
         NSString *selectImgName=i==0?@"school_tabbar_评星select":i==1?@"school_tabbar_赞select":i==2?@"school_tabbar_删除":i==3?@"school_tabbar_喜欢select":@"school_tabbar_评论select";

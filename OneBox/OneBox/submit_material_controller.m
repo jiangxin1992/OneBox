@@ -347,34 +347,54 @@
         CGFloat __h=[[((NSDictionary *)imageArr[btn.tag-100]) objectForKey:@"h"] floatValue];
         CGFloat _height=__h*(ScreenWidth)/__w;
 
-        UIView *backview=[[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth ,ScreenHeight)];
+        UIView *backview=[[UIView alloc] initWithFrame:CGRectZero];
+        [self.view.window addSubview:backview];
+        [backview mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.mas_equalTo(self.view.window);
+        }];
         backview.backgroundColor=_define_backview_color;
         backview.tag=10000;
         UITapGestureRecognizer *tapges = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(removeImage:)];
         [backview addGestureRecognizer:tapges];
 
-        [self.view.window addSubview:backview];
         desImage=[[UIImageView alloc] init];
+        [backview addSubview:desImage];
         if(__w==0)
         {
-            desImage.frame=backview.frame;
+//            desImage.frame=backview.frame;
+            [desImage mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.edges.mas_equalTo(backview);
+            }];
 
         }else
         {
             if(_isPad)
             {
                 CGFloat _width=(ScreenHeight-107)*ScreenWidth/__h;
-                desImage.frame=CGRectMake((ScreenWidth-_width)/2.0f, 6, _width ,ScreenHeight-107);
+                [desImage mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.top.mas_equalTo(6);
+                    make.centerX.mas_equalTo(backview);
+                    make.width.mas_equalTo(_width);
+                    make.height.mas_equalTo(ScreenHeight-107);
+                }];
+//                desImage.frame=CGRectMake((ScreenWidth-_width)/2.0f, 6, _width ,ScreenHeight-107);
+
             }else
             {
-                desImage.frame=CGRectMake(0, (ScreenHeight-_height)/2.0f, ScreenWidth,_height);
+                [desImage mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.centerX.mas_equalTo(backview);
+                    make.centerY.mas_equalTo(backview).with.offset(kIPhoneX?(-34-24):0);
+                    make.width.mas_equalTo(ScreenWidth);
+                    make.height.mas_equalTo(_height);
+                }];
+//                desImage.frame=CGRectMake(0, (ScreenHeight-_height)/2.0f, ScreenWidth,_height);
             }
 
         }
 
         desImage.userInteractionEnabled = YES;
         desImage.image = [UIImage imageNamed:[((NSDictionary *)imageArr[btn.tag-100]) objectForKey:@"imgname"]];
-        [backview addSubview:desImage];
+
         // 旋转手势
         UIRotationGestureRecognizer *rotationGestureRecognizer = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(rotateView:)];
         [desImage addGestureRecognizer:rotationGestureRecognizer];
@@ -384,19 +404,30 @@
         [desImage addGestureRecognizer:pinchGestureRecognizer];
 
         UIButton *comptleView=[UIButton buttonWithType:UIButtonTypeCustom];
+        [backview addSubview:comptleView];
         if(_isPad)
         {
-            comptleView.frame=CGRectMake(0, ScreenHeight-100, ScreenWidth, 100);
+            [comptleView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.right.bottom.mas_equalTo(0);
+                make.height.mas_equalTo(100);
+            }];
+//            comptleView.frame=CGRectMake(0, ScreenHeight-100, ScreenWidth, 100);
         }else
         {
-            comptleView.frame=CGRectMake(18, ScreenHeight-110*_Scale, ScreenWidth-36, 90*_Scale);
+//            comptleView.frame=CGRectMake(18, ScreenHeight- 110*_Scale - (kIPhoneX?34.f:0.f), ScreenWidth-36, 90*_Scale);
+
+            [comptleView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.mas_equalTo(18);
+                make.right.mas_equalTo(-18);
+                make.height.mas_equalTo(90*_Scale);
+                make.bottom.mas_equalTo(-(20*_Scale+(kIPhoneX?34.f:0.f)));
+            }];
         }
         comptleView.backgroundColor=[UIColor colorWithRed:91.0f/255.0f green:192.0f/255.0f blue:190.0f/255.0f alpha:1];
         [comptleView setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [comptleView setTitle:@"点击完成本材料" forState:UIControlStateNormal];
         [comptleView.titleLabel setAttributedText:[regular createAttributeString:@"点击完成本材料" andFloat:@(3.0)]];
         comptleView.titleLabel.font=[regular getFont:14.0f];
-        [backview addSubview:comptleView];
         [comptleView addTarget:self action:@selector(submitcailiao:) forControlEvents:UIControlEventTouchUpInside];
     }
 }

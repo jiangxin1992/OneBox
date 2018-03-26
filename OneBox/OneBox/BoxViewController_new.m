@@ -170,10 +170,6 @@
             [self.navigationController pushViewController:flyVC animated:YES];
         }else if(_tag==1)
         {
-//            submitSchoolController *flyVC = [[submitSchoolController alloc] init];
-//            flyVC.step=_step;
-//            flyVC.block=shareBlock;
-//            [self.navigationController pushViewController:flyVC animated:YES];
             Boxlistviewcontroller *Boxlistview = [[Boxlistviewcontroller alloc] init];
             Boxlistview.block=shareBlock;
             Boxlistview.info=@{@"titlename":@"申请啦！",@"step":[NSNumber numberWithInteger:_step],@"nowstep":[NSNumber numberWithInteger:1]};
@@ -183,10 +179,6 @@
 
         }else if(_tag==2)
         {
-//            QianViewController_new *QianVC = [[QianViewController_new alloc] init];
-//            QianVC.step=_step;
-//            QianVC.block=shareBlock;
-//            [self.navigationController pushViewController:QianVC animated:YES];
             Boxlistviewcontroller *Boxlistview = [[Boxlistviewcontroller alloc] init];
             Boxlistview.block=shareBlock;
             Boxlistview.info=@{@"titlename":@"签证去！",@"step":[NSNumber numberWithInteger:_step],@"nowstep":[NSNumber numberWithInteger:2]};

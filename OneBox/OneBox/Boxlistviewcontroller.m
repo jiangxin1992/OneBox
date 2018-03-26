@@ -68,7 +68,7 @@
     for (int i=0; i<2; i++) {
         UIButton *btn=[UIButton buttonWithType:UIButtonTypeCustom];
 
-        btn.frame=CGRectMake(_x_p, 64,_width , 100*_Scale);
+        btn.frame=CGRectMake(_x_p, kStatusBarAndNavigationBarHeight,_width , 100*_Scale);
         _x_p+=_width+2;
         NSString *str=nil;
         if(_nowstep==1)
@@ -99,7 +99,7 @@
 
     }
     _pageVc = [[UIPageViewController alloc]initWithTransitionStyle:1 navigationOrientation:0 options:nil];
-    _pageVc.view.frame = CGRectMake(0,64+100*_Scale, ScreenWidth*2, ScreenHeight-64);
+    _pageVc.view.frame = CGRectMake(0,kStatusBarAndNavigationBarHeight+100*_Scale, ScreenWidth*2, ScreenHeight-kStatusBarAndNavigationBarHeight);
     _pageVc.view.backgroundColor = [UIColor yellowColor];
     if(_nowstep==1)
     {

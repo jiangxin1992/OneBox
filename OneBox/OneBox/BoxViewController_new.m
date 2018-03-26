@@ -85,6 +85,7 @@
         make.bottom.mas_equalTo(-30-kTabBarHeight);
     }];
     [userHelpButton addTarget:self action:@selector(userHelpAction) forControlEvents:UIControlEventTouchUpInside];
+    userHelpButton.hidden = YES;
 }
 -(void)userHelpAction{
     [self.navigationController pushViewController:[BoxHelpViewController new] animated:YES];

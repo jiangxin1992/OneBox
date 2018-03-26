@@ -8,12 +8,22 @@
 
 #import "collectionSchool_delete.h"
 
-#import "MJRefresh.h"
 
+// c文件 —> 系统文件（c文件在前）
+
+// 控制器
 #import "SchoolDetailViewController.h"
 #import "CustomTabbarController.h"
 
+// 自定义视图
 #import "collection_del_Cell.h"
+
+// 接口
+
+// 分类
+
+// 自定义类和三方类（ cocoapods类 > model > 工具类 > 其他）
+#import "MJRefresh.h"
 
 #import "foundModel.h"
 
@@ -29,14 +39,72 @@
     UITableView *_tableView;
     NSInteger _page;
 }
-
+#pragma mark - --------------生命周期--------------
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self SomePrepare];
+    [self UIConfig];
+//    [self RequestData];
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:@"collectionSchool"];
+
+}
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [[CustomTabbarController sharedManager] tabbarHide];
+
+    [MobClick beginLogPageView:@"collectionSchool"];
+
+}
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+}
+
+#pragma mark - --------------SomePrepare--------------
+- (void)SomePrepare
+{
+    [self PrepareData];
+    [self PrepareUI];
+}
+- (void)PrepareData{
+    _page=1;
+    self.view.backgroundColor=_define_backview_color;
+    dataArray=[[NSMutableArray alloc] init];
+
+
+    UIBarButtonItem *_btn=[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"返回箭头"] style:UIBarButtonItemStylePlain target:self action:@selector(popviewAction)];
+    self.navigationItem.leftBarButtonItem=_btn;
+}
+- (void)PrepareUI{
     self.navigationItem.titleView=[[ToolManager sharedManager] returnNavView:@"心愿单" withmaxwidth:230];
-    [self prepareData];
+}
+
+#pragma mark - --------------UIConfig----------------------
+-(void)UIConfig{
     [self createTableView];
+}
+
+-(void)createTableView
+{
+    _tableView=[[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+    [self.view addSubview:_tableView];
+    [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(self.view);
+    }];
+    _tableView.showsVerticalScrollIndicator=YES;
+    _tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
+    _tableView.delegate=self;
+    _tableView.dataSource=self;
+    _tableView.backgroundColor=_define_backview_color;
+
     [self setupRefresh];
 }
+
 #pragma mark 开始进入刷新状态
 /**
  *  集成刷新控件
@@ -52,8 +120,6 @@
     _tableView.mj_header.automaticallyChangeAlpha = YES;
     header.lastUpdatedTimeLabel.hidden = YES;
 
-    [_tableView.mj_header beginRefreshing];
-
     // 2.上拉加载更多(进入刷新状态就会调用self的footerRereshing)
     _tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
         [ws footerRereshing];
@@ -63,20 +129,19 @@
 }
 - (void)headerRereshing
 {
-
     _page=1;
     [dataArray removeAllObjects];
 
     [self loadData];
-
 }
 
 - (void)footerRereshing
 {
-
     _page++;
     [self loadData];
 }
+#pragma mark - --------------请求数据----------------------
+//-(void)RequestData{}
 -(void)loadData
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -100,7 +165,7 @@
 
                 UILabel *label=[[UILabel alloc] initWithFrame:CGRectMake(0, 30, ScreenWidth, 30)];
 
-               [label setAttributedText:[regular createAttributeString:@" 你的心愿单是空的，到学校页面点击添加心愿吧。" andFloat:@(2.0)]];
+                [label setAttributedText:[regular createAttributeString:@" 你的心愿单是空的，到学校页面点击添加心愿吧。" andFloat:@(2.0)]];
                 label.textColor=[UIColor lightGrayColor];
                 label.textAlignment=1;
                 label.font=[regular getFont:12.0f];
@@ -125,7 +190,7 @@
 
             [_tableView.mj_header endRefreshing];
             [_tableView.mj_footer endRefreshing];
-             [[ToolManager sharedManager] alertTitle_Simple:[dict objectForKey:@"message"]];
+            [[ToolManager sharedManager] alertTitle_Simple:[dict objectForKey:@"message"]];
 
         }
 
@@ -140,35 +205,7 @@
 
 }
 
--(void)prepareData
-{
-    _page=1;
-    self.view.backgroundColor=_define_backview_color;
-    dataArray=[[NSMutableArray alloc] init];
-
-
-    UIBarButtonItem *_btn=[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"返回箭头"] style:UIBarButtonItemStylePlain target:self action:@selector(popviewAction)];
-    self.navigationItem.leftBarButtonItem=_btn;
-}
--(void)popviewAction
-{
-
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
-
--(void)createTableView
-{
-    _tableView=[[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight+49)  style:UITableViewStylePlain];
-
-    _tableView.showsVerticalScrollIndicator=YES;
-    _tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
-    _tableView.delegate=self;
-    _tableView.dataSource=self;
-    _tableView.backgroundColor=_define_backview_color;
-    [self.view addSubview:_tableView];
-
-}
+#pragma mark - --------------系统代理----------------------
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return CellHeight;
@@ -177,7 +214,7 @@
 
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-        
+
         foundModel *model=dataArray[indexPath.section-1];
         NSDictionary *parameters=@{@"followable_id":model.sid,@"followable_type":@"school",@"token":[regular getToken]};
         [manager POST:[[NSString alloc] initWithFormat:@"%@%@",DNS,@"/v1/follows/cancel"] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -191,7 +228,7 @@
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"delete_col" object:[NSNumber numberWithInteger:indexPath.section-1]];
                 [dataArray removeObjectAtIndex:indexPath.section-1];
 
-                 [tableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section]withRowAnimation:UITableViewRowAnimationLeft];
+                [tableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section]withRowAnimation:UITableViewRowAnimationLeft];
 
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"changeCllNum" object:nil];
 
@@ -209,7 +246,7 @@
 
             }else
             {
-                 [[ToolManager sharedManager] alertTitle_Simple:[dict objectForKey:@"message"]];
+                [[ToolManager sharedManager] alertTitle_Simple:[dict objectForKey:@"message"]];
             }
 
             [[ToolManager sharedManager] removeProgress];
@@ -286,25 +323,22 @@
     NSMutableDictionary *__dict=[[NSMutableDictionary alloc] initWithObjectsAndKeys:dataArray[indexPath.section-1],@"model",[NSNumber numberWithInteger:indexPath.section-1],@"rownum",nil];
 
     cell.dict=__dict;
-//    cell.block=changeBlock;
+    //    cell.block=changeBlock;
     return cell;
 }
--(void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    [MobClick endLogPageView:@"collectionSchool"];
 
-}
--(void)viewWillAppear:(BOOL)animated
+#pragma mark - --------------自定义代理/block----------------------
+
+
+#pragma mark - --------------自定义响应----------------------
+-(void)popviewAction
 {
-    [super viewWillAppear:animated];
-    [[CustomTabbarController sharedManager] tabbarHide];
-    
-    [MobClick beginLogPageView:@"collectionSchool"];
-    
+    [self.navigationController popViewControllerAnimated:YES];
 }
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
+
+#pragma mark - --------------自定义方法----------------------
+
+
+#pragma mark - --------------other----------------------
 
 @end

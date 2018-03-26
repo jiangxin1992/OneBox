@@ -13,14 +13,13 @@
 @end
 
 @implementation AboutViewController
-
 {
     UIWebView *web;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    self.view.backgroundColor= _define_backview_color;
 }
 
 -(void)loadData
@@ -73,7 +72,6 @@
 }
 -(void)prapareData
 {
-    self.view.backgroundColor= _define_backview_color;
     UIBarButtonItem *_btn=[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"返回箭头"] style:UIBarButtonItemStylePlain target:self action:@selector(popviewAction)];
     self.navigationItem.leftBarButtonItem=_btn;
     NSString *title=nil;
@@ -89,9 +87,17 @@
     {
         title=@"隐私";
     }
+
     self.navigationItem.titleView=[regular returnNavView:title withmaxwidth:230];
-    web=[[UIWebView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight+kTabBarHeight)];
+    web=[[UIWebView alloc] initWithFrame:CGRectZero];
     [self.view addSubview:web];
+    [web mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.left.right.top.mas_equalTo(0);
+    }];
+    if (@available(iOS 11.0, *)) {
+        web.scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    }
+    web.backgroundColor = _define_white_color;
 }
 -(void)popviewAction
 {
@@ -100,17 +106,6 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
-
-/*
- #pragma mark - Navigation
-
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 
 @end

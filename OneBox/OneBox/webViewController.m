@@ -92,6 +92,9 @@
 
         web=[[UIWebView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(daohang.frame), ScreenWidth, ScreenHeight-kStatusBarAndNavigationBarHeight)];
         [self.view addSubview:web];
+        if (@available(iOS 11.0, *)) {
+            web.scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+        }
         [self loadData];
 
     }

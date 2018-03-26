@@ -112,17 +112,24 @@
 #pragma mark - UIConfig
 -(void)UIConfig
 {
-    [self createWebview];
     [self createtabbar];
+    [self createWebview];
 }
 -(void)createWebview
 {
-    web=[[UIWebView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-80*_Scale+kTabBarHeight)];
+    web=[[UIWebView alloc] initWithFrame:CGRectZero];
+    [self.view addSubview:web];
+    [web mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.top.mas_equalTo(0);
+        make.bottom.mas_equalTo(_tabbar.mas_top).with.offset(0);
+    }];
     web.backgroundColor = [UIColor clearColor];
     web.delegate=self;
     [web loadHTMLString:[NSString stringWithFormat:@"<style></style><div>%@<div>",_detailModel.app_html_url] baseURL:nil];
     [web loadRequest:[[NSURLRequest alloc] initWithURL:[[NSURL alloc] initWithString:_detailModel.app_html_url]]];
-    [self.view addSubview:web];
+    if (@available(iOS 11.0, *)) {
+        web.scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    }
     
     web.opaque = NO;
     web.dataDetectorTypes = UIDataDetectorTypeNone;
@@ -135,11 +142,16 @@
 -(void)createtabbar
 {
     
-    _tabbar=[[UIView alloc] initWithFrame:CGRectMake(0, ScreenHeight-80*_Scale, ScreenWidth, 80*_Scale)];
+    _tabbar=[[UIView alloc] initWithFrame:CGRectZero];
     [self.view addSubview:_tabbar];
-    
-    CGFloat _button_width=CGRectGetWidth(_tabbar.frame)/5.0f;
-    
+    [_tabbar mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.mas_equalTo(0);
+        make.height.mas_equalTo(kTabBarHeight);
+    }];
+    _tabbar.backgroundColor = _define_white_color;
+
+    CGFloat _button_width=ScreenWidth/5.0f;
+    UIView *lastView = nil;
     for (int i=0; i<5; i++) {
         UIButton *btn=nil;
         if(i==2)
@@ -151,7 +163,7 @@
         }
         
         btn.backgroundColor=[UIColor whiteColor];
-        btn.frame=CGRectMake(_button_width*i, 0, _button_width, CGRectGetHeight(_tabbar.frame));
+        btn.frame=CGRectMake(_button_width*i, 0, _button_width, kInteractionHeight);
         btn.tag=7000+i;
         NSString *normalImgName=i==0?@"article_tabbar_撤销":i==1?@"school_tabbar_赞":i==2?@"article_tabbar_分享":i==3?@"school_tabbar_喜欢":@"school_tabbar_评论";
         NSString *selectImgName=i==0?@"article_tabbar_撤销":i==1?@"school_tabbar_赞select":i==2?@"article_tabbar_分享":i==3?@"school_tabbar_喜欢select":@"school_tabbar_评论select";
@@ -166,7 +178,7 @@
         if(i==1||i==3)
         {
             for (int j=0; j<2; j++) {
-                UIView *xian=[[UIView alloc] initWithFrame:CGRectMake((_button_width-1*_Scale)*j, -5*_Scale+((CGRectGetHeight(_tabbar.frame)-46*_Scale)/2.0f), 1*_Scale, 56*_Scale)];
+                UIView *xian=[[UIView alloc] initWithFrame:CGRectMake((_button_width-1*_Scale)*j, -5*_Scale+((kInteractionHeight-46*_Scale)/2.0f), 1*_Scale, 56*_Scale)];
                 xian.backgroundColor=self.view.backgroundColor;
                 [btn addSubview:xian];
             }
@@ -235,10 +247,10 @@
                 
                 label.text=[[NSString alloc] initWithFormat:@"%ld",(long)_detailModel.follows_count];
             }
-            
         }
+        lastView = btn;
     }
-    UIView *qufen=[[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(_tabbar.frame), 2*_Scale)];
+    UIView *qufen=[[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 2*_Scale)];
     qufen.backgroundColor=[UIColor colorWithRed:250.0f/255.0f green:250.0f/255.0f blue:250.0f/255.0f alpha:1];
     [_tabbar addSubview:qufen];
     

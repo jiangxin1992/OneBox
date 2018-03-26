@@ -79,7 +79,7 @@
 -(void)navBarReset
 {
 //将导航栏位置复原
-    self.navigationController.navigationBar.frame=CGRectMake(0, 20, [[UIScreen mainScreen]bounds].size.width, 44);
+    self.navigationController.navigationBar.frame=CGRectMake(0, kStatusBarHeight, [[UIScreen mainScreen]bounds].size.width, kNavigationBarHeight);
 //    导航栏标题透明度还原成1，还原_Dragging，_nav_donghua
     self.navigationItem.titleView.alpha=1;
     _leftBarbtn.alpha=1;
@@ -499,7 +499,7 @@
     [UIView setAnimationDuration:0.2];
     [UIView setAnimationCurve: UIViewAnimationCurveEaseInOut];
     [UIView setAnimationDelegate:self];
-    self.navigationController.navigationBar.frame=CGRectMake(0, 20, [[UIScreen mainScreen]bounds].size.width, 44);
+    self.navigationController.navigationBar.frame=CGRectMake(0, kStatusBarHeight, [[UIScreen mainScreen]bounds].size.width, kNavigationBarHeight);
     _leftBarbtn.alpha=1;
     self.navigationItem.titleView.alpha=1;
     [UIView commitAnimations];
@@ -512,7 +512,7 @@
     [UIView setAnimationDuration:0.2];
     [UIView setAnimationCurve: UIViewAnimationCurveEaseInOut];
     [UIView setAnimationDelegate:self];
-    self.navigationController.navigationBar.frame=CGRectMake(0, -24, [[UIScreen mainScreen]bounds].size.width, 44);
+    self.navigationController.navigationBar.frame=CGRectMake(0, kStatusBarHeight - kStatusBarAndNavigationBarHeight, [[UIScreen mainScreen]bounds].size.width, kNavigationBarHeight);
     _leftBarbtn.alpha=0;
     self.navigationItem.titleView.alpha=0;
     [UIView commitAnimations];
@@ -533,7 +533,7 @@
 {
 //导航栏恢复
     _Dragging=NO;
-    self.navigationController.navigationBar.frame=CGRectMake(0, 20, [[UIScreen mainScreen]bounds].size.width, 44);
+    self.navigationController.navigationBar.frame=CGRectMake(0, kStatusBarHeight, [[UIScreen mainScreen]bounds].size.width, kNavigationBarHeight);
     self.navigationItem.titleView.alpha=1;
     _leftBarbtn.alpha=1;
     _nav_donghua=NO;
@@ -623,7 +623,7 @@
 //    导航栏还原
     _appear=NO;
     _Dragging=NO;
-    self.navigationController.navigationBar.frame=CGRectMake(0, 20, [[UIScreen mainScreen]bounds].size.width, 44);
+    self.navigationController.navigationBar.frame=CGRectMake(0, kStatusBarHeight, [[UIScreen mainScreen]bounds].size.width, kNavigationBarHeight);
     self.navigationItem.titleView.alpha=1;
     _leftBarbtn.alpha=1;
     _nav_donghua=NO;

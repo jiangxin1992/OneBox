@@ -253,7 +253,7 @@ _dictPinyinAndChinese = [[NSMutableDictionary alloc] init];
 - (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView
 {
     _Dragging=NO;
-    self.navigationController.navigationBar.frame=CGRectMake(0, 20, [[UIScreen mainScreen]bounds].size.width, 44);
+    self.navigationController.navigationBar.frame=CGRectMake(0, kStatusBarHeight, [[UIScreen mainScreen]bounds].size.width, kNavigationBarHeight);
     self.navigationItem.titleView.alpha=1;
     _nav_donghua=NO;
 
@@ -264,7 +264,7 @@ _dictPinyinAndChinese = [[NSMutableDictionary alloc] init];
 -(void)navBarReset
 {
     _Dragging=NO;
-    self.navigationController.navigationBar.frame=CGRectMake(0, 20, [[UIScreen mainScreen]bounds].size.width, 44);
+    self.navigationController.navigationBar.frame=CGRectMake(0, kStatusBarHeight, [[UIScreen mainScreen]bounds].size.width, kNavigationBarHeight);
     self.navigationItem.titleView.alpha=1;
     _nav_donghua=NO;
 }
@@ -1933,7 +1933,7 @@ _dictPinyinAndChinese = [[NSMutableDictionary alloc] init];
                 [UIView setAnimationDuration:0.2];
                 [UIView setAnimationCurve: UIViewAnimationCurveEaseInOut];
                 [UIView setAnimationDelegate:self];
-                self.navigationController.navigationBar.frame=CGRectMake(0, -24, [[UIScreen mainScreen]bounds].size.width, 44);
+                self.navigationController.navigationBar.frame=CGRectMake(0, kStatusBarHeight - kStatusBarAndNavigationBarHeight, [[UIScreen mainScreen]bounds].size.width, kNavigationBarHeight);
                 self.navigationItem.titleView.alpha=0;
                 [UIView commitAnimations];
                 _nav_donghua=NO;
@@ -1945,7 +1945,7 @@ _dictPinyinAndChinese = [[NSMutableDictionary alloc] init];
                     [UIView setAnimationDuration:0.2];
                     [UIView setAnimationCurve: UIViewAnimationCurveEaseInOut];
                     [UIView setAnimationDelegate:self];
-                    self.navigationController.navigationBar.frame=CGRectMake(0, 20, [[UIScreen mainScreen]bounds].size.width, 44);
+                    self.navigationController.navigationBar.frame=CGRectMake(0, kStatusBarHeight, [[UIScreen mainScreen]bounds].size.width, kNavigationBarHeight);
                     self.navigationItem.titleView.alpha=1;
                     [UIView commitAnimations];
                     _nav_donghua=NO;
@@ -1959,7 +1959,7 @@ _dictPinyinAndChinese = [[NSMutableDictionary alloc] init];
                         [UIView setAnimationDuration:0.2];
                         [UIView setAnimationCurve: UIViewAnimationCurveEaseInOut];
                         [UIView setAnimationDelegate:self];
-                        self.navigationController.navigationBar.frame=CGRectMake(0, -24, [[UIScreen mainScreen]bounds].size.width, 44);
+                        self.navigationController.navigationBar.frame=CGRectMake(0, kStatusBarHeight - kStatusBarAndNavigationBarHeight, [[UIScreen mainScreen]bounds].size.width, kNavigationBarHeight);
                         self.navigationItem.titleView.alpha=0;
                         [UIView commitAnimations];
 
@@ -1970,7 +1970,7 @@ _dictPinyinAndChinese = [[NSMutableDictionary alloc] init];
                         [UIView setAnimationDuration:0.2];
                         [UIView setAnimationCurve: UIViewAnimationCurveEaseInOut];
                         [UIView setAnimationDelegate:self];
-                        self.navigationController.navigationBar.frame=CGRectMake(0, 20, [[UIScreen mainScreen]bounds].size.width, 44);
+                        self.navigationController.navigationBar.frame=CGRectMake(0, kStatusBarHeight, [[UIScreen mainScreen]bounds].size.width, kNavigationBarHeight);
                         self.navigationItem.titleView.alpha=1;
                         [UIView commitAnimations];
                         _nav_donghua=NO;
@@ -2148,7 +2148,7 @@ _dictPinyinAndChinese = [[NSMutableDictionary alloc] init];
 
     [super viewWillDisappear:animated];
 
-    self.navigationController.navigationBar.frame=CGRectMake(0, 20, [[UIScreen mainScreen]bounds].size.width, 44);
+    self.navigationController.navigationBar.frame=CGRectMake(0, kStatusBarHeight, [[UIScreen mainScreen]bounds].size.width, kNavigationBarHeight);
     self.navigationItem.titleView.alpha=1;
     _nav_donghua=NO;
 

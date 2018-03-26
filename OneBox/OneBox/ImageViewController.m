@@ -25,6 +25,9 @@
     _webView = [[UIWebView alloc] initWithFrame:self.view.bounds];
     //        http://player.youku.com/embed/XMTMwNzcyOTQ0OA
     [self.view addSubview: _webView];
+    if (@available(iOS 11.0, *)) {
+        _webView.scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    }
     _webView.delegate=self;
     _webView.hidden=YES;
 

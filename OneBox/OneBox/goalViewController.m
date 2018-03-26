@@ -236,7 +236,7 @@
 
     max_y=CGRectGetMaxY(_card.frame)+44*_Scale;
 
-    UIImageView *deleteImg=[[UIImageView alloc] initWithFrame:CGRectMake((CGRectGetWidth(_scrollView.frame))/2-54*_Scale/2, CGRectGetMinY(_card.frame)-54*_Scale/2, 54*_Scale, 54*_Scale)];
+    UIImageView *deleteImg=[[UIImageView alloc] initWithFrame:CGRectMake((ScreenWidth-54*_Scale)/2, CGRectGetMinY(_card.frame)-54*_Scale/2, 54*_Scale, 54*_Scale)];
 
 
     deleteImg.image=[UIImage imageNamed:@"box_choose_圆点"];
@@ -268,8 +268,6 @@
         _scrollView.contentSize=CGSizeMake(ScreenWidth, _scrollView.contentSize.height+20);
 
     }
-
-
 
 }
 -(void)requestData
@@ -360,9 +358,12 @@
 
 -(void)createScrollView
 {
-    _scrollView=[[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight+49)];
-    _scrollView.contentSize=CGSizeMake(CGRectGetWidth(_scrollView.frame), CGRectGetHeight(_scrollView.frame));
+    _scrollView=[[UIScrollView alloc] initWithFrame:CGRectZero];
     [self.view addSubview:_scrollView];
+    _scrollView.contentSize=CGSizeMake(CGRectGetWidth(_scrollView.frame), CGRectGetHeight(_scrollView.frame));
+    [_scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(self.view);
+    }];
 }
 -(void)viewWillAppear:(BOOL)animated
 {

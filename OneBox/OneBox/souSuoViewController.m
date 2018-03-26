@@ -479,7 +479,7 @@
 
 
     [_searchBar setSearchFieldBackgroundImage:[UIImage imageNamed:@"found_school_所在州所在城市筛选框"] forState:UIControlStateNormal];
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"found_sousuo_back"]];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"found_newsearch_back_260"]];
     imageView.frame=_searchBar.frame;
     _searchBar.placeholder=@"输入城市或者学校名字 试试吧";
     UITextField *searchField = [_searchBar valueForKey:@"_searchField"];

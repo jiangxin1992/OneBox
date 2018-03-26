@@ -64,7 +64,7 @@
 
         if(model.thumb_image_url==nil)
         {
-            imagebackview.image=[UIImage imageNamed:@"found_sousuo_back"];
+            imagebackview.image=[UIImage imageNamed:@"found_newsearch_back_260"];
         }else
         {
             NSString *imageStr=nil;
@@ -79,7 +79,7 @@
                 imageStr=[NSString stringWithFormat:@"%@?imageView2/1/w/960/h/600",model.thumb_image_url];
             }
 
-            imagebackview.placeHolder=[UIImage imageNamed:@"found_sousuo_back"];
+            imagebackview.placeHolder=[UIImage imageNamed:@"found_newsearch_back_260"];
             [imagebackview setImageWithPath:imageStr];
         }
 
@@ -177,7 +177,7 @@
 
         if(model.thumb_image_url==nil)
         {
-            imagebackview.image=[UIImage imageNamed:@"found_sousuo_back"];
+            imagebackview.image=[UIImage imageNamed:@"found_newsearch_back_260"];
         }else
         {
             NSString *imageStr=nil;
@@ -192,7 +192,7 @@
                 imageStr=[NSString stringWithFormat:@"%@?imageView2/1/w/960/h/600",model.thumb_image_url];
             }
 
-            imagebackview.placeHolder=[UIImage imageNamed:@"found_sousuo_back"];
+            imagebackview.placeHolder=[UIImage imageNamed:@"found_newsearch_back_260"];
             [imagebackview setImageWithPath:imageStr];
         }
         [UIView commitAnimations];
@@ -206,7 +206,7 @@
         titleview.frame=CGRectMake(0, 240*_Scale, ScreenWidth, 160*_Scale);
         if(model.thumb_image_url==nil)
         {
-            imagebackview.image=[UIImage imageNamed:@"found_sousuo_back"];
+            imagebackview.image=[UIImage imageNamed:@"found_newsearch_back_260"];
         }else
         {
             NSString *imageStr=nil;
@@ -221,13 +221,10 @@
                 imageStr=[NSString stringWithFormat:@"%@?imageView2/1/w/960/h/600",model.thumb_image_url];
             }
 
-            imagebackview.placeHolder=[UIImage imageNamed:@"found_sousuo_back"];
+            imagebackview.placeHolder=[UIImage imageNamed:@"found_newsearch_back_260"];
             [imagebackview setImageWithPath:imageStr];
         }
-
     }
-    
-
 }
 
 -(void)anmationStop

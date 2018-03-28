@@ -26,58 +26,47 @@
 
 @interface souSuoCitiesViewController ()<UITableViewDataSource,UITableViewDelegate>
 
+@property (nonatomic, assign) NSInteger m_row;
+@property (nonatomic, assign) NSInteger m_section;
+@property (nonatomic, strong) YYAnimationIndicator *indicator;
+@property (nonatomic, strong) UIView *banbenview;
+@property (nonatomic, strong) UIView *footview;
+
+@property (nonatomic, strong) NSDictionary *dictPinyinAndChinese;
+@property (nonatomic, strong) NSMutableArray *arrayChar;
+
+@property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, assign) NSInteger start;//开始
+@property (nonatomic, assign) NSInteger count;//数量
+
+@property (nonatomic, strong) NSMutableArray *arrayData;
+
+@property (nonatomic, assign) NSInteger page;
+
+@property (nonatomic, strong) UIButton *rightbarbtn;
+@property (nonatomic, assign) BOOL iscard;
+@property (nonatomic, assign) NSInteger Record_cell_num;
+@property (nonatomic, assign) CGFloat min_offset;
+@property (nonatomic, assign) CGFloat start_y;
+@property (nonatomic, assign) BOOL Dragging;
+@property (nonatomic, assign) BOOL appear;
+@property (nonatomic, assign) BOOL nav_donghua;
+@property (nonatomic, strong) UIButton *leftBarbtn;
+@property (nonatomic, assign) BOOL is_suoyin;//是否点击索引
 
 @end
 
 @implementation souSuoCitiesViewController
-{
-    NSInteger _m_row;
-    NSInteger _m_section;
-    YYAnimationIndicator *indicator;
-    UIView *banbenview;
-    UIView *footview;
-
-    NSArray *titleArr;
-    NSDictionary *_dictPinyinAndChinese;
-    NSMutableArray *_arrayChar;
-    //    tableview
-    UITableView *_tableView;
-    //    开始
-    NSInteger start;
-    //    数量
-    NSInteger count;
-    //    data
-    NSMutableData *_receiveData;
-
-    //搜索结果数据
-    NSMutableArray *_arrayResult;
-
-    NSMutableArray *_arrayData;
-    NSInteger _page;
-
-    BOOL _isfirst_choose;
-    
-    UIButton *rightbarbtn;
-    BOOL _iscard;
-    NSInteger _Record_cell_num;
-    CGFloat _min_offset;
-    CGFloat _start_y;
-    BOOL _Dragging;
-    BOOL _appear;
-    BOOL _nav_donghua;
-    UIButton *_leftBarbtn;
-    BOOL _is_suoyin;//是否点击索引
-    
-}
 
 - (void)viewDidLoad {
 
+    WeakSelf(ws);
     self.sousuoBlock=^(NSInteger row ,NSInteger section,NSString *type)
     {
 
         if([type isEqualToString:@"1"])
         {
-            foundModel *model=[[_dictPinyinAndChinese objectForKey:[_arrayChar objectAtIndex:section]] objectAtIndex:row];
+            foundModel *model=[[ws.dictPinyinAndChinese objectForKey:[ws.arrayChar objectAtIndex:section]] objectAtIndex:row];
 
             model.isapp=YES;
         }
@@ -99,7 +88,7 @@
     self.navigationItem.titleView.alpha=1;
     _nav_donghua=NO;
     _leftBarbtn.alpha=1;
-    rightbarbtn.alpha=1;
+    _rightbarbtn.alpha=1;
 }
 #pragma mark#pragma mark-----------------Refresh----------------
 /**
@@ -126,7 +115,7 @@
 }
 - (void)footerRereshing
 {
-    start+=100;
+    self.start+=100;
     _page++;
     [self requestData];
 }
@@ -140,10 +129,10 @@
 #pragma mark*请求数据
 -(void)requestData
 {
-    indicator = [[YYAnimationIndicator alloc]initWithFrame:CGRectMake(ScreenWidth/2-20*_Scale*2, ScreenHeight/2-20*_Scale*2, 40*_Scale*2, 40*_Scale*2)];
-    [indicator setLoadText:@"loading..."];
-    [self.view addSubview:indicator];
-    [indicator startAnimation];
+    _indicator = [[YYAnimationIndicator alloc]initWithFrame:CGRectMake(ScreenWidth/2-20*_Scale*2, ScreenHeight/2-20*_Scale*2, 40*_Scale*2, 40*_Scale*2)];
+    [_indicator setLoadText:@"loading..."];
+    [self.view addSubview:_indicator];
+    [_indicator startAnimation];
     _tableView.tableHeaderView=[UIView new];
 
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -190,15 +179,15 @@
         }
         if([[dict objectForKey:@"data"] count]<100)
         {
-            banbenview.hidden=NO;
+            _banbenview.hidden=NO;
         }else
         {
-            banbenview.hidden=YES;
+            _banbenview.hidden=YES;
         }
-        [indicator stopAnimationWithLoadText:@"loading..." withType:YES];
+        [_indicator stopAnimationWithLoadText:@"loading..." withType:YES];
 
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [indicator stopAnimationWithLoadText:@"loading..." withType:YES];
+        [_indicator stopAnimationWithLoadText:@"loading..." withType:YES];
         [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错白色" Withtype:1]];
     }];
 
@@ -248,7 +237,7 @@
 
         [_arrayData addObjectsFromArray:[foundModel parsingData:@{@"data":_result_arr}]];
         _dictPinyinAndChinese = [[NSMutableDictionary alloc] init];
-        footview.backgroundColor=_define_backview_color;
+        _footview.backgroundColor=_define_backview_color;
         //name = “关羽”
         for (foundModel *model in _arrayData) {
             //‘GUANYU’
@@ -314,20 +303,18 @@
     }
 
 
-    if(start==0)
+    if(_start==0)
     {
         if(_dict[@"count"]!=[NSNull null])
         {
             NSString *countStr=(NSString *)_dict[@"count"];
-            count=[countStr intValue];
+            self.count=[countStr intValue];
 
         }else
         {
-            count=0;
+            self.count=0;
             [_arrayData removeAllObjects];
             [_arrayChar removeAllObjects];
-            [_arrayResult removeAllObjects];
-
         }
         
         
@@ -365,13 +352,13 @@
     UIBarButtonItem *_btn=[[UIBarButtonItem alloc] initWithCustomView:_leftBarbtn];
     self.navigationItem.leftBarButtonItem=_btn;
 
-    rightbarbtn =[UIButton buttonWithType:UIButtonTypeCustom];
-    rightbarbtn.frame=CGRectMake(0, 0, 20, 20);
-    [rightbarbtn setBackgroundImage:[UIImage imageNamed:@"found_qiehuan_card"] forState:UIControlStateSelected];
-    [rightbarbtn setBackgroundImage:[UIImage imageNamed:@"found_qiehuan_list"] forState:UIControlStateNormal];
-    [rightbarbtn addTarget:self action:@selector(card_qiehuan:) forControlEvents:UIControlEventTouchUpInside];
-    rightbarbtn.selected=YES;
-    UIBarButtonItem *btn=[[UIBarButtonItem alloc] initWithCustomView:rightbarbtn];
+    self.rightbarbtn =[UIButton buttonWithType:UIButtonTypeCustom];
+    _rightbarbtn.frame=CGRectMake(0, 0, 20, 20);
+    [_rightbarbtn setBackgroundImage:[UIImage imageNamed:@"found_qiehuan_card"] forState:UIControlStateSelected];
+    [_rightbarbtn setBackgroundImage:[UIImage imageNamed:@"found_qiehuan_list"] forState:UIControlStateNormal];
+    [_rightbarbtn addTarget:self action:@selector(card_qiehuan:) forControlEvents:UIControlEventTouchUpInside];
+    _rightbarbtn.selected=YES;
+    UIBarButtonItem *btn=[[UIBarButtonItem alloc] initWithCustomView:_rightbarbtn];
     self.navigationItem.rightBarButtonItem=btn;
 
 
@@ -390,10 +377,7 @@
 
     _arrayData=[[NSMutableArray alloc] init];
     _page=1;
-    _isfirst_choose=YES;
-    _receiveData=[[NSMutableData alloc] init];
     _arrayData=[[NSMutableArray alloc] init];
-    _arrayResult = [[NSMutableArray alloc] init];
 }
 -(void)popviewAction
 {
@@ -411,10 +395,9 @@
     _tableView.sectionIndexBackgroundColor = [UIColor clearColor];
     _tableView.sectionIndexColor = [UIColor colorWithRed:204.0f/255.0f green:204.0f/255.0f blue:204.0f/255.0f alpha:1];
     [self.view addSubview:_tableView];
-    footview=[[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(_tableView.frame), 100)];
-    //    footview.hidden=YES;
+    _footview=[[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(_tableView.frame), 100)];
     _tableView.backgroundColor=_define_backview_color;
-    _tableView.tableFooterView=footview;
+    _tableView.tableFooterView=_footview;
     _min_offset=_tableView.contentOffset.y;
     [self banben_view];
 
@@ -422,23 +405,22 @@
 }
 -(void)banben_view
 {
-    banbenview=[[UIView alloc] initWithFrame:CGRectMake((CGRectGetWidth(_tableView.frame)-100*_Scale)/2.0f,50*_Scale, 100*_Scale, 100*_Scale)];
-    banbenview.backgroundColor=[UIColor clearColor];
-    [footview addSubview:banbenview];
+    self.banbenview=[[UIView alloc] initWithFrame:CGRectMake((CGRectGetWidth(_tableView.frame)-100*_Scale)/2.0f,50*_Scale, 100*_Scale, 100*_Scale)];
+    _banbenview.backgroundColor=[UIColor clearColor];
+    [_footview addSubview:_banbenview];
     UIImageView *banbenimg=[[UIImageView alloc] initWithFrame:CGRectMake(25*_Scale, 0, 25, 50*_Scale)];
     banbenimg.image=[UIImage imageNamed:@"版本_v1.0"];
-    [banbenview addSubview:banbenimg];
+    [_banbenview addSubview:banbenimg];
 
-    UILabel *label=[[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(banbenimg.frame), CGRectGetWidth(banbenview.frame), CGRectGetHeight(banbenview.frame)-CGRectGetMaxY(banbenimg.frame))];
+    UILabel *label=[[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(banbenimg.frame), CGRectGetWidth(_banbenview.frame), CGRectGetHeight(_banbenview.frame)-CGRectGetMaxY(banbenimg.frame))];
     label.textAlignment=1;
 
 //    label.text=@"V 1.4";
     label.textColor=[UIColor colorWithRed:193.0f/255.0f green:193.0f/255.0f blue:193.0f/255.0f alpha:1];
     label.font=[regular get_en_Font:11.0f];
-    [banbenview addSubview:label];
+    [_banbenview addSubview:label];
 
-    //    banbenview.backgroundColor=[UIColor redColor];
-    banbenview.hidden=YES;
+    _banbenview.hidden=YES;
     
 }
 #pragma mark-检测当前偏移量
@@ -450,7 +432,7 @@
     self.navigationItem.titleView.alpha=1;
     _nav_donghua=NO;
     _leftBarbtn.alpha=1;
-    rightbarbtn.alpha=1;
+    _rightbarbtn.alpha=1;
 
     // Do your action here
     return YES;
@@ -522,7 +504,7 @@
                     self.navigationItem.titleView.alpha=0;
                     //        _leftBarbtn
                     _leftBarbtn.alpha=0;
-                    rightbarbtn.alpha=0;
+                    _rightbarbtn.alpha=0;
                     [UIView commitAnimations];
                     _nav_donghua=YES;
 
@@ -542,7 +524,7 @@
                         self.navigationController.navigationBar.frame=CGRectMake(0, kStatusBarHeight, [[UIScreen mainScreen]bounds].size.width, kNavigationBarHeight);
                         self.navigationItem.titleView.alpha=1;
                         _leftBarbtn.alpha=1;
-                        rightbarbtn.alpha=1;
+                        _rightbarbtn.alpha=1;
                         [UIView commitAnimations];
                         _nav_donghua=NO;
                     }
@@ -560,7 +542,7 @@
                             self.navigationController.navigationBar.frame=CGRectMake(0, kStatusBarHeight - kStatusBarAndNavigationBarHeight, [[UIScreen mainScreen]bounds].size.width, kNavigationBarHeight);
                             self.navigationItem.titleView.alpha=0;
                             _leftBarbtn.alpha=0;
-                            rightbarbtn.alpha=0;
+                            _rightbarbtn.alpha=0;
                             [UIView commitAnimations];
 
                             _nav_donghua=YES;
@@ -578,7 +560,7 @@
                             self.navigationController.navigationBar.frame=CGRectMake(0, kStatusBarHeight, [[UIScreen mainScreen]bounds].size.width, kNavigationBarHeight);
                             self.navigationItem.titleView.alpha=1;
                             _leftBarbtn.alpha=1;
-                            rightbarbtn.alpha=1;
+                            _rightbarbtn.alpha=1;
                             [UIView commitAnimations];
                             _nav_donghua=NO;
 
@@ -720,7 +702,6 @@
     JXLOG(@"%@",_arrayChar);
     JXLOG(@"111");
     return _arrayChar;
-    JXLOG(@"%@",_arrayResult);
 }
 -(void)viewWillDisappear:(BOOL)animated
 {
@@ -730,7 +711,7 @@
     self.navigationItem.titleView.alpha=1;
     _leftBarbtn.alpha=1;
     _nav_donghua=NO;
-    rightbarbtn.alpha=1;
+    _rightbarbtn.alpha=1;
 
     [super viewWillDisappear:animated];
     [MobClick endLogPageView:@"souSuoViewController"];

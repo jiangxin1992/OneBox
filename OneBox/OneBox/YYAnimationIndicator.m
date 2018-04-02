@@ -20,9 +20,12 @@
     if (self) {
         self.backgroundColor = [UIColor clearColor];
         _isAnimating = NO;
-        imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0,0, frame.size.width,frame.size.height-10*_Scale*2)];
-
+        imageView = [UIImageView getCustomImg];
         [self addSubview:imageView];
+        [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.top.mas_equalTo(0);
+            make.bottom.mas_equalTo(-10*_Scale*2);
+        }];
         NSMutableArray *arr=[[NSMutableArray alloc] init];
         for (int i=0; i<29; i++) {
             NSString *str=[[NSString alloc] initWithFormat:@"archive-in%d",i+1];
@@ -33,12 +36,16 @@
         imageView.animationImages=arr;
         
         
-        Infolabel = [[UILabel alloc]initWithFrame:CGRectMake(-40*_Scale*2, frame.size.height, frame.size.width+80*_Scale*2, 20*_Scale*2)];
-        Infolabel.backgroundColor = [UIColor clearColor];
-        Infolabel.textAlignment = NSTextAlignmentCenter;
-        Infolabel.textColor = [UIColor colorWithRed:200.0f/255.0f green:200.0f/255.0f blue:200.0f/255.0f alpha:1];
-        Infolabel.font = [regular get_en_Font:14.0f];
+        Infolabel = [UILabel getLabelWithAlignment:1 WithTitle:nil WithFont:14.0f WithTextColor:[UIColor colorWithRed:200.0f/255.0f green:200.0f/255.0f blue:200.0f/255.0f alpha:1] WithSpacing:0];
         [self addSubview:Infolabel];
+        [Infolabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(-40*_Scale);
+            make.right.mas_equalTo(40*_Scale);
+            make.top.mas_equalTo(self.mas_bottom).with.offset(0);
+            make.height.mas_equalTo(20*_Scale*2);
+        }];
+        Infolabel.backgroundColor = [UIColor clearColor];
+        Infolabel.font = [regular get_en_Font:14.0f];
         self.layer.hidden = YES;
 
     }

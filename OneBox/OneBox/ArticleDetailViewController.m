@@ -938,13 +938,16 @@
 -(void)startLoadingAnimation
 {
     //        加载动画
-    indicator = [[YYAnimationIndicator alloc]initWithFrame:CGRectMake(ScreenWidth/2-20*_Scale*2, ScreenHeight/2-20*_Scale*2, 40*_Scale*2, 40*_Scale*2)];
-    [indicator setLoadText:@"loading..."];
-    //    [self.view addSubview:indicator];
-    [[UIApplication sharedApplication].keyWindow addSubview:indicator];
+    if(!indicator){
+        indicator = [[YYAnimationIndicator alloc]initWithFrame:CGRectZero];
+        [[UIApplication sharedApplication].keyWindow addSubview:indicator];
+        [indicator mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.center.mas_equalTo(self.view);
+            make.width.height.mas_equalTo(40*_Scale*2);
+        }];
+        [indicator setLoadText:@"loading..."];
+    }
     [indicator startAnimation];
-    //        加载结束
-    //         [indicator stopAnimationWithLoadText:@"loading..." withType:YES];
 }
 
 

@@ -181,9 +181,15 @@
 #pragma mark*请求数据
 -(void)requestData
 {
-    indicator = [[YYAnimationIndicator alloc]initWithFrame:CGRectMake(ScreenWidth/2-20*_Scale*2, ScreenHeight/2-20*_Scale*2, 40*_Scale*2, 40*_Scale*2)];
-    [indicator setLoadText:@"loading..."];
-    [self.view addSubview:indicator];
+    if(!indicator){
+        indicator = [[YYAnimationIndicator alloc]initWithFrame:CGRectZero];
+        [self.view addSubview:indicator];
+        [indicator mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.center.mas_equalTo(self.view);
+            make.width.height.mas_equalTo(40*_Scale*2);
+        }];
+        [indicator setLoadText:@"loading..."];
+    }
     [indicator startAnimation];
     _tableView.tableHeaderView=[UIView new];
 

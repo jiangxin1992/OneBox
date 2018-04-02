@@ -227,10 +227,17 @@
 #pragma mark - --------------请求数据----------------------
 -(void)RequestData
 {
-    _indicator = [[YYAnimationIndicator alloc]initWithFrame:CGRectMake(ScreenWidth/2-20*_Scale*2, ScreenHeight/2-20*_Scale*2, 40*_Scale*2, 40*_Scale*2)];
-    [_indicator setLoadText:@"loading..."];
-    [self.view addSubview:_indicator];
+    if(!_indicator){
+        _indicator = [[YYAnimationIndicator alloc]initWithFrame:CGRectZero];
+        [self.view addSubview:_indicator];
+        [_indicator mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.center.mas_equalTo(self.view);
+            make.width.height.mas_equalTo(40*_Scale*2);
+        }];
+        [_indicator setLoadText:@"loading..."];
+    }
     [_indicator startAnimation];
+
     _tableView.tableHeaderView=[UIView new];
 
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];

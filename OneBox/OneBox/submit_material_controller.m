@@ -411,11 +411,8 @@
                 make.left.right.bottom.mas_equalTo(0);
                 make.height.mas_equalTo(100);
             }];
-//            comptleView.frame=CGRectMake(0, ScreenHeight-100, ScreenWidth, 100);
         }else
         {
-//            comptleView.frame=CGRectMake(18, ScreenHeight- 110*_Scale - (kIPhoneX?34.f:0.f), ScreenWidth-36, 90*_Scale);
-
             [comptleView mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.mas_equalTo(18);
                 make.right.mas_equalTo(-18);

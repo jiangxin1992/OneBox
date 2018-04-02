@@ -366,13 +366,22 @@
             UIPinchGestureRecognizer *pinchGestureRecognizer = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(pinchView:)];
             [desImage addGestureRecognizer:pinchGestureRecognizer];
 
-           UIButton *comptleView=[UIButton buttonWithType:UIButtonTypeCustom];
+            UIButton *comptleView=[UIButton buttonWithType:UIButtonTypeCustom];
+            [backview addSubview:comptleView];
             if(_isPad)
             {
-                comptleView.frame=CGRectMake(0, ScreenHeight-100, ScreenWidth, 100);
+                [comptleView mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.left.right.bottom.mas_equalTo(0);
+                    make.height.mas_equalTo(100);
+                }];
             }else
             {
-                comptleView.frame=CGRectMake(18, ScreenHeight-110*_Scale, ScreenWidth-36, 90*_Scale);
+                [comptleView mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.left.mas_equalTo(18);
+                    make.right.mas_equalTo(-18);
+                    make.height.mas_equalTo(90*_Scale);
+                    make.bottom.mas_equalTo(-(20*_Scale+(kIPhoneX?34.f:0.f)));
+                }];
             }
 
             comptleView.backgroundColor=[UIColor colorWithRed:91.0f/255.0f green:192.0f/255.0f blue:190.0f/255.0f alpha:1];
@@ -380,7 +389,6 @@
             [comptleView setTitle:@"点击完成本材料" forState:UIControlStateNormal];
             [comptleView.titleLabel setAttributedText:[regular createAttributeString:@"点击完成本材料" andFloat:@(3.0)]];
             comptleView.titleLabel.font=[regular getFont:14.0f];
-            [backview addSubview:comptleView];
             [comptleView addTarget:self action:@selector(submitcailiao:) forControlEvents:UIControlEventTouchUpInside];
 
         }else

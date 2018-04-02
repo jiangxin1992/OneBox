@@ -272,7 +272,12 @@
 #pragma mark*创建TableView
 -(void)createTableView
 {
-    _tableView=[[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight) style:UITableViewStylePlain];
+    _tableView=[[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+    [self.view addSubview:_tableView];
+    [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.top.mas_equalTo(0);
+        make.bottom.mas_equalTo(-kTabBarHeight);
+    }];
     _tableView.delegate=self;
     _tableView.dataSource=self;
 //    水平方向滑条显示
@@ -280,7 +285,6 @@
     _tableView.backgroundColor=_define_backview_color;
 //    消除分割线
     _tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
-    [self.view addSubview:_tableView];
      _min_offset=_tableView.contentOffset.y;
     
 }

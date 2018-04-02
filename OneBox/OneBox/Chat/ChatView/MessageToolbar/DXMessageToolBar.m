@@ -45,8 +45,8 @@
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
-    if (frame.size.height < (kVerticalPadding * 2 + kInputTextViewMinHeight)) {
-        frame.size.height = kVerticalPadding * 2 + kInputTextViewMinHeight;
+    if (frame.size.height < (kVerticalPadding * 2 + kInputTextViewMinHeight + (kIPhoneX?34.f:0.f))) {
+        frame.size.height = kVerticalPadding * 2 + kInputTextViewMinHeight + (kIPhoneX?34.f:0.f);
     }
     self = [super initWithFrame:frame];
     if (self) {
@@ -58,8 +58,8 @@
 
 - (void)setFrame:(CGRect)frame
 {
-    if (frame.size.height < (kVerticalPadding * 2 + kInputTextViewMinHeight)) {
-        frame.size.height = kVerticalPadding * 2 + kInputTextViewMinHeight;
+    if (frame.size.height < (kVerticalPadding * 2 + kInputTextViewMinHeight + (kIPhoneX?34.f:0.f))) {
+        frame.size.height = kVerticalPadding * 2 + kInputTextViewMinHeight + (kIPhoneX?34.f:0.f);
     }
     [super setFrame:frame];
 }
@@ -268,7 +268,7 @@
     //    self.toolbarView.backgroundColor=[UIColor colorWithRed:235.0f/255.0f green:236.0f/255.0f blue:237.0f/255.0f alpha:1];
     [self addSubview:self.backgroundImageView];
 
-    self.toolbarView.frame = CGRectMake(0, 0, self.frame.size.width, kVerticalPadding * 2 + kInputTextViewMinHeight);
+    self.toolbarView.frame = CGRectMake(0, 0, self.frame.size.width, kVerticalPadding * 2 + kInputTextViewMinHeight + (kIPhoneX?34.f:0.f));
     self.toolbarBackgroundImageView.frame = self.toolbarView.bounds;
     [self.toolbarView addSubview:self.toolbarBackgroundImageView];
     [self addSubview:self.toolbarView];
@@ -352,13 +352,13 @@
     self.recordButton.hidden = YES;
 
     if (!self.moreView) {
-        self.moreView = [[DXChatBarMoreView alloc] initWithFrame:CGRectMake(0, (kVerticalPadding * 2 + kInputTextViewMinHeight), self.frame.size.width, 80) type:ChatMoreTypeChat];
+        self.moreView = [[DXChatBarMoreView alloc] initWithFrame:CGRectMake(0, (kVerticalPadding * 2 + kInputTextViewMinHeight + (kIPhoneX?34.f:0.f)), self.frame.size.width, 80) type:ChatMoreTypeChat];
         self.moreView.backgroundColor = [UIColor colorWithRed:235.0f/255.0f green:235.0f/255.0f blue:235.0f/255.0f alpha:1];
         self.moreView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
     }
 
     if (!self.faceView) {
-        self.faceView = [[DXFaceView alloc] initWithFrame:CGRectMake(0, (kVerticalPadding * 2 + kInputTextViewMinHeight), self.frame.size.width, 200)];
+        self.faceView = [[DXFaceView alloc] initWithFrame:CGRectMake(0, (kVerticalPadding * 2 + kInputTextViewMinHeight + (kIPhoneX?34.f:0.f)), self.frame.size.width, 200)];
         [(DXFaceView *)self.faceView setDelegate:self];
         self.faceView.backgroundColor =[UIColor colorWithRed:235.0f/255.0f green:235.0f/255.0f blue:235.0f/255.0f alpha:1];
         self.faceView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
@@ -770,7 +770,7 @@
 
 + (CGFloat)defaultHeight
 {
-    return kVerticalPadding * 2 + kInputTextViewMinHeight;
+    return kVerticalPadding * 2 + kInputTextViewMinHeight + (kIPhoneX?34.f:0.f);
 }
 
 @end

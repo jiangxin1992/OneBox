@@ -9,7 +9,4 @@
 #import <UIKit/UIKit.h>
 
 @interface AdmissionOfficerViewController : UIViewController
-{
-    void(^changeBlock)(NSNumber *rownum);
-}
 @end

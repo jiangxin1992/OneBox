@@ -74,6 +74,8 @@
 }
 -(void)viewWillDisappear:(BOOL)animated
 {
+    [super viewWillDisappear:animated];
+
     _appear=NO;
     _Dragging=NO;
     self.navigationController.navigationBar.frame=CGRectMake(0, kStatusBarHeight, [[UIScreen mainScreen]bounds].size.width, kNavigationBarHeight);
@@ -82,13 +84,12 @@
     _nav_donghua=NO;
     _rightbarbtn.alpha=1;
 
-    [super viewWillDisappear:animated];
     [MobClick endLogPageView:@"souSuoViewController"];
 }
 -(void)viewWillAppear:(BOOL)animated
 {
-    _appear=YES;
     [super viewWillAppear:animated];
+    _appear=YES;
     [MobClick beginLogPageView:@"souSuoViewController"];
 
     [[CustomTabbarController sharedManager] tabbarHide];
@@ -107,7 +108,6 @@
     WeakSelf(ws);
     self.sousuoBlock=^(NSInteger row ,NSInteger section,NSString *type)
     {
-
         if([type isEqualToString:@"1"])
         {
             foundModel *model=[[ws.dictPinyinAndChinese objectForKey:[ws.arrayChar objectAtIndex:section]] objectAtIndex:row];
@@ -116,29 +116,8 @@
         }
     };
 
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(navBarReset) name:@"navBarReset" object:nil];
-    _leftBarbtn=[UIButton buttonWithType:UIButtonTypeCustom];
-    [_leftBarbtn setImage:[UIImage imageNamed:@"返回箭头"] forState:UIControlStateNormal];
-    _leftBarbtn.frame=CGRectMake(0, 0, 22, 22);
-    [_leftBarbtn addTarget:self action:@selector(popviewAction) forControlEvents:UIControlEventTouchUpInside];
-    [_leftBarbtn setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 10)];
-    UIBarButtonItem *_btn=[[UIBarButtonItem alloc] initWithCustomView:_leftBarbtn];
-    self.navigationItem.leftBarButtonItem=_btn;
-
-    self.rightbarbtn =[UIButton buttonWithType:UIButtonTypeCustom];
-    _rightbarbtn.frame=CGRectMake(0, 0, 20, 20);
-    [_rightbarbtn setBackgroundImage:[UIImage imageNamed:@"found_qiehuan_card"] forState:UIControlStateSelected];
-    [_rightbarbtn setBackgroundImage:[UIImage imageNamed:@"found_qiehuan_list"] forState:UIControlStateNormal];
-    [_rightbarbtn addTarget:self action:@selector(card_qiehuan:) forControlEvents:UIControlEventTouchUpInside];
-    _rightbarbtn.selected=YES;
-    UIBarButtonItem *btn=[[UIBarButtonItem alloc] initWithCustomView:_rightbarbtn];
-    self.navigationItem.rightBarButtonItem=btn;
-
-
-
     _m_row=0;
     _m_section=0;
-
 
     _is_suoyin=NO;
     _nav_donghua=NO;
@@ -150,10 +129,25 @@
 
     _arrayData=[[NSMutableArray alloc] init];
     _page=1;
-    _arrayData=[[NSMutableArray alloc] init];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(navBarReset) name:@"navBarReset" object:nil];
 }
 - (void)PrepareUI{
     self.view.backgroundColor=_define_backview_color;
+
+    _leftBarbtn = [UIButton getCustomImgBtnWithImageStr:@"返回箭头" WithSelectedImageStr:nil];
+    _leftBarbtn.frame=CGRectMake(0, 0, 22, 22);
+    [_leftBarbtn addTarget:self action:@selector(popviewAction) forControlEvents:UIControlEventTouchUpInside];
+    [_leftBarbtn setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 10)];
+    UIBarButtonItem *_btn=[[UIBarButtonItem alloc] initWithCustomView:_leftBarbtn];
+    self.navigationItem.leftBarButtonItem=_btn;
+
+    self.rightbarbtn = [UIButton getCustomImgBtnWithImageStr:@"found_qiehuan_list" WithSelectedImageStr:@"found_qiehuan_card"];
+    _rightbarbtn.frame=CGRectMake(0, 0, 20, 20);
+    [_rightbarbtn addTarget:self action:@selector(card_qiehuan:) forControlEvents:UIControlEventTouchUpInside];
+    _rightbarbtn.selected=YES;
+    UIBarButtonItem *btn=[[UIBarButtonItem alloc] initWithCustomView:_rightbarbtn];
+    self.navigationItem.rightBarButtonItem=btn;
 }
 
 #pragma mark - --------------UIConfig----------------------
@@ -217,7 +211,6 @@
     }];
 
     [_tableView.mj_header beginRefreshing];
-
 }
 - (void)footerRereshing
 {
@@ -275,12 +268,8 @@
                 [label setAttributedText:[regular createAttributeString:titlearr[i] andFloat:@(2.0)]];
 
                 _y_p+=_height;
-
             }
-
-
             _tableView.tableHeaderView=headview;
-
         }
         if([[dict objectForKey:@"data"] count]<100)
         {
@@ -310,7 +299,6 @@
     _leftBarbtn.alpha=1;
     _rightbarbtn.alpha=1;
 
-    // Do your action here
     return YES;
 }
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
@@ -429,7 +417,6 @@
                 }
             }
         }
-
     }
 }
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
@@ -443,8 +430,6 @@
 #pragma mark - UITableViewDelegate
 -(NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index {
     NSInteger __count = 0;
-
-    //    JXLOG(@"%@-%d",title,index);
 
     _is_suoyin=YES;
     for(NSString *character in _arrayChar)
@@ -635,7 +620,6 @@
             {
                 [charArray addObject:model];
             }
-
         }
 
         for (NSString *keys in [_dictPinyinAndChinese allKeys]) {
@@ -677,7 +661,6 @@
 
         [_tableView reloadData];
     }
-
 
     if(_start==0)
     {

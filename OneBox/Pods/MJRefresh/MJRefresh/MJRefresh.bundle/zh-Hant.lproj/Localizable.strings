@@ -1,14 +1,14 @@
 "MJRefreshHeaderIdleText" = "下拉刷新";
 "MJRefreshHeaderPullingText" = "松开刷新";
-"MJRefreshHeaderRefreshingText" = "";
+"MJRefreshHeaderRefreshingText" = "刷新中...";
 
 "MJRefreshAutoFooterIdleText" = "";
-"MJRefreshAutoFooterRefreshingText" = "";
+"MJRefreshAutoFooterRefreshingText" = "加载中...";
 "MJRefreshAutoFooterNoMoreDataText" = "";
 
 "MJRefreshBackFooterIdleText" = "上拉加载";
 "MJRefreshBackFooterPullingText" = "松开加载";
-"MJRefreshBackFooterRefreshingText" = "";
+"MJRefreshBackFooterRefreshingText" = "加载中...";
 "MJRefreshBackFooterNoMoreDataText" = "";
 
 "MJRefreshHeaderLastTimeText" = "";

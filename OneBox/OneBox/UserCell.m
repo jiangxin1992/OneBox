@@ -305,7 +305,9 @@ static NSString * const kTableViewCellContentView = @"UITableViewCellContentView
 {
 //    bl(_num);
 //    JXLOG(@"%d",_num);
-    self.block([NSNumber numberWithInteger:_num]);
+    if(self.block){
+        self.block([NSNumber numberWithInteger:_num]);
+    }
 }
 
 - (void)awakeFromNib {

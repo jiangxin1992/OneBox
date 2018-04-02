@@ -36,6 +36,7 @@
     CGFloat _x_p=0;
     CGFloat _width=(ScreenWidth-2)/3.0f;
 
+    UIView *lastView = nil;
     for (int i=0; i<3; i++) {
         UIButton *btn=[UIButton buttonWithType:UIButtonTypeCustom];
 
@@ -57,15 +58,19 @@
         {
             btn.selected=YES;
             [btn setBackgroundColor:[UIColor whiteColor]];
-        }        [btnarr addObject:btn];
-
-
+        }
+        [btnarr addObject:btn];
+        lastView = btn;
     }
     _pageVc = [[UIPageViewController alloc]initWithTransitionStyle:1 navigationOrientation:0 options:nil];
-    _pageVc.view.frame = CGRectMake(0, 80*_Scale, ScreenWidth*2, ScreenHeight );
+    [self.view addSubview:_pageVc.view];
+    [_pageVc.view mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(0);
+        make.width.mas_equalTo(ScreenWidth*2);
+        make.top.mas_equalTo(lastView.mas_bottom).with.offset(0);
+        make.bottom.mas_equalTo(-kTabBarHeight-kStatusBarAndNavigationBarHeight);
+    }];
     _pageVc.view.backgroundColor = [UIColor yellowColor];
-    //    _pageVc.delegate = self;
-    //    _pageVc.dataSource = self;
     if(ctn2==nil)
     {
         ctn2=[[guanzhuViewController alloc] init];
@@ -73,9 +78,6 @@
     }
     [_pageVc setViewControllers:@[ctn2] direction:0 animated:YES completion:nil];
     currentPage=1;
-
-
-    [self.view addSubview:_pageVc.view];
 }
 
 -(void)qiehuan:(UIButton *)btn

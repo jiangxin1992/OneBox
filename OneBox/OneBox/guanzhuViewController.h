@@ -9,7 +9,4 @@
 #import <UIKit/UIKit.h>
 
 @interface guanzhuViewController : UIViewController
-{
-    void(^changeBlock)(NSNumber *rownum);
-}
 @end

@@ -9,8 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface FriendsViewController : UIViewController
-{
-    void(^changeBlock)(NSNumber *rownum);
-}
 
 @end

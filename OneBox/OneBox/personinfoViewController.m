@@ -720,8 +720,7 @@
 
     }else
     {
-        updateIcon.frame = CGRectMake(105 + 70 * __Scale+4, 35, 20 * __Scale, 20 * __Scale);
-
+        updateIcon.frame = CGRectMake(105 + 70 * __Scale+4, 35, 20, 20);
     }
 
     [updateIcon addTarget:self action:@selector(detailView:) forControlEvents:UIControlEventTouchUpInside];

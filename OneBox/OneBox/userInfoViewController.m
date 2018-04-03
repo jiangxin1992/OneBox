@@ -207,8 +207,8 @@
         {
             _citystr=[dict objectForKey:@"city"];
         }
-        [(UILabel *)[self.view viewWithTag:3001] setAttributedText:[regular createAttributeString:_citystr andFloat:@(2.0)]];
-        [(UILabel *)[self.view viewWithTag:3002] setAttributedText:[regular createAttributeString:[dict objectForKey:@"mark"] andFloat:@(2.0)]];
+        [(UILabel *)[ws.view viewWithTag:3001] setAttributedText:[regular createAttributeString:_citystr andFloat:@(2.0)]];
+        [(UILabel *)[ws.view viewWithTag:3002] setAttributedText:[regular createAttributeString:[dict objectForKey:@"mark"] andFloat:@(2.0)]];
     };
 }
 -(void)login_Action
@@ -603,7 +603,7 @@
 
     }else
     {
-        updateIcon.frame = CGRectMake(105 + 70 * __Scale-2, 28, 20 * __Scale, 20 * __Scale);
+        updateIcon.frame = CGRectMake(105 + 70 * __Scale+4, 35, 20, 20);
     }
 
     [updateIcon addTarget:self action:@selector(detailView:) forControlEvents:UIControlEventTouchUpInside];

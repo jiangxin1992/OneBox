@@ -607,7 +607,7 @@
 - (void)createView
 {
 
-    SelfbottomView = [[UIView alloc] initWithFrame:CGRectMake(0,ScreenHeight-64-100*_Scale, ScreenWidth, 192)];
+    SelfbottomView = [[UIView alloc] initWithFrame:CGRectMake(0, kScreenHeight, kScreenWidth, 192 + (kIPhoneX?34.f:0.f))];
     [self.view addSubview:SelfbottomView];
     UIView *completeView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 30)];
     completeView.backgroundColor = [UIColor whiteColor];

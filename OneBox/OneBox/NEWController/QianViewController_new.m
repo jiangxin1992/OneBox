@@ -464,12 +464,12 @@
 //                今天为面签日
                 if((((long)(time/(86400)))==((long)(timenow/(86400))))&&(time>timenow))
                 {
-                    UIAlertView *view = [[UIAlertView alloc] initWithTitle:@"提示" message:@"今天为签证面试日，请带好材料，祝你好运！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                    UIAlertView *view = [[UIAlertView alloc] initWithTitle:@"提示" message:@"今天为签证面试日，请带好材料，祝你好运！" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
                     [view show];
                 }else if((((long)(time/(86400))-1)==((long)(timenow/(86400))))&&(time>timenow))
                 {
 //                明天为面签日
-                    UIAlertView *view = [[UIAlertView alloc] initWithTitle:@"提示" message:@"明天要去签证面试啦，请带好材料，祝你好运！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                    UIAlertView *view = [[UIAlertView alloc] initWithTitle:@"提示" message:@"明天要去签证面试啦，请带好材料，祝你好运！" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
                     [view show];
                 }
 //                显示当前时间

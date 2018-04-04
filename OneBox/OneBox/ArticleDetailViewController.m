@@ -62,7 +62,7 @@
     
     [super viewDidLoad];
     [self SomePrepare];
-    
+    NSLog(@"1111");
 }
 #pragma mark - SomePrepare
 -(void)SomePrepare
@@ -88,13 +88,10 @@
 #pragma mark - Setter
 -(void)setArticleID:(NSString *)ArticleID
 {
-    if(_ArticleID!=ArticleID)
-    {
-        _ArticleID=[ArticleID copy];
-        [self initializeData];
-        [self startLoadingAnimation];
-        [self requestDataisFrist:YES];
-    }
+    _ArticleID = ArticleID;
+    [self initializeData];
+    [self startLoadingAnimation];
+    [self requestDataisFrist:YES];
 }
 -(void)initializeData
 {
@@ -851,8 +848,6 @@
         
     }else
     {
-        //        UIAlertView *alertview=[[ToolManager sharedManager] alertTitle_Simple:@"用户还未登录，请先登录"];
-        //        alertview.delegate=self;
         [self login_action];
         
     }
@@ -926,10 +921,7 @@
         }];
     }else
     {
-        //        UIAlertView *alertview=[[ToolManager sharedManager] alertTitle_Simple:@"用户还未登录，请先登录"];
-        //        alertview.delegate=self;
-        [self login_action];
-        
+        [self login_action];  
     }
     
     
@@ -940,7 +932,8 @@
     //        加载动画
     if(!indicator){
         indicator = [[YYAnimationIndicator alloc]initWithFrame:CGRectZero];
-        [[UIApplication sharedApplication].keyWindow addSubview:indicator];
+//        [[UIApplication sharedApplication].keyWindow addSubview:indicator];
+        [self.view addSubview:indicator];
         [indicator mas_makeConstraints:^(MASConstraintMaker *make) {
             make.center.mas_equalTo(self.view);
             make.width.height.mas_equalTo(40*_Scale*2);

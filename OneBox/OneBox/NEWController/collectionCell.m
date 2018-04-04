@@ -10,6 +10,9 @@
 
 #import "foundModel.h"
 
+#import <objc/runtime.h>
+static void *EOCAlertViewKey = "EOCAlertViewKey";
+
 #define foundCellHeight 200*_Scale
 #define labelHight 40*_Scale
 
@@ -54,12 +57,8 @@
 }
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if(buttonIndex==1)
-    {
-        NSNumber *n_rownum= _dict[@"rownum"];
-        self.block([n_rownum integerValue]);
-
-    }
+    void (^alertViewBlock)(NSInteger) = objc_getAssociatedObject(alertView, EOCAlertViewKey);
+    alertViewBlock(buttonIndex);
 }
 -(void)deleteAction:(UIButton *)btn
 {
@@ -69,7 +68,16 @@
     if([__type isEqualToString:@"delete"])
     {
         UIAlertView *isdelete=[[UIAlertView alloc] initWithTitle:nil message:@"从心愿单移除该学校？" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
+        isdelete.delegate = self;
+        void (^alertViewBlock)(NSInteger) = ^(NSInteger buttonIndex){
+            if(buttonIndex==1)
+            {
+                NSNumber *n_rownum= _dict[@"rownum"];
+                self.block([n_rownum integerValue]);
 
+            }
+        };
+        objc_setAssociatedObject(isdelete, EOCAlertViewKey, alertViewBlock, OBJC_ASSOCIATION_COPY_NONATOMIC);
         [isdelete show];
 
     }else

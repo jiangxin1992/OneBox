@@ -166,6 +166,7 @@
                     NSInteger index=1000+i;
                     UIAlertView *countersign_delete=[[UIAlertView alloc] initWithTitle:nil message:@"确定删除" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"YES", nil];
                     countersign_delete.tag=index;
+                    countersign_delete.delegate = self;
                     [_alertViewArray addObject:countersign_delete];
                 }
                 _bottom_view=[[UIView alloc] initWithFrame:CGRectMake(20*_Scale, max_y+10*_Scale,CGRectGetWidth(_scrollView.frame)-40*_Scale , 0)];

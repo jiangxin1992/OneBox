@@ -39,12 +39,16 @@
 #import "RobotManager.h"
 #import "CustomTabbarController.h"
 #import "EMAlertView.h"
+
+#import <objc/runtime.h>
+
+static void *EOCAlertViewBlock = "EOCAlertViewBlock";
+
 #define KPageCount 20
 #define KHintAdjustY    50
 
 @interface ChatViewController ()<UITableViewDataSource, UITableViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, SRRefreshDelegate, IChatManagerDelegate, DXChatBarMoreViewDelegate, DXMessageToolBarDelegate, LocationViewDelegate, EMCDDeviceManagerDelegate,EMCallManagerDelegate,UIAlertViewDelegate>
 {
-    UIAlertView *callAlertview;
     UIMenuController *_menuController;
     UIMenuItem *_copyMenuItem;
     UIMenuItem *_deleteMenuItem;
@@ -454,19 +458,21 @@
 
 -(void)call_action
 {
-    callAlertview=[[UIAlertView alloc] initWithTitle:nil message:_cell delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"拨打", nil];
+    UIAlertView *callAlertview=[[UIAlertView alloc] initWithTitle:nil message:_cell delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"拨打", nil];
     callAlertview.delegate=self;
-    [callAlertview show];
-}
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if(alertView==callAlertview)
-    {
+    void (^alertViewBlock)(NSInteger) = ^(NSInteger buttonIndex){
         if(buttonIndex==1)
         {
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[[NSString alloc] initWithFormat:@"tel://%@",_cell]]];
         }
-    }
+    };
+    objc_setAssociatedObject(callAlertview, EOCAlertViewBlock, alertViewBlock, OBJC_ASSOCIATION_COPY_NONATOMIC);
+    [callAlertview show];
+}
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    void (^alertViewBlock)(NSInteger) = objc_getAssociatedObject(alertView, EOCAlertViewBlock);
+    alertViewBlock(buttonIndex);
 }
 #pragma mark - helper
 - (NSURL *)convert2Mp4:(NSURL *)movUrl {

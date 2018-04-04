@@ -8,7 +8,6 @@
 
 #import "schoolCommentController.h"
 
-#import "MJRefresh.h"
 #import "HttpRequestManager.h"
 
 #import "followingViewController.h"
@@ -21,6 +20,9 @@
 #import "Tools.h"
 #import "MyInfo.h"
 #import "comment_model_alter.h"
+
+#import <objc/runtime.h>
+static void *EOCAlertViewKey = "EOCAlertViewKey";
 
 //评论的view的高度（发表评论）
 #define commentHeight 70*_Scale
@@ -54,11 +56,7 @@
 //    BOOL _isCreate;
     
 //    tableview
-    
-//    删除时的确认视图
-    UIAlertView *isdelete;
-//    当登录失败时，跳出的确认视图，用于跳转到登录界面
-    UIAlertView *reload_alertview;
+
 //    评论框的背景view
     UIView *_commentview;
 //    评论框
@@ -67,9 +65,7 @@
     
     UIImageView *imageGray;
 
-//    UIAlertView *comment_alertview;
     NSInteger _nownum;
-    UIAlertView *view_guanzhu;
 
 }
 @end
@@ -161,7 +157,7 @@
     alternum=0;
 
     _start=0;
-    self.view.backgroundColor=_define_backview_color;
+    self.view.backgroundColor=_define_white_color;
     _data_array=[[NSMutableArray alloc] init];
     _height_array=[[NSMutableArray alloc] init];
     
@@ -177,6 +173,7 @@
 //进行cell的删除或者点赞的动作
 -(void)my_block
 {
+    WeakSelf(ws);
     changeBlock=^(NSNumber *rownum,NSInteger type)
     {
         NSInteger _num=[rownum integerValue];
@@ -184,7 +181,16 @@
         if(type==0)
         {
             //             删除
-            isdelete=[[UIAlertView alloc] initWithTitle:nil message:@"是否删除评论" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Yes",nil];
+            UIAlertView *isdelete=[[UIAlertView alloc] initWithTitle:nil message:@"是否删除评论" delegate:ws cancelButtonTitle:@"Cancel" otherButtonTitles:@"Yes",nil];
+            isdelete.delegate = ws;
+            void (^alertViewBlock)(NSInteger) = ^(NSInteger buttonIndex){
+                if(buttonIndex==1)
+                {
+                    //            删除数据
+                    [ws removData];
+                }
+            };
+            objc_setAssociatedObject(isdelete, EOCAlertViewKey, alertViewBlock, OBJC_ASSOCIATION_COPY_NONATOMIC);
             [isdelete show];
             alternum=_num;
 
@@ -192,21 +198,17 @@
         {
             if(![regular isLogin])
             {
-//                UIAlertView *alertview=[[ToolManager sharedManager] alertTitle_Simple:@"You are not logged in, please login first."];
-//                alertview.delegate=self;
-                [self login_action];
+                [ws login_action];
 
             }else
             {
                 _nownum=[rownum integerValue];
-                [self iconClick:rownum];
+                [ws iconClick:rownum];
             }
 
         }else if(type==10)
         {
-//            UIAlertView *alertview=[[ToolManager sharedManager] alertTitle_Simple:@"You are not logged in, please login first."];
-//            alertview.delegate=self;
-            [self login_action];
+            [ws login_action];
         }
         else
         {
@@ -689,27 +691,8 @@
 #pragma mark-alertView代理方法
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if(alertView==isdelete)
-    {
-        if(buttonIndex==1)
-        {
-//            删除数据
-            [self removData];
-        }
-    }else if(alertView == reload_alertview)
-    {
-        LoginViewController*login=[[LoginViewController alloc] init];
-        login.type=@"other";
-        [self presentModalViewController:login animated:YES];
-    }else if(alertView==view_guanzhu)
-    {
-
-    }else
-    {
-        LoginViewController*login=[[LoginViewController alloc] init];
-        login.type=@"other";
-        [self presentModalViewController:login animated:YES];
-    }
+    void (^alertViewBlock)(NSInteger) = objc_getAssociatedObject(alertView, EOCAlertViewKey);
+    alertViewBlock(buttonIndex);
 }
 //进行评论内容的删除（如果是用户自己评论的内容）。
 //前面已经作出判断，是否为当前用户所发表内容
@@ -748,108 +731,36 @@
 
 }
 
-
-#pragma mark 开始进入刷新状态
-/**
- *  集成刷新控件
- */
-- (void)setupRefresh
-{
-    // 1.下拉刷新(进入刷新状态就会调用self的headerRereshing)
-    WeakSelf(ws);
-    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [ws headerRereshing];
-    }];
-    _tableView.mj_header = header;
-    _tableView.mj_header.automaticallyChangeAlpha = YES;
-    header.lastUpdatedTimeLabel.hidden = YES;
-
-    // 2.上拉加载更多(进入刷新状态就会调用self的footerRereshing)
-    _tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
-        [ws footerRereshing];
-    }];
-
-    [_tableView.mj_header beginRefreshing];
-
-}
--(void)footerRereshing
-{
-//    [[ToolManager sharedManager] alertTitle_Simple:@"没有更多了"];
-
-
-//[ToolManager sharedManager]
-    [_tableView.mj_footer endRefreshing];
-}
-- (void)headerRereshing
-{
-
-//    [[ToolManager sharedManager] alertTitle_Simple:@"没有更多了"];
-    [_tableView.mj_header endRefreshing];
-
-//    [_data_array removeAllObjects];
-//    [self prepareData];
-}
-
-
-//
-//- (void)footerRereshing
-//{
-//    start+=25;
-//    _page++;
-//    [self requestData];
-//}
-
 //创建各个视图
 -(void)UIConfig
 {
-
-//    将_isCreate设为yes，用于controller再次出现时调整_tableview的位置
-//    _isCreate=YES;
-//    创建_tableView
-    _tableView=[[UITableView alloc] initWithFrame:CGRectMake(_margin, 64+_margin, ScreenWidth-2*_margin, ScreenHeight-64-commentHeight) style:UITableViewStylePlain];
-    _tableView.backgroundColor=self.view.backgroundColor;
-    _tableView.delegate=self;
-    _tableView.dataSource=self;
-    _tableView.showsVerticalScrollIndicator=YES;
-
-//    加上tap
-    UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(return_KeyBoard)];
-    [_tableView addGestureRecognizer:tap];
-_tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
-    [self.view addSubview:_tableView];
-    [self setupRefresh];
-
-    UIView *headView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 20*_Scale)];
-    headView.backgroundColor=self.view.backgroundColor;
-    _tableView.tableHeaderView=headView;
-
-    [self createNocommentview];
-//    创建底部发表评论的view
-
-
-    _commentview=[[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_tableView.frame), ScreenWidth, commentHeight)];
-    _commentview.backgroundColor=self.view.backgroundColor;
-
-
+    //    创建底部发表评论的view
+    _commentview=[UIView getCustomViewWithColor:_define_backview_color];
     [self.view addSubview:_commentview];
-//    创建textfield，用于填写评论
-//    并将_commentField放在_commentview上
+    [_commentview mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(0);
+        make.height.mas_equalTo(commentHeight);
+        make.bottom.mas_equalTo(self.mas_bottomLayoutGuideTop).with.offset(0);
+    }];
+
+    //    创建textfield，用于填写评论
+    //    并将_commentField放在_commentview上
     CGFloat _y_p=-1*_Scale+(commentHeight-52*_Scale)/2.0f;
     _commentField=[[UITextField alloc] initWithFrame:CGRectMake(10*_Scale, _y_p,ScreenWidth-20*_Scale , 52*_Scale)];
-    UIView *signBoard=[[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 280*_Scale)];
+    UIView *signBoard=[[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 280*_Scale + (kIPhoneX?34.f:0.f))];
 
-//200  65 14
-     _commentField1=[[UITextView alloc] initWithFrame:CGRectMake(14*_Scale, 65*_Scale  ,ScreenWidth-28*_Scale , 200*_Scale)];
+    //200  65 14
+    _commentField1=[[UITextView alloc] initWithFrame:CGRectMake(14*_Scale, 65*_Scale  ,ScreenWidth-28*_Scale , 200*_Scale)];
     _commentField1.returnKeyType=UIReturnKeyDefault;
     _commentField1.delegate=self;
     _commentField1.font=[regular getFont:14.0f];
     _commentField1.textColor=[UIColor colorWithRed:102.0f/255.0f green:102.0f/255.0f blue:102.0f/255.0f alpha:1];
     [signBoard addSubview:_commentField1];
-    signBoard.backgroundColor=self.view.backgroundColor;
+    signBoard.backgroundColor=_define_backview_color;
     UIButton *cancel=[UIButton buttonWithType:UIButtonTypeCustom];
-//    cancel.backgroundColor=[UIColor redColor];
+    //    cancel.backgroundColor=[UIColor redColor];
     cancel.frame=CGRectMake(0, 0, 136*_Scale, 65*_Scale);
-   [cancel setTitle:@"取消" forState:UIControlStateNormal];
+    [cancel setTitle:@"取消" forState:UIControlStateNormal];
     cancel.titleLabel.font=[regular getFont:13.0f];
     [cancel setTitleColor:_define_blue_color forState:UIControlStateNormal];
     [cancel addTarget:self action:@selector(cancelAction) forControlEvents:UIControlEventTouchUpInside];
@@ -858,13 +769,13 @@ _tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
 
     UIButton *send=[UIButton buttonWithType:UIButtonTypeCustom];
     send.frame=CGRectMake(CGRectGetWidth(signBoard.frame)-136*_Scale, 0,136*_Scale , 65*_Scale);
-//    send.backgroundColor=[UIColor redColor];
+    //    send.backgroundColor=[UIColor redColor];
     [send setTitle:@"发送" forState:UIControlStateNormal];
     send.titleLabel.font=[regular getFont:13.0f];
     [send setTitleColor:_define_blue_color forState:UIControlStateNormal];
     [send addTarget:self action:@selector(sendAction) forControlEvents:UIControlEventTouchUpInside];
     [signBoard addSubview:send];
-    
+
 #pragma mark -键盘上加view
     _commentField.inputAccessoryView = signBoard;
     _commentField.clearButtonMode = UITextFieldViewModeAlways;
@@ -874,16 +785,40 @@ _tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
     _commentField.borderStyle= UITextBorderStyleNone;
 
     _commentField.placeholder=@"撰 写 您 的 评 论 。";
-//    _commentField.backgroundColor=self.view.backgroundColor;
     _commentField.delegate=self;
     _commentField.background=[UIImage imageNamed:@"comment_搜索框搜索框"];
     _commentField.font=[regular getFont:10.5f];
     [_commentview addSubview:_commentField];
-//    _commentview.backgroundColor=[UIColor redColor];
+    //    _commentview.backgroundColor=[UIColor redColor];
     UIView *view_qufen=[[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(signBoard.frame), 1*_Scale)];
     view_qufen.backgroundColor=[UIColor colorWithRed:190.0f/255.0f green:190.0f/255.0f blue:190.0f/255.0f alpha:1];
     [signBoard addSubview:view_qufen];
-//    _commentField.backgroundColor=[UIColor whiteColor];
+    //    _commentField.backgroundColor=[UIColor whiteColor];
+
+//    将_isCreate设为yes，用于controller再次出现时调整_tableview的位置
+//    _isCreate=YES;
+//    创建_tableView
+    _tableView=[[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+    [self.view addSubview:_tableView];
+    [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.top.mas_equalTo(0);
+        make.bottom.mas_equalTo(_commentview.mas_top).with.offset(0);
+    }];
+    _tableView.backgroundColor=_define_backview_color;
+    _tableView.delegate=self;
+    _tableView.dataSource=self;
+    _tableView.showsVerticalScrollIndicator=YES;
+
+//    加上tap
+    UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(return_KeyBoard)];
+    [_tableView addGestureRecognizer:tap];
+    _tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
+
+    UIView *headView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 20*_Scale)];
+    headView.backgroundColor=_define_backview_color;
+    _tableView.tableHeaderView=headView;
+
+    [self createNocommentview];
 }
 -(void)sendAction
 {
@@ -983,7 +918,7 @@ _tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
     NSDictionary *sub_dict=[[NSDictionary alloc] initWithObjectsAndKeys:height_num,@"cellheight",_data_array[indexPath.row],@"cellmodel",[NSNumber numberWithInteger:indexPath.row],@"rownum",[NSNumber numberWithBool:islast],@"islast",nil];
 
-    cell.backgroundColor=self.view.backgroundColor;
+    cell.backgroundColor=_define_backview_color;
     cell.dict=sub_dict;
     cell.block=changeBlock;
     

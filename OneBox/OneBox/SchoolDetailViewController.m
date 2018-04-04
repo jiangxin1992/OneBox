@@ -1755,8 +1755,6 @@
 
     if(![regular isLogin])
     {
-//        UIAlertView *alertview=[[ToolManager sharedManager] alertTitle_Simple:@"用户还未登录，请先登录"];
-//        alertview.delegate=self;
         [self login_action];
 
     }else
@@ -4467,8 +4465,6 @@
 
     }else
     {
-//        UIAlertView *alertview=[[ToolManager sharedManager] alertTitle_Simple:@"用户还未登录，请先登录"];
-//        alertview.delegate=self;
         [self login_action];
 
     }
@@ -4542,9 +4538,6 @@
 
     }else
     {
-
-//        UIAlertView *alertview=[[ToolManager sharedManager] alertTitle_Simple:@"用户还未登录，请先登录"];
-//        alertview.delegate=self;
         [self login_action];
 
     }
@@ -4978,8 +4971,6 @@
         [self requestUserStarAvg];
     }else
     {
-//        UIAlertView *alertview=[[ToolManager sharedManager] alertTitle_Simple:@"用户还未登录，请先登录"];
-//        alertview.delegate=self;
         [self login_action];
     }
 }

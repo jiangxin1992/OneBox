@@ -13,7 +13,9 @@
 #import <ShareSDK/ShareSDK.h>
 #import <ShareSDKExtension/ShareSDK+Extension.h>
 #import <ShareSDKConnector/ShareSDKConnector.h>
+#import <objc/runtime.h>
 
+static void *EOCAlertViewKey = "EOCAlertViewKey";
 
 @interface BingingAuthViewController ()<UIAlertViewDelegate>
 
@@ -22,12 +24,6 @@
 @implementation BingingAuthViewController
 {
     MyInfo *info;
-    UIAlertView *alertview_wechat;
-    UIAlertView *alertview_qq;
-    UIAlertView *alertview_sina;
-    UIAlertView *alertview_wechat_cancel;
-    UIAlertView *alertview_qq_cancel;
-    UIAlertView *alertview_sina_cancel;
 }
 
 - (void)viewDidLoad {
@@ -77,51 +73,8 @@
 }
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
-    if(alertView==alertview_wechat)
-    {
-        if(buttonIndex==1)
-        {
-            [self reloadStateWithType:SSDKPlatformTypeWechat];
-        }
-    }else if(alertView==alertview_qq)
-    {
-        if(buttonIndex==1)
-        {
-            [self reloadStateWithType:SSDKPlatformSubTypeQZone];
-        }
-    }else if(alertView==alertview_sina)
-    {
-
-        if(buttonIndex==1)
-        {
-            [self reloadStateWithType:SSDKPlatformTypeSinaWeibo];
-        }
-        
-    }else if(alertView==alertview_wechat_cancel)
-    {
-        if(buttonIndex==1)
-        {
-            [self bangding_cancel:@"weixin"];
-        }
-
-    }else if(alertView==alertview_qq_cancel)
-    {
-        if(buttonIndex==1)
-        {
-
-            [self bangding_cancel:@"qq_connect"];
-
-        }
-
-    }else if(alertView==alertview_sina_cancel)
-    {
-        if(buttonIndex==1)
-        {
-            [self bangding_cancel:@"weibo"];
-        }
-
-    }
-    
+    void (^alertViewBlock)(NSInteger) = objc_getAssociatedObject(alertView, EOCAlertViewKey);
+    alertViewBlock(buttonIndex);
 }
 -(void)bangding_cancel:(NSString *)provider
 {
@@ -212,16 +165,30 @@
         if(btn.selected)
         {
 
-            alertview_wechat_cancel=[[UIAlertView alloc] initWithTitle:@"" message:@"是否确定要解除绑定呢？ " delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"是", nil];
+            UIAlertView *alertview_wechat_cancel=[[UIAlertView alloc] initWithTitle:@"" message:@"是否确定要解除绑定呢？ " delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"是", nil];
             alertview_wechat_cancel.delegate=self;
+            void (^alertViewBlock)(NSInteger) = ^(NSInteger buttonIndex){
+                if(buttonIndex==1)
+                {
+                    [self bangding_cancel:@"weixin"];
+                }
+            };
+            objc_setAssociatedObject(alertview_wechat_cancel, EOCAlertViewKey, alertViewBlock, OBJC_ASSOCIATION_COPY_NONATOMIC);
             [alertview_wechat_cancel show];
 
         }else
         {
             if(_isinstall)
             {
-                alertview_wechat=[[UIAlertView alloc] initWithTitle:@"" message:@"您正在绑定第三方账号，如果此账号已存在，相关数据会丢失，确定绑定吗？ " delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"是", nil];
+                UIAlertView *alertview_wechat=[[UIAlertView alloc] initWithTitle:@"" message:@"您正在绑定第三方账号，如果此账号已存在，相关数据会丢失，确定绑定吗？ " delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"是", nil];
                 alertview_wechat.delegate=self;
+                void (^alertViewBlock)(NSInteger) = ^(NSInteger buttonIndex){
+                    if(buttonIndex==1)
+                    {
+                        [self reloadStateWithType:SSDKPlatformTypeWechat];
+                    }
+                };
+                objc_setAssociatedObject(alertview_wechat, EOCAlertViewKey, alertViewBlock, OBJC_ASSOCIATION_COPY_NONATOMIC);
                 [alertview_wechat show];
 
             }else
@@ -239,13 +206,27 @@
         if(btn.selected)
         {
 
-            alertview_qq_cancel=[[UIAlertView alloc] initWithTitle:@"" message:@"是否确定要解除绑定呢？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"是", nil];
+            UIAlertView *alertview_qq_cancel=[[UIAlertView alloc] initWithTitle:@"" message:@"是否确定要解除绑定呢？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"是", nil];
             alertview_qq_cancel.delegate=self;
+            void (^alertViewBlock)(NSInteger) = ^(NSInteger buttonIndex){
+                if(buttonIndex==1)
+                {
+                    [self bangding_cancel:@"qq_connect"];
+                }
+            };
+            objc_setAssociatedObject(alertview_qq_cancel, EOCAlertViewKey, alertViewBlock, OBJC_ASSOCIATION_COPY_NONATOMIC);
             [alertview_qq_cancel show];
         }else
         {
-            alertview_qq=[[UIAlertView alloc] initWithTitle:@"" message:@"您正在绑定第三方账号，如果此账号已存在，相关数据会丢失，确定绑定吗？ " delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"是", nil];
+            UIAlertView *alertview_qq=[[UIAlertView alloc] initWithTitle:@"" message:@"您正在绑定第三方账号，如果此账号已存在，相关数据会丢失，确定绑定吗？ " delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"是", nil];
             alertview_qq.delegate=self;
+            void (^alertViewBlock)(NSInteger) = ^(NSInteger buttonIndex){
+                if(buttonIndex==1)
+                {
+                    [self reloadStateWithType:SSDKPlatformSubTypeQZone];
+                }
+            };
+            objc_setAssociatedObject(alertview_qq, EOCAlertViewKey, alertViewBlock, OBJC_ASSOCIATION_COPY_NONATOMIC);
             [alertview_qq show];
         }
 
@@ -256,13 +237,27 @@
         if(btn.selected)
         {
 
-            alertview_sina_cancel=[[UIAlertView alloc] initWithTitle:@"" message:@"是否确定要解除绑定呢？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"是", nil];
+            UIAlertView *alertview_sina_cancel=[[UIAlertView alloc] initWithTitle:@"" message:@"是否确定要解除绑定呢？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"是", nil];
             alertview_sina_cancel.delegate=self;
+            void (^alertViewBlock)(NSInteger) = ^(NSInteger buttonIndex){
+                if(buttonIndex==1)
+                {
+                    [self bangding_cancel:@"weibo"];
+                }
+            };
+            objc_setAssociatedObject(alertview_sina_cancel, EOCAlertViewKey, alertViewBlock, OBJC_ASSOCIATION_COPY_NONATOMIC);
             [alertview_sina_cancel show];
         }else
         {
-            alertview_sina=[[UIAlertView alloc] initWithTitle:@"" message:@"您正在绑定第三方账号，如果此账号已存在，相关数据会丢失，确定绑定吗？ " delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"是", nil];
+            UIAlertView *alertview_sina=[[UIAlertView alloc] initWithTitle:@"" message:@"您正在绑定第三方账号，如果此账号已存在，相关数据会丢失，确定绑定吗？ " delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"是", nil];
             alertview_sina.delegate=self;
+            void (^alertViewBlock)(NSInteger) = ^(NSInteger buttonIndex){
+                if(buttonIndex==1)
+                {
+                    [self reloadStateWithType:SSDKPlatformTypeSinaWeibo];
+                }
+            };
+            objc_setAssociatedObject(alertview_sina, EOCAlertViewKey, alertViewBlock, OBJC_ASSOCIATION_COPY_NONATOMIC);
             [alertview_sina show];
 
         }

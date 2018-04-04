@@ -34,16 +34,17 @@
 #import "MyMD5.h"
 #import "MyInfo.h"
 
+#import <objc/runtime.h>
+
+static void *EOCAlertViewKey = "EOCAlertViewKey";
+
 @interface userInfoViewController ()<UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,NSURLConnectionDelegate,UITextFieldDelegate,UICollectionViewDelegate,UIAlertViewDelegate,MFMailComposeViewControllerDelegate,UIActionSheetDelegate>
 {
     UIButton *setBtn;
 
-    UIAlertView *alertviewalbum;
-    UIAlertView *alertviewCamera;
     BOOL _isfirstlogin;
     BOOL app1;
     BOOL app2;
-    UIAlertView *success_alert;
     MyInfo *info;
     UIButton *shareBtn;
     BOOL _click;
@@ -73,19 +74,8 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if(alertView==success_alert)
-    {
-        [imageGray removeFromSuperview];
-
-
-    }else if(alertView==alertviewalbum||alertView==alertviewCamera)
-    {
-        if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]])
-        {
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
-        }
-
-    }
+    void (^alertViewBlock)(NSInteger) = objc_getAssociatedObject(alertView, EOCAlertViewKey);
+    alertViewBlock(buttonIndex);
 }
 
 
@@ -1036,19 +1026,23 @@
 
     if (author == kCLAuthorizationStatusRestricted || author ==kCLAuthorizationStatusDenied){
 
-         alertviewCamera=[[UIAlertView alloc] initWithTitle:@"" message:@"请在iPhone的 设置－隐私－相机 选项中，允许留美盒子访问你的相册。" delegate:self cancelButtonTitle:@"好的" otherButtonTitles: nil];
+        UIAlertView *alertviewCamera=[[UIAlertView alloc] initWithTitle:@"" message:@"请在iPhone的 设置－隐私－相机 选项中，允许留美盒子访问你的相册。" delegate:self cancelButtonTitle:@"好的" otherButtonTitles: nil];
         alertviewCamera.delegate=self;
+        void (^alertViewBlock)(NSInteger) = ^(NSInteger buttonIndex){
+            [regular pushSystem];
+        };
+        objc_setAssociatedObject(alertviewCamera, EOCAlertViewKey, alertViewBlock, OBJC_ASSOCIATION_COPY_NONATOMIC);
         [alertviewCamera show];
-
-
-
 
     }else if(authStatus == ALAuthorizationStatusRestricted || authStatus == ALAuthorizationStatusDenied)
     {
-         alertviewalbum=[[UIAlertView alloc] initWithTitle:@"" message:@"请在iPhone的 设置－隐私－相机 选项中，允许留美盒子访问你的相机。" delegate:self cancelButtonTitle:@"好的" otherButtonTitles: nil];
+        UIAlertView *alertviewalbum=[[UIAlertView alloc] initWithTitle:@"" message:@"请在iPhone的 设置－隐私－相机 选项中，允许留美盒子访问你的相机。" delegate:self cancelButtonTitle:@"好的" otherButtonTitles: nil];
         alertviewalbum.delegate=self;
+        void (^alertViewBlock)(NSInteger) = ^(NSInteger buttonIndex){
+            [regular pushSystem];
+        };
+        objc_setAssociatedObject(alertviewalbum, EOCAlertViewKey, alertViewBlock, OBJC_ASSOCIATION_COPY_NONATOMIC);
         [alertviewalbum show];
-
 
     }else
     {
@@ -1196,9 +1190,7 @@
     NSDictionary *dict;
     NSString *str;
     UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:nil message:@"连接超时" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    // JXLOG(@"%@",[[NSString alloc]initWithData:_datas encoding:NSUTF8StringEncoding]);
     dict=[NSJSONSerialization JSONObjectWithData:_datas options:NSJSONReadingAllowFragments error:nil];
-    //JXLOG(@"%@",[[NSString alloc]initWithData:_datas encoding:NSUTF8StringEncoding]);
     str=[dict objectForKey:@"state"];
     if([str isEqualToString:@"1"])
     {
@@ -1206,10 +1198,8 @@
         NSUserDefaults *defaults =[NSUserDefaults standardUserDefaults];
         if([regular isLogin])
         {
-            //            UIStoryboard *user=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
-            //            ViewController* userView=[user instantiateViewControllerWithIdentifier:@"ViewController"];
             LoginViewController *loginVC = [[LoginViewController alloc] init];
-            UIAlertView *alertview=[[UIAlertView alloc]initWithTitle:nil message:@"网络故障，请重新登录"  delegate:nil cancelButtonTitle:@"OK"  otherButtonTitles:nil];
+            UIAlertView *alertview=[[UIAlertView alloc]initWithTitle:nil message:@"网络故障，请重新登录"  delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [alertview show];
             NSNumber *islogin=[[NSNumber alloc]initWithInt:0];
             [defaults setObject:islogin forKey:@"islogin"];
@@ -1223,7 +1213,7 @@
         }
         else
         {
-            UIAlertView *alertview=[[UIAlertView alloc]initWithTitle:nil message:@"未登录"  delegate:nil cancelButtonTitle:@"OK"  otherButtonTitles:nil];
+            UIAlertView *alertview=[[UIAlertView alloc]initWithTitle:nil message:@"未登录" delegate:nil cancelButtonTitle:@"OK"  otherButtonTitles:nil];
             [alertview show];
         }
     }

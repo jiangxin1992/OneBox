@@ -12,6 +12,10 @@
 #import <AVFoundation/AVFoundation.h>
 #import "DXMessageToolBar.h"
 
+#import <objc/runtime.h>
+
+static void *EOCAlertViewKey = "EOCAlertViewKey";
+
 @interface DXMessageToolBar()<UITextViewDelegate, DXFaceDelegate,UIAlertViewDelegate>
 {
     CGFloat _previousTextViewContentHeight;//上一次inputTextView的contentSize.height
@@ -609,8 +613,12 @@
             }
             else {
                 UIAlertView *alerview=[[UIAlertView alloc] initWithTitle:@"Unable to record" message:@"Allow AbroadBox to access your microphone from device menu:Settings->Privacy->Microphone" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+                alerview.delegate = self;
+                void (^alertViewBlock)(NSInteger) = ^(NSInteger buttonIndex){
+                    [regular pushSystem];
+                };
+                objc_setAssociatedObject(alerview, EOCAlertViewKey, alertViewBlock, OBJC_ASSOCIATION_COPY_NONATOMIC);
                 [alerview show];
-
             }
         }];
     }
@@ -639,6 +647,11 @@
             }
             else {
                 UIAlertView *alerview=[[UIAlertView alloc] initWithTitle:@"Unable to record" message:@"Allow AbroadBox to access your microphone from device menu:Settings->Privacy->Microphone" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+                alerview.delegate = self;
+                void (^alertViewBlock)(NSInteger) = ^(NSInteger buttonIndex){
+                    [regular pushSystem];
+                };
+                objc_setAssociatedObject(alerview, EOCAlertViewKey, alertViewBlock, OBJC_ASSOCIATION_COPY_NONATOMIC);
                 [alerview show];
 
             }
@@ -668,6 +681,11 @@
             }
             else {
                 UIAlertView *alerview=[[UIAlertView alloc] initWithTitle:@"Unable to record" message:@"Allow AbroadBox to access your microphone from device menu:Settings->Privacy->Microphone" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+                alerview.delegate = self;
+                void (^alertViewBlock)(NSInteger) = ^(NSInteger buttonIndex){
+                    [regular pushSystem];
+                };
+                objc_setAssociatedObject(alerview, EOCAlertViewKey, alertViewBlock, OBJC_ASSOCIATION_COPY_NONATOMIC);
                 [alerview show];
 
             }
@@ -697,6 +715,11 @@
             }
             else {
                 UIAlertView *alerview=[[UIAlertView alloc] initWithTitle:@"Unable to record" message:@"Allow AbroadBox to access your microphone from device menu:Settings->Privacy->Microphone" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+                alerview.delegate = self;
+                void (^alertViewBlock)(NSInteger) = ^(NSInteger buttonIndex){
+                    [regular pushSystem];
+                };
+                objc_setAssociatedObject(alerview, EOCAlertViewKey, alertViewBlock, OBJC_ASSOCIATION_COPY_NONATOMIC);
                 [alerview show];
 
             }
@@ -724,7 +747,11 @@
             }
             else {
                 UIAlertView *alerview=[[UIAlertView alloc] initWithTitle:@"无法录音" message:@"请在iPhone的 设置－隐私－麦克风 选项中，允许微信访问你的手机麦克风。" delegate:self cancelButtonTitle:nil otherButtonTitles:@"好", nil];
-                alerview.delegate=self;
+                alerview.delegate = self;
+                void (^alertViewBlock)(NSInteger) = ^(NSInteger buttonIndex){
+                    [regular pushSystem];
+                };
+                objc_setAssociatedObject(alerview, EOCAlertViewKey, alertViewBlock, OBJC_ASSOCIATION_COPY_NONATOMIC);
                 [alerview show];
 
             }
@@ -734,10 +761,8 @@
 }
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]])
-    {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
-    }
+    void (^alertViewBlock)(NSInteger) = objc_getAssociatedObject(alertView, EOCAlertViewKey);
+    alertViewBlock(buttonIndex);
 }
 #pragma mark - public
 

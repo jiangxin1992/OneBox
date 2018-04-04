@@ -15,15 +15,14 @@
 
 #import "DXChatBarMoreView.h"
 
+#import <objc/runtime.h>
+
+static void *EOCAlertViewKey = "EOCAlertViewKey";
+
 #define CHAT_BUTTON_SIZE 50
 #define INSETS 8
 
 @implementation DXChatBarMoreView
-{
-    UIAlertView *alertviewCamera;
-    UIAlertView *alertviewalbum;
-    UIAlertView *alertviewLocation;
-}
 
 - (instancetype)initWithFrame:(CGRect)frame type:(ChatMoreType)type
 {
@@ -95,8 +94,12 @@
     if(authStatus == ALAuthorizationStatusRestricted || authStatus == ALAuthorizationStatusDenied)
     {
 
-        alertviewalbum=[[UIAlertView alloc] initWithTitle:@"" message:@"请在iPhone的 设置－隐私－相机 选项中，允许留美盒子访问你的相机。" delegate:self cancelButtonTitle:@"好的" otherButtonTitles: nil];
+        UIAlertView *alertviewalbum=[[UIAlertView alloc] initWithTitle:@"" message:@"请在iPhone的 设置－隐私－相机 选项中，允许留美盒子访问你的相机。" delegate:self cancelButtonTitle:@"好的" otherButtonTitles: nil];
         alertviewalbum.delegate=self;
+        void (^alertViewBlock)(NSInteger) = ^(NSInteger buttonIndex){
+            [regular pushSystem];
+        };
+        objc_setAssociatedObject(alertviewalbum, EOCAlertViewKey, alertViewBlock, OBJC_ASSOCIATION_COPY_NONATOMIC);
         [alertviewalbum show];
 
     }else
@@ -111,19 +114,20 @@
 }
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]])
-    {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
-    }
-
+    void (^alertViewBlock)(NSInteger) = objc_getAssociatedObject(alertView, buttonIndex);
+    alertViewBlock(buttonIndex);
 }
 - (void)photoAction
 {
     ALAuthorizationStatus author = [ALAssetsLibrary authorizationStatus];
     if (author == kCLAuthorizationStatusRestricted || author ==kCLAuthorizationStatusDenied){
 
-        alertviewCamera=[[UIAlertView alloc] initWithTitle:@"" message:@"请在iPhone的 设置－隐私－相机 选项中，允许留美盒子访问你的相册。" delegate:self cancelButtonTitle:@"好的" otherButtonTitles: nil];
+        UIAlertView *alertviewCamera=[[UIAlertView alloc] initWithTitle:@"" message:@"请在iPhone的 设置－隐私－相机 选项中，允许留美盒子访问你的相册。" delegate:self cancelButtonTitle:@"好的" otherButtonTitles: nil];
         alertviewCamera.delegate=self;
+        void (^alertViewBlock)(NSInteger) = ^(NSInteger buttonIndex){
+            [regular pushSystem];
+        };
+        objc_setAssociatedObject(alertviewCamera, EOCAlertViewKey, alertViewBlock, OBJC_ASSOCIATION_COPY_NONATOMIC);
         [alertviewCamera show];
 
 
@@ -141,8 +145,12 @@
     CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
     if (kCLAuthorizationStatusDenied == status || kCLAuthorizationStatusRestricted == status) {
 
-        alertviewLocation=[[UIAlertView alloc] initWithTitle:@"" message:@"请在iPhone的 设置－隐私－定位服务 选项中，允许留美盒子使用您的位置。" delegate:self cancelButtonTitle:@"好的" otherButtonTitles: nil];
+        UIAlertView *alertviewLocation=[[UIAlertView alloc] initWithTitle:@"" message:@"请在iPhone的 设置－隐私－定位服务 选项中，允许留美盒子使用您的位置。" delegate:self cancelButtonTitle:@"好的" otherButtonTitles: nil];
         alertviewLocation.delegate=self;
+        void (^alertViewBlock)(NSInteger) = ^(NSInteger buttonIndex){
+            [regular pushSystem];
+        };
+        objc_setAssociatedObject(alertviewLocation, EOCAlertViewKey, alertViewBlock, OBJC_ASSOCIATION_COPY_NONATOMIC);
         [alertviewLocation show];
 
 

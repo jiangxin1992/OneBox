@@ -228,7 +228,9 @@
 - (void)showMessageAlertView
 {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:NSLocalizedString(@"saySomething", @"say somthing") delegate:self cancelButtonTitle:NSLocalizedString(@"cancel", @"Cancel") otherButtonTitles:NSLocalizedString(@"ok", @"OK"), nil];
+    alert.delegate = self;
     [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
+
     [alert show];
 }
 

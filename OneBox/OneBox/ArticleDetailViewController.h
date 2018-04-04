@@ -15,6 +15,7 @@ typedef  void(^blchange)(ArticleModel *model,BOOL _isdelete);
 @interface ArticleDetailViewController : UIViewController
 
 __string(ArticleID);
+
 @property (nonatomic,strong)ArticleModel *model;
 @property (nonatomic,strong)blchange block;
 @property (nonatomic, strong) UISwipeGestureRecognizer *leftSwipeGestureRecognizer;

@@ -554,12 +554,12 @@
                 {
 
 
-                    UIAlertView *view = [[UIAlertView alloc] initWithTitle:@"提示" message:@"今天要飞赴美国啦，不要忘记带好海关材料哦！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                    UIAlertView *view = [[UIAlertView alloc] initWithTitle:@"提示" message:@"今天要飞赴美国啦，不要忘记带好海关材料哦！" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
                     [view show];
                 }else if((((long)(time/(86400))-1)==((long)(timenow/(86400))))&&(time>timenow))
                 {
                     //                明天为面签日
-                    UIAlertView *view = [[UIAlertView alloc] initWithTitle:@"提示" message:@"今天要飞赴美国啦，请带好材料，祝你好运！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                    UIAlertView *view = [[UIAlertView alloc] initWithTitle:@"提示" message:@"今天要飞赴美国啦，请带好材料，祝你好运！" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
                     [view show];
                 }
                 //                显示当前时间

@@ -18,6 +18,9 @@
 
 #import "AboutViewController.h"
 
+#import <objc/runtime.h>
+
+static void *EOCAlertViewKey = "EOCAlertViewKey";
 
 @interface about_new_ViewController ()<UIAlertViewDelegate>
 
@@ -25,8 +28,6 @@
 
 @implementation about_new_ViewController
 {
-    UIAlertView *alertviewPush;
-    UIAlertView *alertviewclean;
     UIButton *notbtn;
     UISwitch *_switch;
     UITextView *sugession_content;
@@ -257,31 +258,22 @@
     NSString *path = [paths lastObject];
     ;
 
-
-
-    alertviewclean=[[UIAlertView alloc] initWithTitle:@"提示" message:[[NSString alloc] initWithFormat:@"缓存大小为%.2fM,确定清除缓存吗？",[self folderSizeAtPath:path]] delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    UIAlertView *alertviewclean=[[UIAlertView alloc] initWithTitle:@"提示" message:[[NSString alloc] initWithFormat:@"缓存大小为%.2fM,确定清除缓存吗？",[self folderSizeAtPath:path]] delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
     alertviewclean.delegate=self;
+    void (^alerViewBlock)(NSInteger) = ^(NSInteger buttonIndex){
+        if(buttonIndex==1)
+        {
+            [self cleanCacheAction];
+        }
+    };
+    objc_setAssociatedObject(alertviewclean, EOCAlertViewKey, alerViewBlock, OBJC_ASSOCIATION_COPY_NONATOMIC);
     [alertviewclean show];
 
 }
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if(alertView==alertviewclean)
-    {
-        if(buttonIndex==1)
-        {
-            [self cleanCacheAction];
-        }
-    }else if(alertView==alertviewPush)
-    {
-
-        if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]])
-        {
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
-        }
-    }
-
-
+    void (^alertBlockView)(NSInteger) = objc_getAssociatedObject(alertView, EOCAlertViewKey);
+    alertBlockView(buttonIndex);
 }
 -(void)cleanCacheAction
 {
@@ -430,20 +422,20 @@
         if(btn.tag-100==0)
         {
 #pragma mark-账户资料
-            //        AboutViewController *about=[[AboutViewController alloc] init];
-            //        about.type=@"about_us";
-            //        [self.navigationController pushViewController:about animated:YES];
+
             [self.navigationController pushViewController:[personinfoViewController new] animated:YES];
             
             
         }else if(btn.tag-100==1)
         {
 #pragma mark-推送通知
-            alertviewPush=[[UIAlertView alloc] initWithTitle:@"" message:@"开启或者关闭推送通知，请在iPhone的""设置""-""通知""中进行设置" delegate:self cancelButtonTitle:@"好" otherButtonTitles: nil];
+            UIAlertView *alertviewPush=[[UIAlertView alloc] initWithTitle:@"" message:@"开启或者关闭推送通知，请在iPhone的""设置""-""通知""中进行设置" delegate:self cancelButtonTitle:@"好" otherButtonTitles: nil];
             alertviewPush.delegate=self;
+            void (^alertViewBlock)(NSInteger) = ^(NSInteger buttonIndex){
+                [regular pushSystem];
+            };
+            objc_setAssociatedObject(alertviewPush, EOCAlertViewKey, alertViewBlock, OBJC_ASSOCIATION_COPY_NONATOMIC);
             [alertviewPush show];
-            //        [self.navigationController pushViewController:[pushViewController new] animated:YES];
-            
         }
 
     }else
@@ -451,19 +443,13 @@
         if(btn.tag-100==0)
         {
 #pragma mark-账户资料
-            //        AboutViewController *about=[[AboutViewController alloc] init];
-            //        about.type=@"about_us";
-            //        [self.navigationController pushViewController:about animated:YES];
+
             [self.navigationController pushViewController:[personinfoViewController new] animated:YES];
             
             
         }else if(btn.tag-100==1)
         {
 #pragma mark-修改密码
-
-            //        AboutViewController *about=[[AboutViewController alloc] init];
-            //        about.type=@"privacy";
-            //        [self.navigationController pushViewController:about animated:YES];
             [self.navigationController pushViewController:[ChangePswViewController new] animated:YES];
         }else if(btn.tag-100==2)
         {
@@ -484,8 +470,12 @@
         {
 #pragma mark-推送通知
 
-            alertviewPush=[[UIAlertView alloc] initWithTitle:@"" message:@"开启或者关闭推送通知，请在iPhone的""设置""-""通知""中进行设置" delegate:self cancelButtonTitle:@"好" otherButtonTitles: nil];
+            UIAlertView *alertviewPush=[[UIAlertView alloc] initWithTitle:@"" message:@"开启或者关闭推送通知，请在iPhone的""设置""-""通知""中进行设置" delegate:self cancelButtonTitle:@"好" otherButtonTitles: nil];
             alertviewPush.delegate=self;
+            void (^alertViewBlock)(NSInteger) = ^(NSInteger buttonIndex){
+                [regular pushSystem];
+            };
+            objc_setAssociatedObject(alertviewPush, EOCAlertViewKey, alertViewBlock, OBJC_ASSOCIATION_COPY_NONATOMIC);
             [alertviewPush show];
 
         }

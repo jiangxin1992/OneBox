@@ -768,13 +768,12 @@
 
         [mengbanImg removeFromSuperview];
         mengbanImg=[[UIImageView alloc] init];
-        if(_isPad)
-        {
-            mengbanImg.frame=CGRectMake((ScreenWidth-100)/2.0f, (ScreenHeight-100)/2.0f, 100, 100);
-        }else
-        {
-            mengbanImg.frame=CGRectMake((ScreenWidth-100)/2.0f, 220, 100, 100);
-        }
+        [self.view addSubview:mengbanImg];
+        [mengbanImg mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.width.height.mas_equalTo(100);
+            make.centerX.mas_equalTo(self.view);
+            make.centerY.mas_equalTo(self.view);
+        }];
         mengbanImg.image=[UIImage imageNamed:@"school_center"];
 
         mengbanImg.layer.cornerRadius=50;
@@ -782,13 +781,11 @@
 
 
         UILabel *label=[[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 90)];
+        [mengbanImg addSubview:label];
         label.textAlignment=1;
         label.font=[UIFont fontWithName:@"Skia" size:30.0f];
         label.textColor=[UIColor whiteColor];
         label.text=[[NSString alloc] initWithFormat:@"%lu",(unsigned long)dataarr.count];
-        
-        [mengbanImg addSubview:label];
-        [self.view addSubview:mengbanImg];
         
     }else
     {

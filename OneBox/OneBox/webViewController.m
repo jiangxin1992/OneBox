@@ -59,7 +59,6 @@
 
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错蓝色" Withtype:2]];
-        [[ToolManager sharedManager] removeProgress];
     }];
     
 }

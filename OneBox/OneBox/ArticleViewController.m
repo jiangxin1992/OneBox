@@ -244,12 +244,10 @@
         NSDictionary *dict=[NSJSONSerialization  JSONObjectWithData:data options:0 error:nil];
 //        请求成功后的处理
         blockSuccess(dict);
-        [[ToolManager sharedManager] removeProgress];
 
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [_tableView.mj_header endRefreshing];
         [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错白色" Withtype:1]];
-        [[ToolManager sharedManager] removeProgress];
     }];
 }
 

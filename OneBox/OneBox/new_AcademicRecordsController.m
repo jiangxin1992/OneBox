@@ -193,9 +193,6 @@
     __scrollview.contentSize=CGSizeMake(__scrollview.frame.size.width, __scrollview.frame.size.height);
     [upview addSubview:__scrollview];
 
-
-
-    //    [[ToolManager sharedManager] createProgress:@"加载中"];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:[[NSString alloc] initWithFormat:@"%@%@",DNS,@"/v1/us_states"] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
 
@@ -273,9 +270,7 @@
              [[ToolManager sharedManager] alertTitle_Simple:[dict objectForKey:@"message"]];
         }
         //        blockSuccess(dict);
-        [[ToolManager sharedManager] removeProgress];
-        
-        
+
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错白色" Withtype:1]];
     }];
@@ -402,8 +397,6 @@
     [upviewcity addSubview:_scrollview_city];
     JXLOG(@"%@",state_id);
 
-
-    //    [[ToolManager sharedManager] createProgress:@"加载中"];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:[[NSString alloc] initWithFormat:@"%@%@%@",DNS,@"/v1/us_states/",state_id] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         JXLOG(@"%@",state_id);
@@ -468,9 +461,7 @@
         {
              [[ToolManager sharedManager] alertTitle_Simple:[dict objectForKey:@"message"]];
         }        //        blockSuccess(dict);
-        [[ToolManager sharedManager] removeProgress];
-        
-        
+
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
        [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错白色" Withtype:1]];
     }];
@@ -1074,7 +1065,6 @@
 #pragma mark-提交
 -(void)subAction:(UIButton *)btn
 {
-    //    [[ToolManager sharedManager] createProgress:@"提交中"];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSDictionary *parameters=[self getparameters];
     NSDictionary *parameters1=[self getparameters1];
@@ -1113,11 +1103,9 @@
              [[ToolManager sharedManager] alertTitle_Simple:[dict objectForKey:@"message"]];
         }
 
-        [[ToolManager sharedManager] removeProgress];
-
     } failure:
      ^(AFHTTPRequestOperation *operation, NSError *error) {
-         [[ToolManager sharedManager] removeProgress];
+
      }];
 
 
@@ -1577,20 +1565,16 @@
             }
 
 //            }
-            [[ToolManager sharedManager] removeProgress];
         }else
         {
             data_dict=[[NSDictionary alloc] init];
             [[ToolManager sharedManager] alertTitle_Simple:[dict objectForKey:@"message"]];
-            [[ToolManager sharedManager] removeProgress];
-
         }
 
 
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错白色" Withtype:1]];
         JXLOG(@"Error: %@", error);
-        [[ToolManager sharedManager] removeProgress];
     }];
 
 }

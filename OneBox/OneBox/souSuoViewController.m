@@ -379,7 +379,6 @@
     {
         
     }
-    [[ToolManager sharedManager] removeProgress];
 }
 
 -(void)prepareData

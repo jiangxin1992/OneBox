@@ -341,7 +341,6 @@
     {
 
     }
-    [[ToolManager sharedManager] removeProgress];
 }
 //- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar
 //{

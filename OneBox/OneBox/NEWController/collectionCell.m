@@ -104,11 +104,8 @@ static void *EOCAlertViewKey = "EOCAlertViewKey";
                 {
 
                 }
-
-                [[ToolManager sharedManager] removeProgress];
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 [self.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错白色" Withtype:1]];
-                [[ToolManager sharedManager] removeProgress];
             }];
 
 
@@ -139,9 +136,6 @@ static void *EOCAlertViewKey = "EOCAlertViewKey";
                     NSString *html = operation.responseString;
                     NSData* data=[html dataUsingEncoding:NSUTF8StringEncoding];
                     NSDictionary *dict=[NSJSONSerialization  JSONObjectWithData:data options:0 error:nil];
-
-                    //        进行解析以后的操作
-//                    [self login_praise:data];
 
                 if([[dict objectForKey:@"code"] intValue]==1)
                 {

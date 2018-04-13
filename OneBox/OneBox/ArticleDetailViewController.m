@@ -606,8 +606,7 @@
             manager.responseSerializer = [AFHTTPResponseSerializer serializer];
             
             [manager POST:str parameters:para success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                //                JXLOG(@"%@",responseObject);
-                [regular removeProgress];
+
                 id res = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
                 JXLOG(@"%@",res);
                 if ([res[@"code"] integerValue] == 1) {
@@ -654,8 +653,6 @@
             manager.responseSerializer = [AFHTTPResponseSerializer serializer];
             
             [manager POST:str parameters:para success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                //                JXLOG(@"%@",responseObject);
-                [regular removeProgress];
                 id res = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
                 JXLOG(@"%@",res);
                 if ([res[@"code"] integerValue] == 1) {
@@ -838,11 +835,8 @@
                 [[ToolManager sharedManager] alertTitle_Simple:[dict objectForKey:@"message"]];
             }
             
-            [[ToolManager sharedManager] removeProgress];
-            
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错白色" Withtype:1]];
-            [[ToolManager sharedManager] removeProgress];
         }];
         
         
@@ -914,10 +908,8 @@
             {
                 [[ToolManager sharedManager] alertTitle_Simple:[dict objectForKey:@"message"]];
             }
-            [[ToolManager sharedManager] removeProgress];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错白色" Withtype:1]];
-            [[ToolManager sharedManager] removeProgress];
         }];
     }else
     {

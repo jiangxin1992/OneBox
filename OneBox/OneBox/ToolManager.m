@@ -390,6 +390,7 @@ static ToolManager *_t = nil;
     [KVNProgress showWithParameters:@{KVNProgressViewParameterStatus: title,
                                       KVNProgressViewParameterBackgroundType: @(KVNProgressBackgroundTypeSolid),
                                       KVNProgressViewParameterFullScreen: @(NO)}];
+//    [KVNProgress showSuccessWithStatus:@"Success"]; 这玩意是成功的
 }
 -(void)removeProgress
 {
@@ -479,11 +480,6 @@ static ToolManager *_t = nil;
     return navBtn;
 }
 
--(void)createSuccessProgress
-{
-    [KVNProgress showSuccessWithStatus:@"Success"];
-    
-}
 + (NSAttributedString *)createAttributeString:(NSString *)str andFloat:(NSNumber*)nsKern{
     NSAttributedString *attributedString =[[NSAttributedString alloc] initWithString:str attributes:@{NSKernAttributeName : nsKern}];
     return attributedString;

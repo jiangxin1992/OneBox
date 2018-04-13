@@ -139,7 +139,6 @@
         }
         [indicator startAnimation];
 
-        //        [[ToolManager sharedManager] createProgress:@"Loading..."];
     }
 
 
@@ -199,14 +198,8 @@
         {
              [[ToolManager sharedManager] alertTitle_Simple:[data_dict objectForKey:@"message"]];
         }
-
-
-//        [[ToolManager sharedManager] removeProgress];
-
-
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错白色" Withtype:1]];
-//        [[ToolManager sharedManager] removeProgress];
          [indicator stopAnimationWithLoadText:@"loading..." withType:YES];
     }];
 
@@ -657,7 +650,6 @@
         }
         //    删除
         chooseModel *model=_dataArray[index];
-//        [[ToolManager sharedManager] createProgress:@"删除中"];
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
 
         NSDictionary *parameters=@{@"token":[regular getToken]};
@@ -677,12 +669,9 @@
 
             }
 
-            [[ToolManager sharedManager] removeProgress];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错白色" Withtype:1]];
-            [[ToolManager sharedManager] removeProgress];
         }];
-        
     }
 
 }

@@ -193,14 +193,11 @@
             [[ToolManager sharedManager] alertTitle_Simple:[dict objectForKey:@"message"]];
 
         }
-
-        [[ToolManager sharedManager] removeProgress];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错白色" Withtype:1]];
         [_tableView.mj_header endRefreshing];
         [_tableView.mj_footer endRefreshing];
         JXLOG(@"Error: %@", error);
-        [[ToolManager sharedManager] removeProgress];
     }];
 
 }
@@ -248,13 +245,8 @@
             {
                 [[ToolManager sharedManager] alertTitle_Simple:[dict objectForKey:@"message"]];
             }
-
-            [[ToolManager sharedManager] removeProgress];
-
-
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错白色" Withtype:1]];
-            [[ToolManager sharedManager] removeProgress];
         }];
     }
 }

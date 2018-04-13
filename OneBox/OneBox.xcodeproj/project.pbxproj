@@ -194,7 +194,7 @@
 		53CD92561BEC840B0098E3FD /* CountryCodeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 53CD92541BEC840B0098E3FD /* CountryCodeCell.m */; };
 		53CE563E1AFF27FF00813C95 /* comment_model_alter.m in Sources */ = {isa = PBXBuildFile; fileRef = 53CE563D1AFF27FF00813C95 /* comment_model_alter.m */; };
 		53CF3DEE1B39005600BCD8DD /* SchoolDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 53CF3DEC1B39005600BCD8DD /* SchoolDetailViewController.m */; };
-		53D013DA1C0581CD0053F783 /* BoxViewController_new.m in Sources */ = {isa = PBXBuildFile; fileRef = 53D013D81C0581CD0053F783 /* BoxViewController_new.m */; };
+		53D013DA1C0581CD0053F783 /* BoxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 53D013D81C0581CD0053F783 /* BoxViewController.m */; };
 		53D166411C04496A001E73D5 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53D166401C04496A001E73D5 /* CoreData.framework */; };
 		53D419381BFEE8CC005B80A9 /* chooseForgetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 53D419361BFEE8CC005B80A9 /* chooseForgetViewController.m */; };
 		53D4193D1BFEE8DD005B80A9 /* chooseRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 53D4193B1BFEE8DD005B80A9 /* chooseRegisterViewController.m */; };
@@ -996,8 +996,8 @@
 		53CE563D1AFF27FF00813C95 /* comment_model_alter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = comment_model_alter.m; sourceTree = "<group>"; };
 		53CF3DEB1B39005600BCD8DD /* SchoolDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SchoolDetailViewController.h; sourceTree = "<group>"; };
 		53CF3DEC1B39005600BCD8DD /* SchoolDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SchoolDetailViewController.m; sourceTree = "<group>"; };
-		53D013D71C0581CD0053F783 /* BoxViewController_new.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoxViewController_new.h; sourceTree = "<group>"; };
-		53D013D81C0581CD0053F783 /* BoxViewController_new.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoxViewController_new.m; sourceTree = "<group>"; };
+		53D013D71C0581CD0053F783 /* BoxViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoxViewController.h; sourceTree = "<group>"; };
+		53D013D81C0581CD0053F783 /* BoxViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoxViewController.m; sourceTree = "<group>"; };
 		53D166401C04496A001E73D5 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		53D419351BFEE8CC005B80A9 /* chooseForgetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = chooseForgetViewController.h; sourceTree = "<group>"; };
 		53D419361BFEE8CC005B80A9 /* chooseForgetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = chooseForgetViewController.m; sourceTree = "<group>"; };
@@ -1804,6 +1804,37 @@
 				01C0DF303A3DAAD7CF87D24C /* libPods-OneBox.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3F32F43B2080AD6800FB3D04 /* 首页 */ = {
+			isa = PBXGroup;
+			children = (
+				53FBE1BA1C15886B00AB837A /* FoundViewController.h */,
+				53FBE1BB1C15886B00AB837A /* FoundViewController.m */,
+				3F32F43C2080AD6F00FB3D04 /* CustomView */,
+			);
+			name = "首页";
+			sourceTree = "<group>";
+		};
+		3F32F43C2080AD6F00FB3D04 /* CustomView */ = {
+			isa = PBXGroup;
+			children = (
+				3F32F438207F34D500FB3D04 /* FoundListScreenCityView.h */,
+				3F32F439207F34D500FB3D04 /* FoundListScreenCityView.m */,
+				3F32F435207DB46600FB3D04 /* FoundListScreenStateView.h */,
+				3F32F436207DB46600FB3D04 /* FoundListScreenStateView.m */,
+				3F32F432207B48E500FB3D04 /* FoundListScreenMainView.h */,
+				3F32F433207B48E500FB3D04 /* FoundListScreenMainView.m */,
+				3F32F42F207B133A00FB3D04 /* FoundListScreenView.h */,
+				3F32F430207B133A00FB3D04 /* FoundListScreenView.m */,
+				3F32F42C207B034600FB3D04 /* FoundListBangdanView.h */,
+				3F32F42D207B034600FB3D04 /* FoundListBangdanView.m */,
+				3F32F429207A206E00FB3D04 /* FoundListSousuoView.h */,
+				3F32F42A207A206E00FB3D04 /* FoundListSousuoView.m */,
+				3F32F426207A04B600FB3D04 /* FoundListTableHeaderView.h */,
+				3F32F427207A04B600FB3D04 /* FoundListTableHeaderView.m */,
+			);
+			name = CustomView;
 			sourceTree = "<group>";
 		};
 		3F90A8371E52D7AA00DBEF1A /* Category */ = {
@@ -2952,8 +2983,8 @@
 				3FF87DD92062628600E7A451 /* BoxHelpViewController.m */,
 				53947F671C5722B9007C5A28 /* Boxlistviewcontroller.h */,
 				53947F681C5722B9007C5A28 /* Boxlistviewcontroller.m */,
-				53D013D71C0581CD0053F783 /* BoxViewController_new.h */,
-				53D013D81C0581CD0053F783 /* BoxViewController_new.m */,
+				53D013D71C0581CD0053F783 /* BoxViewController.h */,
+				53D013D81C0581CD0053F783 /* BoxViewController.m */,
 				537F1D081C18376900331419 /* 飞赴美国 */,
 				537F1D071C18375000331419 /* 签证去 */,
 				536731F11B0B1193008B29DD /* 申请进度 */,
@@ -2965,22 +2996,7 @@
 		53B5377F1A7F4ACB0095C129 /* Found */ = {
 			isa = PBXGroup;
 			children = (
-				3F32F438207F34D500FB3D04 /* FoundListScreenCityView.h */,
-				3F32F439207F34D500FB3D04 /* FoundListScreenCityView.m */,
-				3F32F435207DB46600FB3D04 /* FoundListScreenStateView.h */,
-				3F32F436207DB46600FB3D04 /* FoundListScreenStateView.m */,
-				3F32F432207B48E500FB3D04 /* FoundListScreenMainView.h */,
-				3F32F433207B48E500FB3D04 /* FoundListScreenMainView.m */,
-				3F32F42F207B133A00FB3D04 /* FoundListScreenView.h */,
-				3F32F430207B133A00FB3D04 /* FoundListScreenView.m */,
-				3F32F42C207B034600FB3D04 /* FoundListBangdanView.h */,
-				3F32F42D207B034600FB3D04 /* FoundListBangdanView.m */,
-				3F32F429207A206E00FB3D04 /* FoundListSousuoView.h */,
-				3F32F42A207A206E00FB3D04 /* FoundListSousuoView.m */,
-				3F32F426207A04B600FB3D04 /* FoundListTableHeaderView.h */,
-				3F32F427207A04B600FB3D04 /* FoundListTableHeaderView.m */,
-				53FBE1BA1C15886B00AB837A /* FoundViewController.h */,
-				53FBE1BB1C15886B00AB837A /* FoundViewController.m */,
+				3F32F43B2080AD6800FB3D04 /* 首页 */,
 				53B61BBC1C461B8300561AED /* 在线专案 */,
 				537F1D281C19260A00331419 /* 跳转视图 */,
 				536F2D5C1AC4657A00A33DEA /* cell */,
@@ -5229,7 +5245,7 @@
 				66C7323D1AC2AA5B002BCBB9 /* ToolManager.m in Sources */,
 				53D4193D1BFEE8DD005B80A9 /* chooseRegisterViewController.m in Sources */,
 				5323AFC31BD7883800F353C6 /* personinfoViewController.m in Sources */,
-				53D013DA1C0581CD0053F783 /* BoxViewController_new.m in Sources */,
+				53D013DA1C0581CD0053F783 /* BoxViewController.m in Sources */,
 				53F975F21BB29501004FC0B7 /* PSTCollectionViewController.m in Sources */,
 				53F976E51BB295F7004FC0B7 /* usermodel.m in Sources */,
 				53F976DE1BB295B4004FC0B7 /* ChatMainViewController.m in Sources */,

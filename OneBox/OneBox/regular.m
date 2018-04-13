@@ -566,18 +566,6 @@ static regular *_t = nil;
     return view;
 }
 
-
-
-+(void)createProgress:(NSString *)title
-{
-    [KVNProgress showWithParameters:@{KVNProgressViewParameterStatus: title,
-                                      KVNProgressViewParameterBackgroundType: @(KVNProgressBackgroundTypeSolid),
-                                      KVNProgressViewParameterFullScreen: @(NO)}];
-}
-+(void)removeProgress
-{
-    [KVNProgress dismiss];
-}
 +(UIView *)returnNavView:(NSString *)title withmaxwidth:(CGFloat )maxwidth
 {
 
@@ -669,11 +657,6 @@ static regular *_t = nil;
     return navBtn;
 }
 
-+(void)createSuccessProgress
-{
-    [KVNProgress showSuccessWithStatus:@"Success"];
-
-}
 + (UITextField *)createTextField:(CGRect)rect withReturnKeyType: (UIReturnKeyType) returnKeyType textColor: (UIColor *) textColor font: (UIFont *) font textAlignment: (NSTextAlignment) textAlignment toDelegate: (UIViewController<UITextFieldDelegate> *) delegate
                              tag: (NSInteger) tag
 
@@ -690,91 +673,6 @@ static regular *_t = nil;
     
     //    text.backgroundColor = [UIColor blackColor];
     return text;
-}
-
-//+ (void)checkLogin
-//{
-//    if([regular isLogin]){
-////        [regular createProgress:@"登录中"];
-//
-//        //    判断格式是否正确
-//        //    请求url
-//        NSString *str=[NSString stringWithFormat:@"%@/v1/users/login",DNS];
-//        NSURL *url = [NSURL URLWithString:[str stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-//        //    创建可变request
-//        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:5];
-//        //    设定请求类型未post
-//        [request setHTTPMethod:@"POST"];
-//        //    创建包体
-//        NSString *bodyStr=[[NSString alloc] initWithFormat:@"cell=%@&password=%@",[[NSUserDefaults standardUserDefaults]objectForKey:@"tel"],[[NSUserDefaults standardUserDefaults] objectForKey:@"password"]];
-//        //    加入包体
-//        request.HTTPBody=[bodyStr dataUsingEncoding:NSUTF8StringEncoding];
-//
-//        AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-//
-//        //    进行网络请求（AF框架）
-//        [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-////            [regular removeProgress];
-//            if(!operation.response)
-//            {
-//                [self presentViewController:[regular alertTitle_Simple:@"请查收你的邮箱"] animated:YES completion:nil];
-//            }else
-//            {
-//                NSString *html = operation.responseString;
-//                NSData* data=[html dataUsingEncoding:NSUTF8StringEncoding];
-//                //        进行解析以后的操作
-////                [self login_praise:data];
-//                id res = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-//                [[NSUserDefaults standardUserDefaults] setObject:res[@"data"][@"token"] forKey:@"token"];
-//                JXLOG(@"token%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"token"]);
-//
-//
-//            }
-//
-//        }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//            //        下载失败时，打印错误信息
-//            JXLOG(@"发生错误！%@",error);
-////            [regular removeProgress];
-//        }];
-//
-//        NSOperationQueue *queue = [[NSOperationQueue alloc] init];
-//        [queue addOperation:operation];
-//
-//    NSUserDefaults *defaults =[NSUserDefaults standardUserDefaults];
-//    //将islogin存入defaults中
-//    NSNumber *islogin=[[NSNumber alloc]initWithInt:1];
-//    [defaults setObject:islogin forKey:@"islogin"];
-//
-//    [[NSNotificationCenter defaultCenter] postNotificationName:@"updateImg" object:nil];
-//        [[NSNotificationCenter defaultCenter] postNotificationName:@"islogin" object:nil];}
-//
-//}
--(void)login_praise:(NSData *)data
-{
-
-
-    //    json解析
-    NSDictionary *dict=[NSJSONSerialization  JSONObjectWithData:data options:0 error:nil];
-    //    获取返回的dict中的state的值
-    //    0:成功
-    //    1:账号或者密码不能为空
-    //    2:账号或者密码错误
-    //    3:账号不存在
-    int state=[[dict objectForKey:@"code"] intValue];
-
-    if(state == 1)
-    {
-        //        登陆成功
-        //        登陆成功调用的方法
-        //        [self login_success:dict];
-
-    }
-    else
-    {
-        [regular alertTitle_Simple_OLD:[dict objectForKey:@"message"]];
-        [regular removeProgress];
-    }
-
 }
 
 @end

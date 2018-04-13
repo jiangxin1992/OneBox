@@ -1,12 +1,12 @@
 //
-//  BoxViewController_new.m
+//  BoxViewController.m
 //  OneBox
 //
 //  Created by 谢江新 on 15/11/25.
 //  Copyright © 2015年 谢江新. All rights reserved.
 //
 
-#import "BoxViewController_new.h"
+#import "BoxViewController.h"
 
 #import "GifView.h"
 #import "DataSigner.h"
@@ -36,7 +36,7 @@
 #define _yellowColor [UIColor colorWithRed:245.0f/255.0f green:186.0f/255.0f blue:0 alpha:1]
 #define _grayColor [UIColor colorWithRed:224.0f/255.0f green:224.0f/255.0f blue:224.0f/255.0f alpha:1]
 
-@interface BoxViewController_new ()<MFMailComposeViewControllerDelegate>
+@interface BoxViewController ()<MFMailComposeViewControllerDelegate>
 {
     NSInteger _step;
     NSMutableArray *arrayRCUser;
@@ -50,7 +50,7 @@
 
 @end
 
-@implementation BoxViewController_new
+@implementation BoxViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

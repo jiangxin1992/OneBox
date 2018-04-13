@@ -78,7 +78,6 @@
 
             [manager POST:str parameters:para success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 //                JXLOG(@"%@",responseObject);
-                [regular removeProgress];
                 id res = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
                 JXLOG(@"%@",res);
                 if ([res[@"code"] integerValue] == 1) {
@@ -89,9 +88,6 @@
 
                  [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错白色" Withtype:1]];
             }];
-
-
-
         }else
         {
             [ArrayData removeObjectAtIndex:_rownum];
@@ -126,8 +122,6 @@
             manager.responseSerializer = [AFHTTPResponseSerializer serializer];
 
             [manager POST:str parameters:para success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                //                JXLOG(@"%@",responseObject);
-                [regular removeProgress];
                 id res = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
                 JXLOG(@"%@",res);
                 if ([res[@"code"] integerValue] == 1) {
@@ -429,8 +423,6 @@
             manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     
             [manager POST:str parameters:para success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                //                JXLOG(@"%@",responseObject);
-                [regular removeProgress];
                 id res = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
                 JXLOG(@"%@",res);
                 if ([res[@"code"] integerValue] == 1) {

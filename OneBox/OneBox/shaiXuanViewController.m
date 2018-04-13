@@ -508,7 +508,6 @@
     {
         
     }
-    [[ToolManager sharedManager] removeProgress];
 }
 #pragma mark-----------------SomeDelegate----------------
 #pragma mark---SearchBarDelegate---

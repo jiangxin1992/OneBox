@@ -363,12 +363,10 @@
 
         //        请求成功后的处理
         _blockSuccess((NSDictionary *)responseObject);
-        [[ToolManager sharedManager] removeProgress];
 
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [_tableView.mj_header endRefreshing];
         [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错白色" Withtype:1]];
-        [[ToolManager sharedManager] removeProgress];
     }];
 }
 
@@ -472,51 +470,39 @@
         foundModel_new *model = [_arrayData objectAtIndex:indexPath.row];
         if(model.m_type != nil)
         {
-
             if([model.m_type isEqualToString:@"rank"])
             {
-                //                当cell类型为榜单时候
-                if([model.data objectForKey:@"rank_name"] != nil)
+                //当cell类型为榜单时候
+                if(![NSString isNilOrEmpty:[model.data objectForKey:@"rank_name"]])
                 {
-                    //                    判断点击cell榜单类型
+                    //判断点击cell榜单类型
                     if([[model.data objectForKey:@"rank_name"] isKindOfClass:[NSString class]])
                     {
                         if([[model.data objectForKey:@"rank_name"] isEqualToString:@"niche"])
                         {
-                            bangdanViewController *bangdan = [[bangdanViewController alloc] init];
-                            bangdan.type = 1;
-                            [self.navigationController pushViewController:bangdan animated:YES];
+                            [self bangdanAction:@"bangdan_niche"];
                         }else if([[model.data objectForKey:@"rank_name"] isEqualToString:@"insider"])
                         {
-                            bangdanViewController *bangdan = [[bangdanViewController alloc] init];
-                            bangdan.type = 2;
-                            [self.navigationController pushViewController:bangdan animated:YES];
+                            [self bangdanAction:@"bangdan_business_insider"];
                         }else if([[model.data objectForKey:@"rank_name"] isEqualToString:@"blue_ribbon"])
                         {
-                            bangdanViewController *bangdan = [[bangdanViewController alloc] init];
-                            bangdan.type = 4;
-                            [self.navigationController pushViewController:bangdan animated:YES];
+                            [self bangdanAction:@"bangdan_blueribbon"];
                         }else if([[model.data objectForKey:@"rank_name"] isEqualToString:@"day"]||[[model.data objectForKey:@"rank_name"] isEqualToString:@"boarding"])
                         {
-                            [self.navigationController pushViewController:[bangdanlistViewController new] animated:YES];
+                            [self bangdanAction:@"bangdan_prep_review"];
                         }
                     }
                 }
+
             }else if([model.m_type isEqualToString:@"school"])
             {
                 //当当前cell类型为school时候
                 BOOL _canpush = NO;//判断当前时候满足跳转条件（及schoolID不为空）
                 NSString *schoolname = nil;
                 NSString *schoolid = nil;
-                if([model.data objectForKey:@"school_name_cn"] != [NSNull null])
+                if(![NSString isNilOrEmpty:[model.data objectForKey:@"school_name_cn"]])
                 {
-                    if([model.data objectForKey:@"school_name_cn"] != nil)
-                    {
-                        schoolname = [model.data objectForKey:@"school_name_cn"];
-                    }else
-                    {
-                        schoolname = @"";
-                    }
+                    schoolname = [model.data objectForKey:@"school_name_cn"];
                 }else
                 {
                     schoolname = @"";
@@ -539,7 +525,6 @@
 
                 if(_canpush)
                 {
-
                     SchoolDetailViewController *schoolView = [[SchoolDetailViewController alloc] init];
                     schoolView.data_dict = [[NSDictionary alloc] initWithObjectsAndKeys:schoolname,@"schoolName",schoolid,@"schoolID",nil];
                     [self.navigationController pushViewController:schoolView animated:YES];

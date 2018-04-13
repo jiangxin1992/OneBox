@@ -66,7 +66,6 @@
         [indicator setLoadText:@"loading..."];
     }
     [indicator startAnimation];
-//    [regular createProgress:@"加载中..."];
     [self getData];
     [self getmustData];
 
@@ -103,30 +102,22 @@
             }
         }else
         {
-//            [regular removeProgress];
              [indicator stopAnimationWithLoadText:@"loading..." withType:YES];
              [[ToolManager sharedManager] alertTitle_Simple:[dict objectForKey:@"message"]];
         }
 
-
-
-//        [[ToolManager sharedManager] removeProgress];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        [[ToolManager sharedManager] removeProgress];
         if(isshow==NO)
         {
             [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错白色" Withtype:1]];
             isshow=YES;
 
         }
-//        [regular removeProgress];
          [indicator stopAnimationWithLoadText:@"loading..." withType:YES];
     }];
 }
 -(void)getData
 {
-
-//    [[ToolManager sharedManager] createProgress:@"加载中"];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
     NSDictionary *parameters=@{@"token":[regular getToken]};
@@ -148,14 +139,10 @@
             if(request_count==2)
             {
                 [self UIConfig];
-//                [regular removeProgress];
-                 [indicator stopAnimationWithLoadText:@"loading..." withType:YES];
+                [indicator stopAnimationWithLoadText:@"loading..." withType:YES];
             }
         }else
         {
-
-
-//             [regular removeProgress];
              [indicator stopAnimationWithLoadText:@"loading..." withType:YES];
              [[ToolManager sharedManager] alertTitle_Simple:[data_dict objectForKey:@"message"]];
         }
@@ -169,10 +156,7 @@
             isshow=YES;
 
         }
-
-//         [regular removeProgress];
          [indicator stopAnimationWithLoadText:@"loading..." withType:YES];
-//        [[ToolManager sharedManager] removeProgress];
     }];
     
 }
@@ -274,11 +258,9 @@
             {
                [[ToolManager sharedManager] alertTitle_Simple:[dict objectForKey:@"message"]];
             }
-            [[ToolManager sharedManager] removeProgress];
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错白色" Withtype:1]];
-            [[ToolManager sharedManager] removeProgress];
         }];
 
 
@@ -749,11 +731,8 @@
         {
              [[ToolManager sharedManager] alertTitle_Simple:[dict objectForKey:@"message"]];
         }
-        [[ToolManager sharedManager] removeProgress];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错白色" Withtype:1]];
-        [[ToolManager sharedManager] removeProgress];
-
     }];
 
     

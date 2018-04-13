@@ -248,8 +248,6 @@ static void *EOCAlertViewKey = "EOCAlertViewKey";
                 _image_url=imageurl;
             }
             [defaults setObject:[[NSDictionary alloc] initWithObjectsAndKeys:_image_type,@"type",_image_url,@"image",nil] forKey:@"userImageurl"];
-            //                [[ToolManager sharedManager] createSuccessProgress];
-
 
             [[NSNotificationCenter defaultCenter] postNotificationName:@"updateImg" object:[[NSDictionary alloc] initWithObjectsAndKeys:((UITextField *)[self.view viewWithTag:100]).text,@"name",info.area,@"loc",((UITextField *)[self.view viewWithTag:102]).text,@"sign", nil]];
 
@@ -916,12 +914,9 @@ static void *EOCAlertViewKey = "EOCAlertViewKey";
             {
                  [[ToolManager sharedManager] alertTitle_Simple:[dict objectForKey:@"message"]];
             }
-            [[ToolManager sharedManager] removeProgress];
 
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             JXLOG(@"失败");
-
-            [[ToolManager sharedManager] removeProgress];
             [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错白色" Withtype:1]];
         }];
         

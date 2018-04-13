@@ -245,7 +245,6 @@
             {
                 [indicator stopAnimationWithLoadText:@"loading..." withType:YES];
             }
-//            [regular removeProgress];
 
             NSArray *dataarr=(NSArray *)[dict objectForKey:@"data"];
             for (int i=0; i<dataarr.count; i++) {
@@ -399,7 +398,6 @@
             isshow=YES;
 
         }
-//        [regular removeProgress];
         [indicator stopAnimationWithLoadText:@"loading..." withType:YES];
 
     }];
@@ -419,14 +417,11 @@
             requestnum++;
             if(requestnum==2)
             {
-//                [regular removeProgress];
                 [indicator stopAnimationWithLoadText:@"loading..." withType:YES];
-
             }
 
         }else
         {
-//                [regular removeProgress];
             [indicator stopAnimationWithLoadText:@"loading..." withType:YES];
         }
         NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
@@ -501,7 +496,6 @@
             isshow=YES;
 
         }
-//        [regular removeProgress];
         [indicator stopAnimationWithLoadText:@"loading..." withType:YES];
         JXLOG(@"失败");
     }];

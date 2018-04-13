@@ -101,7 +101,6 @@
 
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错白色" Withtype:1]];
-        [[ToolManager sharedManager] removeProgress];
     }];
 }
 -(UIView *)createCardView:(usermodel *)model WithTag:(NSInteger )tag

@@ -79,7 +79,6 @@
             requestnum++;
             if(requestnum==3)
             {
-//                [regular removeProgress];
                 [indicator stopAnimationWithLoadText:@"loading..." withType:YES];
             }
         }else
@@ -96,7 +95,6 @@
             isshow=YES;
 
         }
-//        [regular removeProgress];
         [indicator stopAnimationWithLoadText:@"loading..." withType:YES];
         JXLOG(@"失败");
     }];
@@ -118,7 +116,6 @@
                 requestnum++;
                 if(requestnum==3)
                 {
-//                    [regular removeProgress];
                     [indicator stopAnimationWithLoadText:@"loading..." withType:YES];
                 }
 
@@ -168,11 +165,9 @@
             }
         }else
         {
-//            [regular removeProgress];
             [indicator stopAnimationWithLoadText:@"loading..." withType:YES];
              [[ToolManager sharedManager] alertTitle_Simple:[dict objectForKey:@"message"]];
         }
-        [[ToolManager sharedManager] removeProgress];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if(isshow==NO)
         {
@@ -180,9 +175,7 @@
             isshow=YES;
 
         }
-//        [regular removeProgress];
         [indicator stopAnimationWithLoadText:@"loading..." withType:YES];
-//        [[ToolManager sharedManager] removeProgress];
     }];
 }
 -(void)submitcailiao:(UIButton *)btn
@@ -268,12 +261,9 @@
 
             [[ToolManager sharedManager] alertTitle_Simple:[dict objectForKey:@"message"]];
         }
-        [[ToolManager sharedManager] removeProgress];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错白色" Withtype:1]];
-        
-        [[ToolManager sharedManager] removeProgress];
     }];
 }
 
@@ -486,7 +476,6 @@
     }
     [indicator startAnimation];
 
-//    [regular createProgress:@"加载中..."];
     [self requestStepData];
     [self getmustData];
     [self requestTimeData];
@@ -509,12 +498,10 @@
             requestnum++;
             if(requestnum==3)
             {
-//                [regular removeProgress];
                 [indicator stopAnimationWithLoadText:@"loading..." withType:YES];
             }
         }else
         {
-//            [regular removeProgress];
             [indicator stopAnimationWithLoadText:@"loading..." withType:YES];
         }
 #pragma mark-不为null值的时候
@@ -593,7 +580,6 @@
             isshow=YES;
 
         }
-//        [regular removeProgress];
         [indicator stopAnimationWithLoadText:@"loading..." withType:YES];
         JXLOG(@"失败");
     }];

@@ -421,7 +421,6 @@
         }
 
         [indicator stopAnimationWithLoadText:@"loading..." withType:YES];
-//        [regular removeProgress];
     }];
     
 }
@@ -1792,10 +1791,8 @@
                      [[ToolManager sharedManager] alertTitle_Simple:[dict objectForKey:@"message"]];
                 }
 
-                [[ToolManager sharedManager] removeProgress];
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错白色" Withtype:1]];
-                [[ToolManager sharedManager] removeProgress];
             }];
 
 
@@ -1848,7 +1845,6 @@
                 [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错白色" Withtype:1]];
                 //        下载失败时，打印错误信息
 //                JXLOG(@"发生错误！%@",error);
-                [regular removeProgress];
             }];
             
             NSOperationQueue *queue = [[NSOperationQueue alloc] init];
@@ -4455,11 +4451,8 @@
                  [[ToolManager sharedManager] alertTitle_Simple:[dict objectForKey:@"message"]];
             }
 
-            [[ToolManager sharedManager] removeProgress];
-
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错白色" Withtype:1]];
-            [[ToolManager sharedManager] removeProgress];
         }];
 
 
@@ -4528,11 +4521,8 @@
                  [[ToolManager sharedManager] alertTitle_Simple:[dict objectForKey:@"message"]];
             }
 
-            [[ToolManager sharedManager] removeProgress];
-
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错白色" Withtype:1]];
-            [[ToolManager sharedManager] removeProgress];
         }];
 
 
@@ -4882,7 +4872,6 @@
 -(void)SubmitStarnum
 {
     [[self.view.window viewWithTag:8000] removeFromSuperview];
-    [[ToolManager sharedManager] removeProgress];
     if(!_ispingfen)
     {
         ((UIButton *)[self.view viewWithTag:7000]).selected=YES;
@@ -4957,7 +4946,6 @@
 
         [[self.view.window viewWithTag:8000] removeFromSuperview];
         [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错白色" Withtype:1]];
-        [[ToolManager sharedManager] removeProgress];
     }];
 
 }

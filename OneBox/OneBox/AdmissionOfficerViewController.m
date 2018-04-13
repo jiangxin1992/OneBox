@@ -140,7 +140,6 @@
 
             [manager POST:str parameters:para success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 //                JXLOG(@"%@",responseObject);
-                [regular removeProgress];
                 id res = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
                 JXLOG(@"%@",res);
                 if ([res[@"code"] integerValue] == 1) {
@@ -190,7 +189,6 @@
 
             [manager POST:str parameters:para success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 //                JXLOG(@"%@",responseObject);
-                [regular removeProgress];
                 id res = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
                 JXLOG(@"%@",res);
                 if ([res[@"code"] integerValue] == 1) {
@@ -385,7 +383,6 @@
 
                 [manager POST:str parameters:para success:^(AFHTTPRequestOperation *operation, id responseObject) {
                     //                JXLOG(@"%@",responseObject);
-                    [regular removeProgress];
                     id res = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
                     JXLOG(@"%@",res);
                     if ([res[@"code"] integerValue] == 1) {
@@ -419,7 +416,6 @@
 
                 [manager POST:str parameters:para success:^(AFHTTPRequestOperation *operation, id responseObject) {
                     //                JXLOG(@"%@",responseObject);
-                    [regular removeProgress];
                     id res = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
                     JXLOG(@"%@",res);
                     if ([res[@"code"] integerValue] == 1) {
@@ -501,7 +497,6 @@
 
             [manager POST:str parameters:para success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 //                JXLOG(@"%@",responseObject);
-                [regular removeProgress];
                 id res = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
                 JXLOG(@"%@",res);
                 if ([res[@"code"] integerValue] == 1) {

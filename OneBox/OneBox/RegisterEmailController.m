@@ -274,7 +274,6 @@
 
     }else  if([textfield_nickname.text isEqualToString:@""])
     {
-        [regular removeProgress];
         alertView.message=@"用户名不能为空";
         [alertView show];
     }
@@ -285,7 +284,7 @@
     else
     {
 
-        [regular createProgress:@"注册中..."];
+        [[ToolManager sharedManager] createProgress:@"注册中..."];
 
         NSURL *url=[NSURL URLWithString:[[NSString alloc] initWithFormat:@"%@/v1/users/register",DNS]];
 
@@ -314,12 +313,10 @@
                 //        进行解析以后的操作
             [self login_praise:data];
 
-
-
         }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             //        下载失败时，打印错误信息
             JXLOG(@"发生错误！%@",error);
-            [regular removeProgress];
+            [[ToolManager sharedManager] removeProgress];
         }];
         
         NSOperationQueue *queue = [[NSOperationQueue alloc] init];
@@ -364,7 +361,7 @@
 
         }
 
-        [regular removeProgress];
+        [[ToolManager sharedManager] removeProgress];
 #pragma mark-发通知刷新发现美校
         [[NSNotificationCenter defaultCenter] postNotificationName:@"changeFound" object:nil];
         
@@ -428,7 +425,7 @@
             [defaults setObject:[[NSDictionary alloc] initWithObjectsAndKeys:_image_type,@"type",_image_url,@"image",nil] forKey:@"userImageurl"];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"updateImg" object:nil];
             //    保存后隐藏进度条
-            [regular removeProgress];
+            [[ToolManager sharedManager] removeProgress];
 
             [self.navigationController setNavigationBarHidden:NO animated:NO];
 //            [[UIApplication sharedApplication] setStatusBarHidden:NO];
@@ -455,7 +452,7 @@
 
     }else
     {
-        [regular removeProgress];
+        [[ToolManager sharedManager] removeProgress];
         
         UIAlertView *alertview=[regular alertTitle_Simple_OLD:[dict objectForKey:@"message"]];
         alertview.delegate=self;

@@ -291,7 +291,6 @@ static void *EOCAlertViewKey = "EOCAlertViewKey";
             parameters=@{@"userinfo":user.rawData,@"uid": user.uid,@"provider":provide,@"token":[regular getToken]};
             
             [manager POST:[[NSString alloc] initWithFormat:@"%@/v1/users/auth_bind",DNS] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject)  {
-                [[ToolManager sharedManager] removeProgress];
                 
                 NSString *html = operation.responseString;
                 NSData* data=[html dataUsingEncoding:NSUTF8StringEncoding];
@@ -331,11 +330,9 @@ static void *EOCAlertViewKey = "EOCAlertViewKey";
                 }else
                 {
                     [[ToolManager sharedManager] alertTitle_Simple:[dict objectForKey:@"message"]];
-                    [[ToolManager sharedManager] removeProgress];
                 }
                 
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                //                [[ToolManager sharedManager] removeProgress];
                 [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错白色" Withtype:1]];
             }];
         }

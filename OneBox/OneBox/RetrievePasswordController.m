@@ -351,8 +351,6 @@
         [[ToolManager sharedManager] alertTitle_Simple:@"请输入手机号"];
     }else  if([self validatePhonenum:textfield_email.text])
     {
-
-//        [[ToolManager sharedManager] createProgress:@"发送中"];
         NSString *urltitle=nil;
         if([_type1 isEqualToString:@"register"])
         {
@@ -402,14 +400,10 @@
             {
                 [[ToolManager sharedManager] alertTitle_Simple:[dict objectForKey:@"message"]];
             }
-
-            [[ToolManager sharedManager] removeProgress];
         }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             //        下载失败时，打印错误信息
 //            JXLOG(@"发生错误！%@",error);
             [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错蓝色" Withtype:2]];
-
-            [[ToolManager sharedManager] removeProgress];
         }];
         
         NSOperationQueue *queue = [[NSOperationQueue alloc] init];
@@ -458,7 +452,6 @@
             urltitle=[[NSString alloc] initWithFormat:@"%@/v1/users/update_password",DNS];
         }
 
-//        [regular createProgress:@"验证中"];
         NSURL *url=[NSURL URLWithString:urltitle];
         NSMutableURLRequest *request=[[NSMutableURLRequest alloc] initWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
         [request setHTTPMethod:@"POST"];
@@ -484,7 +477,6 @@
             if([[dict objectForKey:@"code"] intValue]==1)
             {
                 //跳转到输入重置密码界面
-                [regular removeProgress];
 
                 if([_type1 isEqualToString:@"register"])
                 {
@@ -505,7 +497,6 @@
                 }
             }else
             {
-                [regular removeProgress];
                 [[ToolManager sharedManager] alertTitle_Simple:[dict objectForKey:@"message"]];
             }
 
@@ -513,8 +504,6 @@
         }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             //        下载失败时，打印错误信息
             [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错蓝色" Withtype:2]];
-            [regular removeProgress];
-
         }];
 
         NSOperationQueue *queue = [[NSOperationQueue alloc] init];
@@ -528,31 +517,6 @@
 
 }
 
--(void)login_praise:(NSData *)data
-{
-    [regular removeProgress];
-    NSDictionary *dict=[NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-    NSString *str1=[dict objectForKey:@"state"];
-    if([str1 isEqualToString:@"0"])
-    {
-//        [regular createSuccessProgress];
-
-    }
-    else if([str1 isEqualToString:@"1"])
-    {
-        [self presentViewController:[regular alertTitle_Simple:@"邮箱格式错误"] animated:YES completion:nil];
-
-    }
-    else if([str1 isEqualToString:@"2"])
-    {
-        [self presentViewController:[regular alertTitle_Simple:@"邮箱未使用"] animated:YES completion:nil];
-    }
-    else
-    {
-        [self presentViewController:[regular alertTitle_Simple:@"请求次数过多，请24小时后再次尝试"] animated:YES completion:nil];
-    }
-
-}
 //email格式验证函数
 - (BOOL) validateEmail: (NSString *) candidate {
     NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";

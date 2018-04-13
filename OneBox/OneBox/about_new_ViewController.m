@@ -248,8 +248,6 @@ static void *EOCAlertViewKey = "EOCAlertViewKey";
      [[NSNotificationCenter defaultCenter]postNotificationName:@"nonotification" object:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"getmessage" object:nil];
 
-    [regular removeProgress];
-
     [self.navigationController popToRootViewControllerAnimated:YES];
 
 }

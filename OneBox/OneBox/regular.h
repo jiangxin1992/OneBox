@@ -220,14 +220,10 @@
 + (UIView *)createView:(CGRect )rect WithColor:(UIColor *)_color;
 + (UILabel *)createLabelView:(NSString *)title Withrect:(CGRect )rect WithTextColor:(UIColor *)_color WithTextAlignment:(NSInteger) type WithFont:(CGFloat )_font;
 
-+ (void)createProgress:(NSString *)title;
-+ (void)createSuccessProgress;
-+  (void)removeProgress;
 + (UIView *)returnNavView:(NSString *)title withmaxwidth:(CGFloat )maxwidth;
 
 + (UIButton *)CustomButtonWithFrame:(CGRect )rect;
 
 + (UITextField *)createTextField:(CGRect)rect withReturnKeyType: (UIReturnKeyType) returnKeyType textColor: (UIColor *) textColor font: (UIFont *) font textAlignment: (NSTextAlignment) textAlignment toDelegate: (UIViewController<UITextFieldDelegate> *) delegate tag: (NSInteger) tag;
 
-//+ (void)checkLogin;
 @end

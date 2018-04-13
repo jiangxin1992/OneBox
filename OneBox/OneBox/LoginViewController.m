@@ -305,7 +305,7 @@
     {
         if (state == SSDKResponseStateSuccess)
         {
-            [regular createProgress:@"登录中"];
+            [[ToolManager sharedManager] createProgress:@"登录中"];
             
             AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
             //获取请求参数
@@ -324,13 +324,12 @@
                 }else
                 {
                     [[ToolManager sharedManager] alertTitle_Simple:[dict objectForKey:@"message"]];
-                    [[ToolManager sharedManager] removeProgress];
                 }
                 
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 
                 [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错蓝色" Withtype:2]];
-                [regular removeProgress];
+                [[ToolManager sharedManager] removeProgress];
             }];
         }else{
             if(error)
@@ -363,7 +362,7 @@
 -(void)loginAction:(NSString *)key
 {
     //  创建进度条，并给标题
-    [regular createProgress:@"登录中"];
+    [[ToolManager sharedManager] createProgress:@"登录中"];
 
     //    判断格式是否正确
     //    请求url
@@ -382,7 +381,7 @@
 
     //    进行网络请求（AF框架）
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-        [regular removeProgress];
+        [[ToolManager sharedManager] removeProgress];
         NSString *html = operation.responseString;
         NSData* data=[html dataUsingEncoding:NSUTF8StringEncoding];
         NSDictionary *dict=[NSJSONSerialization  JSONObjectWithData:data options:0 error:nil];
@@ -401,7 +400,7 @@
 
         [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错蓝色" Withtype:2]];
 
-        [regular removeProgress];
+        [[ToolManager sharedManager] removeProgress];
     }];
 
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
@@ -430,7 +429,7 @@
     else
     {
         [[ToolManager sharedManager] alertTitle_Simple:[dict objectForKey:@"message"]];
-        [regular removeProgress];
+        [[ToolManager sharedManager] removeProgress];
     }
 }
 
@@ -516,7 +515,7 @@
     [defaults setObject:[[NSDictionary alloc] initWithObjectsAndKeys:_image_type,@"type",_image_url,@"image",nil] forKey:@"userImageurl"];
    
     //    保存后隐藏进度条
-    [regular removeProgress];
+    [[ToolManager sharedManager] removeProgress];
     [regular registerGeTui];
     [self.navigationController setNavigationBarHidden:NO animated:NO];
     NSString * _deviceToken=[[NSUserDefaults standardUserDefaults] objectForKey:@"deviceToken"];

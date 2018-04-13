@@ -667,24 +667,6 @@ static void *EOCAlertViewKey = "EOCAlertViewKey";
 {
 [[self.view.window viewWithTag:878] removeFromSuperview];
 }
--(void)login_praise:(NSData *)data
-{
-    
-    
-    NSNumber *islogin=[[NSNumber alloc]initWithInt:0];
-    NSUserDefaults *defaults =[NSUserDefaults standardUserDefaults];
-    [defaults setObject:islogin forKey:@"islogin"];
-    [defaults setObject:nil forKey:@"username"];
-    [defaults setObject:nil forKey:@"password"];
-    [defaults setObject:islogin forKey:@"islogin"];
-    [defaults setObject:nil forKey:@"uid"];
-    [defaults setObject:nil forKey:@"userImage"];
-    [defaults setObject:nil forKey:@""];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"loginout" object:nil];
-    [regular removeProgress];
-    [self.navigationController popToRootViewControllerAnimated:YES];
-    
-}
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
@@ -1158,7 +1140,6 @@ static void *EOCAlertViewKey = "EOCAlertViewKey";
                     _image_url=imageurl;
                 }
                 [defaults setObject:[[NSDictionary alloc] initWithObjectsAndKeys:_image_type,@"type",_image_url,@"image",nil] forKey:@"userImageurl"];
-//                [[ToolManager sharedManager] createSuccessProgress];
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"updateImg" object:nil];
 
             }else

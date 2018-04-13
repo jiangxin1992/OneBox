@@ -683,7 +683,6 @@
             [_arrayChar removeAllObjects];
         }
     }
-    [[ToolManager sharedManager] removeProgress];
 }
 
 -(void)setCityNameDict:(NSDictionary *)cityNameDict

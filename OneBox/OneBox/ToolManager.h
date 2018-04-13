@@ -15,7 +15,7 @@
 + (BOOL)validateMobile:(NSString *)mobileNum;
 -(void)loginWithSuccess:(void (^)(NSDictionary *))success failure:(void (^)(NSError *))failure pastdue:(void(^)(void))pastdue;
 //封装的数据请求
--(void) NetworkRequest:(NSString *)path bodyStr:(NSString *)body ispost:(BOOL )_ispost success:(void (^)(NSDictionary *))success failure:(void (^)(NSError *))failure;
+-(void)NetworkRequest:(NSString *)path bodyStr:(NSString *)body ispost:(BOOL )_ispost success:(void (^)(NSDictionary *))success failure:(void (^)(NSError *))failure;
 
 //自定义view
 -(UIImageView *)showSuccessfulOperationViewWithTitle:(NSString *)title WithImg:(NSString *)imagename Withtype:(NSInteger)type;
@@ -29,12 +29,13 @@
 -(UILabel *)createLabelView:(NSString *)title Withrect:(CGRect )rect WithTextColor:(UIColor *)_color WithTextAlignment:(NSInteger) type WithFont:(CGFloat )_font;
 -(UIButton *)CustomButtonWithFrame:(CGRect )rect;
 -(UIAlertView *)alertTitle_Simple:(NSString *)title;
+
 //创建进度条
 -(void)createProgress:(NSString *)title;
--(void)createSuccessProgress;
 -(void)removeProgress;
 
 -(UIImageView *)createTitleView:(NSString *)title WithRect:(CGRect )rect WithImg:(NSString *)imageName WithtitleColor:(UIColor *)_color WithTextAlignment:(NSInteger) type WithFontName:(NSString *)str WithFont:(CGFloat )_font;
+
 -(UIView *)returnNavView:(NSString *)title withmaxwidth:(CGFloat )maxwidth;
 + (NSAttributedString *)createAttributeString:(NSString *)str andFloat:(NSNumber*)nsKern;
 

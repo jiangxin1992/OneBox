@@ -292,7 +292,6 @@
     //输入验证
     if([textfield_nickname.text isEqualToString:@""])
     {
-        [regular removeProgress];
         alertView.message=@"用户名不能为空";
         [alertView show];
     }
@@ -303,7 +302,7 @@
     else
     {
 
-        [regular createProgress:@"注册中..."];
+        [[ToolManager sharedManager] createProgress:@"注册中..."];
 
         NSURL *url=[NSURL URLWithString:[[NSString alloc] initWithFormat:@"%@/v1/users/register",DNS]];
 
@@ -328,6 +327,8 @@
         //    进行网络请求（AF框架）
         [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
 
+            [[ToolManager sharedManager] removeProgress];
+
             NSString *html = operation.responseString;
             NSData* data=[html dataUsingEncoding:NSUTF8StringEncoding];
 
@@ -337,7 +338,7 @@
         }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             //        下载失败时，打印错误信息
             JXLOG(@"发生错误！%@",error);
-            [regular removeProgress];
+            [[ToolManager sharedManager] removeProgress];
         }];
         
         NSOperationQueue *queue = [[NSOperationQueue alloc] init];
@@ -383,10 +384,8 @@
 
 
                                                               }onQueue:nil];
-            
-            
+
         }
-       [regular removeProgress];
 #pragma mark-发通知刷新发现美校
         [[NSNotificationCenter defaultCenter] postNotificationName:@"changeFound" object:nil];
 
@@ -450,7 +449,6 @@
             [defaults setObject:[[NSDictionary alloc] initWithObjectsAndKeys:_image_type,@"type",_image_url,@"image",nil] forKey:@"userImageurl"];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"updateImg" object:nil];
             //    保存后隐藏进度条
-            [regular removeProgress];
 
             [self.navigationController setNavigationBarHidden:NO animated:NO];
 //            [[UIApplication sharedApplication] setStatusBarHidden:NO];
@@ -476,7 +474,6 @@
 
     }else
     {
-        [regular removeProgress];
         [[ToolManager sharedManager] alertTitle_Simple:[dict objectForKey:@"message"]];
     }
 

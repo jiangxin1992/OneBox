@@ -253,17 +253,13 @@ static void *EOCAlertViewKey = "EOCAlertViewKey";
                 if([[dict objectForKey:@"code"] integerValue]==1)
                 {
                     JXLOG(@"111");
-                    [[ToolManager sharedManager] removeProgress];
-
                 }else
                 {
-                    [[ToolManager sharedManager] removeProgress];
                      [[ToolManager sharedManager] alertTitle_Simple:[dict objectForKey:@"message"]];
                 }
 
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错白色" Withtype:1]];
-                [[ToolManager sharedManager] removeProgress];
             }];
         }
         
@@ -582,7 +578,6 @@ static void *EOCAlertViewKey = "EOCAlertViewKey";
 
             [manager POST:str parameters:para success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 //                JXLOG(@"%@",responseObject);
-                [regular removeProgress];
                 id res = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
                 JXLOG(@"%@",res);
                 if ([res[@"code"] integerValue] == 1) {
@@ -624,7 +619,6 @@ static void *EOCAlertViewKey = "EOCAlertViewKey";
 
             [manager POST:str parameters:para success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 //                JXLOG(@"%@",responseObject);
-                [regular removeProgress];
                 id res = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
                 JXLOG(@"%@",res);
                 if ([res[@"code"] integerValue] == 1) {
@@ -720,12 +714,8 @@ static void *EOCAlertViewKey = "EOCAlertViewKey";
              [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:[_dict objectForKey:@"message"] WithImg:@"Prompt_网络出错白色" Withtype:1]];
         }
 
-        [[ToolManager sharedManager] removeProgress];
-
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错白色" Withtype:1]];
-        [[ToolManager sharedManager] removeProgress];
-
     }];
 
 
@@ -967,19 +957,16 @@ static void *EOCAlertViewKey = "EOCAlertViewKey";
             _commentField1.text=@"";
             [self loadData1];
             [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"提交成功" WithImg:@"Prompt_提交成功" Withtype:1]];
-            [[ToolManager sharedManager] removeProgress];
 
             [regular dismissKeyborad];
 
         }else
         {
-            [[ToolManager sharedManager] removeProgress];
             [[ToolManager sharedManager] alertTitle_Simple:[dict objectForKey:@"message"]];
         }
 
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错白色" Withtype:1]];
-        [[ToolManager sharedManager] removeProgress];
     }];
 
 }

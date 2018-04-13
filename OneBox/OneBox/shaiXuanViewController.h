@@ -12,7 +12,7 @@ typedef  void(^bl)(NSInteger row,NSInteger section,NSString *type);
 
 @interface shaiXuanViewController : UIViewController
 
-@property (nonatomic,copy)bl sousuoBlock;
-@property (nonatomic,copy)NSMutableDictionary *data_dict;
+@property (nonatomic, copy) bl sousuoBlock;
+@property (nonatomic, copy) NSMutableDictionary *data_dict;
 
 @end

@@ -744,27 +744,17 @@
 
         if(nowrefresh==YES)
         {
-
             nowrefresh=NO;
-
-
         }else
         {
             if(mengbanImg==nil)
             {
-
-
                 nowrefresh=NO;
-
-
             }else
             {
 
             }
-
         }
-
-
 
         [mengbanImg removeFromSuperview];
         mengbanImg=[[UIImageView alloc] init];
@@ -774,11 +764,10 @@
             make.centerX.mas_equalTo(self.view);
             make.centerY.mas_equalTo(self.view);
         }];
-        mengbanImg.image=[UIImage imageNamed:@"school_center"];
 
+        mengbanImg.image=[UIImage imageNamed:@"school_center"];
         mengbanImg.layer.cornerRadius=50;
         mengbanImg.layer.masksToBounds=YES;
-
 
         UILabel *label=[[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 90)];
         [mengbanImg addSubview:label];

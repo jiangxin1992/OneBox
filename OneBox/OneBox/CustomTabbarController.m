@@ -11,7 +11,7 @@
 #import "userInfoViewController.h"
 #import "CustomTabbarController.h"
 #import "ArticleViewController.h"
-#import "FoundViewController_new.h"
+#import "FoundViewController.h"
 #import "BoxViewController_new.h"
 #import "TabbarItem.h"
 
@@ -573,27 +573,11 @@ static CustomTabbarController *tabbarController = nil;
     NSMutableArray *vcs = [[NSMutableArray alloc]init];
     for (int i = 0; i<5; i++) {
         //        三目运算创建视图
-        UIViewController *vc =i==0?[[ChatMainViewController alloc]init]:i==1?[[ArticleViewController alloc] init]:i==2?[[BoxViewController_new alloc] init]:i==3?[[FoundViewController_new alloc]init]:[[userInfoViewController alloc] init];
+        UIViewController *vc =i==0?[[ChatMainViewController alloc]init]:i==1?[[ArticleViewController alloc] init]:i==2?[[BoxViewController_new alloc] init]:i==3?[[FoundViewController alloc]init]:[[userInfoViewController alloc] init];
         //        将创建视图加入到navi中
 
-        //        if(i!=1)
-        //        {
         UINavigationController *navi = [[UINavigationController alloc]initWithRootViewController:vc];
-
         [vcs addObject:navi];
-        //        }else
-        //        {
-        //            [vcs addObject:vc];
-        //
-        //        }
-
-        //        UIBarButtonItem *backItem = [[UIBarButtonItem alloc] init];
-        //        backItem.image=[UIImage imageNamed:@""];
-        ////        backItem.title = @"返回";
-        //
-        //        self.navigationItem.backBarButtonItem = backItem;
-
-        //        将navi存放到数组vcs中去
         
     }
     //    将数组中的视图添加到当前的tabbarController中去

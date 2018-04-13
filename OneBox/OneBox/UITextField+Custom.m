@@ -39,15 +39,9 @@
     {
         _textfield.secureTextEntry=NO;
     }
+
     _textfield.textAlignment=_alignment;
-    UIView *dibu=[[UIView alloc] init];
-    [_textfield addSubview:dibu];
-    dibu.backgroundColor=[UIColor blackColor];
-    [dibu mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.and.right.mas_equalTo(0);
-        make.height.mas_equalTo(1);
-        make.bottom.mas_equalTo(_textfield.mas_bottom);
-    }];
+
     return _textfield;
 }
 @end

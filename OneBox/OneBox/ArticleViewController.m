@@ -1,5 +1,5 @@
 //
-//  FoundViewController_new.m
+//  FoundViewController.m
 //  OneBox
 //
 //  Created by 谢江新 on 15/12/7.
@@ -179,15 +179,7 @@
 {
     _tableView=[[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
     [self.view addSubview:_tableView];
-//    if(_isPad)
-//    {
-//        _tableView.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight-(kTabBarHeight-49));
-//    }else
-//    {
-//        _tableView.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight);
-//    }
     [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.edges.mas_equalTo(self.view);
         make.left.right.top.mas_equalTo(0);
         make.bottom.mas_equalTo(-kTabBarHeight);
     }];

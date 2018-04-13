@@ -8,11 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-typedef  void(^blo)(NSInteger row);
-
 @interface FoundCell_new : UITableViewCell
 
-@property (nonatomic,copy)blo block;
-@property(nonatomic,copy)NSDictionary *dict;
+@property (nonatomic,copy) void(^block)(NSInteger row);
+@property (nonatomic,copy) NSDictionary *dict;
 
 @end

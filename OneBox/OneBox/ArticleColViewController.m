@@ -1,5 +1,5 @@
 //
-//  FoundViewController_new.m
+//  FoundViewController.m
 //  OneBox
 //
 //  Created by 谢江新 on 15/12/7.

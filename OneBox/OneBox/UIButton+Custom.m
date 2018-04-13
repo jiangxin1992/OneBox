@@ -9,41 +9,56 @@
 #import "UIButton+Custom.h"
 
 @implementation UIButton (Custom)
-+(UIButton *)getCustomTitleBtnWithAlignment:(NSInteger )_alignment WithFont:(CGFloat )_font WithSpacing:(CGFloat )_spacing WithNormalTitle:(NSString *)_normalTitle WithNormalColor:(UIColor *)_normalColor WithSelectedTitle:(NSString *)_selectedTitle WithSelectedColor:(UIColor *)_selectedColor;
++(UIButton *)getCustomTitleBtnWithAlignment:(NSInteger )alignment WithFont:(CGFloat )font WithSpacing:(CGFloat )spacing WithNormalTitle:(NSString *)normalTitle WithNormalColor:(UIColor *)normalColor WithSelectedTitle:(NSString *)selectedTitle WithSelectedColor:(UIColor *)selectedColor
 {
     UIButton *btn=[UIButton buttonWithType:UIButtonTypeCustom];
-    
-    if(_normalTitle)
+
+    if(normalTitle)
     {
-        [btn setTitle:_normalTitle forState:UIControlStateNormal];
+        if(spacing)
+        {
+            [btn setAttributedTitle:[btn createAttributeString:normalTitle andFloat:@(spacing) WithColor:normalColor] forState:UIControlStateNormal];
+        }else
+        {
+            [btn setTitle:normalTitle forState:UIControlStateNormal];
+        }
     }
-    if(_normalColor)
+
+    if(normalColor)
     {
-        [btn setTitleColor:_normalColor forState:UIControlStateNormal];
+        [btn setTitleColor:normalColor forState:UIControlStateNormal];
     }else
     {
         [btn setTitleColor:_define_black_color forState:UIControlStateNormal];
     }
-    
-    if(_selectedTitle)
+
+
+    if(selectedTitle)
     {
-        [btn setTitle:_selectedTitle forState:UIControlStateSelected];
+        if(spacing)
+        {
+            [btn setAttributedTitle:[btn createAttributeString:selectedTitle andFloat:@(spacing) WithColor:selectedColor] forState:UIControlStateSelected];
+        }else
+        {
+            [btn setTitle:selectedTitle forState:UIControlStateSelected];
+        }
     }
-    
-    if(_selectedColor)
+
+    if(selectedColor)
     {
-        [btn setTitleColor:_selectedColor forState:UIControlStateSelected];
+        [btn setTitleColor:selectedColor forState:UIControlStateSelected];
     }else
     {
         [btn setTitleColor:_define_black_color forState:UIControlStateSelected];
     }
-    
-    btn.contentHorizontalAlignment=_alignment;
-    if(_font)
+
+
+    btn.contentHorizontalAlignment=alignment;
+    if(font)
     {
-        btn.titleLabel.font=[regular getFont:_font];
+        btn.titleLabel.font=[regular getFont:font];
     }
-    
+
     return btn;
 }
 +(UIButton *)getCustomImgBtnWithImageStr:(NSString *)_normalImageStr WithSelectedImageStr:(NSString *)_selectedImageStr
@@ -77,5 +92,18 @@
 {
     return [UIButton buttonWithType:UIButtonTypeCustom];
 }
+/**
+ * 设置字间距
+ */
+- (NSAttributedString *)createAttributeString:(NSString *)str andFloat:(NSNumber*)nsKern WithColor:(UIColor *)color
+{
 
+    NSMutableAttributedString *attributedString =[[NSMutableAttributedString alloc] initWithString:str attributes:@{NSKernAttributeName : nsKern}];
+    [attributedString addAttribute:NSForegroundColorAttributeName
+
+                             value:color?color:_define_black_color
+
+                             range:NSMakeRange(0, str.length)];
+    return attributedString;
+}
 @end

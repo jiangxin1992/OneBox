@@ -9,6 +9,32 @@
 #import <Foundation/Foundation.h>
 
 @interface NSString (extra)
-+ (BOOL )isNilOrEmpty: (NSString *) str;
+
+/**
+ 判断当前字符串是否为空（尽量用这个）
+
+ @return 是否为空(nil/@""/nsnull)
+ */
+- (BOOL )isNilOrEmpty;
+
+/**
+ 判断传入字符串是否为空
+
+ @param str 传入字符串
+ @return 是否为空(nil/@""/nsnull)
+ */
++ (BOOL )isNilOrEmpty:(NSString *)str;
+
+/**
+ 字符串转拼音
+
+ @return 转义后的拼音字符串
+ */
+- (NSString *)transformToPinyin;
+
++ (NSNumber *)covertToNumber:(NSString *)numberString;
+
+- (BOOL)containsString:(NSString *)str;
 
 @end
+

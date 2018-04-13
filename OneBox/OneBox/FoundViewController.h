@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ArticleViewController : UIViewController
-{
-    void(^changeBlock)(NSInteger row);
-}
+@interface FoundViewController : UIViewController
+
 @end

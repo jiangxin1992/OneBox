@@ -129,8 +129,8 @@
 		538CB7D21AFA13A300C27431 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 538CB7C91AFA13A300C27431 /* AFURLSessionManager.m */; };
 		538F9AFB1AF8CA4C001D16DA /* resetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 538F9AF91AF8CA4C001D16DA /* resetPasswordViewController.m */; };
 		53922B061B4B8BE00079ECA3 /* webViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 53922B041B4B8BE00079ECA3 /* webViewController.m */; };
-		53922B171B4BD7010079ECA3 /* QianViewController_new.m in Sources */ = {isa = PBXBuildFile; fileRef = 53922B151B4BD7010079ECA3 /* QianViewController_new.m */; };
-		53922B221B4CB5130079ECA3 /* FlyUsaViewController_new.m in Sources */ = {isa = PBXBuildFile; fileRef = 53922B201B4CB5130079ECA3 /* FlyUsaViewController_new.m */; };
+		53922B171B4BD7010079ECA3 /* QianViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 53922B151B4BD7010079ECA3 /* QianViewController.m */; };
+		53922B221B4CB5130079ECA3 /* FlyUsaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 53922B201B4CB5130079ECA3 /* FlyUsaViewController.m */; };
 		53947F601C55E864007C5A28 /* box_main_gif@2x.gif in Resources */ = {isa = PBXBuildFile; fileRef = 53947F5F1C55E864007C5A28 /* box_main_gif@2x.gif */; };
 		53947F691C5722B9007C5A28 /* Boxlistviewcontroller.m in Sources */ = {isa = PBXBuildFile; fileRef = 53947F681C5722B9007C5A28 /* Boxlistviewcontroller.m */; };
 		53947F6C1C5725BE007C5A28 /* submit_material_controller.m in Sources */ = {isa = PBXBuildFile; fileRef = 53947F6B1C5725BE007C5A28 /* submit_material_controller.m */; };
@@ -804,10 +804,10 @@
 		538F9AF91AF8CA4C001D16DA /* resetPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = resetPasswordViewController.m; sourceTree = "<group>"; };
 		53922B031B4B8BE00079ECA3 /* webViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = webViewController.h; sourceTree = "<group>"; };
 		53922B041B4B8BE00079ECA3 /* webViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = webViewController.m; sourceTree = "<group>"; };
-		53922B141B4BD7010079ECA3 /* QianViewController_new.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QianViewController_new.h; path = NEWController/QianViewController_new.h; sourceTree = "<group>"; };
-		53922B151B4BD7010079ECA3 /* QianViewController_new.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = QianViewController_new.m; path = NEWController/QianViewController_new.m; sourceTree = "<group>"; };
-		53922B1F1B4CB5130079ECA3 /* FlyUsaViewController_new.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FlyUsaViewController_new.h; path = NEWController/FlyUsaViewController_new.h; sourceTree = "<group>"; };
-		53922B201B4CB5130079ECA3 /* FlyUsaViewController_new.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FlyUsaViewController_new.m; path = NEWController/FlyUsaViewController_new.m; sourceTree = "<group>"; };
+		53922B141B4BD7010079ECA3 /* QianViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QianViewController.h; path = NEWController/QianViewController.h; sourceTree = "<group>"; };
+		53922B151B4BD7010079ECA3 /* QianViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = QianViewController.m; path = NEWController/QianViewController.m; sourceTree = "<group>"; };
+		53922B1F1B4CB5130079ECA3 /* FlyUsaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FlyUsaViewController.h; path = NEWController/FlyUsaViewController.h; sourceTree = "<group>"; };
+		53922B201B4CB5130079ECA3 /* FlyUsaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FlyUsaViewController.m; path = NEWController/FlyUsaViewController.m; sourceTree = "<group>"; };
 		53947F5F1C55E864007C5A28 /* box_main_gif@2x.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "box_main_gif@2x.gif"; sourceTree = "<group>"; };
 		53947F671C5722B9007C5A28 /* Boxlistviewcontroller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Boxlistviewcontroller.h; sourceTree = "<group>"; };
 		53947F681C5722B9007C5A28 /* Boxlistviewcontroller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Boxlistviewcontroller.m; sourceTree = "<group>"; };
@@ -1809,9 +1809,9 @@
 		3F32F43B2080AD6800FB3D04 /* 首页 */ = {
 			isa = PBXGroup;
 			children = (
+				3F32F43C2080AD6F00FB3D04 /* CustomView */,
 				53FBE1BA1C15886B00AB837A /* FoundViewController.h */,
 				53FBE1BB1C15886B00AB837A /* FoundViewController.m */,
-				3F32F43C2080AD6F00FB3D04 /* CustomView */,
 			);
 			name = "首页";
 			sourceTree = "<group>";
@@ -2273,8 +2273,8 @@
 			children = (
 				53C211601C5753C100500B2A /* fly_material_controller.h */,
 				53C2115F1C5753C100500B2A /* fly_material_controller.m */,
-				53922B141B4BD7010079ECA3 /* QianViewController_new.h */,
-				53922B151B4BD7010079ECA3 /* QianViewController_new.m */,
+				53922B141B4BD7010079ECA3 /* QianViewController.h */,
+				53922B151B4BD7010079ECA3 /* QianViewController.m */,
 			);
 			name = "签证去";
 			sourceTree = "<group>";
@@ -2282,8 +2282,8 @@
 		537F1D081C18376900331419 /* 飞赴美国 */ = {
 			isa = PBXGroup;
 			children = (
-				53922B1F1B4CB5130079ECA3 /* FlyUsaViewController_new.h */,
-				53922B201B4CB5130079ECA3 /* FlyUsaViewController_new.m */,
+				53922B1F1B4CB5130079ECA3 /* FlyUsaViewController.h */,
+				53922B201B4CB5130079ECA3 /* FlyUsaViewController.m */,
 			);
 			name = "飞赴美国";
 			sourceTree = "<group>";
@@ -5147,7 +5147,7 @@
 				53F9766D1BB29520004FC0B7 /* EMChatTextBubbleView.m in Sources */,
 				66C67D171AC40B780054B28D /* FoundCell.m in Sources */,
 				5366E1601C1FC9070036A960 /* ArticleCell.m in Sources */,
-				53922B171B4BD7010079ECA3 /* QianViewController_new.m in Sources */,
+				53922B171B4BD7010079ECA3 /* QianViewController.m in Sources */,
 				3FF87DD7206255C100E7A451 /* UILabel+Custom.m in Sources */,
 				53F9761C1BB29516004FC0B7 /* NSDate+Category.m in Sources */,
 				5354B0871C2BA1A60066CF24 /* ArticleDetailModel.m in Sources */,
@@ -5158,7 +5158,7 @@
 				53FFA09D1B26EA500012504A /* userInfoViewController.m in Sources */,
 				53F9768D1BB2952A004FC0B7 /* CreateGroupViewController.m in Sources */,
 				53552CCA1B6F8ECE00CCAC9F /* YYAnimationIndicator.m in Sources */,
-				53922B221B4CB5130079ECA3 /* FlyUsaViewController_new.m in Sources */,
+				53922B221B4CB5130079ECA3 /* FlyUsaViewController.m in Sources */,
 				3F32F434207B48E500FB3D04 /* FoundListScreenMainView.m in Sources */,
 				53F975E61BB29501004FC0B7 /* MKAnnotationView+EMWebCache.m in Sources */,
 				53F9761F1BB29516004FC0B7 /* UIResponder+Router.m in Sources */,

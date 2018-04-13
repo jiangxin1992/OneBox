@@ -215,19 +215,6 @@
     [yinsi addSubview:label];
     [self.view addSubview:yinsi];
 }
-//if(btn.tag==5000)
-//{
-//    AboutViewController *about=[[AboutViewController alloc] init];
-//    about.type=@"privacy";
-//    [self.navigationController pushViewController:about animated:YES];
-//
-//}else
-//{
-//    AboutViewController *about=[[AboutViewController alloc] init];
-//    about.type=@"help";
-//    [self.navigationController pushViewController:about animated:YES];
-//
-//}
 -(void)xieyi:(UIGestureRecognizer *)ges
 {
 

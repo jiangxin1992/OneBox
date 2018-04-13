@@ -1,5 +1,5 @@
 //
-//  FlyUsaViewController_new.h
+//  FlyUsaViewController.h
 //  OneBox
 //
 //  Created by 谢江新 on 15/7/8.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FlyUsaViewController_new : UIViewController
+@interface FlyUsaViewController : UIViewController
 
 @property (nonatomic,copy) void(^block)(NSString*);
 @property (nonatomic,assign)NSInteger step;

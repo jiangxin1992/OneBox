@@ -9,7 +9,7 @@
 #import "Boxlistviewcontroller.h"
 
 #import "OnlineProjectsViewController.h"
-#import "QianViewController_new.h"
+#import "QianViewController.h"
 #import "submit_material_controller.h"
 #import "submitSchoolController.h"
 #import "fly_material_controller.h"
@@ -28,7 +28,7 @@
     submit_material_controller *ctn1;
     fly_material_controller *ctn11;
     submitSchoolController *ctn2;
-    QianViewController_new *ctn3;
+    QianViewController *ctn3;
 }
 -(void)helpAction
 {
@@ -193,7 +193,7 @@
             {
                 if(ctn3==nil)
                 {
-                    ctn3=[[QianViewController_new alloc] init];
+                    ctn3=[[QianViewController alloc] init];
                     ctn3.step=_step;
                     ctn3.block=backBlock;
                 }
@@ -218,7 +218,7 @@
             {
                 if(ctn3==nil)
                 {
-                    ctn3=[[QianViewController_new alloc] init];
+                    ctn3=[[QianViewController alloc] init];
                     ctn3.step=_step;
                     ctn3.block=backBlock;
                 }

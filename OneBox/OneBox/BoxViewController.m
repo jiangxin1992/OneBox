@@ -21,9 +21,8 @@
 #import "HttpRequestManager.h"
 
 #import "Boxlistviewcontroller.h"
-#import "QianViewController_new.h"
 #import "LoginViewController.h"
-#import "FlyUsaViewController_new.h"
+#import "FlyUsaViewController.h"
 #import "chooseSchoolController.h"
 #import "submitSchoolController.h"
 #import "CustomTabbarController.h"
@@ -186,7 +185,7 @@
 
         }else if(_tag==3)
         {
-            FlyUsaViewController_new *flyVC = [[FlyUsaViewController_new alloc] init];
+            FlyUsaViewController *flyVC = [[FlyUsaViewController alloc] init];
             flyVC.step=_step;
             flyVC.block=shareBlock;
             [self.navigationController pushViewController:flyVC animated:YES];

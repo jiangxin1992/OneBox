@@ -9,7 +9,6 @@
 #import "submitSchoolController.h"
 
 #import "OnlineProjectsViewController.h"
-#import "QianViewController_new.h"
 #import "CustomTabbarController.h"
 
 #import "chooseModel.h"

@@ -1,5 +1,5 @@
 //
-//  FlyUsaViewController_new.m
+//  FlyUsaViewController.m
 //  OneBox
 //
 //  Created by 谢江新 on 15/7/8.
@@ -9,18 +9,18 @@
 
 #import "HttpRequestManager.h"
 
-#import "FlyUsaViewController_new.h"
+#import "FlyUsaViewController.h"
 #import "CustomTabbarController.h"
 
 #import "ApplyFilemodel.h"
 
 #define COLOR [UIColor colorWithRed:77/255.0 green:190/255.0 blue:217/255.0 alpha:1.0]
 
-@interface FlyUsaViewController_new ()
+@interface FlyUsaViewController ()
 
 @end
 
-@implementation FlyUsaViewController_new
+@implementation FlyUsaViewController
 {
     YYAnimationIndicator *indicator;
 

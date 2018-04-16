@@ -67,6 +67,11 @@
 @property (nonatomic, assign) BOOL appear;
 @property (nonatomic, assign) NSInteger page;//记录当前page
 
+@property (nonatomic, strong) NSNumber *total_students_min;//记录学生数的最小值
+@property (nonatomic, strong) NSNumber *ap_count_max;//记录ap课程数量的最大值
+@property (nonatomic, strong) NSNumber *total_students_max;//记录学生数的最大值
+@property (nonatomic, strong) NSNumber *ap_count_min;//记录ap课程数量的最小值
+
 @end
 
 @implementation FoundViewController
@@ -255,7 +260,7 @@
                 [ws gotoMapView];
             }else if([type isEqualToString:@"tapActionScreen"]){
                 //筛选
-                [ws createScreenView];
+                [ws requestScreenViewData];
             }
         }];
         _tableHeaderView.backViewImagePath = _headviewimage;
@@ -301,9 +306,37 @@
         _bangdanView.hidden = NO;
     }
 }
+// 创建筛选视图
+-(void)createScreenView{
+    [regular dismissKeyborad];
+    if(!_screenView){
+        WeakSelf(ws);
+        _screenView = [[FoundListScreenView alloc] initWithFrame:CGRectZero];
+        [self.view addSubview:_screenView];
+        [_screenView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.mas_equalTo(self.view);
+        }];
+        [_screenView setScreenViewBlock:^(NSString *type) {
+            if([type isEqualToString:@"hideAll"]){
+                [ws.screenView initializeUI];
+                ws.screenView.hidden = YES;
+            }else if([type isEqualToString:@"screen"]){
+                [ws screenAction];
+            }
+        }];
+        _screenView.total_students_min = _total_students_min;
+        _screenView.ap_count_max = _ap_count_max;
+        _screenView.total_students_max = _total_students_max;
+        _screenView.ap_count_min = _ap_count_min;
+        [_screenView updateUI];
+    }else{
+        _screenView.hidden = NO;
+    }
+}
 // 筛选视图请求
--(void)createScreenView
+-(void)requestScreenViewData
 {
+    [regular dismissKeyborad];
     if(!_screenView){
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         [manager GET:[[NSString alloc] initWithFormat:@"%@/v1/schools/pre_search",DNS] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -314,30 +347,18 @@
             if([[dict objectForKey:@"code"] integerValue]==1)
             {
                 NSString *html = operation.responseString;
-                NSData* data=[html dataUsingEncoding:NSUTF8StringEncoding];
-                NSDictionary *dict=[NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+                NSData* data = [html dataUsingEncoding:NSUTF8StringEncoding];
+                NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
 
-                if(!_screenView){
-                    WeakSelf(ws);
-                    _screenView = [[FoundListScreenView alloc] initWithFrame:CGRectZero];
-                    [self.view addSubview:_screenView];
-                    [_screenView mas_makeConstraints:^(MASConstraintMaker *make) {
-                        make.edges.mas_equalTo(self.view);
-                    }];
-                    [_screenView setScreenViewBlock:^(NSString *type) {
-                        if([type isEqualToString:@"hideAll"]){
-                            [ws.screenView initializeUI];
-                            ws.screenView.hidden = YES;
-                        }else if([type isEqualToString:@"screen"]){
-                            [ws screenAction];
-                        }
-                    }];
-                    _screenView.total_students_min = [[dict objectForKey:@"data"] objectForKey:@"total_students_min"];
-                    _screenView.ap_count_max = [[dict objectForKey:@"data"] objectForKey:@"ap_count_max"];
-                    _screenView.total_students_max = [[dict objectForKey:@"data"] objectForKey:@"total_students_max"];
-                    _screenView.ap_count_min = [[dict objectForKey:@"data"] objectForKey:@"ap_count_min"];
-                    [_screenView updateUI];
+                _total_students_min = [[dict objectForKey:@"data"] objectForKey:@"total_students_min"];
+                _ap_count_max = [[dict objectForKey:@"data"] objectForKey:@"ap_count_max"];
+                _total_students_max = [[dict objectForKey:@"data"] objectForKey:@"total_students_max"];
+                _ap_count_min = [[dict objectForKey:@"data"] objectForKey:@"ap_count_min"];
+
+                if((!_bangdanView || _bangdanView.hidden) && (!_sousuoView || _sousuoView.hidden)){
+                    [self createScreenView];
                 }
+
             }else
             {
                 [[ToolManager sharedManager] alertTitle_Simple:[dict objectForKey:@"message"]];

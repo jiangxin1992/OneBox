@@ -17,13 +17,12 @@
     DBImageView *imagebackview;
     UILabel *titlelabel;
     UILabel *titlelabel_f;
-    BOOL _isdonghua;//是否在动画中
 }
 
 #pragma mark - --------------生命周期--------------
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
-    self=[super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if(self)
     {
         [self SomePrepare];
@@ -47,173 +46,111 @@
 - (void)PrepareData{
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(FoundAnimation:) name:@"FoundAnimation" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(FoundAnimation1:) name:@"FoundAnimation1" object:nil];
-
-    _isdonghua=NO;
 }
 - (void)PrepareUI{}
 
 #pragma mark - --------------UIConfig----------------------
 -(void)UIConfig
 {
-    imagebackview=[[DBImageView alloc] init];
+    imagebackview = [[DBImageView alloc] init];
     [self.contentView addSubview:imagebackview];
     imagebackview.frame=CGRectMake(-ScreenWidth*0.05, 0, ScreenWidth*1.10,foundCellHeight);
 
-    titlelabel =[UILabel getLabelWithAlignment:1 WithTitle:nil WithFont:21.0f WithTextColor:[UIColor whiteColor] WithSpacing:0];;
+    titlelabel = [UILabel getLabelWithAlignment:1 WithTitle:nil WithFont:21.0f WithTextColor:[UIColor whiteColor] WithSpacing:0];;
     [imagebackview addSubview:titlelabel];
-    titlelabel.backgroundColor=[UIColor clearColor];
-    titlelabel.alpha=0;
+    titlelabel.backgroundColor = [UIColor clearColor];
+    titlelabel.alpha = 0;
 
-    titlelabel_f =[UILabel getLabelWithAlignment:1 WithTitle:nil WithFont:15.0f WithTextColor:[UIColor whiteColor] WithSpacing:0];
+    titlelabel_f = [UILabel getLabelWithAlignment:1 WithTitle:nil WithFont:15.0f WithTextColor:[UIColor whiteColor] WithSpacing:0];
     [imagebackview addSubview:titlelabel_f];
-    titlelabel_f.backgroundColor=[UIColor clearColor];
-    titlelabel_f.alpha=0;
+    titlelabel_f.backgroundColor = [UIColor clearColor];
+    titlelabel_f.alpha = 0;
 }
 #pragma mark - --------------UpdateUI----------------------
--(void)setDict:(NSDictionary *)dict
-{
-    if(_dict!=dict)
-    {
-        _dict=[dict copy];
-    }
-    foundModel_new *model=[_dict objectForKey:@"model"];
+-(void)updateUI{
+    //取消所有动画
+    [titlelabel.layer removeAllAnimations];
+    [titlelabel_f.layer removeAllAnimations];
+    [imagebackview.layer removeAllAnimations];
 
-    [titlelabel setAttributedText:[regular createAttributeString:model.title andFloat:@(4.0)]];
+    [titlelabel setAttributedText:[regular createAttributeString:_foundModel.title andFloat:@(4.0)]];
     [titlelabel sizeToFit];
-    titlelabel.frame=CGRectMake((ScreenWidth-CGRectGetWidth(titlelabel.frame))/2.0f, (CGRectGetHeight(imagebackview.frame)-CGRectGetHeight(titlelabel.frame))/2.0f,CGRectGetWidth(titlelabel.frame) ,CGRectGetHeight(titlelabel.frame));
+    titlelabel.frame = CGRectMake((ScreenWidth-CGRectGetWidth(titlelabel.frame))/2.0f, (CGRectGetHeight(imagebackview.frame)-CGRectGetHeight(titlelabel.frame))/2.0f,CGRectGetWidth(titlelabel.frame) ,CGRectGetHeight(titlelabel.frame));
 
-    [titlelabel_f setAttributedText:[regular createAttributeString:model.f_title andFloat:@(2.0)]];
+    [titlelabel_f setAttributedText:[regular createAttributeString:_foundModel.f_title andFloat:@(2.0)]];
     [titlelabel_f sizeToFit];
-    titlelabel_f.frame=CGRectMake(0, CGRectGetMaxY(titlelabel.frame)+10,ScreenWidth,CGRectGetHeight(titlelabel.frame));
+    titlelabel_f.frame = CGRectMake(0, CGRectGetMaxY(titlelabel.frame)+10,ScreenWidth,CGRectGetHeight(titlelabel.frame));
 
-    if([NSString isNilOrEmpty:model.pic])
+    if([NSString isNilOrEmpty:_foundModel.pic])
     {
-        imagebackview.image=[UIImage imageNamed:@"coffee-in_380"];
+        imagebackview.image = [UIImage imageNamed:@"coffee-in_380"];
     }else
     {
-        NSString *imageStr=nil;
-        if(kIPhone4s)
-        {
-            imageStr=[NSString stringWithFormat:@"%@?imageView2/1/w/320/h/180",model.pic];
-        }else if(kIPhone5s||kIPhone6)
-        {
-            imageStr=[NSString stringWithFormat:@"%@?imageView2/1/w/640/h/360",model.pic];
-        }else
-        {
-            imageStr=[NSString stringWithFormat:@"%@?imageView2/1/w/960/h/540",model.pic];
-        }
-
-        imagebackview.placeHolder=[UIImage imageNamed:@"coffee-in_380"];
+        NSString *imageStr = [self getBackViewImg:_foundModel.pic];
         [imagebackview setImageWithPath:imageStr];
+        imagebackview.placeHolder = [UIImage imageNamed:@"coffee-in_380"];
     }
 
-    if(!model.isapp)
+    if(![_foundModel.isAppear boolValue])
     {
-        imagebackview.frame=CGRectMake(-ScreenWidth*0.05, 0, ScreenWidth*1.10,foundCellHeight);
-        titlelabel.alpha=0;
-        titlelabel_f.alpha=0;
+        imagebackview.frame = CGRectMake(-ScreenWidth*0.05, 0, ScreenWidth*1.10, foundCellHeight);
+        titlelabel.alpha = 0;
+        titlelabel_f.alpha = 0;
 
-        [UIView beginAnimations:@"action" context:nil];
-        [UIView setAnimationDuration:1];
-        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-        if([[_dict objectForKey:@"row"] integerValue]<1)
-        {
-            _isdonghua=YES;
-            [UIView setAnimationDidStopSelector:@selector(anmationStop)];
-            NSInteger __ss=[[_dict objectForKey:@"row"] integerValue];
-            self.block(__ss);
+        if(_indexPath.row < 1){
+            [self startAnimation];
         }
-        [UIView setAnimationDelegate:self];
-        if([[_dict objectForKey:@"row"] integerValue]<1)
-        {
-            imagebackview.frame=CGRectMake(0, 0, ScreenWidth,foundCellHeight);
-            titlelabel.alpha=1;
-            titlelabel_f.alpha=1;
-        }
-        [UIView commitAnimations];
-
     }else
     {
-        imagebackview.frame=CGRectMake(0, 0, ScreenWidth,foundCellHeight);
-        titlelabel.alpha=1;
-        titlelabel_f.alpha=1;
+        imagebackview.frame = CGRectMake(0, 0, ScreenWidth,foundCellHeight);
+        titlelabel.alpha = 1;
+        titlelabel_f.alpha = 1;
     }
 }
-
 #pragma mark - --------------系统代理----------------------
 
 #pragma mark - --------------自定义响应----------------------
--(void)FoundAnimation1:(NSNotification *)not
-{
-    //    监测
-    if(!((foundModel_new *)[_dict objectForKey:@"model"]).isapp&&!_isdonghua)
-    {
-        titlelabel.alpha=0;
-        titlelabel_f.alpha=0;
-    }
-}
 -(void)FoundAnimation:(NSNotification *)not
 {
     JXLOG(@"%ld",(long)[not.object integerValue]);
-    if([[_dict objectForKey:@"row"] integerValue]<[not.object integerValue])
+    NSInteger record_cell_num = [not.object integerValue];
+    if(_indexPath.row < record_cell_num)
     {
-        [self startAnimation];
+        if(![_foundModel.isAppear boolValue])
+        {
+            [self startAnimation];
+        }
     }
 }
 
 #pragma mark - --------------自定义方法----------------------
 -(void)startAnimation
 {
-    foundModel_new *model=[_dict objectForKey:@"model"];
-    if(!model.isapp)
+    _foundModel.isAppear = @(YES);
+    
+    [UIView animateWithDuration:1 animations:^{
+
+        imagebackview.frame = CGRectMake(0, 0, ScreenWidth,foundCellHeight);
+        titlelabel.alpha = 1;
+        titlelabel_f.alpha = 1;
+
+    } completion:nil];
+}
+
+-(NSString *)getBackViewImg:(NSString *)pic{
+    NSString *imageStr = nil;
+    if(kIPhone4s)
     {
-
-        titlelabel.alpha=0;
-        titlelabel_f.alpha=0;
-        _isdonghua=YES;
-
-        if(model.pic==nil)
-        {
-            imagebackview.image=[UIImage imageNamed:@"coffee-in_380"];
-        }else
-        {
-            NSString *imageStr=nil;
-            if(kIPhone4s)
-            {
-                imageStr=[NSString stringWithFormat:@"%@?imageView2/1/w/320/h/180",model.pic];
-            }else if(kIPhone5s||kIPhone6)
-            {
-                imageStr=[NSString stringWithFormat:@"%@?imageView2/1/w/640/h/360",model.pic];
-            }else
-            {
-                imageStr=[NSString stringWithFormat:@"%@?imageView2/1/w/960/h/540",model.pic];
-            }
-
-            imagebackview.placeHolder=[UIImage imageNamed:@"coffee-in_380"];
-            [imagebackview setImageWithPath:imageStr];
-        }
-
-        [UIView beginAnimations:@"action" context:nil];
-        [UIView setAnimationDuration:1];
-        [UIView setAnimationCurve: UIViewAnimationCurveEaseInOut];
-        [UIView setAnimationDidStopSelector:@selector(anmationStop)];
-        [UIView setAnimationDelegate:self];
-        titlelabel.alpha=1;
-        titlelabel_f.alpha=1;
-
-        imagebackview.frame=CGRectMake(0, 0, ScreenWidth,foundCellHeight);
-
-        [UIView commitAnimations];
-        NSInteger __ss=[[_dict objectForKey:@"row"] integerValue];
-        self.block(__ss);
+        imageStr = [NSString stringWithFormat:@"%@?imageView2/1/w/320/h/180",pic];
+    }else if(kIPhone5s||kIPhone6)
+    {
+        imageStr = [NSString stringWithFormat:@"%@?imageView2/1/w/640/h/360",pic];
+    }else
+    {
+        imageStr = [NSString stringWithFormat:@"%@?imageView2/1/w/960/h/540",pic];
     }
+    return imageStr;
 }
--(void)anmationStop
-{
-    _isdonghua=NO;
-}
-
 #pragma mark - --------------other----------------------
 
 

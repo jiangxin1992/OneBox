@@ -8,9 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@class foundModel_new;
+
 @interface FoundCell_new : UITableViewCell
 
-@property (nonatomic,copy) void(^block)(NSInteger row);
-@property (nonatomic,copy) NSDictionary *dict;
+@property (nonatomic, strong) NSIndexPath *indexPath;
+
+@property (nonatomic, strong) foundModel_new *foundModel;
+
+-(void)updateUI;
 
 @end

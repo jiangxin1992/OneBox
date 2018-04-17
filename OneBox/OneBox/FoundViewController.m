@@ -44,7 +44,6 @@
 @property (nonatomic, strong) NSMutableArray *arrayData;//存放页面的数据
 
 @property (nonatomic,copy) void (^blockSuccess)(NSDictionary *dict);//主界面数据请求成功后调用
-@property (nonatomic,copy) void (^changeBlock)(NSInteger row);
 
 //view
 @property (nonatomic, strong) FoundListTableHeaderView *tableHeaderView;//headview的背景图
@@ -100,7 +99,7 @@
     self.dragging = NO;
     self.nav_donghua = NO;
     self.rightbtn.alpha = 1;
-    self.navigationController.navigationBar.frame = CGRectMake(0, kStatusBarHeight, [[UIScreen mainScreen]bounds].size.width, kNavigationBarHeight);
+    self.navigationController.navigationBar.frame = CGRectMake(0, kStatusBarHeight, [[UIScreen mainScreen] bounds].size.width, kNavigationBarHeight);
     self.navigationItem.titleView.alpha = 1;
     //    友盟页面监控（进入）
     [MobClick endLogPageView:@"FoundViewController"];
@@ -197,11 +196,11 @@
 }
 -(void)createTableView
 {
-    _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+    _tableView=[[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
     [self.view addSubview:_tableView];
     [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.top.mas_equalTo(0);
-        make.bottom.mas_equalTo(-kTabBarHeight);
+        make.bottom.mas_equalTo(kIPhoneX?-kTabBarHeight:-kStatusBarAndNavigationBarHeight);
     }];
     _tableView.delegate = self;
     _tableView.dataSource = self;
@@ -406,23 +405,17 @@
 }
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView;
 {
-    JXLOG(@"%f",scrollView.contentOffset.y);
-    CGFloat _height = scrollView.contentOffset.y+CGRectGetHeight(_tableView.frame)-_min_offset-kTabBarHeight-420*_Scale;
-    NSInteger now_cell = 0;
-    if(_isPad)
-    {
-        now_cell = (NSInteger)(_height/((NSInteger)380*_Scale));
-    }else
-    {
-        now_cell = (NSInteger)(_height/190);
-    }
+    CGFloat height = scrollView.contentOffset.y + ScreenHeight - _min_offset - (kIPhoneX?kTabBarHeight:kStatusBarAndNavigationBarHeight) - 420*_Scale;
+    JXLOG(@"contentOffset = %f",scrollView.contentOffset.y);
+    JXLOG(@"height = %f",height);
+    JXLOG(@"foundCellHeight = %f",380*_Scale);
+    NSInteger now_cell = (NSInteger)(((CGFloat )height)/((CGFloat)foundCellHeight));
 
     if(now_cell != _record_cell_num)
     {
         _record_cell_num = now_cell;
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"FoundAnimation" object:[NSNumber numberWithLong:_record_cell_num]];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"FoundAnimation" object:@(_record_cell_num)];
     }
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"FoundAnimation1" object:nil];
 
     if(_dragging)
     {
@@ -477,6 +470,44 @@
     return foundCellHeight;
 }
 
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+
+    if(!_arrayData.count)
+    {
+        return 0;
+    }
+    return _arrayData.count;
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    //数据还未获取时候
+    if(!_arrayData.count)
+    {
+        static NSString *cellid = @"cellid";
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellid];
+        if(!cell)
+        {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellid];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        }
+        return cell;
+    }
+    //获取到数据以后
+    static NSString *cellid = @"FoundCell_new";
+    FoundCell_new *cell = [tableView dequeueReusableCellWithIdentifier:cellid];
+    if(!cell)
+    {
+        cell = [[FoundCell_new alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellid];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    }
+    cell.indexPath = indexPath;
+    cell.foundModel = [_arrayData objectAtIndex:indexPath.row];
+    [cell updateUI];
+
+    return cell;
+}
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 
@@ -573,54 +604,10 @@
         }
     }
 }
-
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-
-    if(_arrayData.count == section)
-    {
-        return 0;
-    }
-    return _arrayData.count;
-}
-
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    //数据还未获取时候
-    if(_arrayData.count == indexPath.section)
-    {
-        static NSString *cellid = @"cellid";
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellid];
-        if(!cell)
-        {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellid];
-        }
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        return cell;
-    }
-    //获取到数据以后
-    static NSString *cellid = @"cell_found";
-    FoundCell_new *cell = [tableView dequeueReusableCellWithIdentifier:cellid];
-    if(!cell)
-    {
-        cell = [[FoundCell_new alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellid];
-    }
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:[_arrayData objectAtIndex:indexPath.row],@"model",[NSNumber numberWithInteger:indexPath.row],@"row",[NSNumber numberWithInteger:[_arrayData count]],@"num",nil];
-    cell.block = _changeBlock;
-    cell.dict = dict;
-    return cell;
-}
-
 #pragma mark - --------------自定义代理/block----------------------
 -(void)createBlock
 {
     WeakSelf(ws);
-    self.changeBlock = ^(NSInteger row)
-    {
-        JXLOG(@"%@",ws.arrayData);
-        ((foundModel_new *)[ws.arrayData objectAtIndex:row]).isapp = YES;
-    };
 
     self.blockSuccess = ^(NSDictionary *dict)
     {

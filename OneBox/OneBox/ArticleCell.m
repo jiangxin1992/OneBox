@@ -85,20 +85,9 @@
             imagebackview.image=[UIImage imageNamed:@"found_newsearch_back_360"];
         }else
         {
-            NSString *imageStr=nil;
-            if(kIPhone4s)
-            {
-                imageStr=[NSString stringWithFormat:@"%@?imageView2/1/w/320/h/180",model.thumb_url];
-            }else if(kIPhone5s||kIPhone6)
-            {
-                imageStr=[NSString stringWithFormat:@"%@?imageView2/1/w/640/h/360",model.thumb_url];
-            }else
-            {
-                imageStr=[NSString stringWithFormat:@"%@?imageView2/1/w/960/h/540",model.thumb_url];
-            }
-            
-            imagebackview.placeHolder=[UIImage imageNamed:@"found_newsearch_back_360"];
+            NSString *imageStr = [self getBackViewImg:model.thumb_url];
             [imagebackview setImageWithPath:imageStr];
+            imagebackview.placeHolder=[UIImage imageNamed:@"found_newsearch_back_360"];
         }
         [UIView commitAnimations];
     }else
@@ -112,20 +101,9 @@
             imagebackview.image=[UIImage imageNamed:@"found_newsearch_back_360"];
         }else
         {
-            NSString *imageStr=nil;
-            if(kIPhone4s)
-            {
-                imageStr=[NSString stringWithFormat:@"%@?imageView2/1/w/320/h/180",model.thumb_url];
-            }else if(kIPhone5s||kIPhone6)
-            {
-                imageStr=[NSString stringWithFormat:@"%@?imageView2/1/w/640/h/360",model.thumb_url];
-            }else
-            {
-                imageStr=[NSString stringWithFormat:@"%@?imageView2/1/w/960/h/540",model.thumb_url];
-            }
-            
-            imagebackview.placeHolder=[UIImage imageNamed:@"found_newsearch_back_360"];
+            NSString *imageStr = [self getBackViewImg:model.thumb_url];
             [imagebackview setImageWithPath:imageStr];
+            imagebackview.placeHolder=[UIImage imageNamed:@"found_newsearch_back_360"];
         }
         
     }
@@ -164,6 +142,20 @@
     titlelabel_f.textColor=[UIColor whiteColor];
 }
 #pragma mark - SomeAction
+-(NSString *)getBackViewImg:(NSString *)pic{
+    NSString *imageStr=nil;
+    if(kIPhone4s)
+    {
+        imageStr=[NSString stringWithFormat:@"%@?imageView2/1/w/320/h/180",pic];
+    }else if(kIPhone5s||kIPhone6)
+    {
+        imageStr=[NSString stringWithFormat:@"%@?imageView2/1/w/640/h/360",pic];
+    }else
+    {
+        imageStr=[NSString stringWithFormat:@"%@?imageView2/1/w/960/h/540",pic];
+    }
+    return imageStr;
+}
 -(void)ArticleAnimation1:(NSNotification *)not
 {
 //    监测
@@ -205,19 +197,9 @@
             imagebackview.image=[UIImage imageNamed:@"found_newsearch_back_360"];
         }else
         {
-            NSString *imageStr=nil;
-            if(kIPhone4s)
-            {
-                imageStr=[NSString stringWithFormat:@"%@?imageView2/1/w/320/h/180",model.thumb_url];
-            }else if(kIPhone5s||kIPhone6)
-            {
-                imageStr=[NSString stringWithFormat:@"%@?imageView2/1/w/640/h/360",model.thumb_url];
-            }else
-            {
-                imageStr=[NSString stringWithFormat:@"%@?imageView2/1/w/960/h/540",model.thumb_url];
-            }
-            imagebackview.placeHolder=[UIImage imageNamed:@"found_newsearch_back_360"];
+            NSString *imageStr = [self getBackViewImg:model.thumb_url];
             [imagebackview setImageWithPath:imageStr];
+            imagebackview.placeHolder=[UIImage imageNamed:@"found_newsearch_back_360"];
         }
 
         [UIView commitAnimations];

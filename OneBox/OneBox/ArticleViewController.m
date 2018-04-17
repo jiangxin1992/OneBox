@@ -476,7 +476,7 @@
         return cell;
     }
 //获取到数据以后
-    static NSString *cellid=@"cell_found";
+    static NSString *cellid=@"ArticleCell";
     ArticleCell *cell=[tableView dequeueReusableCellWithIdentifier:cellid];
     if(!cell)
     {

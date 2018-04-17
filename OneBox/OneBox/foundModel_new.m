@@ -19,7 +19,7 @@
     {
         for (NSDictionary *dict in arr) {
             foundModel_new *model = [[foundModel_new alloc]init];
-            model.isapp=NO;
+            model.isAppear = @(NO);
             if([dict objectForKey:@"data"]!=[NSNull null])
             {
                 if([[dict objectForKey:@"data"]isKindOfClass:[NSDictionary class]])

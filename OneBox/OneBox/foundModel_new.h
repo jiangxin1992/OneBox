@@ -12,13 +12,14 @@
 
 +(NSMutableArray *)parsingData:(NSDictionary *)dict;
 
-@property(nonatomic,assign) BOOL isapp;
-@property (nonatomic,copy)NSDictionary *data;
-__string(m_type);
-__string(title);
-__string(title_en);
-__string(pic);
-__string(f_title_en);
-__string(f_title);
+@property (nonatomic, strong) NSNumber *isAppear;
+
+@property (nonatomic, copy) NSDictionary *data;
+@property (nonatomic, copy) NSString *m_type;
+@property (nonatomic, copy) NSString *title;
+@property (nonatomic, copy) NSString *title_en;
+@property (nonatomic, copy) NSString *pic;
+@property (nonatomic, copy) NSString *f_title_en;
+@property (nonatomic, copy) NSString *f_title;
 
 @end

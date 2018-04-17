@@ -94,6 +94,10 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
 #pragma mark - 生命周期
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
+    [UITableView appearance].estimatedRowHeight = 0;
+    [UITableView appearance].estimatedSectionHeaderHeight = 0;
+    [UITableView appearance].estimatedSectionFooterHeight = 0;
+    
     // 友盟统计,在环信sdk中被引用
     [MobClick startWithAppkey:@"56245bf667e58e115b002eb0" reportPolicy:BATCH channelId:@""];
 

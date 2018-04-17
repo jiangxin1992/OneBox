@@ -43,8 +43,6 @@
 
 @property (nonatomic, strong) NSMutableArray *arrayData;//存放页面的数据
 
-@property (nonatomic,copy) void (^blockSuccess)(NSDictionary *dict);//主界面数据请求成功后调用
-
 //view
 @property (nonatomic, strong) FoundListTableHeaderView *tableHeaderView;//headview的背景图
 @property (nonatomic, strong) FoundListSousuoView *sousuoView;
@@ -52,7 +50,6 @@
 @property (nonatomic, strong) FoundListScreenView *screenView;
 
 @property (nonatomic, strong) UIButton *rightbtn;
-@property (nonatomic, copy) NSString *headviewimage;//headview的背景图url
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, assign) BOOL bKeyBoardHide;//判断键盘显示状态
@@ -117,7 +114,7 @@
 -(void)PrepareData
 {
     [self initializeData];
-    [self createBlock];
+//    [self createBlock];
     [self createNotication];
 }
 -(void)initializeData{
@@ -240,7 +237,7 @@
         make.height.mas_equalTo(34*_Scale);
     }];
 }
--(void)createTableHeadView
+-(void)createTableHeadView:(NSString *)headviewimage
 {
     if(!_tableHeaderView){
         WeakSelf(ws);
@@ -262,7 +259,7 @@
                 [ws requestScreenViewData];
             }
         }];
-        _tableHeaderView.backViewImagePath = _headviewimage;
+        _tableHeaderView.backViewImagePath = headviewimage;
         [_tableHeaderView updateUI];
     }
 }
@@ -380,9 +377,29 @@
 
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:[[NSString alloc] initWithFormat:@"%@%@",DNS,@"/v2/app_modules"] parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
-
         //        请求成功后的处理
-        _blockSuccess((NSDictionary *)responseObject);
+        [_tableView.mj_header endRefreshing];
+        [_tableView.mj_footer endRefreshing];
+        if(_page == 1)
+        {
+            [_arrayData removeAllObjects];//删除所有数据
+        }
+        //headview背景图url
+        NSString *headviewimage = [[responseObject objectForKey:@"data"] objectForKey:@"search_bg"];
+        [self createTableHeadView:headviewimage];
+
+        //数据处理，获取模型数组
+        NSArray *getdata = [foundModel_new parsingData:responseObject];
+        //当获取数据count数量大于0时候，刷新tableview
+
+        if(getdata.count > 0)
+        {
+            [_arrayData addObjectsFromArray:getdata];
+            [_tableView reloadData];
+        }else
+        {
+            [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"没有更多了" WithImg:@"Prompt_提交成功" Withtype:1]];
+        }
 
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [_tableView.mj_header endRefreshing];
@@ -472,11 +489,6 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-
-    if(!_arrayData.count)
-    {
-        return 0;
-    }
     return _arrayData.count;
 }
 
@@ -605,44 +617,6 @@
     }
 }
 #pragma mark - --------------自定义代理/block----------------------
--(void)createBlock
-{
-    WeakSelf(ws);
-
-    self.blockSuccess = ^(NSDictionary *dict)
-    {
-        //        刷新动画收起
-        [ws.tableView.mj_header endRefreshing];
-        [ws.tableView.mj_footer endRefreshing];
-        if(ws.page == 1)
-        {
-            [ws.arrayData removeAllObjects];//删除所有数据
-        }
-        //headview背景图url
-        if(![NSString isNilOrEmpty:[[dict objectForKey:@"data"] objectForKey:@"search_bg"]])
-        {
-            ws.headviewimage = [[dict objectForKey:@"data"] objectForKey:@"search_bg"];
-        }else
-        {
-            ws.headviewimage = nil;
-        }
-
-        [ws createTableHeadView];
-
-        //数据处理，获取模型数组
-        NSArray *getdata = [foundModel_new parsingData:dict];
-        //当获取数据count数量大于0时候，刷新tableview
-
-        if(getdata.count > 0)
-        {
-            [ws.arrayData addObjectsFromArray:getdata];
-            [ws.tableView reloadData];
-        }else
-        {
-            [ws.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"没有更多了" WithImg:@"Prompt_提交成功" Withtype:1]];
-        }
-    };
-}
 
 #pragma mark - --------------自定义响应----------------------
 //跳转搜索结果view

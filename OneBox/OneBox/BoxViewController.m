@@ -682,21 +682,6 @@
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:70.0f/255.0f green:195.0f/255.0f blue:247.0f/255.0f alpha:1];
     self.view.backgroundColor=_define_backview_color;
     self.navigationItem.titleView=[regular returnNavView:@"四步赴美" withmaxwidth:230];
-    if ([self.navigationController.navigationBar respondsToSelector:@selector( setBackgroundImage:forBarMetrics:)]){
-        NSArray *list=self.navigationController.navigationBar.subviews;
-        for (id obj in list) {
-            if ([obj isKindOfClass:[UIImageView class]]) {
-                UIImageView *imageView=(UIImageView *)obj;
-                NSArray *list2=imageView.subviews;
-                for (id obj2 in list2) {
-                    if ([obj2 isKindOfClass:[UIImageView class]]) {
-                        UIImageView *imageView2=(UIImageView *)obj2;
-                        imageView2.hidden=YES;
-                    }
-                }
-            }
-        }
-    }
 
 }
 -(void)create_notifications
@@ -737,6 +722,7 @@
     [super viewWillAppear:animated];
     [MobClick beginLogPageView:@"BoxViewController"];
     [[CustomTabbarController sharedManager] tabbarAppear];
+    self.navigationController.navigationBar.subviews[0].subviews[0].hidden = YES;
 }
 -(void)viewWillDisappear:(BOOL)animated
 {

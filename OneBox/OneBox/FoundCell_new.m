@@ -54,7 +54,9 @@
 {
     imagebackview = [[DBImageView alloc] init];
     [self.contentView addSubview:imagebackview];
+    imagebackview.backgroundColor = _define_white_color;
     imagebackview.frame=CGRectMake(-ScreenWidth*0.05, 0, ScreenWidth*1.10,foundCellHeight);
+    imagebackview.image = [UIImage imageNamed:@"coffee-in_380"];
 
     titlelabel = [UILabel getLabelWithAlignment:1 WithTitle:nil WithFont:21.0f WithTextColor:[UIColor whiteColor] WithSpacing:0];;
     [imagebackview addSubview:titlelabel];

@@ -97,7 +97,8 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
     [UITableView appearance].estimatedRowHeight = 0;
     [UITableView appearance].estimatedSectionHeaderHeight = 0;
     [UITableView appearance].estimatedSectionFooterHeight = 0;
-    
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+
     // 友盟统计,在环信sdk中被引用
     [MobClick startWithAppkey:@"56245bf667e58e115b002eb0" reportPolicy:BATCH channelId:@""];
 
@@ -246,8 +247,6 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
         //显示引导页
         [self makeLaunchView];
     }
-
-    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
 
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;

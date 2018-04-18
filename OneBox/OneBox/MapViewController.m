@@ -79,21 +79,7 @@
     haschange=NO;
     dataarr=[[NSArray alloc] init];
     is_order_school=NO;
-    if ([self.navigationController.navigationBar respondsToSelector:@selector( setBackgroundImage:forBarMetrics:)]){
-        NSArray *list=self.navigationController.navigationBar.subviews;
-        for (id obj in list) {
-            if ([obj isKindOfClass:[UIImageView class]]) {
-                UIImageView *imageView=(UIImageView *)obj;
-                NSArray *list2=imageView.subviews;
-                for (id obj2 in list2) {
-                    if ([obj2 isKindOfClass:[UIImageView class]]) {
-                        UIImageView *imageView2=(UIImageView *)obj2;
-                        imageView2.hidden=YES;
-                    }
-                }
-            }
-        }
-    }
+
     UIBarButtonItem *_btn=[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"返回箭头"] style:UIBarButtonItemStylePlain target:self action:@selector(popviewAction)];
     self.navigationItem.leftBarButtonItem=_btn;
 

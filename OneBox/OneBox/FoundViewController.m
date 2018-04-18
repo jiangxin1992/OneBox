@@ -87,6 +87,8 @@
     [[CustomTabbarController sharedManager] tabbarAppear];
     //    友盟页面监控（登出）
     [MobClick beginLogPageView:@"FoundViewController"];
+
+    self.navigationController.navigationBar.subviews[0].subviews[0].hidden = YES;
 }
 -(void)viewWillDisappear:(BOOL)animated
 {
@@ -145,23 +147,6 @@
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:70.0f/255.0f green:195.0f/255.0f blue:247.0f/255.0f alpha:1];
     //    设置背景颜色
     self.view.backgroundColor = _define_backview_color;
-
-    //   应对导航栏黑线问题（异常）
-    if ([self.navigationController.navigationBar respondsToSelector:@selector( setBackgroundImage:forBarMetrics:)]){
-        NSArray *list=self.navigationController.navigationBar.subviews;
-        for (id obj in list) {
-            if ([obj isKindOfClass:[UIImageView class]]) {
-                UIImageView *imageView=(UIImageView *)obj;
-                NSArray *list2=imageView.subviews;
-                for (id obj2 in list2) {
-                    if ([obj2 isKindOfClass:[UIImageView class]]) {
-                        UIImageView *imageView2=(UIImageView *)obj2;
-                        imageView2.hidden=YES;
-                    }
-                }
-            }
-        }
-    }
 
     //    添加标题
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 230, 40)];

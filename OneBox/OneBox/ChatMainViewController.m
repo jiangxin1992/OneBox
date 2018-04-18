@@ -141,22 +141,6 @@
 
 //    [self registerNotifications];
 
-
-    if ([self.navigationController.navigationBar respondsToSelector:@selector( setBackgroundImage:forBarMetrics:)]){
-        NSArray *list=self.navigationController.navigationBar.subviews;
-        for (id obj in list) {
-            if ([obj isKindOfClass:[UIImageView class]]) {
-                UIImageView *imageView=(UIImageView *)obj;
-                NSArray *list2=imageView.subviews;
-                for (id obj2 in list2) {
-                    if ([obj2 isKindOfClass:[UIImageView class]]) {
-                        UIImageView *imageView2=(UIImageView *)obj2;
-                        imageView2.hidden=YES;
-                    }
-                }
-            }
-        }
-    }
     self.navigationController.navigationBar.barTintColor =[UIColor colorWithRed:70.0f/255.0f green:195.0f/255.0f blue:247.0f/255.0f alpha:1];
 
     UIView *navview=[[UIView alloc] initWithFrame:CGRectMake(0, 0, 500*_Scale, 44)];
@@ -548,7 +532,6 @@
 }
 -(void)viewWillAppear:(BOOL)animated
 {
-
     [super viewWillAppear:animated];
     [MobClick beginLogPageView:@"ChatMainViewController"];
     NSUInteger _unreadnum=[[EaseMob sharedInstance].chatManager loadTotalUnreadMessagesCountFromDatabase];
@@ -566,6 +549,7 @@
         login.type=@"chat";
         [self presentModalViewController:login animated:YES];
     }
+    self.navigationController.navigationBar.subviews[0].subviews[0].hidden = YES;
 }
 
 /*

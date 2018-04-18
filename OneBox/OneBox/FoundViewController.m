@@ -22,11 +22,11 @@
 #import "CustomTabbarController.h"
 
 // 自定义视图
-#import "FoundCell_new.h"
 #import "FoundListSousuoView.h"
 #import "FoundListTableHeaderView.h"
 #import "FoundListBangdanView.h"
 #import "FoundListScreenView.h"
+#import "FoundTableView.h"
 
 // 接口
 
@@ -37,9 +37,7 @@
 
 #import "foundModel_new.h"
 
-#define foundCellHeight 380*_Scale
-
-@interface FoundViewController ()<UITableViewDataSource,UITableViewDelegate>
+@interface FoundViewController ()
 
 @property (nonatomic, strong) NSMutableArray *arrayData;//存放页面的数据
 
@@ -51,16 +49,14 @@
 
 @property (nonatomic, strong) UIButton *rightbtn;
 
-@property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, assign) BOOL bKeyBoardHide;//判断键盘显示状态
+@property (nonatomic, strong) FoundTableView *tableView;
 
 //动画相关
-@property (nonatomic, assign) NSInteger record_cell_num;
-@property (nonatomic, assign) CGFloat min_offset;
-@property (nonatomic, assign) BOOL nav_donghua;//记录导航栏是否滑动上去（是否消失）
-@property (nonatomic, assign) CGFloat start_y;//表示tableview开始拖动时候的起始位置
-@property (nonatomic, assign) BOOL dragging;//表示tableview开始拖动，记录拖动的开始
-@property (nonatomic, assign) BOOL appear;
+@property (nonatomic, assign) NSNumber * bKeyBoardHide;//判断键盘显示状态
+@property (nonatomic, strong) NSNumber *nav_donghua;//记录导航栏是否滑动上去（是否消失）BOOL
+@property (nonatomic, strong) NSNumber *isdragging;//表示tableview开始拖动，记录拖动的开始 BOOL
+@property (nonatomic, strong) NSNumber *isappear;//BOOL
+
 @property (nonatomic, assign) NSInteger page;//记录当前page
 
 @property (nonatomic, strong) NSNumber *total_students_min;//记录学生数的最小值
@@ -82,7 +78,7 @@
 {
     [super viewWillAppear:animated];
 
-    self.appear = YES;
+    self.isappear = @(YES);
     //    tabbar设为出现
     [[CustomTabbarController sharedManager] tabbarAppear];
     //    友盟页面监控（登出）
@@ -94,9 +90,9 @@
 {
     [super viewWillDisappear:animated];
     //    导航栏还原
-    self.appear = NO;
-    self.dragging = NO;
-    self.nav_donghua = NO;
+    self.isappear = @(NO);
+    self.isdragging = @(NO);
+    self.nav_donghua = @(NO);
     self.rightbtn.alpha = 1;
     self.navigationController.navigationBar.frame = CGRectMake(0, kStatusBarHeight, [[UIScreen mainScreen] bounds].size.width, kNavigationBarHeight);
     self.navigationItem.titleView.alpha = 1;
@@ -116,16 +112,13 @@
 -(void)PrepareData
 {
     [self initializeData];
-//    [self createBlock];
     [self createNotication];
 }
 -(void)initializeData{
-    self.record_cell_num = 0;
-    self.bKeyBoardHide = YES;//开始时候键盘为隐藏状态
-    self.appear = YES;
-    self.dragging = NO;
-    self.nav_donghua = NO;
-    self.start_y = 0;
+    self.bKeyBoardHide = @(YES);//开始时候键盘为隐藏状态
+    self.isappear = @(YES);
+    self.isdragging = @(NO);
+    self.nav_donghua = @(NO);
     self.arrayData = [[NSMutableArray alloc] init];
 
     self.page = 1;
@@ -178,20 +171,34 @@
 }
 -(void)createTableView
 {
-    _tableView=[[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+    WeakSelf(ws);
+    _tableView = [[FoundTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
     [self.view addSubview:_tableView];
     [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.top.mas_equalTo(0);
         make.bottom.mas_equalTo(kIPhoneX?-kTabBarHeight:-kStatusBarAndNavigationBarHeight);
     }];
-    _tableView.delegate = self;
-    _tableView.dataSource = self;
-    //    水平方向滑条显示
-    _tableView.showsVerticalScrollIndicator = YES;
-    _tableView.backgroundColor = _define_backview_color;
-    //    消除分割线
-    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    _min_offset = _tableView.contentOffset.y;
+    _tableView.arrayData = _arrayData;
+    _tableView.nav_donghua = _nav_donghua;
+    _tableView.isdragging = _isdragging;
+    _tableView.isappear = _isappear;
+    _tableView.bKeyBoardHide = _bKeyBoardHide;
+    [_tableView setFoundTableViewBlock:^(NSString *type, NSIndexPath *indexPath) {
+        if([type isEqualToString:@"slideUpAction"]){
+            [ws slideUpAction];
+        }else if([type isEqualToString:@"slideDownAction"]){
+            [ws slideDownAction];
+        }else if([type isEqualToString:@"scrollViewShouldScrollToTop"]){
+            [ws scrollViewShouldScrollToTop];
+        }else if([type isEqualToString:@"cellClick_rank"]){
+            [ws cellClick_rank:indexPath];
+        }else if([type isEqualToString:@"cellClick_schooldetail"]){
+            [ws cellClick_schooldetail:indexPath];
+        }else if([type isEqualToString:@"cellClick_sousuo"]){
+            [ws cellClick_sousuo:indexPath];
+        }
+    }];
+    [_tableView reloadData];
 
     [self setupRefresh];
 }
@@ -393,214 +400,7 @@
 }
 
 #pragma mark - --------------系统代理----------------------
-#pragma mark - ScrollViewDelegate
-//导航栏的动画显示与隐藏
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
-{
-    if(_appear && scrollView == _tableView)
-    {
-        //        记录开始滑动时候tableview的偏移量
-        self.start_y = scrollView.contentOffset.y;
-        //        开始滑动
-        self.dragging = YES;
-    }
-}
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView;
-{
-    CGFloat height = scrollView.contentOffset.y + ScreenHeight - _min_offset - (kIPhoneX?kTabBarHeight:kStatusBarAndNavigationBarHeight) - 420*_Scale;
-    JXLOG(@"contentOffset = %f",scrollView.contentOffset.y);
-    JXLOG(@"height = %f",height);
-    JXLOG(@"foundCellHeight = %f",380*_Scale);
-    NSInteger now_cell = (NSInteger)(((CGFloat )height)/((CGFloat)foundCellHeight));
 
-    if(now_cell != _record_cell_num)
-    {
-        _record_cell_num = now_cell;
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"FoundAnimation" object:@(_record_cell_num)];
-    }
-
-    if(_dragging)
-    {
-        //        当导航栏已经消失
-        if(_appear && scrollView == _tableView)
-        {
-            if(_start_y < 20 && scrollView.contentOffset.y > 20)
-            {
-                //            当开始时偏移量小于20并且当前偏移量大于20，开始上滑动画
-                [self SlideUpAction];
-            }else
-            {
-                if(scrollView.contentOffset.y < 20)
-                {
-                    [self SlideDownAction];
-                }else
-                {
-                    if(!_nav_donghua && ((scrollView.contentOffset.y-_start_y) > (ScreenHeight/4.0f)))
-                    {
-                        [self SlideUpAction];
-                    }else if(_nav_donghua && ((_start_y-scrollView.contentOffset.y) > (ScreenHeight/4.0f)))
-                    {
-                        [self SlideDownAction];
-                    }
-                }
-            }
-        }
-    }
-}
-//滑动结束时候调用
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
-{
-    if(_appear && (scrollView == _tableView))
-    {
-        self.dragging = NO;
-    }
-}
-// 回到最顶部
-- (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView
-{
-    //导航栏恢复
-    self.dragging = NO;
-    self.navigationController.navigationBar.frame = CGRectMake(0, kStatusBarHeight, [[UIScreen mainScreen]bounds].size.width, kNavigationBarHeight);
-    self.navigationItem.titleView.alpha = 1;
-    self.nav_donghua = NO;
-
-    return YES;
-}
-#pragma mark - TableViewDelegate
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return foundCellHeight;
-}
-
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return _arrayData.count;
-}
-
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    //数据还未获取时候
-    if(!_arrayData.count)
-    {
-        static NSString *cellid = @"cellid";
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellid];
-        if(!cell)
-        {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellid];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        }
-        return cell;
-    }
-    //获取到数据以后
-    static NSString *cellid = @"FoundCell_new";
-    FoundCell_new *cell = [tableView dequeueReusableCellWithIdentifier:cellid];
-    if(!cell)
-    {
-        cell = [[FoundCell_new alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellid];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    }
-    cell.indexPath = indexPath;
-    cell.foundModel = [_arrayData objectAtIndex:indexPath.row];
-    [cell updateUI];
-
-    return cell;
-}
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-
-    if(!_bKeyBoardHide)
-    {
-        //        当键盘为出现状态时，触发 键盘消失方法
-        [regular dismissKeyborad];
-
-    }else
-    {
-        //键盘没有出现时候调用
-        foundModel_new *model = [_arrayData objectAtIndex:indexPath.row];
-        if(model.m_type != nil)
-        {
-            if([model.m_type isEqualToString:@"rank"])
-            {
-                //当cell类型为榜单时候
-                if(![NSString isNilOrEmpty:[model.data objectForKey:@"rank_name"]])
-                {
-                    //判断点击cell榜单类型
-                    if([[model.data objectForKey:@"rank_name"] isKindOfClass:[NSString class]])
-                    {
-                        if([[model.data objectForKey:@"rank_name"] isEqualToString:@"niche"])
-                        {
-                            [self bangdanAction:@"bangdan_niche"];
-                        }else if([[model.data objectForKey:@"rank_name"] isEqualToString:@"insider"])
-                        {
-                            [self bangdanAction:@"bangdan_business_insider"];
-                        }else if([[model.data objectForKey:@"rank_name"] isEqualToString:@"blue_ribbon"])
-                        {
-                            [self bangdanAction:@"bangdan_blueribbon"];
-                        }else if([[model.data objectForKey:@"rank_name"] isEqualToString:@"day"]||[[model.data objectForKey:@"rank_name"] isEqualToString:@"boarding"])
-                        {
-                            [self bangdanAction:@"bangdan_prep_review"];
-                        }
-                    }
-                }
-
-            }else if([model.m_type isEqualToString:@"school"])
-            {
-                //当当前cell类型为school时候
-                BOOL _canpush = NO;//判断当前时候满足跳转条件（及schoolID不为空）
-                NSString *schoolname = nil;
-                NSString *schoolid = nil;
-                if(![NSString isNilOrEmpty:[model.data objectForKey:@"school_name_cn"]])
-                {
-                    schoolname = [model.data objectForKey:@"school_name_cn"];
-                }else
-                {
-                    schoolname = @"";
-                }
-
-                if([model.data objectForKey:@"school_id"] != [NSNull null])
-                {
-                    if([model.data objectForKey:@"school_id"] != nil)
-                    {
-                        schoolid = [[NSString alloc] initWithFormat:@"%ld",[[model.data objectForKey:@"school_id"] longValue]];
-                        _canpush = YES;
-                    }else
-                    {
-                        schoolid = @"";
-                    }
-                }else
-                {
-                    schoolid = @"";
-                }
-
-                if(_canpush)
-                {
-                    SchoolDetailViewController *schoolView = [[SchoolDetailViewController alloc] init];
-                    schoolView.data_dict = [[NSDictionary alloc] initWithObjectsAndKeys:schoolname,@"schoolName",schoolid,@"schoolID",nil];
-                    [self.navigationController pushViewController:schoolView animated:YES];
-                }
-
-            }if([model.m_type isEqualToString:@"city"])
-            {
-                //当前cell为city类型时,当数据类型正确并且城市多余0个的时候允许跳转。
-                if([model.data objectForKey:@"city_names"] != [NSNull null])
-                {
-                    if([model.data objectForKey:@"city_names"] != nil)
-                    {
-                        if([[model.data objectForKey:@"city_names"] isKindOfClass:[NSArray class]])
-                        {
-                            if([[model.data objectForKey:@"city_names"] count] > 0)
-                            {
-                                souSuoCitiesViewController *pushctn = [[souSuoCitiesViewController alloc] init];
-                                pushctn.cityNameDict = [[NSDictionary alloc] initWithObjectsAndKeys:[model.data objectForKey:@"city_names"],@"city_names",model.title,@"title",nil];
-                                [self.navigationController pushViewController:pushctn animated:YES];
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
 #pragma mark - --------------自定义代理/block----------------------
 
 #pragma mark - --------------自定义响应----------------------
@@ -679,41 +479,41 @@
 }
 #pragma mark - slideAction
 //导航栏上滑动画
--(void)SlideUpAction
+-(void)slideUpAction
 {
     [UIView beginAnimations:@"SlideUpAction" context:nil];
     [UIView setAnimationDuration:0.2];
     [UIView setAnimationCurve: UIViewAnimationCurveEaseInOut];
     [UIView setAnimationDelegate:self];
-    self.navigationController.navigationBar.frame = CGRectMake(0, kStatusBarHeight - kStatusBarAndNavigationBarHeight, [[UIScreen mainScreen]bounds].size.width, kNavigationBarHeight);
+    self.navigationController.navigationBar.frame = CGRectMake(0, kStatusBarHeight - kStatusBarAndNavigationBarHeight, [[UIScreen mainScreen] bounds].size.width, kNavigationBarHeight);
     self.navigationItem.titleView.alpha = 0;
     _rightbtn.alpha = 0;
     [UIView commitAnimations];
-    self.nav_donghua = NO;
+    self.nav_donghua = @(NO);
 }
 //导航栏恢复动画
--(void)SlideDownAction
+-(void)slideDownAction
 {
     [UIView beginAnimations:@"SlideDownAction" context:nil];
     [UIView setAnimationDuration:0.2];
     [UIView setAnimationCurve: UIViewAnimationCurveEaseInOut];
     [UIView setAnimationDelegate:self];
-    self.navigationController.navigationBar.frame = CGRectMake(0, kStatusBarHeight, [[UIScreen mainScreen]bounds].size.width, kNavigationBarHeight);
+    self.navigationController.navigationBar.frame = CGRectMake(0, kStatusBarHeight, [[UIScreen mainScreen] bounds].size.width, kNavigationBarHeight);
     _rightbtn.alpha = 1;
     self.navigationItem.titleView.alpha = 1;
     [UIView commitAnimations];
-    self.nav_donghua = NO;
+    self.nav_donghua = @(NO);
 }
 #pragma mark - Notification
 -(void)navBarReset
 {
     //将导航栏位置复原
-    self.navigationController.navigationBar.frame = CGRectMake(0, kStatusBarHeight, [[UIScreen mainScreen]bounds].size.width, kNavigationBarHeight);
+    self.navigationController.navigationBar.frame = CGRectMake(0, kStatusBarHeight, [[UIScreen mainScreen] bounds].size.width, kNavigationBarHeight);
     //    导航栏标题透明度还原成1，还原_dragging，_nav_donghua
     self.navigationItem.titleView.alpha = 1;
     _rightbtn.alpha = 1;
-    self.dragging = NO;
-    self.nav_donghua = NO;
+    self.isdragging = @(NO);
+    self.nav_donghua = @(NO);
 }
 -(void)xiaoshi:(NSNotification *)not
 {
@@ -725,15 +525,53 @@
 //键盘消失时候调用
 -(void)keyboardWillHide:(NSNotification *)notification
 {
-    _bKeyBoardHide = YES;
+    _bKeyBoardHide = @(YES);
 }
 //键盘出现时候调用
 -(void)keyboardWillShow:(NSNotification *)notification
 {
-    _bKeyBoardHide = NO;
+    _bKeyBoardHide = @(NO);
 }
 #pragma mark - --------------自定义方法----------------------
+-(void)cellClick_rank:(NSIndexPath *)indexPath{
+    foundModel_new *model = [_arrayData objectAtIndex:indexPath.row];
+    if([[model.data objectForKey:@"rank_name"] isEqualToString:@"niche"])
+    {
+        [self bangdanAction:@"bangdan_niche"];
+    }else if([[model.data objectForKey:@"rank_name"] isEqualToString:@"insider"])
+    {
+        [self bangdanAction:@"bangdan_business_insider"];
+    }else if([[model.data objectForKey:@"rank_name"] isEqualToString:@"blue_ribbon"])
+    {
+        [self bangdanAction:@"bangdan_blueribbon"];
+    }else if([[model.data objectForKey:@"rank_name"] isEqualToString:@"day"]||[[model.data objectForKey:@"rank_name"] isEqualToString:@"boarding"])
+    {
+        [self bangdanAction:@"bangdan_prep_review"];
+    }
+}
+-(void)cellClick_schooldetail:(NSIndexPath *)indexPath{
+    foundModel_new *model = [_arrayData objectAtIndex:indexPath.row];
+    NSString *schoolname = [model.data objectForKey:@"school_name_cn"];
+    NSString *schoolid = [[NSString alloc] initWithFormat:@"%ld",[[model.data objectForKey:@"school_id"] longValue]];
 
+    SchoolDetailViewController *schoolView = [[SchoolDetailViewController alloc] init];
+    schoolView.data_dict = @{@"schoolName":schoolname,@"schoolID":schoolid};
+    [self.navigationController pushViewController:schoolView animated:YES];
+}
+-(void)cellClick_sousuo:(NSIndexPath *)indexPath{
+    foundModel_new *model = [_arrayData objectAtIndex:indexPath.row];
+
+    souSuoCitiesViewController *pushctn = [[souSuoCitiesViewController alloc] init];
+    pushctn.cityNameDict = [[NSDictionary alloc] initWithObjectsAndKeys:[model.data objectForKey:@"city_names"],@"city_names",model.title,@"title",nil];
+    [self.navigationController pushViewController:pushctn animated:YES];
+}
+-(void)scrollViewShouldScrollToTop{
+    //导航栏恢复
+    self.isdragging = @(NO);
+    self.navigationController.navigationBar.frame = CGRectMake(0, kStatusBarHeight, [[UIScreen mainScreen] bounds].size.width, kNavigationBarHeight);
+    self.navigationItem.titleView.alpha = 1;
+    self.nav_donghua = @(NO);
+}
 
 #pragma mark - --------------other----------------------
 

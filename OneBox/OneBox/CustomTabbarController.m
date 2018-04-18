@@ -751,7 +751,7 @@ static CustomTabbarController *tabbarController = nil;
     [UIView setAnimationCurve: UIViewAnimationCurveEaseInOut];
     [UIView setAnimationDelegate:self];
 
-     _tabbar.frame=CGRectMake(0, [[UIScreen mainScreen]bounds].size.height, [[UIScreen mainScreen]bounds].size.width, kTabBarHeight);
+     _tabbar.frame=CGRectMake(0, [[UIScreen mainScreen] bounds].size.height, [[UIScreen mainScreen] bounds].size.width, kTabBarHeight);
 
     [UIView commitAnimations];
 
@@ -764,7 +764,7 @@ static CustomTabbarController *tabbarController = nil;
     [UIView setAnimationDuration:0.2];
     [UIView setAnimationCurve: UIViewAnimationCurveEaseInOut];
     [UIView setAnimationDelegate:self];
-    _tabbar.frame=CGRectMake(0, [[UIScreen mainScreen]bounds].size.height - kTabBarHeight, [[UIScreen mainScreen]bounds].size.width, kTabBarHeight);
+    _tabbar.frame=CGRectMake(0, [[UIScreen mainScreen] bounds].size.height - kTabBarHeight, [[UIScreen mainScreen] bounds].size.width, kTabBarHeight);
     [UIView commitAnimations];
 
 

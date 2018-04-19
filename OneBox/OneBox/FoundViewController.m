@@ -53,11 +53,6 @@
 @property (nonatomic, strong) FoundTableView *tableView;
 
 //动画相关
-//@property (nonatomic, assign) NSNumber *bKeyBoardHide;//判断键盘显示状态
-//@property (nonatomic, strong) NSNumber *isNavShow;//导航栏是否出现 BOOL
-//@property (nonatomic, strong) NSNumber *isNavAnimation;//导航栏动画是否在进行中 BOOL
-//@property (nonatomic, strong) NSNumber *isdragging;//表示tableview开始拖动，记录拖动的开始 BOOL
-//@property (nonatomic, strong) NSNumber *isappear;//BOOL
 @property (nonatomic, strong) FoundTableViewParameterModel *parameterModel;
 
 @property (nonatomic, assign) NSInteger page;//记录当前page

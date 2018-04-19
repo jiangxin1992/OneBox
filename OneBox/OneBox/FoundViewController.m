@@ -14,7 +14,7 @@
 #import "OnlineProjectsViewController.h"
 #import "MapViewController.h"
 #import "shaiXuanViewController.h"
-#import "souSuoCitiesViewController.h"
+#import "SouSuoCitiesViewController.h"
 #import "SchoolDetailViewController.h"
 #import "souSuoViewController.h"
 #import "bangdanlistViewController.h"
@@ -95,6 +95,7 @@
     self.navigationItem.titleView.alpha = 1;
     //    友盟页面监控（进入）
     [MobClick endLogPageView:@"FoundViewController"];
+    
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -565,7 +566,7 @@
 -(void)cellClick_sousuo:(NSIndexPath *)indexPath{
     foundModel_new *model = [_arrayData objectAtIndex:indexPath.row];
 
-    souSuoCitiesViewController *pushctn = [[souSuoCitiesViewController alloc] init];
+    SouSuoCitiesViewController *pushctn = [[SouSuoCitiesViewController alloc] init];
     pushctn.cityNameDict = [[NSDictionary alloc] initWithObjectsAndKeys:[model.data objectForKey:@"city_names"],@"city_names",model.title,@"title",nil];
     [self.navigationController pushViewController:pushctn animated:YES];
 }

@@ -6,7 +6,7 @@
 //  Copyright (c) 2015年 谢江新. All rights reserved.
 //
 
-#import "souSuoCitiesViewController.h"
+#import "SouSuoCitiesViewController.h"
 
 // c文件 —> 系统文件（c文件在前）
 
@@ -32,7 +32,7 @@
 #define foundCellHeight 184*_Scale
 #define foundCellHeight_card 400*_Scale
 
-@interface souSuoCitiesViewController ()<UITableViewDataSource,UITableViewDelegate>
+@interface SouSuoCitiesViewController ()<UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic, assign) NSInteger m_row;
 @property (nonatomic, assign) NSInteger m_section;
@@ -64,7 +64,7 @@
 
 @end
 
-@implementation souSuoCitiesViewController
+@implementation SouSuoCitiesViewController
 #pragma mark - --------------生命周期--------------
 - (void)viewDidLoad {
     [super viewDidLoad];

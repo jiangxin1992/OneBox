@@ -393,7 +393,6 @@ static CustomTabbarController *tabbarController = nil;
 - (void)viewDidLoad {
 
     [super viewDidLoad];
-//    [[CustomTabbarController sharedManager] tabbarHide]
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(unreadmessage:) name:@"unreadmessage" object:nil];
     btnarr=[[NSMutableArray alloc] init];

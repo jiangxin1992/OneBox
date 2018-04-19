@@ -241,7 +241,6 @@
 
 
     chatController.hidesBottomBarWhenPushed = YES;
-//    [[CustomTabbarController sharedManager] tabbarHide];
 
     [self.navigationController pushViewController:chatController animated:YES];
 

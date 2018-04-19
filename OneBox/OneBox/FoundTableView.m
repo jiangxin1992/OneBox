@@ -83,7 +83,7 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView;
 {
     CGFloat height = scrollView.contentOffset.y + ScreenHeight - (kIPhoneX?kTabBarHeight:kStatusBarAndNavigationBarHeight) - 420*_Scale;
-    JXLOG(@"contentOffset = %f",scrollView.contentOffset.y);
+//    JXLOG(@"contentOffset = %f",scrollView.contentOffset.y);
 //    JXLOG(@"height = %f",height);
 //    JXLOG(@"foundCellHeight = %f",380*_Scale);
     NSInteger now_cell = (NSInteger)(((CGFloat )height)/((CGFloat)foundCellHeight));

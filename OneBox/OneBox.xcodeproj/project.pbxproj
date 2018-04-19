@@ -104,7 +104,7 @@
 		53552CCA1B6F8ECE00CCAC9F /* YYAnimationIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 53552CC91B6F8ECE00CCAC9F /* YYAnimationIndicator.m */; };
 		535D5E4E1C167C6B00470F7F /* foundModel_new.m in Sources */ = {isa = PBXBuildFile; fileRef = 535D5E4D1C167C6B00470F7F /* foundModel_new.m */; };
 		535D5E511C167FC000470F7F /* FoundCell_new.m in Sources */ = {isa = PBXBuildFile; fileRef = 535D5E4F1C167FC000470F7F /* FoundCell_new.m */; };
-		535D5E5B1C16B01300470F7F /* souSuoCitiesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 535D5E5A1C16B01300470F7F /* souSuoCitiesViewController.m */; };
+		535D5E5B1C16B01300470F7F /* SouSuoCitiesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 535D5E5A1C16B01300470F7F /* SouSuoCitiesViewController.m */; };
 		535E5ED61BE084A600A5C4F1 /* chatview_关注好友.png in Resources */ = {isa = PBXBuildFile; fileRef = 535E5ED31BE084A600A5C4F1 /* chatview_关注好友.png */; };
 		536504CB1A84ADEE00B8C2A9 /* baseModelJX.m in Sources */ = {isa = PBXBuildFile; fileRef = 536504CA1A84ADEE00B8C2A9 /* baseModelJX.m */; };
 		5366E1541C1FC13F0036A960 /* ArticleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5366E1531C1FC13F0036A960 /* ArticleViewController.m */; };
@@ -757,8 +757,8 @@
 		535D5E4D1C167C6B00470F7F /* foundModel_new.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = foundModel_new.m; sourceTree = "<group>"; };
 		535D5E4F1C167FC000470F7F /* FoundCell_new.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoundCell_new.m; sourceTree = "<group>"; };
 		535D5E501C167FC000470F7F /* FoundCell_new.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoundCell_new.h; sourceTree = "<group>"; };
-		535D5E591C16B01300470F7F /* souSuoCitiesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = souSuoCitiesViewController.h; sourceTree = "<group>"; };
-		535D5E5A1C16B01300470F7F /* souSuoCitiesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = souSuoCitiesViewController.m; sourceTree = "<group>"; };
+		535D5E591C16B01300470F7F /* SouSuoCitiesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SouSuoCitiesViewController.h; sourceTree = "<group>"; };
+		535D5E5A1C16B01300470F7F /* SouSuoCitiesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SouSuoCitiesViewController.m; sourceTree = "<group>"; };
 		535E5ED31BE084A600A5C4F1 /* chatview_关注好友.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chatview_关注好友.png"; sourceTree = "<group>"; };
 		536504C91A84ADEE00B8C2A9 /* baseModelJX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = baseModelJX.h; sourceTree = "<group>"; };
 		536504CA1A84ADEE00B8C2A9 /* baseModelJX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = baseModelJX.m; sourceTree = "<group>"; };
@@ -2232,8 +2232,8 @@
 		535D5E581C16AFB300470F7F /* 城市类型 */ = {
 			isa = PBXGroup;
 			children = (
-				535D5E591C16B01300470F7F /* souSuoCitiesViewController.h */,
-				535D5E5A1C16B01300470F7F /* souSuoCitiesViewController.m */,
+				535D5E591C16B01300470F7F /* SouSuoCitiesViewController.h */,
+				535D5E5A1C16B01300470F7F /* SouSuoCitiesViewController.m */,
 			);
 			name = "城市类型";
 			sourceTree = "<group>";
@@ -4607,7 +4607,7 @@
 					53B537271A7F465D0095C129 = {
 						CreatedOnToolsVersion = 6.1;
 						DevelopmentTeam = 8S92E4NW68;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -5006,7 +5006,7 @@
 				66C7322D1AC2A765002BCBB9 /* ADClusterableAnnotation.m in Sources */,
 				53F976651BB29520004FC0B7 /* DXFaceView.m in Sources */,
 				53B675691BEC5B4B00DFD940 /* CountryCodeViewController.m in Sources */,
-				535D5E5B1C16B01300470F7F /* souSuoCitiesViewController.m in Sources */,
+				535D5E5B1C16B01300470F7F /* SouSuoCitiesViewController.m in Sources */,
 				53F977721BB3BC9E004FC0B7 /* notificationModel.m in Sources */,
 				53F2D9641B1F073E000A5183 /* MYIntroductionView.m in Sources */,
 				66C732391AC2A922002BCBB9 /* ADMapCluster.m in Sources */,
@@ -5405,7 +5405,7 @@
 				CODE_SIGN_ENTITLEMENTS = OneBox/OneBox.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEVELOPMENT_TEAM = 8S92E4NW68;
 				ENABLE_BITCODE = NO;
@@ -5457,8 +5457,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.onebox.boxs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "00e60fb7-18a7-47b4-8731-d6e70d89e2fa";
-				PROVISIONING_PROFILE_SPECIFIER = onebox.Development;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};
@@ -5472,9 +5472,9 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = NO;
 				CODE_SIGN_ENTITLEMENTS = OneBox/OneBox.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = YES;
 				DEVELOPMENT_TEAM = 8S92E4NW68;
 				ENABLE_BITCODE = NO;
@@ -5526,8 +5526,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.onebox.boxs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "00e60fb7-18a7-47b4-8731-d6e70d89e2fa";
-				PROVISIONING_PROFILE_SPECIFIER = onebox.Distribution;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};

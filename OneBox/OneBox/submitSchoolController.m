@@ -762,8 +762,6 @@
     [super viewWillAppear:animated];
     [MobClick beginLogPageView:@"submitSchoolController"];
 
-
-
      [[CustomTabbarController sharedManager] tabbarHide];
 }
 

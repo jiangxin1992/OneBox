@@ -941,7 +941,7 @@
                     {
                         if(!_nav_donghua)
                         {
-                            //        动画显示
+                            
                             [UIView beginAnimations:@"anmationAppear" context:nil];
                             [UIView setAnimationDuration:0.2];
                             [UIView setAnimationCurve: UIViewAnimationCurveEaseInOut];

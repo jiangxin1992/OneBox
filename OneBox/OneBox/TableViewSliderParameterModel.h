@@ -1,5 +1,5 @@
 //
-//  FoundTableViewParameterModel.h
+//  TableViewSliderParameterModel.h
 //  OneBox
 //
 //  Created by yyj on 2018/4/19.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface FoundTableViewParameterModel : NSObject
+@interface TableViewSliderParameterModel : NSObject
 
 @property (nonatomic, strong) NSNumber *isNavShow;//导航栏是否出现 BOOL
 @property (nonatomic, assign) NSNumber *isNavAnimation;//导航栏动画是否在进行中 BOOL

@@ -8,13 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@class FoundTableViewParameterModel;
+@class TableViewSliderParameterModel;
 
 @interface FoundTableView : UITableView
 
 @property (nonatomic, strong) NSMutableArray *arrayData;//存放页面的数据
 
-@property (nonatomic, strong) FoundTableViewParameterModel *parameterModel;
+@property (nonatomic, strong) TableViewSliderParameterModel *parameterModel;
 
 @property (nonatomic, copy) void (^foundTableViewBlock)(NSString *type,NSIndexPath *indexPath);
 

@@ -21,7 +21,7 @@
 
 // 自定义类和三方类（ cocoapods类 > model > 工具类 > 其他）
 #import "foundModel_new.h"
-#import "FoundTableViewParameterModel.h"
+#import "TableViewSliderParameterModel.h"
 
 #define foundCellHeight 380*_Scale
 

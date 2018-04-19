@@ -36,7 +36,7 @@
 #import "MJRefresh.h"
 
 #import "foundModel_new.h"
-#import "FoundTableViewParameterModel.h"
+#import "TableViewSliderParameterModel.h"
 
 @interface FoundViewController ()
 
@@ -53,7 +53,7 @@
 @property (nonatomic, strong) FoundTableView *tableView;
 
 //动画相关
-@property (nonatomic, strong) FoundTableViewParameterModel *parameterModel;
+@property (nonatomic, strong) TableViewSliderParameterModel *parameterModel;
 
 @property (nonatomic, assign) NSInteger page;//记录当前page
 
@@ -113,7 +113,7 @@
     [self createNotication];
 }
 -(void)initializeData{
-    _parameterModel = [[FoundTableViewParameterModel alloc] init];
+    _parameterModel = [[TableViewSliderParameterModel alloc] init];
     _parameterModel.bKeyBoardHide = @(YES);//开始时候键盘为隐藏状态
     _parameterModel.isappear = @(YES);
     _parameterModel.isdragging = @(NO);

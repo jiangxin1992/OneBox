@@ -75,6 +75,7 @@
 		3F9586171E56EB1B004A5AC2 /* libz.1.2.5.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F9586161E56EB1B004A5AC2 /* libz.1.2.5.tbd */; };
 		3F9586191E56EB2F004A5AC2 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F9586181E56EB2F004A5AC2 /* libicucore.tbd */; };
 		3FACCDBE20871D97004AF8EA /* FoundTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FACCDBD20871D97004AF8EA /* FoundTableView.m */; };
+		3FACCDC120887298004AF8EA /* FoundTableViewParameterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FACCDC020887298004AF8EA /* FoundTableViewParameterModel.m */; };
 		3FF879B02062330800E7A451 /* libEaseMobClientSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FF879AF2062330700E7A451 /* libEaseMobClientSDK.a */; };
 		3FF87DD7206255C100E7A451 /* UILabel+Custom.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF87DD5206255C000E7A451 /* UILabel+Custom.m */; };
 		3FF87DDA2062628600E7A451 /* BoxHelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF87DD92062628600E7A451 /* BoxHelpViewController.m */; };
@@ -700,6 +701,8 @@
 		3F9586181E56EB2F004A5AC2 /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
 		3FACCDBC20871D97004AF8EA /* FoundTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FoundTableView.h; sourceTree = "<group>"; };
 		3FACCDBD20871D97004AF8EA /* FoundTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FoundTableView.m; sourceTree = "<group>"; };
+		3FACCDBF20887298004AF8EA /* FoundTableViewParameterModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FoundTableViewParameterModel.h; sourceTree = "<group>"; };
+		3FACCDC020887298004AF8EA /* FoundTableViewParameterModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FoundTableViewParameterModel.m; sourceTree = "<group>"; };
 		3FCD89D2204E7C96004AF13A /* OneBox.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OneBox.entitlements; sourceTree = "<group>"; };
 		3FF879AF2062330700E7A451 /* libEaseMobClientSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libEaseMobClientSDK.a; sourceTree = "<group>"; };
 		3FF87DD5206255C000E7A451 /* UILabel+Custom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+Custom.m"; sourceTree = "<group>"; };
@@ -1822,6 +1825,8 @@
 		3F32F43C2080AD6F00FB3D04 /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
+				3FACCDBF20887298004AF8EA /* FoundTableViewParameterModel.h */,
+				3FACCDC020887298004AF8EA /* FoundTableViewParameterModel.m */,
 				3FACCDBC20871D97004AF8EA /* FoundTableView.h */,
 				3FACCDBD20871D97004AF8EA /* FoundTableView.m */,
 				3F32F438207F34D500FB3D04 /* FoundListScreenCityView.h */,
@@ -5242,6 +5247,7 @@
 				53F975F01BB29501004FC0B7 /* PSTCollectionView.m in Sources */,
 				53F9769C1BB29534004FC0B7 /* ChatroomListViewController.m in Sources */,
 				53F976CC1BB295A2004FC0B7 /* EMChooseViewController.m in Sources */,
+				3FACCDC120887298004AF8EA /* FoundTableViewParameterModel.m in Sources */,
 				530A54C41A8C50C50048EEEB /* Tools.m in Sources */,
 				53F975CC1BB29501004FC0B7 /* EMCDDeviceManager+Media.m in Sources */,
 				53F976DA1BB295AA004FC0B7 /* EMTextView.m in Sources */,

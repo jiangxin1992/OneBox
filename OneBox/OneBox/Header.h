@@ -12,6 +12,7 @@
 #import "YYAnimationIndicator.h"
 #import "DBImageView.h"
 #import "AFNetworking.h"
+#import <MJExtension.h>
 
 /*************** Category ***************/
 #import "UIViewController+HUD.h"

@@ -21,6 +21,7 @@
 
 // 自定义类和三方类（ cocoapods类 > model > 工具类 > 其他）
 #import "foundModel_new.h"
+#import "FoundTableViewParameterModel.h"
 
 #define foundCellHeight 380*_Scale
 
@@ -71,20 +72,20 @@
 //导航栏的动画显示与隐藏
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
-    if([_isappear boolValue])
+    if([_parameterModel.isappear boolValue])
     {
         //        记录开始滑动时候tableview的偏移量
         self.start_y = @(scrollView.contentOffset.y);
         //        开始滑动
-        self.isdragging = @(YES);
+        _parameterModel.isdragging = @(YES);
     }
 }
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView;
 {
     CGFloat height = scrollView.contentOffset.y + ScreenHeight - (kIPhoneX?kTabBarHeight:kStatusBarAndNavigationBarHeight) - 420*_Scale;
     JXLOG(@"contentOffset = %f",scrollView.contentOffset.y);
-    JXLOG(@"height = %f",height);
-    JXLOG(@"foundCellHeight = %f",380*_Scale);
+//    JXLOG(@"height = %f",height);
+//    JXLOG(@"foundCellHeight = %f",380*_Scale);
     NSInteger now_cell = (NSInteger)(((CGFloat )height)/((CGFloat)foundCellHeight));
 
     if(now_cell != [_record_cell_num integerValue])
@@ -92,37 +93,44 @@
         _record_cell_num = @(now_cell);
         [[NSNotificationCenter defaultCenter] postNotificationName:@"FoundAnimation" object:_record_cell_num];
     }
-
-    if([_isdragging boolValue])
+    if([_parameterModel.isNavAnimation boolValue]){
+        NSLog(@"111");
+    }else{
+        NSLog(@"111");
+    }
+    //条件 （在拖动中 && 界面在出现状态 && 导航栏动画结束）
+    if([_parameterModel.isdragging boolValue] && [_parameterModel.isappear boolValue] && ![_parameterModel.isNavAnimation boolValue])
     {
-        //        当导航栏已经消失
-        if([_isappear boolValue])
+
+        if([_start_y floatValue] < 0.f && scrollView.contentOffset.y > 0.f)
         {
-            if([_start_y floatValue] < 20 && scrollView.contentOffset.y > 20)
-            {
-                //            当开始时偏移量小于20并且当前偏移量大于20，开始上滑动画
+            //当起始位置小于0，并且当前位置大于0时，开始消失动画
+            if([_parameterModel.isNavShow boolValue]){
                 if(_foundTableViewBlock){
-                    _foundTableViewBlock(@"slideUpAction",nil);
+                    _foundTableViewBlock(@"navHideAction",nil);
+                }
+            }
+        }else
+        {
+            if(scrollView.contentOffset.y < 0.f)
+            {
+                //当tableview刚好到顶部时，开始出现动画
+                if(![_parameterModel.isNavShow boolValue]){
+                    if(_foundTableViewBlock){
+                        _foundTableViewBlock(@"navShowAction",nil);
+                    }
                 }
             }else
             {
-                if(scrollView.contentOffset.y < 20)
-                {
+                if(([_start_y floatValue] - scrollView.contentOffset.y) > (ScreenHeight/4.0f) && ![_parameterModel.isNavShow boolValue]){
+                    //当导航栏为隐藏状态；并且整体偏移量大于1/4屏时，开始出现动画
                     if(_foundTableViewBlock){
-                        _foundTableViewBlock(@"slideDownAction",nil);
+                        _foundTableViewBlock(@"navShowAction",nil);
                     }
-                }else
-                {
-                    if(![_nav_donghua boolValue] && ((scrollView.contentOffset.y-[_start_y floatValue]) > (ScreenHeight/4.0f)))
-                    {
-                        if(_foundTableViewBlock){
-                            _foundTableViewBlock(@"slideUpAction",nil);
-                        }
-                    }else if([_nav_donghua boolValue] && (([_start_y floatValue]-scrollView.contentOffset.y) > (ScreenHeight/4.0f)))
-                    {
-                        if(_foundTableViewBlock){
-                            _foundTableViewBlock(@"slideDownAction",nil);
-                        }
+                }else if((scrollView.contentOffset.y - [_start_y floatValue]) > (ScreenHeight/4.0f) && [_parameterModel.isNavShow boolValue]){
+                    //当导航栏为出现状态；并且整体偏移量大于1/4屏时，开始消失动画
+                    if(_foundTableViewBlock){
+                        _foundTableViewBlock(@"navHideAction",nil);
                     }
                 }
             }
@@ -132,9 +140,9 @@
 //滑动结束时候调用
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-    if([_isappear boolValue])
+    if([_parameterModel.isappear boolValue])
     {
-        self.isdragging = @(NO);
+        _parameterModel.isdragging = @(NO);
     }
 }
 // 回到最顶部
@@ -190,7 +198,7 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 
-    if(![_bKeyBoardHide boolValue])
+    if(![_parameterModel.bKeyBoardHide boolValue])
     {
         //        当键盘为出现状态时，触发 键盘消失方法
         [regular dismissKeyborad];
@@ -269,7 +277,6 @@
     }
 }
 #pragma mark - --------------自定义响应----------------------
-
 
 #pragma mark - --------------自定义方法----------------------
 

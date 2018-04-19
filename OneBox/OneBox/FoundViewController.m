@@ -36,6 +36,7 @@
 #import "MJRefresh.h"
 
 #import "foundModel_new.h"
+#import "FoundTableViewParameterModel.h"
 
 @interface FoundViewController ()
 
@@ -52,10 +53,12 @@
 @property (nonatomic, strong) FoundTableView *tableView;
 
 //动画相关
-@property (nonatomic, assign) NSNumber * bKeyBoardHide;//判断键盘显示状态
-@property (nonatomic, strong) NSNumber *nav_donghua;//记录导航栏是否滑动上去（是否消失）BOOL
-@property (nonatomic, strong) NSNumber *isdragging;//表示tableview开始拖动，记录拖动的开始 BOOL
-@property (nonatomic, strong) NSNumber *isappear;//BOOL
+//@property (nonatomic, assign) NSNumber *bKeyBoardHide;//判断键盘显示状态
+//@property (nonatomic, strong) NSNumber *isNavShow;//导航栏是否出现 BOOL
+//@property (nonatomic, strong) NSNumber *isNavAnimation;//导航栏动画是否在进行中 BOOL
+//@property (nonatomic, strong) NSNumber *isdragging;//表示tableview开始拖动，记录拖动的开始 BOOL
+//@property (nonatomic, strong) NSNumber *isappear;//BOOL
+@property (nonatomic, strong) FoundTableViewParameterModel *parameterModel;
 
 @property (nonatomic, assign) NSInteger page;//记录当前page
 
@@ -78,7 +81,7 @@
 {
     [super viewWillAppear:animated];
 
-    self.isappear = @(YES);
+    _parameterModel.isappear = @(YES);
     //    tabbar设为出现
     [[CustomTabbarController sharedManager] tabbarAppear];
     //    友盟页面监控（登出）
@@ -90,9 +93,8 @@
 {
     [super viewWillDisappear:animated];
     //    导航栏还原
-    self.isappear = @(NO);
-    self.isdragging = @(NO);
-    self.nav_donghua = @(NO);
+    _parameterModel.isappear = @(NO);
+    _parameterModel.isdragging = @(NO);
     self.rightbtn.alpha = 1;
     self.navigationController.navigationBar.frame = CGRectMake(0, kStatusBarHeight, [[UIScreen mainScreen] bounds].size.width, kNavigationBarHeight);
     self.navigationItem.titleView.alpha = 1;
@@ -115,10 +117,12 @@
     [self createNotication];
 }
 -(void)initializeData{
-    self.bKeyBoardHide = @(YES);//开始时候键盘为隐藏状态
-    self.isappear = @(YES);
-    self.isdragging = @(NO);
-    self.nav_donghua = @(NO);
+    _parameterModel = [[FoundTableViewParameterModel alloc] init];
+    _parameterModel.bKeyBoardHide = @(YES);//开始时候键盘为隐藏状态
+    _parameterModel.isappear = @(YES);
+    _parameterModel.isdragging = @(NO);
+    _parameterModel.isNavShow = @(YES);
+    _parameterModel.isNavAnimation = @(NO);
     self.arrayData = [[NSMutableArray alloc] init];
 
     self.page = 1;
@@ -178,16 +182,13 @@
         make.left.right.top.mas_equalTo(0);
         make.bottom.mas_equalTo(kIPhoneX?-kTabBarHeight:-kStatusBarAndNavigationBarHeight);
     }];
+    _tableView.parameterModel = _parameterModel;
     _tableView.arrayData = _arrayData;
-    _tableView.nav_donghua = _nav_donghua;
-    _tableView.isdragging = _isdragging;
-    _tableView.isappear = _isappear;
-    _tableView.bKeyBoardHide = _bKeyBoardHide;
     [_tableView setFoundTableViewBlock:^(NSString *type, NSIndexPath *indexPath) {
-        if([type isEqualToString:@"slideUpAction"]){
-            [ws slideUpAction];
-        }else if([type isEqualToString:@"slideDownAction"]){
-            [ws slideDownAction];
+        if([type isEqualToString:@"navHideAction"]){
+            [ws navHideAction];
+        }else if([type isEqualToString:@"navShowAction"]){
+            [ws navShowAction];
         }else if([type isEqualToString:@"scrollViewShouldScrollToTop"]){
             [ws scrollViewShouldScrollToTop];
         }else if([type isEqualToString:@"cellClick_rank"]){
@@ -477,43 +478,51 @@
         }
     }
 }
-#pragma mark - slideAction
+#pragma mark - navAction
 //导航栏上滑动画
--(void)slideUpAction
+-(void)navHideAction
 {
-    [UIView beginAnimations:@"SlideUpAction" context:nil];
-    [UIView setAnimationDuration:0.2];
-    [UIView setAnimationCurve: UIViewAnimationCurveEaseInOut];
-    [UIView setAnimationDelegate:self];
-    self.navigationController.navigationBar.frame = CGRectMake(0, kStatusBarHeight - kStatusBarAndNavigationBarHeight, [[UIScreen mainScreen] bounds].size.width, kNavigationBarHeight);
-    self.navigationItem.titleView.alpha = 0;
-    _rightbtn.alpha = 0;
-    [UIView commitAnimations];
-    self.nav_donghua = @(NO);
+    _parameterModel.isNavAnimation = @(YES);
+    [UIView animateWithDuration:0.2 animations:^{
+
+        self.navigationController.navigationBar.frame = CGRectMake(0, kStatusBarHeight - kStatusBarAndNavigationBarHeight, [[UIScreen mainScreen] bounds].size.width, kNavigationBarHeight);
+        self.navigationItem.titleView.alpha = 0;
+        _rightbtn.alpha = 0;
+
+    } completion:^(BOOL finished) {
+
+        _parameterModel.isNavShow = @(NO);
+        _parameterModel.isNavAnimation = @(NO);
+
+    }];
 }
+
 //导航栏恢复动画
--(void)slideDownAction
+-(void)navShowAction
 {
-    [UIView beginAnimations:@"SlideDownAction" context:nil];
-    [UIView setAnimationDuration:0.2];
-    [UIView setAnimationCurve: UIViewAnimationCurveEaseInOut];
-    [UIView setAnimationDelegate:self];
-    self.navigationController.navigationBar.frame = CGRectMake(0, kStatusBarHeight, [[UIScreen mainScreen] bounds].size.width, kNavigationBarHeight);
-    _rightbtn.alpha = 1;
-    self.navigationItem.titleView.alpha = 1;
-    [UIView commitAnimations];
-    self.nav_donghua = @(NO);
+    _parameterModel.isNavAnimation = @(YES);
+    [UIView animateWithDuration:0.2 animations:^{
+
+        self.navigationController.navigationBar.frame = CGRectMake(0, kStatusBarHeight, [[UIScreen mainScreen] bounds].size.width, kNavigationBarHeight);
+        self.navigationItem.titleView.alpha = 1;
+        _rightbtn.alpha = 1;
+
+    } completion:^(BOOL finished) {
+
+        _parameterModel.isNavShow = @(YES);
+        _parameterModel.isNavAnimation = @(NO);
+
+    }];
 }
 #pragma mark - Notification
 -(void)navBarReset
 {
     //将导航栏位置复原
     self.navigationController.navigationBar.frame = CGRectMake(0, kStatusBarHeight, [[UIScreen mainScreen] bounds].size.width, kNavigationBarHeight);
-    //    导航栏标题透明度还原成1，还原_dragging，_nav_donghua
+    //    导航栏标题透明度还原成1，还原_dragging，_isNavShow
     self.navigationItem.titleView.alpha = 1;
     _rightbtn.alpha = 1;
-    self.isdragging = @(NO);
-    self.nav_donghua = @(NO);
+    _parameterModel.isdragging = @(NO);
 }
 -(void)xiaoshi:(NSNotification *)not
 {
@@ -525,12 +534,12 @@
 //键盘消失时候调用
 -(void)keyboardWillHide:(NSNotification *)notification
 {
-    _bKeyBoardHide = @(YES);
+    _parameterModel.bKeyBoardHide = @(YES);
 }
 //键盘出现时候调用
 -(void)keyboardWillShow:(NSNotification *)notification
 {
-    _bKeyBoardHide = @(NO);
+    _parameterModel.bKeyBoardHide = @(NO);
 }
 #pragma mark - --------------自定义方法----------------------
 -(void)cellClick_rank:(NSIndexPath *)indexPath{
@@ -567,10 +576,9 @@
 }
 -(void)scrollViewShouldScrollToTop{
     //导航栏恢复
-    self.isdragging = @(NO);
+    _parameterModel.isdragging = @(NO);
     self.navigationController.navigationBar.frame = CGRectMake(0, kStatusBarHeight, [[UIScreen mainScreen] bounds].size.width, kNavigationBarHeight);
     self.navigationItem.titleView.alpha = 1;
-    self.nav_donghua = @(NO);
 }
 
 #pragma mark - --------------other----------------------

@@ -10,7 +10,7 @@
 
 #import "MJRefresh.h"
 
-#import "suggestViewController.h"
+#import "SuggestViewController.h"
 #import "SchoolDetailViewController.h"
 #import "CustomTabbarController.h"
 
@@ -1007,7 +1007,7 @@
 #pragma mark-----------------Others----------------
 -(void)saysomething_to_us
 {
-    [self.navigationController pushViewController:[suggestViewController new] animated:YES];
+    [self.navigationController pushViewController:[SuggestViewController new] animated:YES];
 }
 -(void)popviewAction
 {

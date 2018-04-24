@@ -1,20 +1,20 @@
 //
-//  suggestViewController.m
+//  SuggestViewController.m
 //  OneBox
 //
 //  Created by 谢江新 on 15/7/22.
 //  Copyright (c) 2015年 谢江新. All rights reserved.
 //
 
-#import "suggestViewController.h"
+#import "SuggestViewController.h"
 
 #import "CustomTabbarController.h"
 
-@interface suggestViewController ()<UITextViewDelegate>
+@interface SuggestViewController ()<UITextViewDelegate>
 
 @end
 
-@implementation suggestViewController
+@implementation SuggestViewController
 {
     UITextView *textView;
 }
@@ -128,13 +128,13 @@
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [MobClick endLogPageView:@"suggestViewController"];
+    [MobClick endLogPageView:@"SuggestViewController"];
 
 }
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [MobClick beginLogPageView:@"suggestViewController"];
+    [MobClick beginLogPageView:@"SuggestViewController"];
     [[CustomTabbarController sharedManager] tabbarHide];
 }
 

@@ -1,5 +1,5 @@
 //
-//  suggestViewController.h
+//  SuggestViewController.h
 //  OneBox
 //
 //  Created by 谢江新 on 15/7/22.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface suggestViewController : UIViewController
+@interface SuggestViewController : UIViewController
 
 @end

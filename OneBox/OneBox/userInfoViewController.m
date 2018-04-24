@@ -23,7 +23,7 @@
 #import <ShareSDKConnector/ShareSDKConnector.h>
 
 #import "CustomTabbarController.h"
-#import "suggestViewController.h"
+#import "SuggestViewController.h"
 #import "about_new_ViewController.h"
 #import "goalViewController.h"
 #import "collectionSchool_delete.h"
@@ -974,7 +974,7 @@ static void *EOCAlertViewKey = "EOCAlertViewKey";
 - (void)aboutBtnPress
 {
 #pragma mark-意见建议
-    suggestViewController *suggest=[[suggestViewController alloc] init];
+    SuggestViewController *suggest=[[SuggestViewController alloc] init];
     [self.navigationController pushViewController:suggest animated:YES];
 
 }

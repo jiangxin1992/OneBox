@@ -10,7 +10,6 @@
 
 @interface SouSuoCitiesViewController : UIViewController
 
-@property (nonatomic, copy) void (^sousuoBlock)(NSInteger row,NSInteger section,NSString *type);
 @property (nonatomic, copy) NSDictionary *cityNameDict;
 
 @end

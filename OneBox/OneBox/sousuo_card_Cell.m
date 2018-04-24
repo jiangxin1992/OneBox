@@ -160,7 +160,7 @@
         [UIView beginAnimations:@"action" context:nil];
         [UIView setAnimationDuration:0.6];
         [UIView setAnimationCurve: UIViewAnimationCurveEaseInOut];
-        if(([[_dict objectForKey:@"row"] integerValue]<=[[_dict objectForKey:@"m_row"] integerValue]&&[[_dict objectForKey:@"section"] integerValue]<=[[_dict objectForKey:@"m_section"] integerValue])||[[_dict objectForKey:@"suoyin"] boolValue])
+        if(([[_dict objectForKey:@"row"] integerValue] <= [[_dict objectForKey:@"m_row"] integerValue] && [[_dict objectForKey:@"section"] integerValue] <= [[_dict objectForKey:@"m_section"] integerValue]) || [[_dict objectForKey:@"suoyin"] boolValue])
         {
             _isdonghua=YES;
             [UIView setAnimationDidStopSelector:@selector(anmationStop)];
@@ -168,7 +168,7 @@
 
         }
         [UIView setAnimationDelegate:self];
-        if(([[_dict objectForKey:@"row"] integerValue]<=[[_dict objectForKey:@"m_row"] integerValue]&&[[_dict objectForKey:@"section"] integerValue]<=[[_dict objectForKey:@"m_section"] integerValue])||[[_dict objectForKey:@"suoyin"] boolValue])
+        if(([[_dict objectForKey:@"row"] integerValue] <= [[_dict objectForKey:@"m_row"] integerValue] && [[_dict objectForKey:@"section"] integerValue] <= [[_dict objectForKey:@"m_section"] integerValue]) || [[_dict objectForKey:@"suoyin"] boolValue])
         {
             titleview.frame=CGRectMake(0, 240*_Scale, ScreenWidth, 160*_Scale);
             imagebackview.frame=CGRectMake(0, 0, ScreenWidth,foundCellHeight);

@@ -93,11 +93,6 @@
         _record_cell_num = @(now_cell);
         [[NSNotificationCenter defaultCenter] postNotificationName:@"FoundAnimation" object:_record_cell_num];
     }
-    if([_parameterModel.isNavAnimation boolValue]){
-        NSLog(@"111");
-    }else{
-        NSLog(@"111");
-    }
     //条件 （在拖动中 && 界面在出现状态 && 导航栏动画结束）
     if([_parameterModel.isdragging boolValue] && [_parameterModel.isappear boolValue] && ![_parameterModel.isNavAnimation boolValue])
     {

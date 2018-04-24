@@ -518,6 +518,8 @@
     //    导航栏标题透明度还原成1，还原_dragging，_isNavShow
     self.navigationItem.titleView.alpha = 1;
     _rightbtn.alpha = 1;
+    _parameterModel.isNavShow = @(YES);
+    _parameterModel.isNavAnimation = @(NO);
     _parameterModel.isdragging = @(NO);
 }
 -(void)xiaoshi:(NSNotification *)not
@@ -570,8 +572,8 @@
     pushctn.cityNameDict = [[NSDictionary alloc] initWithObjectsAndKeys:[model.data objectForKey:@"city_names"],@"city_names",model.title,@"title",nil];
     [self.navigationController pushViewController:pushctn animated:YES];
 }
+//导航栏恢复
 -(void)scrollViewShouldScrollToTop{
-    //导航栏恢复
     _parameterModel.isdragging = @(NO);
     self.navigationController.navigationBar.frame = CGRectMake(0, kStatusBarHeight, [[UIScreen mainScreen] bounds].size.width, kNavigationBarHeight);
     self.navigationItem.titleView.alpha = 1;

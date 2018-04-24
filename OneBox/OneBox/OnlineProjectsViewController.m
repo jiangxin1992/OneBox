@@ -8,7 +8,7 @@
 
 #import "OnlineProjectsViewController.h"
 
-#import "suggestViewController.h"
+#import "SuggestViewController.h"
 #import "ChatViewController.h"
 #import "CustomTabbarController.h"
 #import "LoginViewController.h"
@@ -299,7 +299,7 @@
 }
 -(void)suggest
 {
-    [self.navigationController pushViewController:[suggestViewController new] animated:YES];
+    [self.navigationController pushViewController:[SuggestViewController new] animated:YES];
 }
 -(void)login
 {
@@ -357,7 +357,7 @@
 }
 -(void)suggestionAction:(UIButton *)btn
 {
-    [self.navigationController pushViewController:[suggestViewController new] animated:YES];
+    [self.navigationController pushViewController:[SuggestViewController new] animated:YES];
 
 }
 -(void)CreateScrollView

@@ -1,19 +1,18 @@
 //
-//  sousuo_card_Cell.m
+//  Sousuo_card_Cell.m
 //  OneBox
 //
 //  Created by 谢江新 on 15/12/18.
 //  Copyright © 2015年 谢江新. All rights reserved.
 //
 
-#import "sousuo_card_Cell.h"
+#import "Sousuo_card_Cell.h"
 
 #import "foundModel.h"
 
 #define foundCellHeight 400*_Scale
-#define labelHight 20
 
-@implementation sousuo_card_Cell
+@implementation Sousuo_card_Cell
 {
     DBImageView *imagebackview;
     UILabel *titlelabel;
@@ -35,12 +34,10 @@
 }
 -(void)ArticleAnimation:(NSNotification *)not
 {
-
     if([[_dict objectForKey:@"row"] integerValue]<[[not.object objectForKey:@"num"] integerValue]&&[[not.object objectForKey:@"key"] isEqualToString:[_dict objectForKey:@"char"]]&&![[not.object objectForKey:@"suoyin"] boolValue])
     {
         [self startAnimation];
     }
-
 }
 
 -(void)startAnimation
@@ -85,12 +82,7 @@
 
         [UIView commitAnimations];
         self.block([[_dict objectForKey:@"row"] integerValue],[[_dict objectForKey:@"section"] integerValue],[_dict objectForKey:@"type"]);
-    }else
-    {
-
     }
-
-
 }
 -(void)UIConfig
 {
@@ -262,8 +254,6 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-    
-    // Configure the view for the selected state
 }
 
 @end

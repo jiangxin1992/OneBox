@@ -14,7 +14,6 @@
 static void *EOCAlertViewKey = "EOCAlertViewKey";
 
 #define foundCellHeight 200*_Scale
-#define labelHight 40*_Scale
 
 @implementation collectionCell
 {

@@ -1,5 +1,5 @@
 //
-//  SouSuoCitiesHeaderView.h
+//  SouSuoHeaderView.h
 //  OneBox
 //
 //  Created by yyj on 2018/4/23.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SouSuoCitiesHeaderView : UIView
+@interface SouSuoHeaderView : UIView
 
 @property (nonatomic, copy) void (^SouSuoCitiesViewBlock)(NSString *type);
 

@@ -14,16 +14,19 @@
 #import "SchoolDetailViewController.h"
 #import "CustomTabbarController.h"
 
-#import "sousuo_card_Cell.h"
+#import "Sousuo_card_Cell.h"
 #import "FoundCell.h"
 
 #import "foundModel.h"
 #import "ChineseToPinyin.h"
+#import "SouSuoHeaderView.h"
 
 #define foundCellHeight 184*_Scale
 #define foundCellHeight_card 400*_Scale
 
 @interface shaiXuanViewController ()<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate>
+
+@property (nonatomic, strong) SouSuoHeaderView *headerView;
 
 @end
 
@@ -349,32 +352,10 @@
 
 //        [_arrayData removeAllObjects];
         [self setdata:dict];
-        if(_arrayData.count==0)
+        if(!_arrayData.count)
         {
-            //                没有要找的学校，换一个筛选条件吧
-            UIView *headview=[[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 300)];
-
-            UIButton *touchbtn=[UIButton buttonWithType:UIButtonTypeCustom];
-            [headview addSubview:touchbtn];
-            touchbtn.frame=CGRectMake((ScreenWidth-80*_Scale)/2.0f, 70, 80*_Scale, 80*_Scale);
-            [touchbtn setBackgroundImage:[UIImage imageNamed:@"setting_意见"] forState:UIControlStateNormal];
-            [touchbtn addTarget:self action:@selector(saysomething_to_us) forControlEvents:UIControlEventTouchUpInside];
-            NSArray *titlearr=@[@"要找的学校没有收录？",@"告诉我们吧。"];
-            CGFloat _y_p=CGRectGetMaxY(touchbtn.frame)+15;
-            CGFloat _height=60*_Scale;
-            for (int i=0; i<2; i++) {
-                UILabel *label=[[UILabel alloc] initWithFrame:CGRectMake(0, _y_p, ScreenWidth, _height)];
-                [headview addSubview:label];
-                label.textColor=_define_blue_color;
-                label.font=[regular getFont:13.0f];
-                label.textAlignment=1;
-
-                [label setAttributedText:[regular createAttributeString:titlearr[i] andFloat:@(2.0)]];
-
-                _y_p+=_height;
-
-            }
-            _tableView.tableHeaderView=headview;
+            //没有要找的学校，换一个筛选条件吧
+            [self addHeadViewWhenNoData];
 
         }
         if([[dict objectForKey:@"data"] count]<100)
@@ -392,6 +373,19 @@
        [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错白色" Withtype:1]];
     }];
 
+}
+-(void)addHeadViewWhenNoData{
+    if(!_headerView){
+        WeakSelf(ws);
+        _headerView = [[SouSuoHeaderView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 300)];
+        [_headerView setSouSuoCitiesViewBlock:^(NSString *type) {
+            if([type isEqualToString:@"saysomething_to_us"]){
+                [ws saysomething_to_us];
+            }
+        }];
+    }
+
+    _tableView.tableHeaderView = _headerView;
 }
 #pragma mark*Analyse
 -(void)setdata:(NSDictionary *)_dict
@@ -746,10 +740,10 @@
     if(_iscard)
     {
         static NSString *cellid=@"cell_card";
-        sousuo_card_Cell *cell_card=[tableView dequeueReusableCellWithIdentifier:cellid ];
+        Sousuo_card_Cell *cell_card=[tableView dequeueReusableCellWithIdentifier:cellid ];
         if(!cell_card)
         {
-            cell_card=[[sousuo_card_Cell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellid];
+            cell_card=[[Sousuo_card_Cell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellid];
 
         }
         cell_card.selectionStyle=UITableViewCellSelectionStyleNone;

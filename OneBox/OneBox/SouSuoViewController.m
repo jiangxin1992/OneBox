@@ -1,12 +1,12 @@
 //
-//  SouSuoCitiesViewController.m
+//  SouSuoViewController.m
 //  OneBox
 //
 //  Created by 谢江新 on 15/6/9.
 //  Copyright (c) 2015年 谢江新. All rights reserved.
 //
 
-#import "SouSuoCitiesViewController.h"
+#import "SouSuoViewController.h"
 
 // c文件 —> 系统文件（c文件在前）
 
@@ -30,7 +30,7 @@
 #import "TableViewSliderParameterModel.h"
 #import "ChineseToPinyin.h"
 
-@interface SouSuoCitiesViewController ()
+@interface SouSuoViewController ()
 
 @property (nonatomic, strong) NSMutableArray *arrayData;
 @property (nonatomic, strong) NSMutableArray *arrayChar;
@@ -55,7 +55,8 @@
 
 @end
 
-@implementation SouSuoCitiesViewController
+@implementation SouSuoViewController
+
 #pragma mark - --------------生命周期--------------
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -68,7 +69,7 @@
 {
     [super viewWillDisappear:animated];
 
-    [MobClick endLogPageView:@"SouSuoCitiesViewController"];
+    [MobClick endLogPageView:@"SouSuoViewController"];
 
     _parameterModel.isappear = @(NO);
     _parameterModel.isdragging = @(NO);
@@ -82,7 +83,7 @@
 {
     [super viewWillAppear:animated];
 
-    [MobClick beginLogPageView:@"SouSuoCitiesViewController"];
+    [MobClick beginLogPageView:@"SouSuoViewController"];
 
     _parameterModel.isappear = @(YES);
 
@@ -117,22 +118,25 @@
     self.page = 1;
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(navBarReset) name:@"navBarReset" object:nil];
+
 }
 - (void)PrepareUI{
 
     self.view.backgroundColor = _define_backview_color;
 
-    _leftBarbtn = [UIButton getCustomImgBtnWithImageStr:@"返回箭头" WithSelectedImageStr:nil];
-    _leftBarbtn.frame = CGRectMake(0, 0, 22, 22);
-    [_leftBarbtn addTarget:self action:@selector(popviewAction) forControlEvents:UIControlEventTouchUpInside];
-    [_leftBarbtn setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 10)];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_leftBarbtn];
+    self.navigationItem.titleView=[regular returnNavView:@"搜索结果" withmaxwidth:230];
 
     _rightBarbtn = [UIButton getCustomImgBtnWithImageStr:@"found_qiehuan_list" WithSelectedImageStr:@"found_qiehuan_card"];
-    _rightBarbtn.frame = CGRectMake(0, 0, 20, 20);
+    _rightBarbtn.frame=CGRectMake(0, 0, 20, 20);
     [_rightBarbtn addTarget:self action:@selector(card_qiehuan:) forControlEvents:UIControlEventTouchUpInside];
-    _rightBarbtn.selected = YES;
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_rightBarbtn];
+    _rightBarbtn.selected=YES;
+    self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc] initWithCustomView:_rightBarbtn];
+
+    _leftBarbtn = [UIButton getCustomImgBtnWithImageStr:@"返回箭头" WithSelectedImageStr:nil];
+    _leftBarbtn.frame=CGRectMake(0, 0, 22, 22);
+    [_leftBarbtn addTarget:self action:@selector(popviewAction) forControlEvents:UIControlEventTouchUpInside];
+    [_leftBarbtn setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 10)];
+    self.navigationItem.leftBarButtonItem=[[UIBarButtonItem alloc] initWithCustomView:_leftBarbtn];
 }
 
 #pragma mark - --------------UIConfig----------------------
@@ -181,6 +185,66 @@
     }
     _tableView.tableFooterView=_footerView;
 }
+-(void)cellClick_schooldetail:(NSIndexPath *)indexPath{
+    SchoolDetailViewController *schoolView = [[SchoolDetailViewController alloc] init];
+    NSInteger section = indexPath.section;
+    JXLOG(@"%@",_arrayChar);
+    NSString *strKey = [_arrayChar objectAtIndex:section];
+    NSMutableArray  *arr = [[NSMutableArray alloc] initWithArray:[_dictPinyinAndChinese objectForKey:strKey]];
+    NSInteger num = indexPath.row;
+    foundModel *model = arr[num];
+    schoolView.data_dict = @{
+                             @"schoolName":model.cn_name
+                             ,@"schoolID":model.sid
+                             ,@"is_order_school":[NSNumber numberWithInteger:model.is_order_school]
+                             };
+    [self.navigationController pushViewController:schoolView animated:YES];
+}
+-(void)selectModelIsapp:(NSIndexPath *)indexPath{
+    foundModel *model = (_dictPinyinAndChinese[_arrayChar[indexPath.section]])[indexPath.row];
+    model.isapp = YES;
+}
+//导航栏恢复
+-(void)scrollViewShouldScrollToTop{
+    _parameterModel.isdragging = @(NO);
+    self.navigationController.navigationBar.frame=CGRectMake(0, kStatusBarHeight, [[UIScreen mainScreen] bounds].size.width, kNavigationBarHeight);
+    self.navigationItem.titleView.alpha=1;
+    _leftBarbtn.alpha = 1;
+    _rightBarbtn.alpha = 1;
+}
+-(void)navHideAction{
+    _parameterModel.isNavAnimation = @(YES);
+    [UIView animateWithDuration:0.2 animations:^{
+
+        self.navigationController.navigationBar.frame = CGRectMake(0, kStatusBarHeight - kStatusBarAndNavigationBarHeight, [[UIScreen mainScreen] bounds].size.width, kNavigationBarHeight);
+        self.navigationItem.titleView.alpha = 0;
+        _leftBarbtn.alpha = 0;
+        _rightBarbtn.alpha = 0;
+
+    } completion:^(BOOL finished) {
+
+        _parameterModel.isNavShow = @(NO);
+        _parameterModel.isNavAnimation = @(NO);
+
+    }];
+
+}
+-(void)navShowAction{
+    _parameterModel.isNavAnimation = @(YES);
+    [UIView animateWithDuration:0.2 animations:^{
+
+        self.navigationController.navigationBar.frame = CGRectMake(0, kStatusBarHeight, [[UIScreen mainScreen] bounds].size.width, kNavigationBarHeight);
+        self.navigationItem.titleView.alpha = 1;
+        _leftBarbtn.alpha = 1;
+        _rightBarbtn.alpha = 1;
+
+    } completion:^(BOOL finished) {
+
+        _parameterModel.isNavShow = @(YES);
+        _parameterModel.isNavAnimation = @(NO);
+
+    }];
+}
 -(void)banben_view
 {
     _banbenview = [UIImageView getImgWithImageStr:@"版本_v1.0"];
@@ -218,7 +282,6 @@
 
     _tableView.tableHeaderView = _headerView;
 }
-//Refresh
 /**
  *  集成刷新控件
  */
@@ -237,10 +300,11 @@
     _tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
         [ws footerRereshing];
     }];
+
 }
 - (void)footerRereshing
 {
-    self.start += 100;
+    self.start+=100;
     _page++;
     [self RequestData];
 }
@@ -253,20 +317,17 @@
     [self RequestData];
 }
 #pragma mark - --------------请求数据----------------------
--(void)RequestData
-{
+-(void)RequestData{
 
     _tableView.tableHeaderView = [UIView new];
 
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-
-    NSDictionary *parameters = @{
-                                 @"areas":[_cityNameDict objectForKey:@"city_names"]
+    NSDictionary *parameters = @{@"query":_keystring
                                  ,@"page":[[NSString alloc] initWithFormat:@"%ld"
-                                 ,(long)_page]
+                                           ,(long)_page]
                                  };
 
-    [manager GET:[[NSString alloc] initWithFormat:@"%@/v2/schools/schools_by_areas",DNS] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager GET:[[NSString alloc] initWithFormat:@"%@%@",DNS,@"/v1/schools"] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
 
         [_tableView.mj_header endRefreshing];
         [_tableView.mj_footer endRefreshing];
@@ -274,6 +335,7 @@
         NSString *html = operation.responseString;
         NSData* data = [html dataUsingEncoding:NSUTF8StringEncoding];
         NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+
         [self setdata:dict];
         if(!_arrayData.count)
         {
@@ -295,7 +357,6 @@
                 _banbenview.hidden = YES;
             }
         }
-
         [_indicator stopAnimationWithLoadText:@"loading..." withType:YES];
 
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -310,67 +371,7 @@
 
 #pragma mark - --------------自定义代理/block----------------------
 
-
 #pragma mark - --------------自定义响应----------------------
--(void)selectModelIsapp:(NSIndexPath *)indexPath{
-    foundModel *model = (_dictPinyinAndChinese[_arrayChar[indexPath.section]])[indexPath.row];
-    model.isapp = YES;
-}
-//导航栏恢复
--(void)scrollViewShouldScrollToTop{
-    _parameterModel.isdragging = @(NO);
-    self.navigationController.navigationBar.frame = CGRectMake(0, kStatusBarHeight, [[UIScreen mainScreen] bounds].size.width, kNavigationBarHeight);
-    self.navigationItem.titleView.alpha = 1;
-    _leftBarbtn.alpha = 1;
-    _rightBarbtn.alpha = 1;
-}
--(void)cellClick_schooldetail:(NSIndexPath *)indexPath{
-    SchoolDetailViewController *schoolView = [[SchoolDetailViewController alloc] init];
-    NSInteger section = indexPath.section;
-    JXLOG(@"%@",_arrayChar);
-    NSString *strKey = [_arrayChar objectAtIndex:section];
-    NSMutableArray  *arr = [[NSMutableArray alloc] initWithArray:[_dictPinyinAndChinese objectForKey:strKey]];
-    NSInteger num = indexPath.row;
-    foundModel *model = arr[num];
-    schoolView.data_dict = @{
-                             @"schoolName":model.cn_name
-                             ,@"schoolID":model.sid
-                             ,@"is_order_school":[NSNumber numberWithInteger:model.is_order_school]
-                             };
-    [self.navigationController pushViewController:schoolView animated:YES];
-}
--(void)navHideAction{
-    _parameterModel.isNavAnimation = @(YES);
-    [UIView animateWithDuration:0.2 animations:^{
-
-        self.navigationController.navigationBar.frame = CGRectMake(0, kStatusBarHeight - kStatusBarAndNavigationBarHeight, [[UIScreen mainScreen] bounds].size.width, kNavigationBarHeight);
-        self.navigationItem.titleView.alpha = 0;
-        _leftBarbtn.alpha = 0;
-        _rightBarbtn.alpha = 0;
-
-    } completion:^(BOOL finished) {
-
-        _parameterModel.isNavShow = @(NO);
-        _parameterModel.isNavAnimation = @(NO);
-
-    }];
-}
--(void)navShowAction{
-    _parameterModel.isNavAnimation = @(YES);
-    [UIView animateWithDuration:0.2 animations:^{
-
-        self.navigationController.navigationBar.frame = CGRectMake(0, kStatusBarHeight, [[UIScreen mainScreen] bounds].size.width, kNavigationBarHeight);
-        self.navigationItem.titleView.alpha = 1;
-        _leftBarbtn.alpha = 1;
-        _rightBarbtn.alpha = 1;
-
-    } completion:^(BOOL finished) {
-
-        _parameterModel.isNavShow = @(YES);
-        _parameterModel.isNavAnimation = @(NO);
-
-    }];
-}
 -(void)saysomething_to_us
 {
     [self.navigationController pushViewController:[SuggestViewController new] animated:YES];
@@ -383,10 +384,10 @@
         _parameterModel.iscard = @(NO);
     }else
     {
-        btn.selected=YES;
+        btn.selected = YES;
         _parameterModel.iscard = @(YES);
     }
-    if(_tableView)
+    if(!_tableView)
     {
         [_tableView reloadData];
     }
@@ -395,7 +396,6 @@
 {
     [self.navigationController popViewControllerAnimated:YES];
 }
-//导航栏重置
 -(void)navBarReset
 {
     self.navigationController.navigationBar.frame = CGRectMake(0, kStatusBarHeight, [[UIScreen mainScreen] bounds].size.width, kNavigationBarHeight);
@@ -407,11 +407,19 @@
     _parameterModel.isNavAnimation = @(NO);
 }
 #pragma mark - --------------自定义方法----------------------
-
+-(void)setKeystring:(NSString *)keystring
+{
+    if(_keystring != keystring)
+    {
+        _keystring = [keystring copy];
+        self.page = 1;
+    }
+}
 -(void)setdata:(NSDictionary *)dict
 {
     if(((NSArray *)[dict objectForKey:@"data"]).count == 0)
     {
+
         if(_page > 1)
         {
             [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"没有更多了" WithImg:@"Prompt_提交成功" Withtype:1]];
@@ -422,15 +430,15 @@
             [_tableView reloadData];
         }
         [_tableView reloadData];
+
     }else
     {
-        //        cn_name
-        NSArray *result_arr = [[dict objectForKey:@"data"] sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        NSArray *_result_arr = [[dict objectForKey:@"data"] sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
             return [[obj1 objectForKey:@"en_name"] compare:[obj2 objectForKey:@"en_name"] options:NSNumericSearch];
         }];
 
 
-        [_arrayData addObjectsFromArray:[foundModel parsingData:@{@"data":result_arr}]];
+        [_arrayData addObjectsFromArray:[foundModel parsingData:@{@"data":_result_arr}]];
         [_dictPinyinAndChinese removeAllObjects];
         _footerView.backgroundColor = _define_backview_color;
         //name = “关羽”
@@ -454,9 +462,11 @@
             {
                 [charArray addObject:model];
             }
+
         }
 
         for (NSString *keys in [_dictPinyinAndChinese allKeys]) {
+
             //        JXLOG(@"%@", [_dictPinyinAndChinese objectForKey:keys]);
             JXLOG(@"%@", keys);
             for (NSString *str in [_dictPinyinAndChinese objectForKey:keys]) {
@@ -476,50 +486,40 @@
 
         _parameterModel.m_row = @(0);
         _parameterModel.m_section = @(0);
-        NSInteger count=0;
+        NSInteger _count = 0;
         for (int i = 0; i < _arrayChar.count; i++) {
             for (int j = 0; j < [[_dictPinyinAndChinese objectForKey:[_arrayChar objectAtIndex:i]] count]; j++) {
-                count++;
-                if(count <= 2)
+                _count++;
+                if(_count <= 2)
                 {
                     _parameterModel.m_row = @(j);
                     _parameterModel.m_section = @(i);
                 }
-                if(count == 2)
+                if(_count==2)
                 {
                     break;
                 }
             }
         }
-
         [_tableView reloadData];
     }
 
     if(_start == 0)
     {
-        if(dict[@"count"] != [NSNull null])
+        if(dict[@"count"]!=[NSNull null])
         {
-            NSString *countStr = (NSString *)dict[@"count"];
-            self.count = [countStr intValue];
+            NSString *countStr=(NSString *)dict[@"count"];
+            self.count=[countStr intValue];
 
         }else
         {
-            self.count = 0;
+            self.count=0;
             [_arrayData removeAllObjects];
             [_arrayChar removeAllObjects];
         }
     }
 }
 
--(void)setCityNameDict:(NSDictionary *)cityNameDict
-{
-    if(_cityNameDict!=cityNameDict)
-    {
-        _cityNameDict = [cityNameDict copy];
-        self.page = 1;
-        self.navigationItem.titleView = [regular returnNavView:[cityNameDict objectForKey:@"title"] withmaxwidth:230];
-    }
-}
 #pragma mark - --------------other----------------------
 
 @end

@@ -1,5 +1,5 @@
 //
-//  SouSuoCitiesViewController.h
+//  SouSuoViewController.h
 //  OneBox
 //
 //  Created by 谢江新 on 15/6/9.
@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SouSuoCitiesViewController : UIViewController
 
-@property (nonatomic, copy) NSDictionary *cityNameDict;
+@interface SouSuoViewController : UIViewController
+
+@property (nonatomic, copy) NSString *keystring;
 
 @end

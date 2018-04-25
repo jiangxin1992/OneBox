@@ -16,7 +16,7 @@
 #import "shaiXuanViewController.h"
 #import "SouSuoCitiesViewController.h"
 #import "SchoolDetailViewController.h"
-#import "souSuoViewController.h"
+#import "SouSuoViewController.h"
 #import "bangdanlistViewController.h"
 #import "bangdanViewController.h"
 #import "CustomTabbarController.h"
@@ -403,7 +403,7 @@
 #pragma mark - --------------自定义响应----------------------
 //跳转搜索结果view
 -(void)pushToSouSuoView:(NSString *)textFieldStr{
-    souSuoViewController *sousuo = [[souSuoViewController alloc] init];
+    SouSuoViewController *sousuo = [[SouSuoViewController alloc] init];
     sousuo.keystring = textFieldStr;
     [self.navigationController pushViewController:sousuo animated:YES];
 }

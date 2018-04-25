@@ -1,5 +1,5 @@
 //
-//  SouSuoCitiesTableView.h
+//  SouSuoTableView.h
 //  OneBox
 //
 //  Created by yyj on 2018/4/23.
@@ -10,7 +10,7 @@
 
 @class TableViewSliderParameterModel;
 
-@interface SouSuoCitiesTableView : UITableView
+@interface SouSuoTableView : UITableView
 
 @property (nonatomic, strong) TableViewSliderParameterModel *parameterModel;
 
@@ -20,7 +20,7 @@
 
 @property (nonatomic, strong) NSMutableArray *arrayChar;
 
-@property (nonatomic, copy) void (^souSuoCitiesTableViewBlock)(NSString *type,NSIndexPath *indexPath);
+@property (nonatomic, copy) void (^SouSuoTableViewBlock)(NSString *type,NSIndexPath *indexPath);
 
 
 @end

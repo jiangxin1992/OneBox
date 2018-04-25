@@ -1,22 +1,33 @@
 //
-//  SouSuoCitiesTableView.m
+//  SouSuoTableView.m
 //  OneBox
 //
 //  Created by yyj on 2018/4/23.
 //  Copyright © 2018年 谢江新. All rights reserved.
 //
 
-#import "SouSuoCitiesTableView.h"
+#import "SouSuoTableView.h"
 
+// c文件 —> 系统文件（c文件在前）
+
+// 控制器
+
+// 自定义视图
 #import "FoundCell.h"
-#import "sousuo_card_Cell.h"
+#import "Sousuo_card_Cell.h"
+
+// 接口
+
+// 分类
+
+// 自定义类和三方类（ cocoapods类 > model > 工具类 > 其他）
 
 #import "TableViewSliderParameterModel.h"
 
 #define foundCellHeight 184*_Scale
 #define foundCellHeight_card 400*_Scale
 
-@interface SouSuoCitiesTableView()<UITableViewDataSource,UITableViewDelegate>
+@interface SouSuoTableView()<UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic, strong) NSNumber *record_cell_num;//NSInteger
 @property (nonatomic, strong) NSNumber *start_y;//表示tableview开始拖动时候的起始位置 CGFloat
@@ -24,7 +35,7 @@
 
 @end
 
-@implementation SouSuoCitiesTableView
+@implementation SouSuoTableView
 
 #pragma mark - --------------生命周期--------------
 - (instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style{
@@ -101,8 +112,8 @@
 
             //当起始位置小于0，并且当前位置大于0时，开始消失动画
             if([_parameterModel.isNavShow boolValue]){
-                if(_souSuoCitiesTableViewBlock){
-                    _souSuoCitiesTableViewBlock(@"navHideAction",nil);
+                if(_SouSuoTableViewBlock){
+                    _SouSuoTableViewBlock(@"navHideAction",nil);
                 }
             }
         }else
@@ -111,21 +122,21 @@
             {
                 //当tableview刚好到顶部时，开始出现动画
                 if(![_parameterModel.isNavShow boolValue]){
-                    if(_souSuoCitiesTableViewBlock){
-                        _souSuoCitiesTableViewBlock(@"navShowAction",nil);
+                    if(_SouSuoTableViewBlock){
+                        _SouSuoTableViewBlock(@"navShowAction",nil);
                     }
                 }
             }else
             {
                 if(([_start_y floatValue] - scrollView.contentOffset.y) > (ScreenHeight/4.0f) && ![_parameterModel.isNavShow boolValue]){
                     //当导航栏为隐藏状态；并且整体偏移量大于1/4屏时，开始出现动画
-                    if(_souSuoCitiesTableViewBlock){
-                        _souSuoCitiesTableViewBlock(@"navShowAction",nil);
+                    if(_SouSuoTableViewBlock){
+                        _SouSuoTableViewBlock(@"navShowAction",nil);
                     }
                 }else if((scrollView.contentOffset.y - [_start_y floatValue]) > (ScreenHeight/4.0f) && [_parameterModel.isNavShow boolValue]){
                     //当导航栏为出现状态；并且整体偏移量大于1/4屏时，开始消失动画
-                    if(_souSuoCitiesTableViewBlock){
-                        _souSuoCitiesTableViewBlock(@"navHideAction",nil);
+                    if(_SouSuoTableViewBlock){
+                        _SouSuoTableViewBlock(@"navHideAction",nil);
                     }
                 }
             }
@@ -143,8 +154,8 @@
 - (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView
 {
     //导航栏恢复
-    if(_souSuoCitiesTableViewBlock){
-        _souSuoCitiesTableViewBlock(@"scrollViewShouldScrollToTop",nil);
+    if(_SouSuoTableViewBlock){
+        _SouSuoTableViewBlock(@"scrollViewShouldScrollToTop",nil);
     }
 
     return YES;
@@ -195,14 +206,14 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(_souSuoCitiesTableViewBlock){
-        _souSuoCitiesTableViewBlock(@"cellClick_schooldetail",indexPath);
+    if(_SouSuoTableViewBlock){
+        _SouSuoTableViewBlock(@"cellClick_schooldetail",indexPath);
     }
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    NSInteger _count = _arrayChar.count;
-    return _count;
+    NSInteger count = _arrayChar.count;
+    return count;
 
 }
 
@@ -215,24 +226,24 @@
         if(!cell)
         {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellid];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }
 
     if([_parameterModel.iscard boolValue])
     {
         WeakSelf(ws);
-        static NSString *cellid = @"sousuo_card_Cell";
-        sousuo_card_Cell *cell_card = [tableView dequeueReusableCellWithIdentifier:cellid ];
+        static NSString *cellid = @"Sousuo_card_Cell";
+        Sousuo_card_Cell *cell_card = [tableView dequeueReusableCellWithIdentifier:cellid ];
         if(!cell_card)
         {
-            cell_card = [[sousuo_card_Cell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellid];
+            cell_card = [[Sousuo_card_Cell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellid];
             cell_card.selectionStyle = UITableViewCellSelectionStyleNone;
             [cell_card setBlock:^(NSInteger row, NSInteger section, NSString *type) {
                 if([type isEqualToString:@"1"]){
-                    if(ws.souSuoCitiesTableViewBlock){
-                        ws.souSuoCitiesTableViewBlock(@"isapp",[NSIndexPath indexPathForRow:row inSection:section]);
+                    if(ws.SouSuoTableViewBlock){
+                        ws.SouSuoTableViewBlock(@"isapp",[NSIndexPath indexPathForRow:row inSection:section]);
                     }
                 }
             }];

@@ -296,7 +296,7 @@
     }else
     {
 //        //跳转到搜索页面
-//        souSuoViewController *sousuo= [[souSuoViewController alloc] init];
+//        SouSuoViewController *sousuo= [[SouSuoViewController alloc] init];
 //        sousuo.keystring=textField.text;
 //        [self.navigationController pushViewController:sousuo animated:YES];
     }

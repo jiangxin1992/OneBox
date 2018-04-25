@@ -10,9 +10,10 @@
 
 @class foundModel;
 
-@interface sousuo_card_Cell : UITableViewCell
+@interface Sousuo_card_Cell : UITableViewCell
 
 @property (nonatomic, copy) void (^block)(NSInteger row,NSInteger section,NSString *type);
+
 @property (nonatomic, copy) NSDictionary *dict;
 
 @end

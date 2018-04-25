@@ -11,7 +11,6 @@
 #import "foundModel.h"
 
 #define foundCellHeight 200*_Scale
-#define labelHight 40*_Scale
 
 @implementation collection_del_Cell
 {

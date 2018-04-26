@@ -316,7 +316,7 @@
 {
     _time--;
 
-    [get_yanzheng setTitle:[[NSString alloc] initWithFormat:@"%ds",_time] forState:UIControlStateSelected];
+    [get_yanzheng setTitle:[[NSString alloc] initWithFormat:@"%lds",_time] forState:UIControlStateSelected];
     if(!_time)
     {
 

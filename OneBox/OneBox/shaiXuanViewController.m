@@ -475,7 +475,7 @@
                 }
             }
         }
-        JXLOG(@"%ld %d",(long)_m_row,_m_section);
+        JXLOG(@"%ld %ld",(long)_m_row,(long)_m_section);
 
 
         [_tableView reloadData];

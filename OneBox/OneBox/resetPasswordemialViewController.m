@@ -9,7 +9,6 @@
 #import "resetPasswordemialViewController.h"
 
 #import <objc/runtime.h>
-static void *EOCAlertViewKey = "EOCAlertViewKey";
 
 #define Color_tp [UIColor colorWithRed:170.0f/255.0f green:230.0f/255.0f blue:245.0f/255.0f alpha:1]
 

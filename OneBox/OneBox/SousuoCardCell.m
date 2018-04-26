@@ -28,7 +28,7 @@
 #pragma mark - --------------生命周期--------------
 -(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
-    self=[super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if(self)
     {
         [self SomePrepare];
@@ -59,32 +59,38 @@
 #pragma mark - --------------UIConfig----------------------
 -(void)UIConfig
 {
-    _imagebackview = [[DBImageView alloc] init];
+    _imagebackview=[[DBImageView alloc] init];
+    _imagebackview.frame=CGRectMake(-ScreenWidth*0.03, 0, ScreenWidth*1.06,foundCellHeight);
     [self.contentView addSubview:_imagebackview];
-    _imagebackview.frame = CGRectMake(-ScreenWidth*0.03, 0, ScreenWidth*1.06,foundCellHeight);
 
-    _titleview = [UIImageView getImgWithImageStr:@"found_card_titleview1"];
+    _titleview=[[UIImageView alloc] initWithFrame:CGRectMake(0, 400*_Scale, ScreenWidth, 0)];
+    _titleview.image=[UIImage imageNamed:@"found_card_titleview1"];
     [self.contentView addSubview:_titleview];
-    _titleview.frame = CGRectMake(0, 400*_Scale, ScreenWidth, 0);
 
-    _titlelabel = [UILabel getLabelWithAlignment:0 WithTitle:nil WithFont:14.0f WithTextColor:_define_white_color WithSpacing:0];
+    _titlelabel =[[UILabel alloc] initWithFrame:CGRectMake(40*_Scale, 30*_Scale, ScreenWidth-40*_Scale, 30*_Scale)];
     [_titleview addSubview:_titlelabel];
-    _titlelabel.frame = CGRectMake(40*_Scale, 30*_Scale, ScreenWidth-40*_Scale, 30*_Scale);
-    _titlelabel.backgroundColor = [UIColor clearColor];
-    _titlelabel.alpha = 0;
+    _titlelabel.backgroundColor=[UIColor clearColor];
+    _titlelabel.font=[regular get_en_Font:14.0f];
+    _titlelabel.textAlignment=0;
+    _titlelabel.alpha=0;
+    _titlelabel.textColor=[UIColor whiteColor];
 
-    _cn_name_label = [UILabel getLabelWithAlignment:0 WithTitle:nil WithFont:14.0f WithTextColor:_define_white_color WithSpacing:0];
+    _cn_name_label =[[UILabel alloc] initWithFrame:CGRectMake(40*_Scale, CGRectGetMaxY(_titlelabel.frame), ScreenWidth-40*_Scale, 44*_Scale)];
     [_titleview addSubview:_cn_name_label];
-    _cn_name_label.frame = CGRectMake(40*_Scale, CGRectGetMaxY(_titlelabel.frame), ScreenWidth-40*_Scale, 44*_Scale);
-    _cn_name_label.backgroundColor = [UIColor clearColor];
-    _cn_name_label.alpha = 0;
+    _cn_name_label.backgroundColor=[UIColor clearColor];
+    _cn_name_label.font=[regular getFont:14.0f];
+    _cn_name_label.textAlignment=0;
+    _cn_name_label.alpha=0;
+    _cn_name_label.textColor=[UIColor whiteColor];
 
-    _titlelabel_f = [UILabel getLabelWithAlignment:0 WithTitle:nil WithFont:12.0f WithTextColor:_define_white_color WithSpacing:0];
+    _titlelabel_f =[[UILabel alloc] initWithFrame:CGRectMake(40*_Scale, CGRectGetMaxY(_cn_name_label.frame), ScreenWidth-40*_Scale, 44*_Scale)];
     [_titleview addSubview:_titlelabel_f];
-    _titlelabel_f.frame = CGRectMake(40*_Scale, CGRectGetMaxY(_cn_name_label.frame), ScreenWidth-40*_Scale, 44*_Scale);
-    _titlelabel_f.backgroundColor = [UIColor clearColor];
-    _titlelabel_f.alpha = 0;
-    _titlelabel_f.numberOfLines = 2;
+    _titlelabel_f.alpha=0;
+    _titlelabel_f.backgroundColor=[UIColor clearColor];
+    _titlelabel_f.font=[regular getFont:12.0f];
+    _titlelabel_f.numberOfLines=2;
+    _titlelabel_f.textAlignment=0;
+    _titlelabel_f.textColor=[UIColor whiteColor];
 }
 
 #pragma mark - --------------UpdateUI----------------------
@@ -116,17 +122,14 @@
 {
     WeakSelf(ws);
     [UIView animateWithDuration:0.5 animations:^{
-
-        ws.titlelabel.alpha = 1;
-        ws.titlelabel_f.alpha = 1;
-        ws.cn_name_label.alpha = 1;
-
+        ws.titlelabel.alpha=1;
+        ws.titlelabel_f.alpha=1;
+        ws.cn_name_label.alpha=1;
     } completion:^(BOOL finished) {
-
-        ws.isdonghua = @(NO);
-
+        self.isdonghua = @(NO);
     }];
 }
+
 #pragma mark - --------------自定义方法----------------------
 -(void)setDict:(NSDictionary *)dict
 {

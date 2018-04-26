@@ -10,8 +10,6 @@
 
 #import <Foundation/Foundation.h>
 
-#define __string(__k__) @property(nonatomic,copy) NSString *__k__
-
 @interface surveyModel : baseModelJX
 +(surveyModel *)parsingWithJsonDataForModel:(NSDictionary *)dict;
 //__string(progress);

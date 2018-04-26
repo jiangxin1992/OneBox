@@ -14,7 +14,7 @@
 
 // 自定义视图
 #import "FoundCell.h"
-#import "Sousuo_card_Cell.h"
+#import "SousuoCardCell.h"
 
 // 接口
 
@@ -77,17 +77,17 @@
 //导航栏的动画显示与隐藏
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
-    if([_parameterModel.isappear boolValue])
+    if([_parameterModel.isAppear boolValue])
     {
         //记录开始滑动时候tableview的偏移量
         self.start_y = @(scrollView.contentOffset.y);
         //开始滑动
-        _parameterModel.isdragging = @(YES);
+        _parameterModel.isDragging = @(YES);
     }
 }
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView;
 {
-    if([_parameterModel.iscard boolValue])
+    if([_parameterModel.isCard boolValue])
     {
         CGFloat height = scrollView.contentOffset.y + ScreenHeight;
         //    JXLOG(@"contentOffset = %f",scrollView.contentOffset.y);
@@ -104,7 +104,7 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:@"SousuoAnimation1" object:nil];
     }
 
-    if([_parameterModel.isdragging boolValue] && [_parameterModel.isappear boolValue] && ![_parameterModel.isNavAnimation boolValue])
+    if([_parameterModel.isDragging boolValue] && [_parameterModel.isAppear boolValue] && ![_parameterModel.isNavAnimation boolValue])
     {
         JXLOG(@"滚动视图正在滚动=%f",scrollView.contentOffset.y);
         if([_start_y floatValue] < 0.f && scrollView.contentOffset.y > 0.f)
@@ -145,9 +145,9 @@
 }
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-    if([_parameterModel.isappear boolValue])
+    if([_parameterModel.isAppear boolValue])
     {
-        _parameterModel.isdragging = @(NO);
+        _parameterModel.isDragging = @(NO);
     }
     self.is_suoyin = @(NO);
 }
@@ -165,14 +165,14 @@
 {
     if(_arrayData.count == indexPath.section)
     {
-        if([_parameterModel.iscard boolValue])
+        if([_parameterModel.isCard boolValue])
         {
             return foundCellHeight_card;
         }
         return foundCellHeight;
     }else
     {
-        if([_parameterModel.iscard boolValue])
+        if([_parameterModel.isCard boolValue])
         {
             return foundCellHeight_card;
         }
@@ -231,14 +231,14 @@
         return cell;
     }
 
-    if([_parameterModel.iscard boolValue])
+    if([_parameterModel.isCard boolValue])
     {
         WeakSelf(ws);
-        static NSString *cellid = @"Sousuo_card_Cell";
-        Sousuo_card_Cell *cell_card = [tableView dequeueReusableCellWithIdentifier:cellid ];
+        static NSString *cellid = @"SousuoCardCell";
+        SousuoCardCell *cell_card = [tableView dequeueReusableCellWithIdentifier:cellid ];
         if(!cell_card)
         {
-            cell_card = [[Sousuo_card_Cell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellid];
+            cell_card = [[SousuoCardCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellid];
             cell_card.selectionStyle = UITableViewCellSelectionStyleNone;
             [cell_card setBlock:^(NSInteger row, NSInteger section, NSString *type) {
                 if([type isEqualToString:@"1"]){

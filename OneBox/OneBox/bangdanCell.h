@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@class foundModel;
+@class FoundModel;
 
 @interface bangdanCell : UITableViewCell
 
-@property(nonatomic,strong)foundModel *model;
+@property(nonatomic,strong)FoundModel *model;
 
 @end

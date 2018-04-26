@@ -1,30 +1,24 @@
  //
-//  foundModel.m
+//  FoundModel.m
 //  OneBox
 //
 //  Created by 谢江新 on 15/2/6.
 //  Copyright (c) 2015年 谢江新. All rights reserved.
 //
 
-#import "foundModel.h"
+#import "FoundModel.h"
 
-@implementation foundModel
+@implementation FoundModel
 +(NSMutableArray *)parsingData:(NSDictionary *)_dict
 {
     NSMutableArray *dataArray = [[NSMutableArray alloc]init];
-//    &&()
-//    ![_dict[@"list"] isEqualToString:@"0"];
     
     NSArray*arr=_dict[@"data"];
-//    &&(![_dict[@"list"] isKindOfClass:[NSString class]])
+
     if((_dict[@"data"]!=[NSNull null]))
     {
         for (NSDictionary *dict in arr) {
-            foundModel *model = [[foundModel alloc]init];
-            //KVC
-//            [model setValuesForKeysWithDictionary:dict];
-
-//is_order_school
+            FoundModel *model = [[FoundModel alloc]init];
 
             if(dict[@"rank"]!=[NSNull null])
             {
@@ -68,7 +62,7 @@
                 model.if_order_school=NO;
             }
 
-            model.isapp=NO;
+            model.isAppear = @(NO);
             if(dict[@"setup_year"]!=[NSNull null])
             {
                 model.setup_year=[[NSString alloc] initWithFormat:@"%ld",[dict[@"setup_year"] longValue]];

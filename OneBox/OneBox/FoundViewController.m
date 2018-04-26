@@ -35,7 +35,7 @@
 // 自定义类和三方类（ cocoapods类 > model > 工具类 > 其他）
 #import "MJRefresh.h"
 
-#import "foundModel_new.h"
+#import "FoundModel_new.h"
 #import "TableViewSliderParameterModel.h"
 
 @interface FoundViewController ()
@@ -76,7 +76,7 @@
 {
     [super viewWillAppear:animated];
 
-    _parameterModel.isappear = @(YES);
+    _parameterModel.isAppear = @(YES);
     //    tabbar设为出现
     [[CustomTabbarController sharedManager] tabbarAppear];
     //    友盟页面监控（登出）
@@ -88,8 +88,8 @@
 {
     [super viewWillDisappear:animated];
     //    导航栏还原
-    _parameterModel.isappear = @(NO);
-    _parameterModel.isdragging = @(NO);
+    _parameterModel.isAppear = @(NO);
+    _parameterModel.isDragging = @(NO);
     self.rightbtn.alpha = 1;
     self.navigationController.navigationBar.frame = CGRectMake(0, kStatusBarHeight, [[UIScreen mainScreen] bounds].size.width, kNavigationBarHeight);
     self.navigationItem.titleView.alpha = 1;
@@ -115,8 +115,8 @@
 -(void)initializeData{
     _parameterModel = [[TableViewSliderParameterModel alloc] init];
     _parameterModel.bKeyBoardHide = @(YES);//开始时候键盘为隐藏状态
-    _parameterModel.isappear = @(YES);
-    _parameterModel.isdragging = @(NO);
+    _parameterModel.isAppear = @(YES);
+    _parameterModel.isDragging = @(NO);
     _parameterModel.isNavShow = @(YES);
     _parameterModel.isNavAnimation = @(NO);
     self.arrayData = [[NSMutableArray alloc] init];
@@ -378,7 +378,7 @@
         [self createTableHeadView:headviewimage];
 
         //数据处理，获取模型数组
-        NSArray *getdata = [foundModel_new parsingData:responseObject];
+        NSArray *getdata = [FoundModel_new parsingData:responseObject];
         //当获取数据count数量大于0时候，刷新tableview
 
         if(getdata.count > 0)
@@ -520,7 +520,7 @@
     _rightbtn.alpha = 1;
     _parameterModel.isNavShow = @(YES);
     _parameterModel.isNavAnimation = @(NO);
-    _parameterModel.isdragging = @(NO);
+    _parameterModel.isDragging = @(NO);
 }
 -(void)xiaoshi:(NSNotification *)not
 {
@@ -541,7 +541,7 @@
 }
 #pragma mark - --------------自定义方法----------------------
 -(void)cellClick_rank:(NSIndexPath *)indexPath{
-    foundModel_new *model = [_arrayData objectAtIndex:indexPath.row];
+    FoundModel_new *model = [_arrayData objectAtIndex:indexPath.row];
     if([[model.data objectForKey:@"rank_name"] isEqualToString:@"niche"])
     {
         [self bangdanAction:@"bangdan_niche"];
@@ -557,7 +557,7 @@
     }
 }
 -(void)cellClick_schooldetail:(NSIndexPath *)indexPath{
-    foundModel_new *model = [_arrayData objectAtIndex:indexPath.row];
+    FoundModel_new *model = [_arrayData objectAtIndex:indexPath.row];
     NSString *schoolname = [model.data objectForKey:@"school_name_cn"];
     NSString *schoolid = [[NSString alloc] initWithFormat:@"%ld",[[model.data objectForKey:@"school_id"] longValue]];
 
@@ -566,7 +566,7 @@
     [self.navigationController pushViewController:schoolView animated:YES];
 }
 -(void)cellClick_sousuo:(NSIndexPath *)indexPath{
-    foundModel_new *model = [_arrayData objectAtIndex:indexPath.row];
+    FoundModel_new *model = [_arrayData objectAtIndex:indexPath.row];
 
     SouSuoCitiesViewController *pushctn = [[SouSuoCitiesViewController alloc] init];
     pushctn.cityNameDict = [[NSDictionary alloc] initWithObjectsAndKeys:[model.data objectForKey:@"city_names"],@"city_names",model.title,@"title",nil];
@@ -574,7 +574,7 @@
 }
 //导航栏恢复
 -(void)scrollViewShouldScrollToTop{
-    _parameterModel.isdragging = @(NO);
+    _parameterModel.isDragging = @(NO);
     self.navigationController.navigationBar.frame = CGRectMake(0, kStatusBarHeight, [[UIScreen mainScreen] bounds].size.width, kNavigationBarHeight);
     self.navigationItem.titleView.alpha = 1;
 }

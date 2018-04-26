@@ -8,7 +8,7 @@
 
 #import "FoundCell.h"
 
-#import "foundModel.h"
+#import "FoundModel.h"
 
 #define foundCellHeight 184*_Scale
 
@@ -152,7 +152,7 @@
     }
     
 }
--(void)setModel:(foundModel *)model
+-(void)setModel:(FoundModel *)model
 {
 
     NSArray *contentArray1=@[model.en_name,model.cn_name,[[NSString alloc] initWithFormat:@"%@，%@",model.city,model.state],model.web];

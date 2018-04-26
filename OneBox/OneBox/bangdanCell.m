@@ -8,7 +8,7 @@
 
 #import "bangdanCell.h"
 
-#import "foundModel.h"
+#import "FoundModel.h"
 
 #define foundCellHeight 200*_Scale
 
@@ -134,7 +134,7 @@
 
 }
 
--(void)setModel:(foundModel *)model
+-(void)setModel:(FoundModel *)model
 {
 
 

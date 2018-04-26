@@ -8,12 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@class foundModel;
-
-@interface Sousuo_card_Cell : UITableViewCell
+@interface SousuoCardCell : UITableViewCell
 
 @property (nonatomic, copy) void (^block)(NSInteger row,NSInteger section,NSString *type);
-
 @property (nonatomic, copy) NSDictionary *dict;
 
 @end

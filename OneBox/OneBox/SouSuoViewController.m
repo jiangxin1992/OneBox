@@ -71,8 +71,8 @@
 
     [MobClick endLogPageView:@"SouSuoViewController"];
 
-    _parameterModel.isappear = @(NO);
-    _parameterModel.isdragging = @(NO);
+    _parameterModel.isAppear = @(NO);
+    _parameterModel.isDragging = @(NO);
 
     self.navigationController.navigationBar.frame = CGRectMake(0, kStatusBarHeight, [[UIScreen mainScreen] bounds].size.width, kNavigationBarHeight);
     self.navigationItem.titleView.alpha = 1;
@@ -85,7 +85,7 @@
 
     [MobClick beginLogPageView:@"SouSuoViewController"];
 
-    _parameterModel.isappear = @(YES);
+    _parameterModel.isAppear = @(YES);
 
     [[CustomTabbarController sharedManager] tabbarHide];
 }
@@ -103,12 +103,12 @@
 
     _parameterModel = [[TableViewSliderParameterModel alloc] init];
     _parameterModel.bKeyBoardHide = @(YES);//开始时候键盘为隐藏状态
-    _parameterModel.isappear = @(YES);
-    _parameterModel.isdragging = @(NO);
+    _parameterModel.isAppear = @(YES);
+    _parameterModel.isDragging = @(NO);
     _parameterModel.isNavShow = @(YES);
     _parameterModel.isNavAnimation = @(NO);
 
-    _parameterModel.iscard = @(YES);
+    _parameterModel.isCard = @(YES);
     _parameterModel.m_row = @(0);
     _parameterModel.m_section = @(0);
 
@@ -192,7 +192,7 @@
     NSString *strKey = [_arrayChar objectAtIndex:section];
     NSMutableArray  *arr = [[NSMutableArray alloc] initWithArray:[_dictPinyinAndChinese objectForKey:strKey]];
     NSInteger num = indexPath.row;
-    foundModel *model = arr[num];
+    FoundModel *model = arr[num];
     schoolView.data_dict = @{
                              @"schoolName":model.cn_name
                              ,@"schoolID":model.sid
@@ -201,12 +201,12 @@
     [self.navigationController pushViewController:schoolView animated:YES];
 }
 -(void)selectModelIsapp:(NSIndexPath *)indexPath{
-    foundModel *model = (_dictPinyinAndChinese[_arrayChar[indexPath.section]])[indexPath.row];
-    model.isapp = YES;
+    FoundModel *model = (_dictPinyinAndChinese[_arrayChar[indexPath.section]])[indexPath.row];
+    model.isAppear = @(YES);
 }
 //导航栏恢复
 -(void)scrollViewShouldScrollToTop{
-    _parameterModel.isdragging = @(NO);
+    _parameterModel.isDragging = @(NO);
     self.navigationController.navigationBar.frame=CGRectMake(0, kStatusBarHeight, [[UIScreen mainScreen] bounds].size.width, kNavigationBarHeight);
     self.navigationItem.titleView.alpha=1;
     _leftBarbtn.alpha = 1;
@@ -381,11 +381,11 @@
     if(btn.selected)
     {
         btn.selected = NO;
-        _parameterModel.iscard = @(NO);
+        _parameterModel.isCard = @(NO);
     }else
     {
         btn.selected = YES;
-        _parameterModel.iscard = @(YES);
+        _parameterModel.isCard = @(YES);
     }
     if(!_tableView)
     {
@@ -402,7 +402,7 @@
     self.navigationItem.titleView.alpha = 1;
     _leftBarbtn.alpha = 1;
     _rightBarbtn.alpha = 1;
-    _parameterModel.isdragging = @(NO);
+    _parameterModel.isDragging = @(NO);
     _parameterModel.isNavShow = @(YES);
     _parameterModel.isNavAnimation = @(NO);
 }
@@ -438,11 +438,11 @@
         }];
 
 
-        [_arrayData addObjectsFromArray:[foundModel parsingData:@{@"data":_result_arr}]];
+        [_arrayData addObjectsFromArray:[FoundModel parsingData:@{@"data":_result_arr}]];
         [_dictPinyinAndChinese removeAllObjects];
         _footerView.backgroundColor = _define_backview_color;
         //name = “关羽”
-        for (foundModel *model in _arrayData) {
+        for (FoundModel *model in _arrayData) {
             //‘GUANYU’
             NSString *pinyin = [ChineseToPinyin pinyinFromChiniseString:model.en_name];
 

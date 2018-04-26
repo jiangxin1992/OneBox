@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@class foundModel;
+@class FoundModel;
 
 @interface FoundCell : UITableViewCell
 
-@property(nonatomic,strong)foundModel *model;
+@property(nonatomic,strong)FoundModel *model;
 //@property (weak, nonatomic) IBOutlet UIView *rightView;
 //@property (weak, nonatomic) IBOutlet UIView *leftView;
 //@property (weak, nonatomic) IBOutlet UIImageView *middleView;

@@ -13,7 +13,7 @@
 
 #import "bangdanCell.h"
 
-#import "foundModel.h"
+#import "FoundModel.h"
 #import "ChineseToPinyin.h"
 
 #define foundCellHeight 200*_Scale
@@ -312,7 +312,7 @@
     {
 
         [_arrayData removeAllObjects];
-        [_arrayData addObjectsFromArray:[foundModel parsingData:_dict]];
+        [_arrayData addObjectsFromArray:[FoundModel parsingData:_dict]];
         banbenview.hidden=NO;
         footview.backgroundColor=_define_backview_color;
         JXLOG(@"%@",_arrayData);
@@ -384,7 +384,7 @@
 {
 
     NSInteger num=indexPath.row;
-    foundModel *model=_arrayData[num];
+    FoundModel *model=_arrayData[num];
     NSDictionary *pushdict=[[NSDictionary alloc] initWithObjectsAndKeys:model.cn_name,@"schoolName",model.sid,@"schoolID",[NSNumber numberWithInteger:model.is_order_school],@"is_order_school",nil];
 
     if(_type==5||_type==6)
@@ -420,7 +420,7 @@
 //        //遍历数据源数据，找到与当前搜索内容相匹配的数据
 //        JXLOG(@"%@",_dictPinyinAndChinese);
 //
-//        for (foundModel *model in _arrayData) {
+//        for (FoundModel *model in _arrayData) {
 //
 //            if(![title isEqualToString:@""])
 //            {
@@ -500,7 +500,7 @@
 //        NSString *strKey  = [_arrayChar objectAtIndex:_section];
 //        NSMutableArray  *__arr=[[NSMutableArray alloc] initWithArray:[_dictPinyinAndChinese objectForKey:strKey]];
         NSInteger num=indexPath.row;
-        foundModel *model=_arrayData[num];
+        FoundModel *model=_arrayData[num];
 
 
         cell.model =model;
@@ -521,11 +521,11 @@
 //        return _arrayChar;
 //    }
 //    JXLOG(@"%@",_arrayResult);
-//    //    [_arrayData addObjectsFromArray:[foundModel parsingData:_dict]];
+//    //    [_arrayData addObjectsFromArray:[FoundModel parsingData:_dict]];
 //    _dictPinyinAndChinese1= [[NSMutableDictionary alloc] init];
 //
 //    //name = “关羽”
-//    for (foundModel *model in _arrayResult) {
+//    for (FoundModel *model in _arrayResult) {
 //        //‘GUANYU’
 //        NSString *pinyin = [ChineseToPinyin pinyinFromChiniseString:model.en_name];
 //

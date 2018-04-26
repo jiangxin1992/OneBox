@@ -1,14 +1,14 @@
  //
-//  foundModel.m
+//  FoundModel.m
 //  OneBox
 //
 //  Created by 谢江新 on 15/2/6.
 //  Copyright (c) 2015年 谢江新. All rights reserved.
 //
 
-#import "foundModel_new.h"
+#import "FoundModel_new.h"
 
-@implementation foundModel_new
+@implementation FoundModel_new
 +(NSMutableArray *)parsingData:(NSDictionary *)_dict
 {
     NSMutableArray *dataArray = [[NSMutableArray alloc]init];
@@ -18,7 +18,7 @@
     if((_dict[@"data"]!=[NSNull null]))
     {
         for (NSDictionary *dict in arr) {
-            foundModel_new *model = [[foundModel_new alloc]init];
+            FoundModel_new *model = [[FoundModel_new alloc]init];
             model.isAppear = @(NO);
             if([dict objectForKey:@"data"]!=[NSNull null])
             {

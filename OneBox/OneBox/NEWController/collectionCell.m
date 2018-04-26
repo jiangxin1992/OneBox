@@ -8,7 +8,7 @@
 
 #import "collectionCell.h"
 
-#import "foundModel.h"
+#import "FoundModel.h"
 
 #import <objc/runtime.h>
 static void *EOCAlertViewKey = "EOCAlertViewKey";
@@ -26,7 +26,7 @@ static void *EOCAlertViewKey = "EOCAlertViewKey";
     UIView *_leftView;
     UIView *_middleView;
     UIButton *_deleteBtn;
-    foundModel *model;
+    FoundModel *model;
     NSInteger is_order_school;
 }
 -(void)UIConfig
@@ -81,7 +81,7 @@ static void *EOCAlertViewKey = "EOCAlertViewKey";
 
     }else
     {
-        foundModel *model=self.dict[@"model"];
+        FoundModel *model=self.dict[@"model"];
         if(_deleteBtn.selected)
         {
             _deleteBtn.selected=NO;

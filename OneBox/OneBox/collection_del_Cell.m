@@ -8,7 +8,7 @@
 
 #import "collection_del_Cell.h"
 
-#import "foundModel.h"
+#import "FoundModel.h"
 
 #define foundCellHeight 200*_Scale
 
@@ -22,7 +22,7 @@
     UIView *_rightView;
     UIView *_leftView;
     UIView *_middleView;
-    foundModel *model;
+    FoundModel *model;
 
 }
 

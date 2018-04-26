@@ -15,7 +15,7 @@
 
 #import "collectionSchool.h"
 #import "surveyModel.h"
-#import "foundModel.h"
+#import "FoundModel.h"
 
 #define CellHeight 200*_Scale
 
@@ -45,7 +45,7 @@
         {
                 AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
             
-                foundModel *model=dataArray[rownum];
+                FoundModel *model=dataArray[rownum];
                 NSDictionary *parameters=@{@"followable_id":model.sid,@"followable_type":@"school",@"token":[regular getToken]};
                 [manager POST:[[NSString alloc] initWithFormat:@"%@%@",DNS,@"/v1/follows/cancel"] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
 
@@ -170,7 +170,7 @@
         if([[dict objectForKey:@"code"] integerValue]==1)
         {
 
-            NSArray *_array=[foundModel parsingData:dict];
+            NSArray *_array=[FoundModel parsingData:dict];
             if(_page==1&&_array.count==0)
             {
 
@@ -291,7 +291,7 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     SchoolDetailViewController *school=[[SchoolDetailViewController alloc] init];
-    foundModel *model=dataArray[indexPath.row];
+    FoundModel *model=dataArray[indexPath.row];
     school.data_dict=[[NSDictionary alloc] initWithObjectsAndKeys:model.cn_name,@"schoolName",model.sid,@"schoolID",[NSNumber numberWithInteger:1],@"is_order_school",nil];
     [self.navigationController pushViewController:school animated:YES];
     

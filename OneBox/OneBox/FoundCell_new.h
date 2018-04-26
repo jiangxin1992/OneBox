@@ -8,13 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@class foundModel_new;
+@class FoundModel_new;
 
 @interface FoundCell_new : UITableViewCell
 
 @property (nonatomic, strong) NSIndexPath *indexPath;
 
-@property (nonatomic, strong) foundModel_new *foundModel;
+@property (nonatomic, strong) FoundModel_new *foundModel;
 
 -(void)updateUI;
 

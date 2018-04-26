@@ -1,18 +1,18 @@
 //
-//  Sousuo_card_Cell.m
+//  SousuoCardCell.m
 //  OneBox
 //
 //  Created by 谢江新 on 15/12/18.
 //  Copyright © 2015年 谢江新. All rights reserved.
 //
 
-#import "Sousuo_card_Cell.h"
+#import "SousuoCardCell.h"
 
-#import "foundModel.h"
+#import "FoundModel.h"
 
 #define foundCellHeight 400*_Scale
 
-@interface Sousuo_card_Cell()
+@interface SousuoCardCell()
 
 @property (nonatomic, strong) DBImageView *imagebackview;
 @property (nonatomic, strong) UILabel *titlelabel;
@@ -24,13 +24,14 @@
 @end
 
 
-@implementation Sousuo_card_Cell
+@implementation SousuoCardCell
 #pragma mark - --------------生命周期--------------
 -(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self=[super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if(self)
     {
+        [self SomePrepare];
         [self UIConfig];
     }
     return  self;
@@ -48,50 +49,42 @@
     [self PrepareData];
     [self PrepareUI];
 }
-- (void)PrepareData{}
+- (void)PrepareData{
+    self.isdonghua = @(NO);
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(ArticleAnimation:) name:@"SousuoAnimation" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(ArticleAnimation1:) name:@"SousuoAnimation1" object:nil];
+}
 - (void)PrepareUI{}
 
 #pragma mark - --------------UIConfig----------------------
 -(void)UIConfig
 {
-    _isdonghua = @(NO);
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(ArticleAnimation:) name:@"SousuoAnimation" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(ArticleAnimation1:) name:@"SousuoAnimation1" object:nil];
-
     _imagebackview = [[DBImageView alloc] init];
-    _imagebackview.frame = CGRectMake(-ScreenWidth*0.03, 0, ScreenWidth*1.06,foundCellHeight);
     [self.contentView addSubview:_imagebackview];
+    _imagebackview.frame = CGRectMake(-ScreenWidth*0.03, 0, ScreenWidth*1.06,foundCellHeight);
 
-
-    _titleview = [[UIImageView alloc] initWithFrame:CGRectMake(0, 400*_Scale, ScreenWidth, 0)];
-    _titleview.image = [UIImage imageNamed:@"found_card_titleview1"];
-
+    _titleview = [UIImageView getImgWithImageStr:@"found_card_titleview1"];
     [self.contentView addSubview:_titleview];
+    _titleview.frame = CGRectMake(0, 400*_Scale, ScreenWidth, 0);
 
-    _titlelabel = [[UILabel alloc] initWithFrame:CGRectMake(40*_Scale, 30*_Scale, ScreenWidth-40*_Scale, 30*_Scale)];
+    _titlelabel = [UILabel getLabelWithAlignment:0 WithTitle:nil WithFont:14.0f WithTextColor:_define_white_color WithSpacing:0];
     [_titleview addSubview:_titlelabel];
+    _titlelabel.frame = CGRectMake(40*_Scale, 30*_Scale, ScreenWidth-40*_Scale, 30*_Scale);
     _titlelabel.backgroundColor = [UIColor clearColor];
-    _titlelabel.font = [regular get_en_Font:14.0f];
-    _titlelabel.textAlignment = 0;
     _titlelabel.alpha = 0;
-    _titlelabel.textColor = [UIColor whiteColor];
 
-    _cn_name_label = [[UILabel alloc] initWithFrame:CGRectMake(40*_Scale, CGRectGetMaxY(_titlelabel.frame), ScreenWidth-40*_Scale, 44*_Scale)];
+    _cn_name_label = [UILabel getLabelWithAlignment:0 WithTitle:nil WithFont:14.0f WithTextColor:_define_white_color WithSpacing:0];
     [_titleview addSubview:_cn_name_label];
+    _cn_name_label.frame = CGRectMake(40*_Scale, CGRectGetMaxY(_titlelabel.frame), ScreenWidth-40*_Scale, 44*_Scale);
     _cn_name_label.backgroundColor = [UIColor clearColor];
-    _cn_name_label.font = [regular getFont:14.0f];
-    _cn_name_label.textAlignment = 0;
     _cn_name_label.alpha = 0;
-    _cn_name_label.textColor = [UIColor whiteColor];
 
-    _titlelabel_f = [[UILabel alloc] initWithFrame:CGRectMake(40*_Scale, CGRectGetMaxY(_cn_name_label.frame), ScreenWidth-40*_Scale, 44*_Scale)];
+    _titlelabel_f = [UILabel getLabelWithAlignment:0 WithTitle:nil WithFont:12.0f WithTextColor:_define_white_color WithSpacing:0];
     [_titleview addSubview:_titlelabel_f];
-    _titlelabel_f.alpha = 0;
+    _titlelabel_f.frame = CGRectMake(40*_Scale, CGRectGetMaxY(_cn_name_label.frame), ScreenWidth-40*_Scale, 44*_Scale);
     _titlelabel_f.backgroundColor = [UIColor clearColor];
-    _titlelabel_f.font = [regular getFont:12.0f];
+    _titlelabel_f.alpha = 0;
     _titlelabel_f.numberOfLines = 2;
-    _titlelabel_f.textAlignment = 0;
-    _titlelabel_f.textColor = [UIColor whiteColor];
 }
 
 #pragma mark - --------------UpdateUI----------------------
@@ -100,27 +93,11 @@
 #pragma mark - --------------系统代理----------------------
 
 #pragma mark - --------------自定义响应----------------------
--(void)anmationStop
-{
-    [UIView beginAnimations:@"action" context:nil];
-    [UIView setAnimationDuration:0.5];
-    [UIView setAnimationCurve: UIViewAnimationCurveEaseInOut];
-    [UIView setAnimationDidStopSelector:@selector(anmationStop1)];
-    [UIView setAnimationDelegate:self];
-    _titlelabel.alpha = 1;
-    _titlelabel_f.alpha = 1;
-    _cn_name_label.alpha = 1;
-    [UIView commitAnimations];
-}
--(void)anmationStop1
-{
-    self.isdonghua = @(NO);
-}
 -(void)ArticleAnimation1:(NSNotification *)not
 {
-    foundModel *model = [_dict objectForKey:@"model"];
+    FoundModel *model = [_dict objectForKey:@"model"];
     //    监测
-    if(!model.isapp && ![_isdonghua boolValue])
+    if(![model.isAppear boolValue] && ![_isdonghua boolValue])
     {
         _titlelabel.alpha = 0;
         _titlelabel_f.alpha = 0;
@@ -135,6 +112,21 @@
         [self startAnimation];
     }
 }
+-(void)anmationStop
+{
+    WeakSelf(ws);
+    [UIView animateWithDuration:0.5 animations:^{
+
+        ws.titlelabel.alpha = 1;
+        ws.titlelabel_f.alpha = 1;
+        ws.cn_name_label.alpha = 1;
+
+    } completion:^(BOOL finished) {
+
+        ws.isdonghua = @(NO);
+
+    }];
+}
 #pragma mark - --------------自定义方法----------------------
 -(void)setDict:(NSDictionary *)dict
 {
@@ -143,29 +135,32 @@
         _dict = [dict copy];
     }
 
-    foundModel *model = [dict objectForKey:@"model"];
+    FoundModel *model = [dict objectForKey:@"model"];
 
     _titlelabel.text = model.en_name;
 
     [_cn_name_label setAttributedText:[regular createAttributeString:model.cn_name andFloat:@(2.0)]];
     [_titlelabel_f setAttributedText:[regular createAttributeString:[[NSString alloc] initWithFormat:@"%@，%@",model.city,model.state] andFloat:@(2.0)]];
 
-    if(!model.isapp)
+    if(![model.isAppear boolValue])
     {
         _imagebackview.frame = CGRectMake(-ScreenWidth*0.03, 0, ScreenWidth*1.06,foundCellHeight);
+
         _titlelabel.alpha = 0;
         _titlelabel_f.alpha = 0;
         _cn_name_label.alpha = 0;
 
         _titleview.frame = CGRectMake(0, 400*_Scale, ScreenWidth, 0);
+
+
         [UIView beginAnimations:@"action" context:nil];
         [UIView setAnimationDuration:0.6];
         [UIView setAnimationCurve: UIViewAnimationCurveEaseInOut];
-        if(([[_dict objectForKey:@"row"] integerValue] <= [[_dict objectForKey:@"m_row"] integerValue] && [[_dict objectForKey:@"section"] integerValue] <= [[_dict objectForKey:@"m_section"] integerValue]) || [[_dict objectForKey:@"suoyin"] boolValue])
+        if(([_dict[@"row"] integerValue] <= [_dict[@"m_row"] integerValue] && [_dict[@"section"] integerValue] <= [_dict[@"m_section"] integerValue]) || [_dict[@"suoyin"] boolValue])
         {
             _isdonghua = @(YES);
             [UIView setAnimationDidStopSelector:@selector(anmationStop)];
-            self.block([[_dict objectForKey:@"row"] integerValue],[[_dict objectForKey:@"section"] integerValue],[_dict objectForKey:@"type"]);
+            self.block([_dict[@"row"] integerValue],[_dict[@"section"] integerValue],_dict[@"type"]);
 
         }
         [UIView setAnimationDelegate:self];
@@ -181,17 +176,7 @@
             _imagebackview.image = [UIImage imageNamed:@"found_sousuo_back"];
         }else
         {
-            NSString *imageStr = nil;
-            if(kIPhone4s)
-            {
-                imageStr = [NSString stringWithFormat:@"%@?imageView2/1/w/320/h/200",model.thumb_image_url];
-            }else if(kIPhone5s || kIPhone6)
-            {
-                imageStr = [NSString stringWithFormat:@"%@?imageView2/1/w/640/h/400",model.thumb_image_url];
-            }else
-            {
-                imageStr = [NSString stringWithFormat:@"%@?imageView2/1/w/960/h/600",model.thumb_image_url];
-            }
+            NSString *imageStr = [self getBackViewImg:model.thumb_image_url];
 
             _imagebackview.placeHolder = [UIImage imageNamed:@"found_sousuo_back"];
             [_imagebackview setImageWithPath:imageStr];
@@ -210,17 +195,7 @@
             _imagebackview.image = [UIImage imageNamed:@"found_sousuo_back"];
         }else
         {
-            NSString *imageStr = nil;
-            if(kIPhone4s)
-            {
-                imageStr = [NSString stringWithFormat:@"%@?imageView2/1/w/320/h/200",model.thumb_image_url];
-            }else if(kIPhone5s || kIPhone6)
-            {
-                imageStr = [NSString stringWithFormat:@"%@?imageView2/1/w/640/h/400",model.thumb_image_url];
-            }else
-            {
-                imageStr = [NSString stringWithFormat:@"%@?imageView2/1/w/960/h/600",model.thumb_image_url];
-            }
+            NSString *imageStr = [self getBackViewImg:model.thumb_image_url];
 
             _imagebackview.placeHolder = [UIImage imageNamed:@"found_sousuo_back"];
             [_imagebackview setImageWithPath:imageStr];
@@ -229,8 +204,8 @@
 }
 -(void)startAnimation
 {
-    foundModel *model = [_dict objectForKey:@"model"];
-    if(!model.isapp)
+    FoundModel *model = [_dict objectForKey:@"model"];
+    if(![model.isAppear boolValue])
     {
         _titlelabel.alpha = 0;
         _titlelabel_f.alpha = 0;
@@ -252,17 +227,7 @@
             _imagebackview.image=[UIImage imageNamed:@"found_sousuo_back"];
         }else
         {
-            NSString *imageStr = nil;
-            if(kIPhone4s)
-            {
-                imageStr = [NSString stringWithFormat:@"%@?imageView2/1/w/320/h/200",model.thumb_image_url];
-            }else if(kIPhone5s||kIPhone6)
-            {
-                imageStr = [NSString stringWithFormat:@"%@?imageView2/1/w/640/h/400",model.thumb_image_url];
-            }else
-            {
-                imageStr = [NSString stringWithFormat:@"%@?imageView2/1/w/960/h/600",model.thumb_image_url];
-            }
+            NSString *imageStr = [self getBackViewImg:model.thumb_image_url];
 
             _imagebackview.placeHolder = [UIImage imageNamed:@"found_sousuo_back"];
             [_imagebackview setImageWithPath:imageStr];
@@ -272,7 +237,20 @@
         self.block([_dict[@"row"] integerValue],[_dict[@"section"] integerValue],_dict[@"type"]);
     }
 }
-
+-(NSString *)getBackViewImg:(NSString *)pic{
+    NSString *imageStr = nil;
+    if(kIPhone4s)
+    {
+        imageStr = [NSString stringWithFormat:@"%@?imageView2/1/w/320/h/200",pic];
+    }else if(kIPhone5s || kIPhone6)
+    {
+        imageStr = [NSString stringWithFormat:@"%@?imageView2/1/w/640/h/400",pic];
+    }else
+    {
+        imageStr = [NSString stringWithFormat:@"%@?imageView2/1/w/960/h/600",pic];
+    }
+    return imageStr;
+}
 #pragma mark - --------------other----------------------
 
 

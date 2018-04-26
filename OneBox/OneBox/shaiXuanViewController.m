@@ -14,7 +14,7 @@
 #import "SchoolDetailViewController.h"
 #import "CustomTabbarController.h"
 
-#import "Sousuo_card_Cell.h"
+#import "SousuoCardCell.h"
 #import "FoundCell.h"
 
 #import "foundModel.h"
@@ -90,12 +90,12 @@
         {
             JXLOG(@"%@",_dictPinyinAndChinese);
             JXLOG(@"%@",_arrayChar);
-             foundModel *model=[[_dictPinyinAndChinese objectForKey:[_arrayChar objectAtIndex:section]] objectAtIndex:row];
-            model.isapp=YES;
+             FoundModel *model=[[_dictPinyinAndChinese objectForKey:[_arrayChar objectAtIndex:section]] objectAtIndex:row];
+            model.isAppear = @(YES);
         }else if([type isEqualToString:@"2"])
         {
-             foundModel *model=[[_dictPinyinAndChinese1 objectForKey:[_arrayChar1 objectAtIndex:section]] objectAtIndex:row];
-             model.isapp=YES;
+            FoundModel *model=[[_dictPinyinAndChinese1 objectForKey:[_arrayChar1 objectAtIndex:section]] objectAtIndex:row];
+            model.isAppear = @(YES);
 
         }
 
@@ -415,14 +415,14 @@
         }];
 
 
-        [_arrayData addObjectsFromArray:[foundModel parsingData:@{@"data":_result_arr}]];
+        [_arrayData addObjectsFromArray:[FoundModel parsingData:@{@"data":_result_arr}]];
 //        banbenview.hidden=NO;
         footview.backgroundColor=_define_backview_color;
 
         _dictPinyinAndChinese = [[NSMutableDictionary alloc] init];
 
         //name = “关羽”
-        for (foundModel *model in _arrayData) {
+        for (FoundModel *model in _arrayData) {
             //‘GUANYU’
             NSString *pinyin = [ChineseToPinyin pinyinFromChiniseString:model.en_name];
 
@@ -514,7 +514,7 @@
     {
 
          NSArray *data_Result_arr=[[self get_contain_word_arr:_searchBar.text] sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-            return [((foundModel *)obj1).en_name compare:((foundModel *)obj2).en_name options:NSNumericSearch];
+            return [((FoundModel *)obj1).en_name compare:((FoundModel *)obj2).en_name options:NSNumericSearch];
         }];
 //  @{@"data":_result_arr}
         //获得搜索数据
@@ -565,7 +565,7 @@
 
     NSMutableDictionary *dict=[[NSMutableDictionary alloc] init];
     for (int i=0; i<arr.count; i++) {
-        foundModel *model=arr[i];
+        FoundModel *model=arr[i];
         if(model.en_name!=nil)
         {
 
@@ -594,7 +594,7 @@
 {
     NSMutableArray *arr=[[NSMutableArray alloc] init];
 
-    for (foundModel *model in _arrayData) {
+    for (FoundModel *model in _arrayData) {
         if(![title isEqualToString:@""])
         {
 //            __string(en_name);
@@ -690,7 +690,7 @@
 {
     SchoolDetailViewController *schoolView=[[SchoolDetailViewController alloc] init];
 
-    foundModel *model=nil;
+    FoundModel *model=nil;
 
     if(tableView==_tableView)
     {
@@ -740,10 +740,10 @@
     if(_iscard)
     {
         static NSString *cellid=@"cell_card";
-        Sousuo_card_Cell *cell_card=[tableView dequeueReusableCellWithIdentifier:cellid ];
+        SousuoCardCell *cell_card=[tableView dequeueReusableCellWithIdentifier:cellid ];
         if(!cell_card)
         {
-            cell_card=[[Sousuo_card_Cell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellid];
+            cell_card=[[SousuoCardCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellid];
 
         }
         cell_card.selectionStyle=UITableViewCellSelectionStyleNone;

@@ -20,7 +20,7 @@
 // 分类
 
 // 自定义类和三方类（ cocoapods类 > model > 工具类 > 其他）
-#import "foundModel_new.h"
+#import "FoundModel_new.h"
 #import "TableViewSliderParameterModel.h"
 
 #define foundCellHeight 380*_Scale
@@ -72,12 +72,12 @@
 //导航栏的动画显示与隐藏
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
-    if([_parameterModel.isappear boolValue])
+    if([_parameterModel.isAppear boolValue])
     {
         //        记录开始滑动时候tableview的偏移量
         self.start_y = @(scrollView.contentOffset.y);
         //        开始滑动
-        _parameterModel.isdragging = @(YES);
+        _parameterModel.isDragging = @(YES);
     }
 }
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView;
@@ -94,7 +94,7 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:@"FoundAnimation" object:_record_cell_num];
     }
     //条件 （在拖动中 && 界面在出现状态 && 导航栏动画结束）
-    if([_parameterModel.isdragging boolValue] && [_parameterModel.isappear boolValue] && ![_parameterModel.isNavAnimation boolValue])
+    if([_parameterModel.isDragging boolValue] && [_parameterModel.isAppear boolValue] && ![_parameterModel.isNavAnimation boolValue])
     {
 
         if([_start_y floatValue] < 0.f && scrollView.contentOffset.y > 0.f)
@@ -135,9 +135,9 @@
 //滑动结束时候调用
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-    if([_parameterModel.isappear boolValue])
+    if([_parameterModel.isAppear boolValue])
     {
-        _parameterModel.isdragging = @(NO);
+        _parameterModel.isDragging = @(NO);
     }
 }
 // 回到最顶部
@@ -201,7 +201,7 @@
     }else
     {
         //键盘没有出现时候调用
-        foundModel_new *model = [_arrayData objectAtIndex:indexPath.row];
+        FoundModel_new *model = [_arrayData objectAtIndex:indexPath.row];
         if(model.m_type != nil)
         {
             if([model.m_type isEqualToString:@"rank"])

@@ -183,10 +183,11 @@
 }
 -(void)banben_view
 {
+    WeakSelf(ws);
     _banbenview = [UIImageView getImgWithImageStr:@"版本_v1.0"];
     [_footerView addSubview:_banbenview];
     [_banbenview mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.mas_equalTo(_footerView);
+        make.centerX.mas_equalTo(ws.footerView);
         make.width.mas_equalTo(25);
         make.height.mas_equalTo(50*_Scale);
         make.top.mas_equalTo(50*_Scale);
@@ -266,41 +267,42 @@
                                  ,(long)_page]
                                  };
 
+    WeakSelf(ws);
     [manager GET:[[NSString alloc] initWithFormat:@"%@/v2/schools/schools_by_areas",DNS] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
 
-        [_tableView.mj_header endRefreshing];
-        [_tableView.mj_footer endRefreshing];
+        [ws.tableView.mj_header endRefreshing];
+        [ws.tableView.mj_footer endRefreshing];
 
         NSString *html = operation.responseString;
         NSData* data = [html dataUsingEncoding:NSUTF8StringEncoding];
         NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
         [self setdata:dict];
-        if(!_arrayData.count)
+        if(!ws.arrayData.count)
         {
             //没有要找的学校，换一个筛选条件吧
             [self addHeadViewWhenNoData];
 
-            _footerView.hidden = YES;
-            _banbenview.hidden = YES;
+            ws.footerView.hidden = YES;
+            ws.banbenview.hidden = YES;
         }else{
             if([[dict objectForKey:@"data"] count] < 100)
             {
                 //说明到底了 没有下一页
-                _footerView.hidden = NO;
-                _banbenview.hidden = NO;
+                ws.footerView.hidden = NO;
+                ws.banbenview.hidden = NO;
             }else
             {
                 //说明还没完 还有下一页
-                _footerView.hidden = YES;
-                _banbenview.hidden = YES;
+                ws.footerView.hidden = YES;
+                ws.banbenview.hidden = YES;
             }
         }
 
-        [_indicator stopAnimationWithLoadText:@"loading..." withType:YES];
+        [ws.indicator stopAnimationWithLoadText:@"loading..." withType:YES];
 
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [_indicator stopAnimationWithLoadText:@"loading..." withType:YES];
-        [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错白色" Withtype:1]];
+        [ws.indicator stopAnimationWithLoadText:@"loading..." withType:YES];
+        [ws.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错白色" Withtype:1]];
     }];
 
 }
@@ -341,17 +343,18 @@
 }
 -(void)navHideAction{
     _parameterModel.isNavAnimation = @(YES);
+    WeakSelf(ws);
     [UIView animateWithDuration:0.2 animations:^{
 
-        self.navigationController.navigationBar.frame = CGRectMake(0, kStatusBarHeight - kStatusBarAndNavigationBarHeight, [[UIScreen mainScreen] bounds].size.width, kNavigationBarHeight);
-        self.navigationItem.titleView.alpha = 0;
-        _leftBarbtn.alpha = 0;
-        _rightBarbtn.alpha = 0;
+        ws.navigationController.navigationBar.frame = CGRectMake(0, kStatusBarHeight - kStatusBarAndNavigationBarHeight, [[UIScreen mainScreen] bounds].size.width, kNavigationBarHeight);
+        ws.navigationItem.titleView.alpha = 0;
+        ws.leftBarbtn.alpha = 0;
+        ws.rightBarbtn.alpha = 0;
 
     } completion:^(BOOL finished) {
 
-        _parameterModel.isNavShow = @(NO);
-        _parameterModel.isNavAnimation = @(NO);
+        ws.parameterModel.isNavShow = @(NO);
+        ws.parameterModel.isNavAnimation = @(NO);
 
     }];
 }
@@ -361,13 +364,13 @@
 
         self.navigationController.navigationBar.frame = CGRectMake(0, kStatusBarHeight, [[UIScreen mainScreen] bounds].size.width, kNavigationBarHeight);
         self.navigationItem.titleView.alpha = 1;
-        _leftBarbtn.alpha = 1;
-        _rightBarbtn.alpha = 1;
+        self.leftBarbtn.alpha = 1;
+        self.rightBarbtn.alpha = 1;
 
     } completion:^(BOOL finished) {
 
-        _parameterModel.isNavShow = @(YES);
-        _parameterModel.isNavAnimation = @(NO);
+        self.parameterModel.isNavShow = @(YES);
+        self.parameterModel.isNavAnimation = @(NO);
 
     }];
 }

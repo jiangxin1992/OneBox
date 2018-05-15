@@ -50,6 +50,7 @@
 		3F4B1E081DE3DCC4000867D0 /* screenShcoolView_城镇_town.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F4B1E041DE3DCC4000867D0 /* screenShcoolView_城镇_town.png */; };
 		3F4B1E091DE3DCC4000867D0 /* screenShcoolView_郊区_outskirt.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F4B1E051DE3DCC4000867D0 /* screenShcoolView_郊区_outskirt.png */; };
 		3F4B1E0A1DE3DCC4000867D0 /* screenShcoolView_乡村_village.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F4B1E061DE3DCC4000867D0 /* screenShcoolView_乡村_village.png */; };
+		3F61EFD020A99012004DEE20 /* ScreenTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F61EFCF20A99011004DEE20 /* ScreenTableView.m */; };
 		3F90A8361E52D01800DBEF1A /* LoginTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F90A8351E52D01800DBEF1A /* LoginTool.m */; };
 		3F90A83F1E52D7DE00DBEF1A /* UIImageView+CornerRadius.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F90A83E1E52D7DE00DBEF1A /* UIImageView+CornerRadius.m */; };
 		3F90A8431E52D7EB00DBEF1A /* NSDate+Custom.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F90A8421E52D7EB00DBEF1A /* NSDate+Custom.m */; };
@@ -573,7 +574,7 @@
 		53FBE1BD1C15886B00AB837A /* FoundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 53FBE1BB1C15886B00AB837A /* FoundViewController.m */; };
 		53FE28201BD64B4800E910CF /* ChangePswViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 53FE281E1BD64B4800E910CF /* ChangePswViewController.m */; };
 		53FFA07B1B268E6D0012504A /* bangdanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 53FFA0791B268E6D0012504A /* bangdanViewController.m */; };
-		53FFA0811B26A2870012504A /* shaiXuanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 53FFA07F1B26A2870012504A /* shaiXuanViewController.m */; };
+		53FFA0811B26A2870012504A /* ScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 53FFA07F1B26A2870012504A /* ScreenViewController.m */; };
 		53FFA0871B26B18D0012504A /* SouSuoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 53FFA0851B26B18D0012504A /* SouSuoViewController.m */; };
 		53FFA0961B26E9EA0012504A /* MyInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 53FFA0951B26E9EA0012504A /* MyInfo.m */; };
 		53FFA09D1B26EA500012504A /* userInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 53FFA0981B26EA500012504A /* userInfoViewController.m */; };
@@ -665,6 +666,8 @@
 		3F4B1E041DE3DCC4000867D0 /* screenShcoolView_城镇_town.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "screenShcoolView_城镇_town.png"; sourceTree = "<group>"; };
 		3F4B1E051DE3DCC4000867D0 /* screenShcoolView_郊区_outskirt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "screenShcoolView_郊区_outskirt.png"; sourceTree = "<group>"; };
 		3F4B1E061DE3DCC4000867D0 /* screenShcoolView_乡村_village.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "screenShcoolView_乡村_village.png"; sourceTree = "<group>"; };
+		3F61EFCE20A99011004DEE20 /* ScreenTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScreenTableView.h; sourceTree = "<group>"; };
+		3F61EFCF20A99011004DEE20 /* ScreenTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScreenTableView.m; sourceTree = "<group>"; };
 		3F90A8341E52D01800DBEF1A /* LoginTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginTool.h; sourceTree = "<group>"; };
 		3F90A8351E52D01800DBEF1A /* LoginTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginTool.m; sourceTree = "<group>"; };
 		3F90A83D1E52D7DE00DBEF1A /* UIImageView+CornerRadius.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+CornerRadius.h"; sourceTree = "<group>"; };
@@ -1640,8 +1643,8 @@
 		53FE281E1BD64B4800E910CF /* ChangePswViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePswViewController.m; sourceTree = "<group>"; };
 		53FFA0781B268E6D0012504A /* bangdanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bangdanViewController.h; sourceTree = "<group>"; };
 		53FFA0791B268E6D0012504A /* bangdanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = bangdanViewController.m; sourceTree = "<group>"; };
-		53FFA07E1B26A2870012504A /* shaiXuanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = shaiXuanViewController.h; sourceTree = "<group>"; };
-		53FFA07F1B26A2870012504A /* shaiXuanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = shaiXuanViewController.m; sourceTree = "<group>"; };
+		53FFA07E1B26A2870012504A /* ScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScreenViewController.h; sourceTree = "<group>"; };
+		53FFA07F1B26A2870012504A /* ScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScreenViewController.m; sourceTree = "<group>"; };
 		53FFA0841B26B18D0012504A /* SouSuoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SouSuoViewController.h; sourceTree = "<group>"; };
 		53FFA0851B26B18D0012504A /* SouSuoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SouSuoViewController.m; sourceTree = "<group>"; };
 		53FFA0941B26E9EA0012504A /* MyInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyInfo.h; sourceTree = "<group>"; };
@@ -1833,8 +1836,6 @@
 		3F32F43C2080AD6F00FB3D04 /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
-				3FACCDBF20887298004AF8EA /* TableViewSliderParameterModel.h */,
-				3FACCDC020887298004AF8EA /* TableViewSliderParameterModel.m */,
 				3FACCDBC20871D97004AF8EA /* FoundTableView.h */,
 				3FACCDBD20871D97004AF8EA /* FoundTableView.m */,
 				3F32F438207F34D500FB3D04 /* FoundListScreenCityView.h */,
@@ -2593,6 +2594,8 @@
 		537F1D281C19260A00331419 /* 跳转视图 */ = {
 			isa = PBXGroup;
 			children = (
+				3FACCDBF20887298004AF8EA /* TableViewSliderParameterModel.h */,
+				3FACCDC020887298004AF8EA /* TableViewSliderParameterModel.m */,
 				3FBD055E208DC8AA00E45574 /* SouSuoTableView.h */,
 				3FBD055F208DC8AA00E45574 /* SouSuoTableView.m */,
 				3FBD055A208DB6C600E45574 /* SouSuoHeaderView.h */,
@@ -4558,8 +4561,10 @@
 		53FFA07D1B26A26B0012504A /* 筛选 */ = {
 			isa = PBXGroup;
 			children = (
-				53FFA07E1B26A2870012504A /* shaiXuanViewController.h */,
-				53FFA07F1B26A2870012504A /* shaiXuanViewController.m */,
+				3F61EFCE20A99011004DEE20 /* ScreenTableView.h */,
+				3F61EFCF20A99011004DEE20 /* ScreenTableView.m */,
+				53FFA07E1B26A2870012504A /* ScreenViewController.h */,
+				53FFA07F1B26A2870012504A /* ScreenViewController.m */,
 			);
 			name = "筛选";
 			sourceTree = "<group>";
@@ -5065,6 +5070,7 @@
 				53F975D31BB29501004FC0B7 /* EmojiEmoticons.m in Sources */,
 				53B771C51C4F3C1300F20085 /* DataVerifier.m in Sources */,
 				53B771C31C4F3C1300F20085 /* base64.m in Sources */,
+				3F61EFD020A99012004DEE20 /* ScreenTableView.m in Sources */,
 				53F976901BB2952A004FC0B7 /* GroupSettingViewController.m in Sources */,
 				53A13E081A820AD3009108DE /* DBImage.m in Sources */,
 				53F975F51BB29501004FC0B7 /* PSTCollectionViewItemKey.m in Sources */,
@@ -5251,7 +5257,7 @@
 				5335ED8B1BE9F79B00542270 /* AdmissionViewController.m in Sources */,
 				53BAAC621C0D65C600DA1269 /* collection_del_Cell.m in Sources */,
 				53F0290A1C0D65260051E975 /* collectionSchool_delete.m in Sources */,
-				53FFA0811B26A2870012504A /* shaiXuanViewController.m in Sources */,
+				53FFA0811B26A2870012504A /* ScreenViewController.m in Sources */,
 				53FE28201BD64B4800E910CF /* ChangePswViewController.m in Sources */,
 				3F90A8531E52D82000DBEF1A /* UITextField+Custom.m in Sources */,
 				53F977701BB3BC9E004FC0B7 /* NotificationCell.m in Sources */,

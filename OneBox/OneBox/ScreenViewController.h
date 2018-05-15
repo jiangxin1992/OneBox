@@ -1,5 +1,5 @@
 //
-//  shaiXuanViewController.h
+//  ScreenViewController.h
 //  OneBox
 //
 //  Created by 谢江新 on 15/6/9.
@@ -8,11 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-typedef  void(^bl)(NSInteger row,NSInteger section,NSString *type);
+@interface ScreenViewController : UIViewController
 
-@interface shaiXuanViewController : UIViewController
-
-@property (nonatomic, copy) bl sousuoBlock;
 @property (nonatomic, copy) NSMutableDictionary *data_dict;
 
 @end

@@ -80,7 +80,7 @@
         _parameterModel.isDragging = @(YES);
     }
 }
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView;
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     CGFloat height = scrollView.contentOffset.y + ScreenHeight - (kIPhoneX?kTabBarHeight:kStatusBarAndNavigationBarHeight) - 420*_Scale;
 //    JXLOG(@"contentOffset = %f",scrollView.contentOffset.y);

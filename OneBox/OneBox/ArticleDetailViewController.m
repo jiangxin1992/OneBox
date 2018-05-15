@@ -923,7 +923,7 @@
 {
     //        加载动画
     if(!indicator){
-        indicator = [[YYAnimationIndicator alloc]initWithFrame:CGRectZero];
+        indicator = [[YYAnimationIndicator alloc] initWithFrame:CGRectZero];
 //        [[UIApplication sharedApplication].keyWindow addSubview:indicator];
         [self.view addSubview:indicator];
         [indicator mas_makeConstraints:^(MASConstraintMaker *make) {

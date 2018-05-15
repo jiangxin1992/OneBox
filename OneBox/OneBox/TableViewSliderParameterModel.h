@@ -22,4 +22,7 @@
 @property (nonatomic, strong) NSNumber *m_row;//NSInteger
 @property (nonatomic, strong) NSNumber *m_section;//NSInteger
 
+@property (nonatomic, strong) NSNumber *m_row1;//NSInteger
+@property (nonatomic, strong) NSNumber *m_section1;//NSInteger
+
 @end

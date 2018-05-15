@@ -114,7 +114,7 @@ static void *EOCAlertViewKey = "EOCAlertViewKey";
     [self prepareData];
 
     if(!indicator){
-        indicator = [[YYAnimationIndicator alloc]initWithFrame:CGRectZero];
+        indicator = [[YYAnimationIndicator alloc] initWithFrame:CGRectZero];
         [self.view addSubview:indicator];
         [indicator mas_makeConstraints:^(MASConstraintMaker *make) {
             make.center.mas_equalTo(self.view);

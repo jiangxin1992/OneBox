@@ -13,7 +13,7 @@
 // 控制器
 #import "OnlineProjectsViewController.h"
 #import "MapViewController.h"
-#import "shaiXuanViewController.h"
+#import "ScreenViewController.h"
 #import "SouSuoCitiesViewController.h"
 #import "SchoolDetailViewController.h"
 #import "SouSuoViewController.h"
@@ -465,7 +465,7 @@
 
         if(keyarr.count > 2)
         {
-            shaiXuanViewController *shaixuan = [[shaiXuanViewController alloc] init];
+            ScreenViewController *shaixuan = [[ScreenViewController alloc] init];
             shaixuan.data_dict = parameters;
             [self.navigationController pushViewController:shaixuan animated:YES];
         }else

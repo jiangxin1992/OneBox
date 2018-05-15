@@ -85,14 +85,14 @@
         _parameterModel.isDragging = @(YES);
     }
 }
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView;
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     if([_parameterModel.isCard boolValue])
     {
         CGFloat height = scrollView.contentOffset.y + ScreenHeight;
         //    JXLOG(@"contentOffset = %f",scrollView.contentOffset.y);
         //    JXLOG(@"height = %f",height);
-        //    JXLOG(@"foundCellHeight = %f",380*_Scale);
+        //    JXLOG(@"foundCellHeight = %f",foundCellHeight_card);
         NSInteger now_cell = (NSInteger)(((CGFloat )height)/((CGFloat)foundCellHeight_card));
 
         if(now_cell != [_record_cell_num integerValue])
@@ -249,15 +249,15 @@
             }];
         }
         NSDictionary *tempDict = @{
-                                @"model":(_dictPinyinAndChinese[_arrayChar[indexPath.section]])[indexPath.row]
-                                ,@"row":@(indexPath.row)
-                                ,@"section":@(indexPath.section)
-                                ,@"type":@"1"
-                                ,@"char":_arrayChar[indexPath.section]
-                                ,@"suoyin":_is_suoyin
-                                ,@"m_row":_parameterModel.m_row
-                                ,@"m_section":_parameterModel.m_section
-                                };
+                                   @"model":(_dictPinyinAndChinese[_arrayChar[indexPath.section]])[indexPath.row]
+                                   ,@"row":@(indexPath.row)
+                                   ,@"section":@(indexPath.section)
+                                   ,@"type":@"1"
+                                   ,@"char":_arrayChar[indexPath.section]
+                                   ,@"suoyin":_is_suoyin
+                                   ,@"m_row":_parameterModel.m_row
+                                   ,@"m_section":_parameterModel.m_section
+                                   };
         cell_card.dict = tempDict;
         return cell_card;
 

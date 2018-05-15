@@ -26,7 +26,7 @@
 // 自定义类和三方类（ cocoapods类 > model > 工具类 > 其他）
 #import "MJRefresh.h"
 
-#import "foundModel.h"
+#import "FoundModel.h"
 #import "TableViewSliderParameterModel.h"
 #import "ChineseToPinyin.h"
 
@@ -39,7 +39,7 @@
 @property (nonatomic, strong) SouSuoTableView *tableView;
 @property (nonatomic, strong) SouSuoHeaderView *headerView;
 @property (nonatomic, strong) UIView *footerView;
-@property (nonatomic, strong) UIView *banbenview;
+@property (nonatomic, strong) UIView *banbenView;
 
 @property (nonatomic, strong) YYAnimationIndicator *indicator;
 
@@ -184,19 +184,19 @@
 -(void)banben_view
 {
     WeakSelf(ws);
-    _banbenview = [UIImageView getImgWithImageStr:@"版本_v1.0"];
-    [_footerView addSubview:_banbenview];
-    [_banbenview mas_makeConstraints:^(MASConstraintMaker *make) {
+    _banbenView = [UIImageView getImgWithImageStr:@"版本_v1.0"];
+    [_footerView addSubview:_banbenView];
+    [_banbenView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(ws.footerView);
         make.width.mas_equalTo(25);
         make.height.mas_equalTo(50*_Scale);
         make.top.mas_equalTo(50*_Scale);
     }];
-    _banbenview.hidden = YES;
+    _banbenView.hidden = YES;
 }
 -(void)indicatorStartAnimation{
     if(!_indicator){
-        _indicator = [[YYAnimationIndicator alloc]initWithFrame:CGRectZero];
+        _indicator = [[YYAnimationIndicator alloc] initWithFrame:CGRectZero];
         [self.view addSubview:_indicator];
         [_indicator mas_makeConstraints:^(MASConstraintMaker *make) {
             make.center.mas_equalTo(self.view);
@@ -250,7 +250,7 @@
     self.page = 1;
     [_arrayData removeAllObjects];
     _footerView.hidden = YES;
-    _banbenview.hidden = YES;
+    _banbenView.hidden = YES;
     [self RequestData];
 }
 #pragma mark - --------------请求数据----------------------
@@ -283,18 +283,18 @@
             [self addHeadViewWhenNoData];
 
             ws.footerView.hidden = YES;
-            ws.banbenview.hidden = YES;
+            ws.banbenView.hidden = YES;
         }else{
             if([[dict objectForKey:@"data"] count] < 100)
             {
                 //说明到底了 没有下一页
                 ws.footerView.hidden = NO;
-                ws.banbenview.hidden = NO;
+                ws.banbenView.hidden = NO;
             }else
             {
                 //说明还没完 还有下一页
                 ws.footerView.hidden = YES;
-                ws.banbenview.hidden = YES;
+                ws.banbenView.hidden = YES;
             }
         }
 

@@ -14,6 +14,8 @@
 
 - (instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style controller:(ScreenViewController *)controller;
 
+- (void)createSearchBar;
+
 @property (nonatomic, strong) TableViewSliderParameterModel *parameterModel;
 
 @property (nonatomic, strong) NSMutableArray *arrayData;//存放页面的数据

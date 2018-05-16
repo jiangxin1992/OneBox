@@ -260,11 +260,14 @@
 {
     _page = 1;
     [_arrayData removeAllObjects];
+    _footerView.hidden = YES;
+    _banbenView.hidden = YES;
     [self requestData];
 }
 #pragma mark - --------------请求数据----------------------
 -(void)requestData
 {
+    
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     JXLOG(@"%@",_data_dict);
     [_data_dict setValue:[[NSString alloc] initWithFormat:@"%ld",(long)_page] forKey:@"page"];
@@ -282,7 +285,8 @@
         {
             //没有要找的学校，换一个筛选条件吧
             [self addHeadViewWhenNoData];
-
+        }else{
+            [self.tableView createSearchBar];
         }
         if([[dict objectForKey:@"data"] count] < 100)
         {
@@ -299,7 +303,6 @@
         [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错白色" Withtype:1]];
     }];
 }
-
 #pragma mark - --------------系统代理----------------------
 
 #pragma mark - --------------自定义代理/block----------------------

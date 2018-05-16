@@ -22,6 +22,8 @@
 // 分类
 
 // 自定义类和三方类（ cocoapods类 > model > 工具类 > 其他）
+#import "MJRefresh.h"
+
 #import "FoundModel.h"
 #import "TableViewSliderParameterModel.h"
 
@@ -82,34 +84,36 @@
 }
 - (void)createSearchBar
 {
-    _searchBar = [[UISearchBar alloc] init];
-    _searchBar.backgroundColor = [UIColor clearColor];
-    _searchBar.frame = CGRectMake(0, 0, ScreenWidth, 44);
-    _searchBar.delegate = self;
+    if(!_searchBar){
+        _searchBar = [[UISearchBar alloc] init];
+        _searchBar.backgroundColor = [UIColor clearColor];
+        _searchBar.frame = CGRectMake(0, 0, ScreenWidth, 56.f);
+        _searchBar.delegate = self;
 
-    [_searchBar setSearchFieldBackgroundImage:[UIImage imageNamed:@"found_school_所在州所在城市筛选框"] forState:UIControlStateNormal];
-    _searchBar.backgroundImage = [UIImage imageNamed:@"found_card_titleview"];
+        [_searchBar setSearchFieldBackgroundImage:[UIImage imageNamed:@"found_school_所在州所在城市筛选框"] forState:UIControlStateNormal];
+        _searchBar.backgroundImage = [UIImage imageNamed:@"found_card_titleview"];
 
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"found_school_2_选中底图.png"]];
-    imageView.frame = _searchBar.frame;
-    _searchBar.placeholder = @"输入城市或者学校名字 试试吧";
-    UITextField *searchField = [_searchBar valueForKey:@"_searchField"];
+        UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"found_school_2_选中底图.png"]];
+        imageView.frame = _searchBar.frame;
+        _searchBar.placeholder = @"输入城市或者学校名字 试试吧";
+        UITextField *searchField = [_searchBar valueForKey:@"_searchField"];
 
-    searchField.font=(kIOSVersions>=9.0? [UIFont systemFontOfSize:11.0f]:[UIFont fontWithName:@"Helvetica Neue" size:11.0f]);
-    searchField.leftView.alpha = 0.5;
+        searchField.font=(kIOSVersions>=9.0? [UIFont systemFontOfSize:11.0f]:[UIFont fontWithName:@"Helvetica Neue" size:11.0f]);
+        searchField.leftView.alpha = 0.5;
 
-    [searchField setValue:[UIColor colorWithRed:220.0f/255.0f green:220.0f/255.0f blue:220.0f/255.0f alpha:1] forKeyPath:@"_placeholderLabel.textColor"];
+        [searchField setValue:[UIColor colorWithRed:220.0f/255.0f green:220.0f/255.0f blue:220.0f/255.0f alpha:1] forKeyPath:@"_placeholderLabel.textColor"];
 
-    [_searchBar insertSubview:imageView atIndex:1];
+        [_searchBar insertSubview:imageView atIndex:1];
 
-    _searchBar.searchBarStyle = UISearchBarStyleDefault;
-    //设置搜索栏取消按钮是否显示
-    //        _searchBar.showsCancelButton = YES;
-    //将搜索栏添加到视图控制器的主视图上
-    //效果是,搜索栏不会随着表视图的滚动而滚动
-    //    [self.view addSubview:_searchBar];
-    //将搜索栏添加到表视图的表头视图上
-    //效果是,搜索栏会随着表视图的滚动而滚动
+        _searchBar.searchBarStyle = UISearchBarStyleDefault;
+        //设置搜索栏取消按钮是否显示
+        //        _searchBar.showsCancelButton = YES;
+        //将搜索栏添加到视图控制器的主视图上
+        //效果是,搜索栏不会随着表视图的滚动而滚动
+        //    [self.view addSubview:_searchBar];
+        //将搜索栏添加到表视图的表头视图上
+        //效果是,搜索栏会随着表视图的滚动而滚动
+    }
     self.tableHeaderView = _searchBar;
 
 }
@@ -349,6 +353,7 @@
 {
     if([_parameterModel.isCard boolValue])
     {
+        NSLog(@"ssss= %lf",self.tableHeaderView.frame.size.height);
         CGFloat height = scrollView.contentOffset.y + ScreenHeight - self.tableHeaderView.frame.size.height;
         JXLOG(@"contentOffset = %f",scrollView.contentOffset.y);
         JXLOG(@"height = %f",height);
@@ -424,7 +429,6 @@
 #pragma mark - SearchBarDelegate
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
-
     if(![_searchBar.text isEqualToString:@""])
     {
         NSArray *data_Result_arr = [[self get_contain_word_arr:_searchBar.text] sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {

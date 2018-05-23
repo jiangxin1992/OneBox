@@ -12,9 +12,6 @@
 
 @interface FoundCell : UITableViewCell
 
-@property(nonatomic,strong)FoundModel *model;
-//@property (weak, nonatomic) IBOutlet UIView *rightView;
-//@property (weak, nonatomic) IBOutlet UIView *leftView;
-//@property (weak, nonatomic) IBOutlet UIImageView *middleView;
+@property (nonatomic, strong) FoundModel *model;
 
 @end

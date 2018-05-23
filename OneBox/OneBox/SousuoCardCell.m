@@ -19,6 +19,7 @@
 @property (nonatomic, strong) UILabel *titlelabel_f;
 @property (nonatomic, strong) UILabel *cn_name_label;
 @property (nonatomic, strong) UIImageView *titleview;
+
 @property (nonatomic, strong) NSNumber *isdonghua;//是否在动画中
 
 @end
@@ -59,38 +60,38 @@
 #pragma mark - --------------UIConfig----------------------
 -(void)UIConfig
 {
-    _imagebackview=[[DBImageView alloc] init];
-    _imagebackview.frame=CGRectMake(-ScreenWidth*0.03, 0, ScreenWidth*1.06,foundCellHeight);
+    _imagebackview = [[DBImageView alloc] init];
+    _imagebackview.frame = CGRectMake(-ScreenWidth*0.03, 0, ScreenWidth*1.06,foundCellHeight);
     [self.contentView addSubview:_imagebackview];
 
-    _titleview=[[UIImageView alloc] initWithFrame:CGRectMake(0, 400*_Scale, ScreenWidth, 0)];
-    _titleview.image=[UIImage imageNamed:@"found_card_titleview1"];
+    _titleview = [[UIImageView alloc] initWithFrame:CGRectMake(0, 400*_Scale, ScreenWidth, 0)];
+    _titleview.image = [UIImage imageNamed:@"found_card_titleview1"];
     [self.contentView addSubview:_titleview];
 
-    _titlelabel =[[UILabel alloc] initWithFrame:CGRectMake(40*_Scale, 30*_Scale, ScreenWidth-40*_Scale, 30*_Scale)];
+    _titlelabel = [[UILabel alloc] initWithFrame:CGRectMake(40*_Scale, 30*_Scale, ScreenWidth-40*_Scale, 30*_Scale)];
     [_titleview addSubview:_titlelabel];
-    _titlelabel.backgroundColor=[UIColor clearColor];
-    _titlelabel.font=[regular get_en_Font:14.0f];
-    _titlelabel.textAlignment=0;
-    _titlelabel.alpha=0;
-    _titlelabel.textColor=[UIColor whiteColor];
+    _titlelabel.backgroundColor = [UIColor clearColor];
+    _titlelabel.font = [regular get_en_Font:14.0f];
+    _titlelabel.textAlignment = 0;
+    _titlelabel.alpha = 0;
+    _titlelabel.textColor = [UIColor whiteColor];
 
-    _cn_name_label =[[UILabel alloc] initWithFrame:CGRectMake(40*_Scale, CGRectGetMaxY(_titlelabel.frame), ScreenWidth-40*_Scale, 44*_Scale)];
+    _cn_name_label = [[UILabel alloc] initWithFrame:CGRectMake(40*_Scale, CGRectGetMaxY(_titlelabel.frame), ScreenWidth-40*_Scale, 44*_Scale)];
     [_titleview addSubview:_cn_name_label];
-    _cn_name_label.backgroundColor=[UIColor clearColor];
-    _cn_name_label.font=[regular getFont:14.0f];
-    _cn_name_label.textAlignment=0;
-    _cn_name_label.alpha=0;
-    _cn_name_label.textColor=[UIColor whiteColor];
+    _cn_name_label.backgroundColor = [UIColor clearColor];
+    _cn_name_label.font = [regular getFont:14.0f];
+    _cn_name_label.textAlignment = 0;
+    _cn_name_label.alpha = 0;
+    _cn_name_label.textColor = [UIColor whiteColor];
 
-    _titlelabel_f =[[UILabel alloc] initWithFrame:CGRectMake(40*_Scale, CGRectGetMaxY(_cn_name_label.frame), ScreenWidth-40*_Scale, 44*_Scale)];
+    _titlelabel_f = [[UILabel alloc] initWithFrame:CGRectMake(40*_Scale, CGRectGetMaxY(_cn_name_label.frame), ScreenWidth-40*_Scale, 44*_Scale)];
     [_titleview addSubview:_titlelabel_f];
-    _titlelabel_f.alpha=0;
-    _titlelabel_f.backgroundColor=[UIColor clearColor];
-    _titlelabel_f.font=[regular getFont:12.0f];
-    _titlelabel_f.numberOfLines=2;
-    _titlelabel_f.textAlignment=0;
-    _titlelabel_f.textColor=[UIColor whiteColor];
+    _titlelabel_f.alpha = 0;
+    _titlelabel_f.backgroundColor = [UIColor clearColor];
+    _titlelabel_f.font = [regular getFont:12.0f];
+    _titlelabel_f.numberOfLines = 2;
+    _titlelabel_f.textAlignment = 0;
+    _titlelabel_f.textColor = [UIColor whiteColor];
 }
 
 #pragma mark - --------------UpdateUI----------------------
@@ -122,11 +123,15 @@
 {
     WeakSelf(ws);
     [UIView animateWithDuration:0.5 animations:^{
-        ws.titlelabel.alpha=1;
-        ws.titlelabel_f.alpha=1;
-        ws.cn_name_label.alpha=1;
+
+        ws.titlelabel.alpha = 1;
+        ws.titlelabel_f.alpha = 1;
+        ws.cn_name_label.alpha = 1;
+
     } completion:^(BOOL finished) {
+
         self.isdonghua = @(NO);
+
     }];
 }
 
@@ -227,7 +232,7 @@
 
         if([NSString isNilOrEmpty:model.thumb_image_url])
         {
-            _imagebackview.image=[UIImage imageNamed:@"found_sousuo_back"];
+            _imagebackview.image = [UIImage imageNamed:@"found_sousuo_back"];
         }else
         {
             NSString *imageStr = [self getBackViewImg:model.thumb_image_url];

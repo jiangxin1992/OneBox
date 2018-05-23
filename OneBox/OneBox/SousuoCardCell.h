@@ -10,7 +10,7 @@
 
 @interface SousuoCardCell : UITableViewCell
 
-@property (nonatomic, copy) void (^block)(NSInteger row,NSInteger section,NSString *type);
+@property (nonatomic, copy) void (^block)(NSInteger row, NSInteger section, NSString *type);
 @property (nonatomic, copy) NSDictionary *dict;
 
 @end

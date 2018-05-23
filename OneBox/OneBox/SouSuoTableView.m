@@ -15,6 +15,7 @@
 // 自定义视图
 #import "FoundCell.h"
 #import "SousuoCardCell.h"
+#import "SouSuoHeaderView.h"
 
 // 接口
 
@@ -29,6 +30,17 @@
 
 @interface SouSuoTableView()<UITableViewDataSource,UITableViewDelegate>
 
+//外界传入
+@property (nonatomic, strong) TableViewSliderParameterModel *parameterModel;
+@property (nonatomic, strong) NSMutableArray *arrayData;//存放页面的数据
+@property (nonatomic, strong) NSDictionary *dictPinyinAndChinese;
+@property (nonatomic, strong) NSMutableArray *arrayChar;
+@property (nonatomic, strong) NSNumber *isFirstRequest;//Bool
+
+@property (nonatomic, copy) void (^souSuoTableViewBlock)(NSString *type,NSIndexPath *indexPath);
+
+@property (nonatomic, strong) SouSuoHeaderView *headerView;
+
 @property (nonatomic, strong) NSNumber *record_cell_num;//NSInteger
 @property (nonatomic, strong) NSNumber *start_y;//表示tableview开始拖动时候的起始位置 CGFloat
 @property (nonatomic, strong) NSNumber *is_suoyin;//是否点击索引 BOOL
@@ -38,12 +50,28 @@
 @implementation SouSuoTableView
 
 #pragma mark - --------------生命周期--------------
-- (instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style{
+- (instancetype)initWithFrame:(CGRect)frame
+                        style:(UITableViewStyle)style
+               parameterModel:(TableViewSliderParameterModel *)parameterModel
+                    arrayData:(NSMutableArray *)arrayData
+         dictPinyinAndChinese:(NSDictionary *)dictPinyinAndChinese
+                    arrayChar:(NSMutableArray *)arrayChar
+               isFirstRequest:(NSNumber *)isFirstRequest
+         souSuoTableViewBlock:(void (^)(NSString *type,NSIndexPath *indexPath))souSuoTableViewBlock{
+
     self = [super initWithFrame:frame style:style];
     if(self){
+        _parameterModel = parameterModel;
+        _arrayData = arrayData;
+        _dictPinyinAndChinese = dictPinyinAndChinese;
+        _arrayChar = arrayChar;
+        _isFirstRequest = isFirstRequest;
+        _souSuoTableViewBlock = souSuoTableViewBlock;
         [self SomePrepare];
+        [self UIConfig];
     }
     return self;
+
 }
 #pragma mark - --------------SomePrepare--------------
 - (void)SomePrepare
@@ -67,8 +95,46 @@
 
 #pragma mark - --------------UIConfig----------------------
 -(void)UIConfig{
+    [self createTableFooterView];
 }
+-(void)createTableFooterView{
+    if(!_footerView){
+        _footerView = [UIView getCustomViewWithColor:_define_backview_color];
+        _footerView.frame = CGRectMake(0, 0, CGRectGetWidth(self.frame), 100);
+        _footerView.hidden = YES;
 
+        [self banben_view];
+    }
+    self.tableFooterView = _footerView;
+}
+-(void)createHeaderViewWhenNoData{
+
+    if(!_headerView){
+        WeakSelf(ws);
+        _headerView = [[SouSuoHeaderView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 300)];
+        [_headerView setSouSuoCitiesViewBlock:^(NSString *type) {
+            if([type isEqualToString:@"saysomething_to_us"]){
+                if(ws.souSuoTableViewBlock){
+                    ws.souSuoTableViewBlock(type,nil);
+                }
+            }
+        }];
+    }
+
+    self.tableHeaderView = _headerView;
+}
+-(void)banben_view
+{
+    _banbenView = [UIImageView getImgWithImageStr:@"版本_v1.0"];
+    [_footerView addSubview:_banbenView];
+    [_banbenView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(self.footerView);
+        make.width.mas_equalTo(25);
+        make.height.mas_equalTo(50*_Scale);
+        make.top.mas_equalTo(50*_Scale);
+    }];
+    _banbenView.hidden = YES;
+}
 #pragma mark - --------------UpdateUI----------------------
 -(void)updateUI{}
 
@@ -85,24 +151,10 @@
         _parameterModel.isDragging = @(YES);
     }
 }
+
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    if([_parameterModel.isCard boolValue])
-    {
-        CGFloat height = scrollView.contentOffset.y + ScreenHeight;
-        //    JXLOG(@"contentOffset = %f",scrollView.contentOffset.y);
-        //    JXLOG(@"height = %f",height);
-        //    JXLOG(@"foundCellHeight = %f",foundCellHeight_card);
-        NSInteger now_cell = (NSInteger)(((CGFloat )height)/((CGFloat)foundCellHeight_card));
-
-        if(now_cell != [_record_cell_num integerValue])
-        {
-            _record_cell_num = @(now_cell);
-            NSDictionary *pushnum = [self getnumWithChar:_arrayChar WithPinyin:_dictPinyinAndChinese];
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"SousuoAnimation" object:pushnum];
-        }
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"SousuoAnimation1" object:nil];
-    }
+    [self animationNotification];
 
     if([_parameterModel.isDragging boolValue] && [_parameterModel.isAppear boolValue] && ![_parameterModel.isNavAnimation boolValue])
     {
@@ -112,8 +164,8 @@
 
             //当起始位置小于0，并且当前位置大于0时，开始消失动画
             if([_parameterModel.isNavShow boolValue]){
-                if(_SouSuoTableViewBlock){
-                    _SouSuoTableViewBlock(@"navHideAction",nil);
+                if(_souSuoTableViewBlock){
+                    _souSuoTableViewBlock(@"navHideAction",nil);
                 }
             }
         }else
@@ -122,21 +174,21 @@
             {
                 //当tableview刚好到顶部时，开始出现动画
                 if(![_parameterModel.isNavShow boolValue]){
-                    if(_SouSuoTableViewBlock){
-                        _SouSuoTableViewBlock(@"navShowAction",nil);
+                    if(_souSuoTableViewBlock){
+                        _souSuoTableViewBlock(@"navShowAction",nil);
                     }
                 }
             }else
             {
                 if(([_start_y floatValue] - scrollView.contentOffset.y) > (ScreenHeight/4.0f) && ![_parameterModel.isNavShow boolValue]){
                     //当导航栏为隐藏状态；并且整体偏移量大于1/4屏时，开始出现动画
-                    if(_SouSuoTableViewBlock){
-                        _SouSuoTableViewBlock(@"navShowAction",nil);
+                    if(_souSuoTableViewBlock){
+                        _souSuoTableViewBlock(@"navShowAction",nil);
                     }
                 }else if((scrollView.contentOffset.y - [_start_y floatValue]) > (ScreenHeight/4.0f) && [_parameterModel.isNavShow boolValue]){
                     //当导航栏为出现状态；并且整体偏移量大于1/4屏时，开始消失动画
-                    if(_SouSuoTableViewBlock){
-                        _SouSuoTableViewBlock(@"navHideAction",nil);
+                    if(_souSuoTableViewBlock){
+                        _souSuoTableViewBlock(@"navHideAction",nil);
                     }
                 }
             }
@@ -154,8 +206,8 @@
 - (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView
 {
     //导航栏恢复
-    if(_SouSuoTableViewBlock){
-        _SouSuoTableViewBlock(@"scrollViewShouldScrollToTop",nil);
+    if(_souSuoTableViewBlock){
+        _souSuoTableViewBlock(@"scrollViewShouldScrollToTop",nil);
     }
 
     return YES;
@@ -206,8 +258,8 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(_SouSuoTableViewBlock){
-        _SouSuoTableViewBlock(@"cellClick_schooldetail",indexPath);
+    if(_souSuoTableViewBlock){
+        _souSuoTableViewBlock(@"cellClick_schooldetail",indexPath);
     }
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -242,8 +294,8 @@
             cell_card.selectionStyle = UITableViewCellSelectionStyleNone;
             [cell_card setBlock:^(NSInteger row, NSInteger section, NSString *type) {
                 if([type isEqualToString:@"1"]){
-                    if(ws.SouSuoTableViewBlock){
-                        ws.SouSuoTableViewBlock(@"isapp",[NSIndexPath indexPathForRow:row inSection:section]);
+                    if(ws.souSuoTableViewBlock){
+                        ws.souSuoTableViewBlock(@"isapp",[NSIndexPath indexPathForRow:row inSection:section]);
                     }
                 }
             }];
@@ -286,14 +338,14 @@
 
 
 #pragma mark - --------------自定义方法----------------------
--(NSDictionary *)getnumWithChar:(NSArray *)arrayChar WithPinyin:(NSDictionary *)dictPinyinAndChinese
+-(NSDictionary *)getnumWithChar:(NSArray *)arrayChar WithPinyin:(NSDictionary *)dictPinyinAndChinese nowCell:(NSInteger )now_cell
 {
-    NSDictionary *returndata = 0;
+    NSDictionary *returndata = nil;
     NSInteger count = 0;
     for (int i = 0; i < [arrayChar count]; i++) {
         for (int j = 0; j < [[dictPinyinAndChinese objectForKey:[arrayChar objectAtIndex:i]] count]; j++) {
             count++;
-            if(count == [_record_cell_num integerValue])
+            if(count == now_cell)
             {
                 returndata = @{
                                 @"num":[NSNumber numberWithInteger:j+1]
@@ -305,6 +357,35 @@
         }
     }
     return returndata;
+}
+- (void)animationNotification{
+    if([_parameterModel.isCard boolValue])
+    {
+        JXLOG(@"foundCellHeight = %f",foundCellHeight_card);
+        JXLOG(@"contentOffset = %f",self.contentOffset.y);
+        JXLOG(@"ScreenHeight = %lf",ScreenHeight);
+        CGFloat height = self.contentOffset.y + ScreenHeight;
+        //    JXLOG(@"contentOffset = %f",scrollView.contentOffset.y);
+        //    JXLOG(@"height = %f",height);
+        //    JXLOG(@"foundCellHeight = %f",foundCellHeight_card);
+        NSInteger now_cell = (NSInteger)(((CGFloat )height)/((CGFloat)foundCellHeight_card));
+
+        //先看看有没有数据
+        NSDictionary *pushData = [self getnumWithChar:_arrayChar WithPinyin:_dictPinyinAndChinese nowCell:now_cell];
+        if(now_cell != [_record_cell_num integerValue] && pushData)
+        {
+            _record_cell_num = @(now_cell);
+            if([_isFirstRequest boolValue]){
+                self.isFirstRequest = @(NO);
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"SousuoAnimation" object:pushData];
+                });
+            }else{
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"SousuoAnimation" object:pushData];
+            }
+        }
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"SousuoAnimation1" object:nil];
+    }
 }
 
 #pragma mark - --------------other----------------------

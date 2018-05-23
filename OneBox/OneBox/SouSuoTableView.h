@@ -12,15 +12,22 @@
 
 @interface SouSuoTableView : UITableView
 
-@property (nonatomic, strong) TableViewSliderParameterModel *parameterModel;
+- (instancetype)initWithFrame:(CGRect)frame
+                        style:(UITableViewStyle)style
+               parameterModel:(TableViewSliderParameterModel *)parameterModel
+                    arrayData:(NSMutableArray *)arrayData
+         dictPinyinAndChinese:(NSDictionary *)dictPinyinAndChinese
+                    arrayChar:(NSMutableArray *)arrayChar
+               isFirstRequest:(NSNumber *)isFirstRequest
+         souSuoTableViewBlock:(void (^)(NSString *type,NSIndexPath *indexPath))souSuoTableViewBlock;
 
-@property (nonatomic, strong) NSMutableArray *arrayData;//存放页面的数据
+- (void)createHeaderViewWhenNoData;
 
-@property (nonatomic, strong) NSDictionary *dictPinyinAndChinese;
+- (void)animationNotification;
 
-@property (nonatomic, strong) NSMutableArray *arrayChar;
+//pulib属性，允许外界访问
+@property (nonatomic, strong) UIView *footerView;
 
-@property (nonatomic, copy) void (^SouSuoTableViewBlock)(NSString *type,NSIndexPath *indexPath);
-
+@property (nonatomic, strong) UIView *banbenView;
 
 @end

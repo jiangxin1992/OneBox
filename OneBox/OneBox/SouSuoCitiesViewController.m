@@ -16,7 +16,6 @@
 #import "CustomTabbarController.h"
 
 // 自定义视图
-#import "SouSuoHeaderView.h"
 #import "SouSuoTableView.h"
 
 // 接口
@@ -37,9 +36,6 @@
 @property (nonatomic, strong) NSMutableDictionary *dictPinyinAndChinese;
 
 @property (nonatomic, strong) SouSuoTableView *tableView;
-@property (nonatomic, strong) SouSuoHeaderView *headerView;
-@property (nonatomic, strong) UIView *footerView;
-@property (nonatomic, strong) UIView *banbenView;
 
 @property (nonatomic, strong) YYAnimationIndicator *indicator;
 
@@ -50,6 +46,8 @@
 @property (nonatomic, assign) NSInteger count;//数量
 
 @property (nonatomic, assign) NSInteger page;
+
+@property (nonatomic, strong) NSNumber *isFirstRequest;//Bool
 
 @property (nonatomic, strong) TableViewSliderParameterModel *parameterModel;//动画相关
 
@@ -114,6 +112,7 @@
     self.arrayData = [[NSMutableArray alloc] init];
     self.arrayChar = [[NSMutableArray alloc] init];
     self.dictPinyinAndChinese = [[NSMutableDictionary alloc] init];
+    self.isFirstRequest = @(YES);
     self.page = 1;
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(navBarReset) name:@"navBarReset" object:nil];
@@ -144,19 +143,7 @@
 {
     WeakSelf(ws);
     if(!_tableView){
-        _tableView = [[SouSuoTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
-        [self.view addSubview:_tableView];
-        [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.top.mas_equalTo(0);
-            make.bottom.mas_equalTo(kIPhoneX ? 34.f : 0);
-        }];
-        _tableView.parameterModel = _parameterModel;
-        _tableView.arrayData = _arrayData;
-        _tableView.parameterModel = _parameterModel;
-        _tableView.dictPinyinAndChinese = _dictPinyinAndChinese;
-        _tableView.arrayChar = _arrayChar;
-
-        [_tableView setSouSuoTableViewBlock:^(NSString *type, NSIndexPath *indexPath) {
+        _tableView = [[SouSuoTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain parameterModel:_parameterModel arrayData:_arrayData dictPinyinAndChinese:_dictPinyinAndChinese arrayChar:_arrayChar isFirstRequest:_isFirstRequest souSuoTableViewBlock:^(NSString *type, NSIndexPath *indexPath) {
             if([type isEqualToString:@"navHideAction"]){
                 [ws navHideAction];
             }else if([type isEqualToString:@"navShowAction"]){
@@ -167,32 +154,16 @@
                 [ws scrollViewShouldScrollToTop];
             }else if([type isEqualToString:@"isapp"]){
                 [ws selectModelIsapp:indexPath];
+            }else if([type isEqualToString:@"saysomething_to_us"]){
+                [ws saysomething_to_us];
             }
         }];
-        [_tableView reloadData];
+        [self.view addSubview:_tableView];
+        [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.top.mas_equalTo(0);
+            make.bottom.mas_equalTo(kIPhoneX ? 34.f : 0);
+        }];
     }
-
-    if(!_footerView){
-        _footerView = [UIView getCustomViewWithColor:_define_backview_color];
-        _footerView.frame = CGRectMake(0, 0, CGRectGetWidth(_tableView.frame), 100);
-        _footerView.hidden = YES;
-
-        [self banben_view];
-    }
-    _tableView.tableFooterView=_footerView;
-}
--(void)banben_view
-{
-    WeakSelf(ws);
-    _banbenView = [UIImageView getImgWithImageStr:@"版本_v1.0"];
-    [_footerView addSubview:_banbenView];
-    [_banbenView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.mas_equalTo(ws.footerView);
-        make.width.mas_equalTo(25);
-        make.height.mas_equalTo(50*_Scale);
-        make.top.mas_equalTo(50*_Scale);
-    }];
-    _banbenView.hidden = YES;
 }
 -(void)indicatorStartAnimation{
     if(!_indicator){
@@ -205,19 +176,6 @@
         [_indicator setLoadText:@"loading..."];
     }
     [_indicator startAnimation];
-}
--(void)addHeadViewWhenNoData{
-    if(!_headerView){
-        WeakSelf(ws);
-        _headerView = [[SouSuoHeaderView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 300)];
-        [_headerView setSouSuoCitiesViewBlock:^(NSString *type) {
-            if([type isEqualToString:@"saysomething_to_us"]){
-                [ws saysomething_to_us];
-            }
-        }];
-    }
-
-    _tableView.tableHeaderView = _headerView;
 }
 //Refresh
 /**
@@ -249,8 +207,8 @@
 {
     self.page = 1;
     [_arrayData removeAllObjects];
-    _footerView.hidden = YES;
-    _banbenView.hidden = YES;
+    _tableView.footerView.hidden = YES;
+    _tableView.banbenView.hidden = YES;
     [self RequestData];
 }
 #pragma mark - --------------请求数据----------------------
@@ -276,31 +234,16 @@
         NSString *html = operation.responseString;
         NSData* data = [html dataUsingEncoding:NSUTF8StringEncoding];
         NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-        [self setdata:dict];
-        if(!ws.arrayData.count)
-        {
-            //没有要找的学校，换一个筛选条件吧
-            [self addHeadViewWhenNoData];
 
-            ws.footerView.hidden = YES;
-            ws.banbenView.hidden = YES;
-        }else{
-            if([[dict objectForKey:@"data"] count] < 100)
-            {
-                //说明到底了 没有下一页
-                ws.footerView.hidden = NO;
-                ws.banbenView.hidden = NO;
-            }else
-            {
-                //说明还没完 还有下一页
-                ws.footerView.hidden = YES;
-                ws.banbenView.hidden = YES;
-            }
-        }
+        [self analysisDataWhenRequestSuccess:dict];
 
         [ws.indicator stopAnimationWithLoadText:@"loading..." withType:YES];
 
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+
+        [ws.tableView.mj_header endRefreshing];
+        [ws.tableView.mj_footer endRefreshing];
+
         [ws.indicator stopAnimationWithLoadText:@"loading..." withType:YES];
         [ws.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错白色" Withtype:1]];
     }];
@@ -411,7 +354,7 @@
 }
 #pragma mark - --------------自定义方法----------------------
 
--(void)setdata:(NSDictionary *)dict
+-(void)analysisDataWhenRequestSuccess:(NSDictionary *)dict
 {
     if(((NSArray *)[dict objectForKey:@"data"]).count == 0)
     {
@@ -435,7 +378,7 @@
 
         [_arrayData addObjectsFromArray:[FoundModel parsingData:@{@"data":result_arr}]];
         [_dictPinyinAndChinese removeAllObjects];
-        _footerView.backgroundColor = _define_backview_color;
+        _tableView.footerView.backgroundColor = _define_backview_color;
         //name = “关羽”
         for (FoundModel *model in _arrayData) {
             //‘GUANYU’
@@ -512,11 +455,36 @@
             [_arrayChar removeAllObjects];
         }
     }
+
+    if(!_arrayData.count)
+    {
+        //没有要找的学校，换一个筛选条件吧
+        [_tableView createHeaderViewWhenNoData];
+
+        _tableView.footerView.hidden = YES;
+        _tableView.banbenView.hidden = YES;
+    }else{
+        if([[dict objectForKey:@"data"] count] < 100)
+        {
+            //说明到底了 没有下一页
+            _tableView.footerView.hidden = NO;
+            _tableView.banbenView.hidden = NO;
+        }else
+        {
+            //说明还没完 还有下一页
+            _tableView.footerView.hidden = YES;
+            _tableView.banbenView.hidden = YES;
+        }
+    }
+
+    if(_page == 1 && [_isFirstRequest boolValue]){
+        [_tableView animationNotification];
+    }
 }
 
 -(void)setCityNameDict:(NSDictionary *)cityNameDict
 {
-    if(_cityNameDict!=cityNameDict)
+    if(_cityNameDict != cityNameDict)
     {
         _cityNameDict = [cityNameDict copy];
         self.page = 1;

@@ -12,24 +12,29 @@
 
 @interface ScreenTableView : UITableView
 
-- (instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style controller:(ScreenViewController *)controller;
+- (instancetype)initWithFrame:(CGRect)frame
+                        style:(UITableViewStyle)style
+               parameterModel:(TableViewSliderParameterModel *)parameterModel
+                    arrayData:(NSMutableArray *)arrayData
+         dictPinyinAndChinese:(NSMutableDictionary *)dictPinyinAndChinese
+                    arrayChar:(NSMutableArray *)arrayChar
+        dictPinyinAndChinese1:(NSMutableDictionary *)dictPinyinAndChinese1
+                   arrayChar1:(NSMutableArray *)arrayChar1
+               isFirstRequest:(NSNumber *)isFirstRequest
+                   controller:(ScreenViewController *)controller
+          sreenTableViewBlock:(void (^)(NSString *type,NSIndexPath *indexPath))sreenTableViewBlock;
 
-- (void)createSearchBar;
+- (void)createSearchController;
 
-@property (nonatomic, strong) TableViewSliderParameterModel *parameterModel;
+- (void)createHeaderViewWhenNoData;
 
-@property (nonatomic, strong) NSMutableArray *arrayData;//存放页面的数据
+- (void)removeSearchController;
 
-@property (nonatomic, strong) NSDictionary *dictPinyinAndChinese;
+- (void)animationNotification;
 
-@property (nonatomic, strong) NSMutableArray *arrayChar;
+//pulib属性，允许外界访问
+@property (nonatomic, strong) UIView *footerView;
 
-@property (nonatomic, strong) NSMutableDictionary *dictPinyinAndChinese1;
-
-@property (nonatomic, strong) NSMutableArray *arrayChar1;
-
-@property (nonatomic, strong) ScreenViewController *controller;
-
-@property (nonatomic, copy) void (^SreenTableViewBlock)(NSString *type,NSIndexPath *indexPath);
+@property (nonatomic, strong) UIView *banbenView;
 
 @end

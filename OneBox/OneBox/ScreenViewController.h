@@ -10,6 +10,6 @@
 
 @interface ScreenViewController : UIViewController
 
-@property (nonatomic, copy) NSMutableDictionary *data_dict;
+@property (nonatomic, strong) NSMutableDictionary *data_dict;
 
 @end

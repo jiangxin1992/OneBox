@@ -1,18 +1,18 @@
 //
-//  webViewController.m
+//  WebViewController.m
 //  OneBox
 //
 //  Created by 谢江新 on 15/7/7.
 //  Copyright (c) 2015年 谢江新. All rights reserved.
 //
 
-#import "webViewController.h"
+#import "WebViewController.h"
 
-@interface webViewController ()<UIWebViewDelegate>
+@interface WebViewController ()<UIWebViewDelegate>
 
 @end
 
-@implementation webViewController
+@implementation WebViewController
 {
 
     UIWebView *web;
@@ -22,8 +22,6 @@
     [super viewDidLoad];
    
 }
-
-
 
 -(void)loadData
 {
@@ -111,8 +109,8 @@
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [MobClick endLogPageView:@"webViewController"];
 
+    [MobClick endLogPageView:@"WebViewController"];
     [self.navigationController setNavigationBarHidden:YES animated:NO];
 
 }
@@ -120,8 +118,8 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [MobClick beginLogPageView:@"webViewController"];
-//      [[UIApplication sharedApplication] setStatusBarHidden:NO];
+
+    [MobClick beginLogPageView:@"WebViewController"];
     [self.navigationController setNavigationBarHidden:NO animated:NO];
 }
 

@@ -1,5 +1,5 @@
 //
-//  followingViewController.h
+//  FollowerViewController.h
 //  OneBox
 //
 //  Created by 谢江新 on 15/9/8.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface followingViewController : UIViewController{
+@interface FollowerViewController : UIViewController{
     void(^changeBlock)(NSNumber *rownum);
 }
 __string(token);

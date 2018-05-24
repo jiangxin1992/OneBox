@@ -12,8 +12,8 @@
 #import <AVFoundation/AVFoundation.h>
 
 #import "LoginViewController.h"
-#import "followingViewController.h"
-#import "followerViewController.h"
+#import "FollowingViewController.h"
+#import "FollowerViewController.h"
 #import "ChatListViewController.h"
 #import "ChatViewController.h"
 #import "CallViewController.h"
@@ -68,7 +68,7 @@
 -(void)following:(NSNotification *)not
 {
     NSString *_token=not.object;
-    followingViewController *foll=[[followingViewController alloc] init];
+    FollowingViewController *foll=[[FollowingViewController alloc] init];
     foll.token=_token;
     [self.navigationController pushViewController:foll animated:YES];
 
@@ -77,7 +77,7 @@
 -(void)follower:(NSNotification *)not
 {
     NSString *_token=not.object;
-    followerViewController *foll=[[followerViewController alloc] init];
+    FollowerViewController *foll=[[FollowerViewController alloc] init];
     foll.token=_token;
     [self.navigationController pushViewController:foll animated:YES];
 }

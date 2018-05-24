@@ -9,7 +9,7 @@
 #import "RetrievePasswordController.h"
 
 #import "RegisterController.h"
-#import "resetPasswordViewController.h"
+#import "ResetPwdViewController.h"
 
 #import "CountryCodeLoginCell.h"
 
@@ -489,7 +489,7 @@
                     [self presentModalViewController:_register animated:YES];
                 }else
                 {
-                    resetPasswordViewController *ctn=[[resetPasswordViewController alloc] init];
+                    ResetPwdViewController *ctn=[[ResetPwdViewController alloc] init];
                     ctn.dict=[[NSDictionary alloc] initWithObjectsAndKeys:textfield_email.text,@"tel",textfield_yanzheng.text,@"code", nil];
                     ctn.block2=registerBlock2;
                     ctn.block=registerBlock;

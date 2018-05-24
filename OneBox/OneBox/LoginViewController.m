@@ -12,8 +12,8 @@
 #import <ShareSDKExtension/ShareSDK+Extension.h>
 
 #import "RegisterController.h"
-#import "chooseForgetViewController.h"
-#import "chooseRegisterViewController.h"
+#import "ChooseResetPwdTypeViewController.h"
+#import "ChooseRegisterViewController.h"
 #import "RetrievePasswordController.h"
 #import "CustomTabbarController.h"
 
@@ -342,7 +342,7 @@
 }
 -(void)register_action:(UIButton *)btn
 {
-    chooseRegisterViewController *Register=[[chooseRegisterViewController alloc] init];
+    ChooseRegisterViewController*Register=[[ChooseRegisterViewController alloc] init];
     Register.block=resetpasswordBlock;
     [self presentModalViewController:Register animated:YES];
     
@@ -354,7 +354,7 @@
 }
 -(void)forget_password_action:(UIButton *)btn
 {
-    chooseForgetViewController *forget=[[chooseForgetViewController alloc] init];
+    ChooseResetPwdTypeViewController *forget=[[ChooseResetPwdTypeViewController alloc] init];
     forget.block=resetpasswordBlock;
     [self presentModalViewController:forget animated:YES];
 }

@@ -11,7 +11,7 @@
 #import <GTSDK/GeTuiSdk.h>
 #import "MyMD5.h"
 
-#import "webViewController.h"
+#import "WebViewController.h"
 
 #define Color_tp [UIColor colorWithRed:170.0f/255.0f green:230.0f/255.0f blue:245.0f/255.0f alpha:1]
 
@@ -217,14 +217,14 @@
 }
 -(void)xieyi:(UIGestureRecognizer *)ges
 {
-    webViewController *web=[[webViewController alloc] init];
+    WebViewController *web=[[WebViewController alloc] init];
     web.block=disblock;
     web.dict=[[NSDictionary alloc] initWithObjectsAndKeys:@"http://www.abroadbox.cn/?page_id=497",@"web",@"使用协议",@"title",@"help",@"type",nil];
     [self presentModalViewController:web animated:YES];
 }
 -(void)yinsi:(UIGestureRecognizer *)ges
 {
-    webViewController *web=[[webViewController alloc] init];
+    WebViewController *web=[[WebViewController alloc] init];
     web.block=disblock;
     web.dict=[[NSDictionary alloc] initWithObjectsAndKeys:@"http://www.abroadbox.cn/?page_id=499",@"web",@"隐私条款",@"title",@"privacy",@"type",nil];
 

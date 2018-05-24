@@ -8,7 +8,7 @@
 #import "EMCDDeviceManager.h"
 #import "ChatViewController.h"
 #import "ChatMainViewController.h"
-#import "userInfoViewController.h"
+#import "UserInfoViewController.h"
 #import "CustomTabbarController.h"
 #import "ArticleViewController.h"
 #import "FoundViewController.h"
@@ -572,7 +572,7 @@ static CustomTabbarController *tabbarController = nil;
     NSMutableArray *vcs = [[NSMutableArray alloc]init];
     for (int i = 0; i<5; i++) {
         //        三目运算创建视图
-        UIViewController *vc =i==0?[[ChatMainViewController alloc]init]:i==1?[[ArticleViewController alloc] init]:i==2?[[BoxViewController alloc] init]:i==3?[[FoundViewController alloc]init]:[[userInfoViewController alloc] init];
+        UIViewController *vc =i==0?[[ChatMainViewController alloc]init]:i==1?[[ArticleViewController alloc] init]:i==2?[[BoxViewController alloc] init]:i==3?[[FoundViewController alloc]init]:[[UserInfoViewController alloc] init];
         //        将创建视图加入到navi中
 
         UINavigationController *navi = [[UINavigationController alloc]initWithRootViewController:vc];

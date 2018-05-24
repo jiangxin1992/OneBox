@@ -1,22 +1,22 @@
 //
-//  resetPasswordViewController.m
+//  ResetPwdViewController.m
 //  OneBox
 //
 //  Created by 谢江新 on 15/5/5.
 //  Copyright (c) 2015年 谢江新. All rights reserved.
 //
 
-#import "resetPasswordemialViewController.h"
+#import "ResetPwdEmialViewController.h"
 
 #import <objc/runtime.h>
 
 #define Color_tp [UIColor colorWithRed:170.0f/255.0f green:230.0f/255.0f blue:245.0f/255.0f alpha:1]
 
-@interface resetPasswordemialViewController ()<UITextFieldDelegate,UIAlertViewDelegate>
+@interface ResetPwdEmialViewController ()<UITextFieldDelegate,UIAlertViewDelegate>
 
 @end
 
-@implementation resetPasswordemialViewController
+@implementation ResetPwdEmialViewController
 {
     //用户名
     UITextField *username;
@@ -212,13 +212,13 @@
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [MobClick endLogPageView:@"resetPasswordViewController"];
+    [MobClick endLogPageView:@"ResetPwdViewController"];
 
 }
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [MobClick beginLogPageView:@"resetPasswordViewController"];
+    [MobClick beginLogPageView:@"ResetPwdViewController"];
     [self.navigationController setNavigationBarHidden:YES animated:NO];
 }
 /*

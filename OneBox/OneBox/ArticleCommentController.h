@@ -1,5 +1,5 @@
 //
-//  schoolCommentController.h
+//  ArticleCommentController.h
 //  OneBox
 //
 //  Created by 谢江新 on 15-2-2.

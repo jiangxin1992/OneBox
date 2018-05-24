@@ -1,5 +1,5 @@
 //
-//  schoolCommentController.h
+//  SchoolCommentController.h
 //  OneBox
 //
 //  Created by 谢江新 on 15-2-2.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface schoolCommentController : UIViewController{
+@interface SchoolCommentController : UIViewController{
     void(^changeBlock)(NSNumber *rownum,NSInteger type);
 }
 

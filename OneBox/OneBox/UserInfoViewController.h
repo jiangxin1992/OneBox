@@ -1,5 +1,5 @@
 //
-//  userInfoViewController.h
+//  UserInfoViewController.h
 //  OneBox
 //
 //  Created by 谢江新 on 15-2-4.
@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface userInfoViewController : UIViewController
+@interface UserInfoViewController : UIViewController
 {
-        void(^updataInfo)(NSDictionary *dict);
+    void(^updataInfo)(NSDictionary *dict);
 }
 @property (weak, nonatomic) IBOutlet UILabel *username;
 @property (weak, nonatomic) IBOutlet UIImageView *headimg;

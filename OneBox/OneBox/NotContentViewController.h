@@ -1,5 +1,5 @@
 //
-//  NOTContentViewController.h
+//  NotContentViewController.h
 //  OneBox
 //
 //  Created by 谢江新 on 15/8/27.
@@ -10,7 +10,7 @@
 
 @class notificationModel;
 
-@interface NOTContentViewController : UIViewController
+@interface NotContentViewController : UIViewController
 
 @property (nonatomic,strong)notificationModel *model;
 

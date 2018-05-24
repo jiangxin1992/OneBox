@@ -18,8 +18,8 @@
 #import <ShareSDKConnector/ShareSDKConnector.h>
 
 #import "ChatViewController.h"
-#import "followerViewController.h"
-#import "followingViewController.h"
+#import "FollowerViewController.h"
+#import "FollowingViewController.h"
 #import "CustomTabbarController.h"
 #import "ArticleCommentController.h"
 #import "LoginViewController.h"
@@ -297,14 +297,14 @@
     //    friend_list
     if(ges.view.tag==6000)
     {
-        followerViewController *foll=[[followerViewController alloc] init];
+        FollowerViewController *foll=[[FollowerViewController alloc] init];
         foll.token=friend_token;
         [self.navigationController pushViewController:foll animated:YES];
         [self backxiaoshi];
         
     }else
     {
-        followingViewController *foll=[[followingViewController alloc] init];
+        FollowingViewController *foll=[[FollowingViewController alloc] init];
         foll.token=friend_token;
         [self.navigationController pushViewController:foll animated:YES];
         [self backxiaoshi];
@@ -761,8 +761,6 @@
 }
 -(void)commentAction
 {
-    
-    //    schoolCommentController
     ArticleCommentController *comment=[[ArticleCommentController alloc] init];
     comment.sid=_detailModel.m_id;
     [self.navigationController pushViewController:comment animated:YES];

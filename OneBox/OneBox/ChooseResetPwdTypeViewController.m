@@ -1,21 +1,21 @@
 //
-//  chooseForgetViewController.m
+//  ChooseResetPwdTypeViewController.m
 //  OneBox
 //
 //  Created by 谢江新 on 15/11/20.
 //  Copyright © 2015年 谢江新. All rights reserved.
 //
 
-#import "chooseForgetViewController.h"
+#import "ChooseResetPwdTypeViewController.h"
 
-#import "resetPasswordemialViewController.h"
+#import "ResetPwdEmialViewController.h"
 #import "RetrievePasswordController.h"
 
-@interface chooseForgetViewController ()
+@interface ChooseResetPwdTypeViewController ()
 
 @end
 
-@implementation chooseForgetViewController
+@implementation ChooseResetPwdTypeViewController
 {
 
     UIImageView *backgroundImg;
@@ -100,7 +100,7 @@
     }else
     {
 //        密码找回
-        resetPasswordemialViewController *ret=[[resetPasswordemialViewController alloc] init];
+        ResetPwdEmialViewController *ret=[[ResetPwdEmialViewController alloc] init];
         ret.type=self.type;
         ret.block2=resetpasswordBlock2;
         ret.block=resetpasswordBlock;

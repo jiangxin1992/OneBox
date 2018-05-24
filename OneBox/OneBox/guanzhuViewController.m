@@ -11,8 +11,6 @@
 #import "HttpRequestManager.h"
 #import "MJRefresh.h"
 
-#import "followerViewController.h"
-#import "followingViewController.h"
 #import "ChatViewController.h"
 
 #import "UserCell.h"

@@ -1,5 +1,5 @@
 //
-//  goalViewController.h
+//  GoalViewController.h
 //  OneBox
 //
 //  Created by 谢江新 on 15/6/25.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface goalViewController : UIViewController
+@interface GoalViewController : UIViewController
 
 __string(type);
 

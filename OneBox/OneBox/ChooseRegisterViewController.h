@@ -1,5 +1,5 @@
 //
-//  chooseRegisterViewController.h
+//  ChooseRegisterViewController.h
 //  OneBox
 //
 //  Created by 谢江新 on 15/11/20.
@@ -10,7 +10,7 @@
 
 typedef  void(^bl)(void);
 
-@interface chooseRegisterViewController : UIViewController
+@interface ChooseRegisterViewController: UIViewController
 {
     void(^disblock)(void);
     void(^resetpasswordBlock)(void);

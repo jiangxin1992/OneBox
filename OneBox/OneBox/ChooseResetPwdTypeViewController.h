@@ -1,5 +1,5 @@
 //
-//  chooseForgetViewController.h
+//  ChooseResetPwdTypeViewController.h
 //  OneBox
 //
 //  Created by 谢江新 on 15/11/20.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 typedef  void(^bl)(void);
-@interface chooseForgetViewController : UIViewController
+@interface ChooseResetPwdTypeViewController : UIViewController
 {
     void(^resetpasswordBlock)(void);
     void(^resetpasswordBlock2)(void);

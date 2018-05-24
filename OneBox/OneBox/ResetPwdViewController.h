@@ -1,5 +1,5 @@
 //
-//  resetPasswordViewController.h
+//  ResetPwdViewController.h
 //  OneBox
 //
 //  Created by 谢江新 on 15/5/5.
@@ -10,7 +10,7 @@
 
 typedef  void(^bl)(void);
 
-@interface resetPasswordViewController : UIViewController
+@interface ResetPwdViewController : UIViewController
 
 @property (nonatomic,copy)bl block;
 @property (nonatomic,copy)bl block2;

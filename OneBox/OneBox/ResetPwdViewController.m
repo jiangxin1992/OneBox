@@ -1,20 +1,20 @@
 //
-//  resetPasswordViewController.m
+//  ResetPwdViewController.m
 //  OneBox
 //
 //  Created by 谢江新 on 15/5/5.
 //  Copyright (c) 2015年 谢江新. All rights reserved.
 //
 
-#import "resetPasswordViewController.h"
+#import "ResetPwdViewController.h"
 
 #define Color_tp [UIColor colorWithRed:170.0f/255.0f green:230.0f/255.0f blue:245.0f/255.0f alpha:1]
 
-@interface resetPasswordViewController ()<UITextFieldDelegate,UIAlertViewDelegate>
+@interface ResetPwdViewController ()<UITextFieldDelegate,UIAlertViewDelegate>
 
 @end
 
-@implementation resetPasswordViewController
+@implementation ResetPwdViewController
 {
     //用户名
     UITextField *username;
@@ -155,12 +155,12 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [MobClick beginLogPageView:@"resetPasswordViewController"];
+    [MobClick beginLogPageView:@"ResetPwdViewController"];
 }
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [MobClick endLogPageView:@"resetPasswordViewController"];
+    [MobClick endLogPageView:@"ResetPwdViewController"];
 }
 #pragma mark-return后隐藏键盘
 - (BOOL)textFieldShouldReturn:(UITextField *)theTextField {

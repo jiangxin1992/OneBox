@@ -1,5 +1,5 @@
 //
-//  webViewController.h
+//  WebViewController.h
 //  OneBox
 //
 //  Created by 谢江新 on 15/7/7.
@@ -9,7 +9,7 @@
 typedef  void(^bl)(void);
 #import <UIKit/UIKit.h>
 
-@interface webViewController : UIViewController
+@interface WebViewController : UIViewController
 
 @property (nonatomic,copy)bl block;
 @property(nonatomic,copy)NSDictionary *dict;

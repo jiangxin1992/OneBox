@@ -1,17 +1,17 @@
 //
-//  schoolCommentController.m
+//  SchoolCommentController.m
 //  OneBox
 //
 //  Created by 谢江新 on 15-2-2.
 //  Copyright (c) 2015年 谢江新. All rights reserved.
 //
 
-#import "schoolCommentController.h"
+#import "SchoolCommentController.h"
 
 #import "HttpRequestManager.h"
 
-#import "followingViewController.h"
-#import "followerViewController.h"
+#import "FollowingViewController.h"
+#import "FollowerViewController.h"
 #import "ChatViewController.h"
 #import "LoginViewController.h"
 
@@ -27,7 +27,7 @@ static void *EOCAlertViewKey = "EOCAlertViewKey";
 //评论的view的高度（发表评论）
 #define commentHeight 70*_Scale
 
-@interface schoolCommentController ()<UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate,UITextFieldDelegate,UITextViewDelegate>
+@interface SchoolCommentController ()<UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate,UITextFieldDelegate,UITextViewDelegate>
 {
 
     UIView *nocomment;
@@ -70,7 +70,7 @@ static void *EOCAlertViewKey = "EOCAlertViewKey";
 }
 @end
 
-@implementation schoolCommentController
+@implementation SchoolCommentController
 -(void)xiaoshi:(NSNotification *)not
 {
     if([not.object isEqualToString:@"other"])
@@ -273,13 +273,13 @@ static void *EOCAlertViewKey = "EOCAlertViewKey";
 {
     if(ges.view.tag==6000)
     {
-        followerViewController *foll=[[followerViewController alloc] init];
+        FollowerViewController *foll=[[FollowerViewController alloc] init];
         foll.token=friend_token;
         [self.navigationController pushViewController:foll animated:YES];
         [self xiaoshi];
     }else
     {
-        followingViewController *foll=[[followingViewController alloc] init];
+        FollowingViewController *foll=[[FollowingViewController alloc] init];
         foll.token=friend_token;
         [self.navigationController pushViewController:foll animated:YES];
         [self xiaoshi];
@@ -1039,12 +1039,12 @@ static void *EOCAlertViewKey = "EOCAlertViewKey";
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [MobClick endLogPageView:@"schoolCommentController"];
+    [MobClick endLogPageView:@"SchoolCommentController"];
 }
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [MobClick beginLogPageView:@"schoolCommentController"];
+    [MobClick beginLogPageView:@"SchoolCommentController"];
     self.tabBarController.tabBar.hidden=YES;
 }
 - (void)didReceiveMemoryWarning {

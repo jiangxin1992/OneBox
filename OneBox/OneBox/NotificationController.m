@@ -10,7 +10,7 @@
 
 #import "MJRefresh.h"
 
-#import "NOTContentViewController.h"
+#import "NotContentViewController.h"
 
 #import "NotificationCell.h"
 
@@ -156,7 +156,7 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 //    push subview
-    NOTContentViewController *not=[[NOTContentViewController alloc] init];
+    NotContentViewController *not=[[NotContentViewController alloc] init];
     not.model=dataArr[indexPath.section];
     [self.navigationController pushViewController:not animated:YES];
 }

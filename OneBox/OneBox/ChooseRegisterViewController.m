@@ -1,21 +1,21 @@
 //
-//  chooseRegisterViewController.m
+//  ChooseRegisterViewController.m
 //  OneBox
 //
 //  Created by 谢江新 on 15/11/20.
 //  Copyright © 2015年 谢江新. All rights reserved.
 //
 
-#import "chooseRegisterViewController.h"
+#import "ChooseRegisterViewController.h"
 
 #import "RegisterEmailController.h"
 #import "RetrievePasswordController.h"
 
-@interface chooseRegisterViewController ()
+@interface ChooseRegisterViewController()
 
 @end
 
-@implementation chooseRegisterViewController
+@implementation ChooseRegisterViewController
 {
     UIImageView *backgroundImg;
 }
@@ -103,14 +103,6 @@
         ret.block2=resetpasswordBlock2;
         ret.block=resetpasswordBlock;
         [self presentModalViewController:ret animated:YES];
-
-        //        密码找回
-//        resetPasswordemialViewController *ret=[[resetPasswordemialViewController alloc] init];
-//        ret.type=self.type;
-//        ret.block2=resetpasswordBlock2;
-//        ret.block=resetpasswordBlock;
-//        [self presentModalViewController:ret animated:YES];
-
     }
 }
 -(void)backAction:(UIButton *)btn

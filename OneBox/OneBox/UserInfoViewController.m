@@ -1,14 +1,14 @@
 
 
 //
-//  userInfoViewController.m
+//  UserInfoViewController.m
 //  OneBox
 //
 //  Created by 谢江新 on 15-2-4.
 //  Copyright (c) 2015年 谢江新. All rights reserved.
 //
 
-#import "userInfoViewController.h"
+#import "UserInfoViewController.h"
 
 #import "HttpRequestManager.h"
 #import "QiniuSDK.h"
@@ -25,7 +25,7 @@
 #import "CustomTabbarController.h"
 #import "SuggestViewController.h"
 #import "AboutViewController.h"
-#import "goalViewController.h"
+#import "GoalViewController.h"
 #import "collectionSchool_delete.h"
 #import "LoginViewController.h"
 
@@ -37,7 +37,7 @@
 
 static void *EOCAlertViewKey = "EOCAlertViewKey";
 
-@interface userInfoViewController ()<UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,NSURLConnectionDelegate,UITextFieldDelegate,UICollectionViewDelegate,UIAlertViewDelegate,MFMailComposeViewControllerDelegate,UIActionSheetDelegate>
+@interface UserInfoViewController ()<UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,NSURLConnectionDelegate,UITextFieldDelegate,UICollectionViewDelegate,UIAlertViewDelegate,MFMailComposeViewControllerDelegate,UIActionSheetDelegate>
 {
     UIButton *setBtn;
 
@@ -69,7 +69,7 @@ static void *EOCAlertViewKey = "EOCAlertViewKey";
 @property(strong,nonatomic)NSMutableData *datas;
 @end
 
-@implementation userInfoViewController
+@implementation UserInfoViewController
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
@@ -480,14 +480,14 @@ static void *EOCAlertViewKey = "EOCAlertViewKey";
     }else if(ges.view.tag==3601)
     {
 #pragma mark- 目标
-        goalViewController *goal=[[goalViewController alloc] init];
+        GoalViewController *goal=[[GoalViewController alloc] init];
         goal.type=@"goal";
         [self.navigationController pushViewController:goal animated:YES];
 
     }else if(ges.view.tag==3602)
     {
 #pragma mark- 录取
-        goalViewController *goal=[[goalViewController alloc] init];
+        GoalViewController *goal=[[GoalViewController alloc] init];
         goal.type=@"admit";
         [self.navigationController pushViewController:goal animated:YES];
     }
@@ -655,12 +655,12 @@ static void *EOCAlertViewKey = "EOCAlertViewKey";
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [MobClick endLogPageView:@"userInfoViewController"];
+    [MobClick endLogPageView:@"UserInfoViewController"];
 }
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [MobClick beginLogPageView:@"userInfoViewController"];
+    [MobClick beginLogPageView:@"UserInfoViewController"];
     [[CustomTabbarController sharedManager] tabbarAppear];
     if([regular isLogin])
     {

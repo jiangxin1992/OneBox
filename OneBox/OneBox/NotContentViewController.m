@@ -1,20 +1,20 @@
 //
-//  NOTContentViewController.m
+//  NotContentViewController.m
 //  OneBox
 //
 //  Created by 谢江新 on 15/8/27.
 //  Copyright (c) 2015年 谢江新. All rights reserved.
 //
 
-#import "NOTContentViewController.h"
+#import "NotContentViewController.h"
 
 #import "notificationModel.h"
 
-@interface NOTContentViewController ()
+@interface NotContentViewController ()
 
 @end
 
-@implementation NOTContentViewController
+@implementation NotContentViewController
 {
     UIScrollView *_scrollview;
     DBImageView *icon;

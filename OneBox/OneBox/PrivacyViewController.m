@@ -8,7 +8,7 @@
 
 #import "PrivacyViewController.h"
 
-@interface PrivacyViewController ()<UIWebViewDelegate>
+@interface PrivacyViewController ()
 
 @property (nonatomic, strong) UIWebView *webView;
 
@@ -64,12 +64,15 @@
     _webView = [[UIWebView alloc] initWithFrame:CGRectZero];
     [self.view addSubview:_webView];
     [_webView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.left.right.top.mas_equalTo(0);
+        make.bottom.left.right.mas_equalTo(0);
+        make.top.mas_equalTo(kStatusBarAndNavigationBarHeight);
     }];
     if (@available(iOS 11.0, *)) {
         _webView.scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     }
     _webView.backgroundColor = _define_white_color;
+    _webView.opaque = NO;
+    _webView.dataDetectorTypes = UIDataDetectorTypeNone;
 }
 
 #pragma mark - --------------请求数据----------------------
@@ -85,14 +88,11 @@
         NSData *data = [html dataUsingEncoding:NSUTF8StringEncoding];
         NSDictionary *dict = [NSJSONSerialization  JSONObjectWithData:data options:0 error:nil];
 
-        ws.webView.delegate = self;
         ws.webView.backgroundColor = [UIColor clearColor];
-        ws.webView.opaque = NO;
-        ws.webView.dataDetectorTypes = UIDataDetectorTypeNone;
 
-        if(![NSString isNilOrEmpty:[[dict objectForKey:@"data"] objectForKey:@"html_url"]])
+        NSString *html_url = [[dict objectForKey:@"data"] objectForKey:@"html_url"];
+        if(![NSString isNilOrEmpty:html_url])
         {
-            NSString *html_url = [[dict objectForKey:@"data"] objectForKey:@"html_url"];
             NSURL *url = [NSURL URLWithString:html_url];
             NSURLRequest *request = [NSURLRequest requestWithURL:url];
             [ws.webView loadRequest:request];

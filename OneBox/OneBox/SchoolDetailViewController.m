@@ -19,10 +19,10 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 
-#import "followerViewController.h"
-#import "followingViewController.h"
+#import "FollowerViewController.h"
+#import "FollowingViewController.h"
 #import "AdmissionViewController.h"
-#import "schoolCommentController.h"
+#import "SchoolCommentController.h"
 #import "CustomTabbarController.h"
 #import "ImageViewController.h"
 #import "LoginViewController.h"
@@ -182,7 +182,7 @@
     if (sender.direction == UISwipeGestureRecognizerDirectionLeft) {
         if(_sid!=nil)
         {
-            schoolCommentController *comment=[[schoolCommentController alloc] init];
+            SchoolCommentController *comment=[[SchoolCommentController alloc] init];
             comment.sid=_sid;
             [self.navigationController pushViewController:comment animated:YES];
 
@@ -300,8 +300,8 @@
 {
 
 
-//    schoolCommentController
-    schoolCommentController *comment=[[schoolCommentController alloc] init];
+//    SchoolCommentController
+    SchoolCommentController *comment=[[SchoolCommentController alloc] init];
     comment.sid=_sid;
     [self.navigationController pushViewController:comment animated:YES];
 
@@ -730,7 +730,7 @@
 
     if(ges.view.tag==6000)
     {
-        followerViewController *foll=[[followerViewController alloc] init];
+        FollowerViewController *foll=[[FollowerViewController alloc] init];
         foll.token=friend_token;
         [self.navigationController pushViewController:foll animated:YES];
         [self xiaoshi];
@@ -738,7 +738,7 @@
 
     }else
     {
-        followingViewController *foll=[[followingViewController alloc] init];
+        FollowingViewController *foll=[[FollowingViewController alloc] init];
         foll.token=friend_token;
         [self.navigationController pushViewController:foll animated:YES];
         [self xiaoshi];

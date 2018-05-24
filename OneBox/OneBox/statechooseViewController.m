@@ -11,7 +11,7 @@
 #import "ChineseToPinyin.h"
 
 #import "citychooseViewController.h"
-#import "personinfoViewController.h"
+#import "PersoninfoViewController.h"
 
 @interface statechooseViewController ()<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate>
 

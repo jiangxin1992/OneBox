@@ -122,12 +122,12 @@
     [self.view addSubview:_tableView];
     footview=[[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(_tableView.frame), 100)];
     _tableView.tableFooterView=footview;
-    [self banben_view];
+    [self createVersionView];
     _tableView.backgroundColor=[UIColor clearColor];
 
 
 }
--(void)banben_view
+-(void)createVersionView
 {
     banbenview=[[UIView alloc] initWithFrame:CGRectMake((CGRectGetWidth(_tableView.frame)-100*_Scale)/2.0f,50*_Scale, 100*_Scale, 100*_Scale)];
     banbenview.backgroundColor=[UIColor clearColor];

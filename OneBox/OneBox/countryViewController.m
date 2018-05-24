@@ -13,7 +13,7 @@
 #import "ChineseToPinyin.h"
 
 #import "statechooseViewController.h"
-#import "personinfoViewController.h"
+#import "PersoninfoViewController.h"
 
 @interface countryViewController ()<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate,CLLocationManagerDelegate>
 

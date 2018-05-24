@@ -1,12 +1,12 @@
 //
-//  personinfoViewController.m
+//  PersoninfoViewController.m
 //  OneBox
 //
 //  Created by 谢江新 on 15/10/21.
 //  Copyright © 2015年 谢江新. All rights reserved.
 //
 
-#import "personinfoViewController.h"
+#import "PersoninfoViewController.h"
 
 #import "QiniuSDK.h"
 #import <CoreLocation/CoreLocation.h>
@@ -24,11 +24,11 @@
 
 static void *EOCAlertViewKey = "EOCAlertViewKey";
 
-@interface personinfoViewController ()<UIAlertViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextFieldDelegate>
+@interface PersoninfoViewController ()<UIAlertViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextFieldDelegate>
 
 @end
 
-@implementation personinfoViewController
+@implementation PersoninfoViewController
 {
 //    国家城市id
     NSMutableString *country_id;
@@ -935,13 +935,13 @@ static void *EOCAlertViewKey = "EOCAlertViewKey";
 {
     [regular dismissKeyborad];
     [super viewWillDisappear:animated];
-    [MobClick endLogPageView:@"personinfoViewController"];
+    [MobClick endLogPageView:@"PersoninfoViewController"];
 }
 -(void)viewWillAppear:(BOOL)animated
 {
 //
     [super viewWillAppear:animated];
-    [MobClick beginLogPageView:@"personinfoViewController"];
+    [MobClick beginLogPageView:@"PersoninfoViewController"];
 
 }
 /*

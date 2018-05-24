@@ -24,11 +24,10 @@
 
 #import "CustomTabbarController.h"
 #import "SuggestViewController.h"
-#import "about_new_ViewController.h"
+#import "AboutViewController.h"
 #import "goalViewController.h"
 #import "collectionSchool_delete.h"
 #import "LoginViewController.h"
-#import "AboutViewController.h"
 
 #import "regular.h"
 #import "MyMD5.h"
@@ -165,6 +164,7 @@ static void *EOCAlertViewKey = "EOCAlertViewKey";
     {
         [setBtn setImage:[UIImage imageNamed:@"设置"] forState:UIControlStateNormal];
     }
+    
 }
 #pragma mark-刷新个人信息
 -(void)block
@@ -624,12 +624,12 @@ static void *EOCAlertViewKey = "EOCAlertViewKey";
     labelabout.font=[regular getFont:10.0f];
     labelabout.textColor=_define_blue_color;
     labelabout.text=@"你 好";
-    [self banben_view];
+    [self createVersionView];
 
 
 
 }
--(void)banben_view
+-(void)createVersionView
 {
     UIView *backview=[[UIView alloc] initWithFrame:CGRectMake((ScreenWidth-100*_Scale)/2, CGRectGetMaxY(aboutBtn.frame)+70*_Scale, 100*_Scale, 50*_Scale)];
     backview.backgroundColor=[UIColor clearColor];
@@ -980,7 +980,7 @@ static void *EOCAlertViewKey = "EOCAlertViewKey";
 }
 - (void)setBtnPress:(UIButton *)btn
 {
-    about_new_ViewController *UserSet = [[about_new_ViewController alloc] init];
+    AboutViewController *UserSet = [[AboutViewController alloc] init];
     [self.navigationController pushViewController:UserSet animated:YES];
 }
 

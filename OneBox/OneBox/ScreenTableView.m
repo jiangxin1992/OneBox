@@ -146,11 +146,11 @@
         _footerView.frame = CGRectMake(0, 0, CGRectGetWidth(self.frame), 100);
         _footerView.hidden = YES;
 
-        [self banben_view];
+        [self createVersionView];
     }
     self.tableFooterView = _footerView;
 }
--(void)banben_view
+-(void)createVersionView
 {
     _banbenView = [UIImageView getImgWithImageStr:@"版本_v1.0"];
     [_footerView addSubview:_banbenView];

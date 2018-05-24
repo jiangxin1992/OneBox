@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@class personinfoViewController;
+@class PersoninfoViewController;
 
 @interface statechooseViewController : UIViewController
 
-@property (nonatomic,strong)personinfoViewController *person;
+@property (nonatomic,strong)PersoninfoViewController *person;
 @property (nonatomic,copy)NSDictionary *dict;
 
 @end

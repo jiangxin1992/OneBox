@@ -1,5 +1,5 @@
 //
-//  personinfoViewController.h
+//  PersoninfoViewController.h
 //  OneBox
 //
 //  Created by 谢江新 on 15/10/21.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface personinfoViewController : UIViewController
+@interface PersoninfoViewController : UIViewController
 
 @end

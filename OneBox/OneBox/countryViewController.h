@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@class personinfoViewController;
+@class PersoninfoViewController;
 
 @interface countryViewController : UIViewController
 
-@property (nonatomic,strong)personinfoViewController *person;
+@property (nonatomic,strong)PersoninfoViewController *person;
 
 @end

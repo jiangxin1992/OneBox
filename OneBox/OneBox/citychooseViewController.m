@@ -8,7 +8,7 @@
 
 #import "citychooseViewController.h"
 
-#import "personinfoViewController.h"
+#import "PersoninfoViewController.h"
 
 #import "ChineseToPinyin.h"
 

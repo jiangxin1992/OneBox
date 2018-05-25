@@ -1,12 +1,12 @@
 //
-//  submitSchoolController.m
+//  SubmitSchoolController.m
 //  OneBox
 //
 //  Created by 谢江新 on 15/3/9.
 //  Copyright (c) 2015年 谢江新. All rights reserved.
 //
 
-#import "submitSchoolController.h"
+#import "SubmitSchoolController.h"
 
 #import "OnlineProjectsViewController.h"
 #import "CustomTabbarController.h"
@@ -15,11 +15,11 @@
 
 #define color_gray [UIColor colorWithRed:153.0f/255.0f green:153.0f/255.0f blue:153.0f/255.0f alpha:1]
 
-@interface submitSchoolController ()
+@interface SubmitSchoolController ()
 
 @end
 
-@implementation submitSchoolController
+@implementation SubmitSchoolController
 {
     NSMutableDictionary *data_dict_must;
     NSArray *titleArr;
@@ -753,14 +753,14 @@
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [MobClick endLogPageView:@"submitSchoolController"];
+    [MobClick endLogPageView:@"SubmitSchoolController"];
 
 }
 -(void)viewWillAppear:(BOOL)animated
 {
 
     [super viewWillAppear:animated];
-    [MobClick beginLogPageView:@"submitSchoolController"];
+    [MobClick beginLogPageView:@"SubmitSchoolController"];
 
      [[CustomTabbarController sharedManager] tabbarHide];
 }

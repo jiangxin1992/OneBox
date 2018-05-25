@@ -1,20 +1,19 @@
 //
-//  chooseSchoolController.m
+//  ChooseSchoolController.m
 //  OneBox
 //
 //  Created by 谢江新 on 15/3/9.
 //  Copyright (c) 2015年 谢江新. All rights reserved.
 //
 
-#import "chooseSchoolController.h"
+#import "ChooseSchoolController.h"
 
 #import "OnlineProjectsViewController.h"
-#import "new_AcademicRecordsController.h"
+#import "AcademicRecordsController.h"
 #import "SchoolDetailViewController.h"
-#import "submitSchoolController.h"
 #import "CustomTabbarController.h"
 
-#import "collectionSchool.h"
+#import "CollectionSchoolViewController.h"
 #import "chooseModel.h"
 #import "surveyModel.h"
 #import "Tools.h"
@@ -24,11 +23,11 @@
 #define card_type 140*_Scale
 #define schoolSign @"注:以上学费信息为官网获取，可能未包含书本，校服，活动等费用，最终费用请以学校通知为准。"
 
-@interface chooseSchoolController ()<UIAlertViewDelegate,UIScrollViewDelegate>
+@interface ChooseSchoolController ()<UIAlertViewDelegate,UIScrollViewDelegate>
 
 @end
 
-@implementation chooseSchoolController
+@implementation ChooseSchoolController
 {
     YYAnimationIndicator *indicator;
     UIView *_bottom_view;
@@ -393,12 +392,12 @@
     NSInteger _index=btn.tag-200;
     if(_index)
     {
-        [self.navigationController pushViewController:[new_AcademicRecordsController new] animated:YES];
+        [self.navigationController pushViewController:[AcademicRecordsController new] animated:YES];
 
     }else
     {
 //     收藏学校
-        collectionSchool *col=[[collectionSchool alloc] init];
+        CollectionSchoolViewController *col=[[CollectionSchoolViewController alloc] init];
         col.dict=[[NSDictionary alloc] initWithObjectsAndKeys:@"add",@"type",[NSDictionary new],@"dict",nil];
 
         isToCol=YES;
@@ -1097,7 +1096,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [MobClick beginLogPageView:@"chooseSchoolController"];
+    [MobClick beginLogPageView:@"ChooseSchoolController"];
     if(!isAppear)
     {
         [self prepareData];
@@ -1141,7 +1140,7 @@
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [MobClick endLogPageView:@"chooseSchoolController"];
+    [MobClick endLogPageView:@"ChooseSchoolController"];
     UIView *view=[self.view viewWithTag:50];
     [view removeFromSuperview];
 }

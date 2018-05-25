@@ -6,17 +6,17 @@
 //  Copyright © 2015年 谢江新. All rights reserved.
 //
 
-#import "submit_material_controller.h"
+#import "SubmitMaterialController.h"
 
 #import "CustomTabbarController.h"
 
 #import "ApplyFilemodel.h"
 
-@interface submit_material_controller ()
+@interface SubmitMaterialController ()
 
 @end
 
-@implementation submit_material_controller
+@implementation SubmitMaterialController
 {
     ApplyFilemodel *appleFilemodel;
     UIImageView *desImage;

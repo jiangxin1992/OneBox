@@ -1,5 +1,5 @@
 //
-//  countryViewController.h
+//  CityChooseViewController.h
 //  OneBox
 //
 //  Created by 谢江新 on 15/10/30.
@@ -10,8 +10,9 @@
 
 @class PersoninfoViewController;
 
-@interface countryViewController : UIViewController
+@interface CityChooseViewController : UIViewController
 
 @property (nonatomic,strong)PersoninfoViewController *person;
+@property(nonatomic,copy)NSDictionary *dict;
 
 @end

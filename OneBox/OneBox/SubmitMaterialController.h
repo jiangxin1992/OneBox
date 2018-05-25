@@ -8,6 +8,5 @@
 
 #import <UIKit/UIKit.h>
 
-@interface fly_material_controller: UIViewController
-
+@interface SubmitMaterialController: UIViewController
 @end

@@ -1,5 +1,5 @@
 //
-//  collectionSchool.h
+//  CollectionSchoolViewController.h
 //  OneBox
 //
 //  Created by 谢江新 on 15/3/11.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface collectionSchool : UIViewController{
+@interface CollectionSchoolViewController : UIViewController{
     void(^changeBlock)(NSInteger rownum);
 }
 @property (nonatomic,copy)NSDictionary *dict;

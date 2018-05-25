@@ -10,9 +10,9 @@
 
 #import "OnlineProjectsViewController.h"
 #import "QianViewController.h"
-#import "submit_material_controller.h"
-#import "submitSchoolController.h"
-#import "fly_material_controller.h"
+#import "SubmitMaterialController.h"
+#import "SubmitSchoolController.h"
+#import "FlyMaterialController.h"
 #import "CustomTabbarController.h"
 
 @interface Boxlistviewcontroller ()
@@ -25,9 +25,9 @@
     NSMutableArray *btnarr;
     NSInteger currentPage;
     
-    submit_material_controller *ctn1;
-    fly_material_controller *ctn11;
-    submitSchoolController *ctn2;
+    SubmitMaterialController *ctn1;
+    FlyMaterialController *ctn11;
+    SubmitSchoolController *ctn2;
     QianViewController *ctn3;
 }
 -(void)helpAction
@@ -105,14 +105,14 @@
     {
         if(ctn1==nil)
         {
-            ctn1=[[submit_material_controller alloc] init];
+            ctn1=[[SubmitMaterialController alloc] init];
         }
         [_pageVc setViewControllers:@[ctn1] direction:0 animated:YES completion:nil];
     }else if(_nowstep==2)
     {
         if(ctn11==nil)
         {
-            ctn11=[[fly_material_controller alloc] init];
+            ctn11=[[FlyMaterialController alloc] init];
         }
         [_pageVc setViewControllers:@[ctn11] direction:0 animated:YES completion:nil];
     }
@@ -160,14 +160,14 @@
             {
                 if(ctn1==nil)
                 {
-                    ctn1=[[submit_material_controller alloc] init];
+                    ctn1=[[SubmitMaterialController alloc] init];
                 }
                 [_pageVc setViewControllers:@[ctn1] direction:1 animated:YES completion:nil];
             }else if(_nowstep==2)
             {
                 if(ctn11==nil)
                 {
-                    ctn11=[[fly_material_controller alloc] init];
+                    ctn11=[[FlyMaterialController alloc] init];
                 }
                 [_pageVc setViewControllers:@[ctn11] direction:1 animated:YES completion:nil];
             }
@@ -184,7 +184,7 @@
             {
                 if(ctn2==nil)
                 {
-                    ctn2=[[submitSchoolController alloc] init];
+                    ctn2=[[SubmitSchoolController alloc] init];
                     ctn2.step=_step;
                     ctn2.block=backBlock;
                 }
@@ -208,7 +208,7 @@
             {
                 if(ctn2==nil)
                 {
-                    ctn2=[[submitSchoolController alloc] init];
+                    ctn2=[[SubmitSchoolController alloc] init];
                     ctn2.step=_step;
                     ctn2.block=backBlock;
                 }

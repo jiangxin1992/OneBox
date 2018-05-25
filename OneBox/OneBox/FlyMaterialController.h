@@ -1,5 +1,5 @@
 //
-//  bangdanlistViewController.h
+//  FlyMaterialController.h
 //  OneBox
 //
 //  Created by 谢江新 on 15/11/16.
@@ -8,5 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface submit_material_controller: UIViewController
+@interface FlyMaterialController: UIViewController
+
 @end

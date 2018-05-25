@@ -26,7 +26,7 @@
 #import "SuggestViewController.h"
 #import "AboutViewController.h"
 #import "GoalViewController.h"
-#import "collectionSchool_delete.h"
+#import "CollectionSchoolDeleteViewController.h"
 #import "LoginViewController.h"
 
 #import "regular.h"
@@ -399,7 +399,7 @@ static void *EOCAlertViewKey = "EOCAlertViewKey";
     }else if(_index==2)
     {
         //        收藏学校
-        collectionSchool_delete *col=[[collectionSchool_delete alloc] init];
+        CollectionSchoolDeleteViewController *col=[[CollectionSchoolDeleteViewController alloc] init];
 //        col.dict=[[NSDictionary alloc] initWithObjectsAndKeys:@"add",@"type",[NSDictionary new],@"dict",nil];
 
         [self.navigationController pushViewController:col animated:YES];
@@ -472,7 +472,7 @@ static void *EOCAlertViewKey = "EOCAlertViewKey";
     {
 #pragma mark- 收藏
 //        [self aboutBtnPress];
-        collectionSchool_delete *col=[[collectionSchool_delete alloc] init];
+        CollectionSchoolDeleteViewController *col=[[CollectionSchoolDeleteViewController alloc] init];
         //        col.block=changeBlock;
 //        col.dict=[[NSDictionary alloc] initWithObjectsAndKeys:@"delete",@"type",[NSDictionary new],@"dict",nil];
 

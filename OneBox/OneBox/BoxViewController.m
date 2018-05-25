@@ -23,8 +23,7 @@
 #import "Boxlistviewcontroller.h"
 #import "LoginViewController.h"
 #import "FlyUsaViewController.h"
-#import "chooseSchoolController.h"
-#import "submitSchoolController.h"
+#import "ChooseSchoolController.h"
 #import "CustomTabbarController.h"
 #import "BoxHelpViewController.h"
 
@@ -162,7 +161,7 @@
         NSInteger _tag=btn.tag-100;
         if(_tag==0)
         {
-            chooseSchoolController *flyVC = [[chooseSchoolController alloc] init];
+            ChooseSchoolController *flyVC = [[ChooseSchoolController alloc] init];
             flyVC.step=_step;
             flyVC.block=shareBlock;
 

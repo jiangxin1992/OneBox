@@ -1,18 +1,18 @@
 //
-//  collection_del_Cell.m
+//  collectionDelCell.m
 //  OneBox
 //
 //  Created by 谢江新 on 15/12/1.
 //  Copyright © 2015年 谢江新. All rights reserved.
 //
 
-#import "collection_del_Cell.h"
+#import "collectionDelCell.h"
 
 #import "FoundModel.h"
 
 #define foundCellHeight 200*_Scale
 
-@implementation collection_del_Cell
+@implementation collectionDelCell
 {
     NSMutableArray *leftViewArray;
     NSArray *titleArr;

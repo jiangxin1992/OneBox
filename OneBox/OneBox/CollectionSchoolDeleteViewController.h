@@ -1,5 +1,5 @@
 //
-//  collectionSchool_delete.h
+//  CollectionSchoolDeleteViewController.h
 //  OneBox
 //
 //  Created by 谢江新 on 15/12/1.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface collectionSchool_delete : UIViewController
+@interface CollectionSchoolDeleteViewController : UIViewController
 
 @end

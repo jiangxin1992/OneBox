@@ -1,22 +1,22 @@
 //
-//  citychooseViewController.m
+//  CityChooseViewController.m
 //  OneBox
 //
 //  Created by 谢江新 on 15/10/30.
 //  Copyright © 2015年 谢江新. All rights reserved.
 //
 
-#import "citychooseViewController.h"
+#import "CityChooseViewController.h"
 
 #import "PersoninfoViewController.h"
 
 #import "ChineseToPinyin.h"
 
-@interface citychooseViewController ()<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate>
+@interface CityChooseViewController ()<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate>
 
 @end
 
-@implementation citychooseViewController
+@implementation CityChooseViewController
 {
 
     NSArray *city_data_arr;

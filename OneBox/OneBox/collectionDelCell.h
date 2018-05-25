@@ -1,5 +1,5 @@
 //
-//  collection_del_Cell.h
+//  collectionDelCell.h
 //  OneBox
 //
 //  Created by 谢江新 on 15/12/1.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface collection_del_Cell : UITableViewCell
+@interface collectionDelCell : UITableViewCell
 
 @property(nonatomic,copy)NSMutableDictionary *dict;
 

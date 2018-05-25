@@ -1,5 +1,5 @@
 //
-//  chooseSchoolController.h
+//  ChooseSchoolController.h
 //  OneBox
 //
 //  Created by 谢江新 on 15/3/9.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface chooseSchoolController : UIViewController
+@interface ChooseSchoolController : UIViewController
 
 @property (nonatomic,assign)NSInteger step;
 @property (nonatomic,copy) void(^block)(NSString*);

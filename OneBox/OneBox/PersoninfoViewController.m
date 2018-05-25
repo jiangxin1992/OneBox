@@ -15,9 +15,7 @@
 #import "UIImageView+AFNetworking.h"
 #import "HttpRequestManager.h"
 
-#import "countryViewController.h"
-#import "statechooseViewController.h"
-#import "citychooseViewController.h"
+#import "CountryChooseViewController.h"
 
 #import "MyInfo.h"
 #import <objc/runtime.h>
@@ -647,7 +645,7 @@ static void *EOCAlertViewKey = "EOCAlertViewKey";
 }
 -(void)chooseCity:(UIButton *)btn
 {
-    countryViewController *cou=[[countryViewController alloc] init];
+    CountryChooseViewController *cou=[[CountryChooseViewController alloc] init];
     cou.person=self;
     [self.navigationController pushViewController:cou animated:YES];
 

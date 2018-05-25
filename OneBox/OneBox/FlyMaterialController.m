@@ -1,22 +1,22 @@
 //
-//  bangdanlistViewController.m
+//  FlyMaterialController.m
 //  OneBox
 //
 //  Created by 谢江新 on 15/11/16.
 //  Copyright © 2015年 谢江新. All rights reserved.
 //
 
-#import "fly_material_controller.h"
+#import "FlyMaterialController.h"
 
 #import "CustomTabbarController.h"
 
 #import "ApplyFilemodel.h"
 
-@interface fly_material_controller ()
+@interface FlyMaterialController ()
 
 @end
 
-@implementation fly_material_controller
+@implementation FlyMaterialController
 {
 
 

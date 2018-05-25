@@ -1,5 +1,5 @@
 //
-//  statechooseViewController.h
+//  StateChooseViewController.h
 //  OneBox
 //
 //  Created by 谢江新 on 15/10/30.
@@ -10,7 +10,7 @@
 
 @class PersoninfoViewController;
 
-@interface statechooseViewController : UIViewController
+@interface StateChooseViewController : UIViewController
 
 @property (nonatomic,strong)PersoninfoViewController *person;
 @property (nonatomic,copy)NSDictionary *dict;

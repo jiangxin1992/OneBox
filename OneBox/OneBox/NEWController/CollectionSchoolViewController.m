@@ -1,5 +1,5 @@
 //
-//  collectionSchool.m
+//  CollectionSchoolViewController.m
 //  OneBox
 //
 //  Created by 谢江新 on 15/3/11.
@@ -13,17 +13,17 @@
 
 #import "collectionCell.h"
 
-#import "collectionSchool.h"
+#import "CollectionSchoolViewController.h"
 #import "surveyModel.h"
 #import "FoundModel.h"
 
 #define CellHeight 200*_Scale
 
-@interface collectionSchool ()<UITableViewDelegate,UITableViewDataSource>
+@interface CollectionSchoolViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @end
 
-@implementation collectionSchool
+@implementation CollectionSchoolViewController
 {
 
     NSMutableArray *dataArray;
@@ -331,7 +331,7 @@
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [MobClick endLogPageView:@"collectionSchool"];
+    [MobClick endLogPageView:@"CollectionSchoolViewController"];
     if([[_dict objectForKey:@"type"] isEqualToString:@"recommend"])
     {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadGoal" object:nil];
@@ -342,7 +342,7 @@
     [super viewWillAppear:animated];
     [[CustomTabbarController sharedManager] tabbarHide];
 
-    [MobClick beginLogPageView:@"collectionSchool"];
+    [MobClick beginLogPageView:@"CollectionSchoolViewController"];
 
 }
 - (void)didReceiveMemoryWarning {

@@ -1,12 +1,12 @@
 //
-//  collectionSchool_delete.m
+//  CollectionSchoolDeleteViewController.m
 //  OneBox
 //
 //  Created by 谢江新 on 15/12/1.
 //  Copyright © 2015年 谢江新. All rights reserved.
 //
 
-#import "collectionSchool_delete.h"
+#import "CollectionSchoolDeleteViewController.h"
 
 
 // c文件 —> 系统文件（c文件在前）
@@ -16,7 +16,7 @@
 #import "CustomTabbarController.h"
 
 // 自定义视图
-#import "collection_del_Cell.h"
+#import "collectionDelCell.h"
 
 // 接口
 
@@ -29,11 +29,11 @@
 
 #define CellHeight 200*_Scale
 
-@interface collectionSchool_delete ()<UITableViewDelegate,UITableViewDataSource>
+@interface CollectionSchoolDeleteViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @end
 
-@implementation collectionSchool_delete
+@implementation CollectionSchoolDeleteViewController
 {
     NSMutableArray *dataArray;
     UITableView *_tableView;
@@ -50,7 +50,7 @@
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [MobClick endLogPageView:@"collectionSchool"];
+    [MobClick endLogPageView:@"CollectionSchoolDeleteViewController"];
 
 }
 -(void)viewWillAppear:(BOOL)animated
@@ -58,7 +58,7 @@
     [super viewWillAppear:animated];
     [[CustomTabbarController sharedManager] tabbarHide];
 
-    [MobClick beginLogPageView:@"collectionSchool"];
+    [MobClick beginLogPageView:@"CollectionSchoolDeleteViewController"];
 
 }
 - (void)didReceiveMemoryWarning {
@@ -303,10 +303,10 @@
         return cell;
     }
     static NSString *cellid=@"cell";
-    collection_del_Cell *cell=[tableView dequeueReusableCellWithIdentifier:cellid];
+    collectionDelCell *cell=[tableView dequeueReusableCellWithIdentifier:cellid];
     if(!cell)
     {
-        cell=[[collection_del_Cell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellid];
+        cell=[[collectionDelCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellid];
     }
 
     cell.backgroundColor=_define_backview_color;

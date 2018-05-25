@@ -1,25 +1,25 @@
 //
-//  countryViewController.m
+//  CountryChooseViewController.m
 //  OneBox
 //
 //  Created by 谢江新 on 15/10/30.
 //  Copyright © 2015年 谢江新. All rights reserved.
 //
 
-#import "countryViewController.h"
+#import "CountryChooseViewController.h"
 
 #import <CoreLocation/CoreLocation.h>
 #import <MapKit/MapKit.h>
 #import "ChineseToPinyin.h"
 
-#import "statechooseViewController.h"
+#import "StateChooseViewController.h"
 #import "PersoninfoViewController.h"
 
-@interface countryViewController ()<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate,CLLocationManagerDelegate>
+@interface CountryChooseViewController ()<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate,CLLocationManagerDelegate>
 
 @end
 
-@implementation countryViewController
+@implementation CountryChooseViewController
 {
 
     CLLocationManager *locationManager;
@@ -386,7 +386,7 @@
         [self.navigationController popToViewController:self.person animated:YES];
     }else
     {
-        statechooseViewController *state=[[statechooseViewController alloc] init];
+        StateChooseViewController *state=[[StateChooseViewController alloc] init];
         NSDictionary *pushdata=@{@"country_code":[dict_data objectForKey:@"code"]};
 
         state.dict=pushdata;

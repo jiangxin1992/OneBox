@@ -1,5 +1,5 @@
 //
-//  new_AcademicRecordsController.h
+//  AcademicRecordsController.h
 //  OneBox
 //
 //  Created by 谢江新 on 15/6/30.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface new_AcademicRecordsController : UIViewController
+@interface AcademicRecordsController : UIViewController
 
 @property NSMutableString* ismixed;
 @property NSMutableString* ismale;

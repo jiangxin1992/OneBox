@@ -1,12 +1,12 @@
 //
-//  guanzhuViewController.m
+//  AttentionViewController.m
 //  OneBox
 //
 //  Created by 谢江新 on 15/8/31.
 //  Copyright (c) 2015年 谢江新. All rights reserved.
 //
 
-#import "guanzhuViewController.h"
+#import "AttentionViewController.h"
 
 #import "HttpRequestManager.h"
 #import "MJRefresh.h"
@@ -17,11 +17,11 @@
 
 #import "usermodel.h"
 
-@interface guanzhuViewController ()<UITableViewDataSource,UITableViewDelegate, SWTableViewCellDelegate>
+@interface AttentionViewController ()<UITableViewDataSource,UITableViewDelegate, SWTableViewCellDelegate>
 
 @end
 
-@implementation guanzhuViewController
+@implementation AttentionViewController
 {
     BOOL _iswillapp;
     UIView *nofollow;
@@ -539,12 +539,12 @@ self.view.backgroundColor=_define_backview_color;
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [MobClick endLogPageView:@"guanzhuViewController"];
+    [MobClick endLogPageView:@"AttentionViewController"];
 }
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [MobClick beginLogPageView:@"guanzhuViewController"];
+    [MobClick beginLogPageView:@"AttentionViewController"];
     nofollow.hidden=YES;
     
     _page=1;

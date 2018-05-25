@@ -8,7 +8,7 @@
 
 #import "UserListViewController.h"
 
-#import "guanzhuViewController.h"
+#import "AttentionViewController.h"
 #import "FriendsViewController.h"
 #import "AdmissionOfficerViewController.h"
 #import "GroupViewController.h"
@@ -23,7 +23,7 @@
     NSMutableArray *btnarr;
     NSInteger currentPage;
     FriendsViewController *ctn1;
-    guanzhuViewController *ctn2;
+    AttentionViewController *ctn2;
     AdmissionOfficerViewController *ctn3;
 }
 
@@ -73,7 +73,7 @@
     _pageVc.view.backgroundColor = [UIColor yellowColor];
     if(ctn2==nil)
     {
-        ctn2=[[guanzhuViewController alloc] init];
+        ctn2=[[AttentionViewController alloc] init];
 
     }
     [_pageVc setViewControllers:@[ctn2] direction:0 animated:YES completion:nil];
@@ -104,7 +104,7 @@
         {
             if(ctn2==nil)
             {
-                ctn2=[[guanzhuViewController alloc] init];
+                ctn2=[[AttentionViewController alloc] init];
 
             }
 
@@ -114,7 +114,7 @@
         {
             if(ctn2==nil)
             {
-                ctn2=[[guanzhuViewController alloc] init];
+                ctn2=[[AttentionViewController alloc] init];
 
             }
             [_pageVc setViewControllers:@[ctn2] direction:0 animated:YES completion:nil];

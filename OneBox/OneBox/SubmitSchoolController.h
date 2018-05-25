@@ -1,5 +1,5 @@
 //
-//  submitSchoolController.h
+//  SubmitSchoolController.h
 //  OneBox
 //
 //  Created by 谢江新 on 15/3/9.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface submitSchoolController : UIViewController
+@interface SubmitSchoolController : UIViewController
 
 @property (nonatomic,copy) void(^block)(NSString*,BOOL);
 @property(nonatomic,assign)NSInteger step;

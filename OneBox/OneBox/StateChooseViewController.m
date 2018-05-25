@@ -1,23 +1,23 @@
 //
-//  statechooseViewController.m
+//  StateChooseViewController.m
 //  OneBox
 //
 //  Created by 谢江新 on 15/10/30.
 //  Copyright © 2015年 谢江新. All rights reserved.
 //
 
-#import "statechooseViewController.h"
+#import "StateChooseViewController.h"
 
 #import "ChineseToPinyin.h"
 
-#import "citychooseViewController.h"
+#import "CityChooseViewController.h"
 #import "PersoninfoViewController.h"
 
-@interface statechooseViewController ()<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate>
+@interface StateChooseViewController ()<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate>
 
 @end
 
-@implementation statechooseViewController
+@implementation StateChooseViewController
 {
 
     NSArray *state_data_arr;
@@ -449,7 +449,7 @@
                 {
                     if([[dict_data objectForKey:@"City"] count]>0)
                     {
-                        citychooseViewController *state=[[citychooseViewController alloc] init];
+                        CityChooseViewController *state=[[CityChooseViewController alloc] init];
 
 
                         state.person=self.person;

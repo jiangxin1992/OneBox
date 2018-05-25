@@ -1,5 +1,5 @@
 //
-//  guanzhuViewController.h
+//  AttentionViewController.h
 //  OneBox
 //
 //  Created by 谢江新 on 15/8/31.
@@ -8,5 +8,5 @@
 
 #import <UIKit/UIKit.h>
 
-@interface guanzhuViewController : UIViewController
+@interface AttentionViewController : UIViewController
 @end

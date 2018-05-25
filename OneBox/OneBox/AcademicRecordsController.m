@@ -1,22 +1,22 @@
 //
-//  new_AcademicRecordsController.m
+//  AcademicRecordsController.m
 //  OneBox
 //
 //  Created by 谢江新 on 15/6/30.
 //  Copyright (c) 2015年 谢江新. All rights reserved.
 //
 
-#import "new_AcademicRecordsController.h"
+#import "AcademicRecordsController.h"
 
 #import "NMRangeSlider.h"
 
-#import "collectionSchool.h"
+#import "CollectionSchoolViewController.h"
 
-@interface new_AcademicRecordsController ()
+@interface AcademicRecordsController ()
 
 @end
 
-@implementation new_AcademicRecordsController
+@implementation AcademicRecordsController
 {
 
     NSInteger _request_num;
@@ -1093,7 +1093,7 @@
                 _alert_grade=NO;
             }else
             {
-                collectionSchool *col=[[collectionSchool alloc] init];
+                CollectionSchoolViewController *col=[[CollectionSchoolViewController alloc] init];
                 col.dict=[[NSDictionary alloc] initWithObjectsAndKeys:@"recommend",@"type",parameters1,@"dict",nil];
                 [self.navigationController pushViewController:col animated:YES];
             }

@@ -4550,10 +4550,10 @@
 			children = (
 				53807EEA1BF9A33A00A46480 /* bangdanlistViewController.h */,
 				53807EEB1BF9A33A00A46480 /* bangdanlistViewController.m */,
-				53B4907F1B56352A00814F1A /* bangdanCell.h */,
-				53B490801B56352A00814F1A /* bangdanCell.m */,
 				53FFA0781B268E6D0012504A /* bangdanViewController.h */,
 				53FFA0791B268E6D0012504A /* bangdanViewController.m */,
+				53B4907F1B56352A00814F1A /* bangdanCell.h */,
+				53B490801B56352A00814F1A /* bangdanCell.m */,
 			);
 			name = "榜单";
 			sourceTree = "<group>";

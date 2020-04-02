@@ -82,8 +82,6 @@
     _textFiled.layer.masksToBounds = YES;
     _textFiled.layer.cornerRadius = 36*_Scale;
 
-    //    设置placeholder字体颜色
-    [_textFiled setValue:[UIColor colorWithRed:160.0f/255.0f green:160.0f/255.0f blue:160.0f/255.0f alpha:1] forKeyPath:@"_placeholderLabel.textColor"];
     //    clear类型
     _textFiled.clearButtonMode = UITextFieldViewModeWhileEditing;
     //    设置return类型

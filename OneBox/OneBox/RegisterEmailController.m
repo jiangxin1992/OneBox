@@ -118,8 +118,6 @@
         textfield.textColor=[UIColor whiteColor];
 
         [self.view addSubview:textfield];
-        [textfield setValue:Color_tp forKeyPath:@"_placeholderLabel.textColor"];
-        [textfield setValue:[regular get_en_Font:12.0f] forKeyPath:@"_placeholderLabel.font"];
         textfield.font=[regular get_en_Font:12.0f];
         textfield.textAlignment=0;
         if(i==2)

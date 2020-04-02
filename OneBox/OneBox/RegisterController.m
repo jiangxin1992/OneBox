@@ -136,8 +136,6 @@
         textfield.textColor=[UIColor whiteColor];
 //        [put_backView addSubview:textfield];
         [self.view addSubview:textfield];
-        [textfield setValue:Color_tp forKeyPath:@"_placeholderLabel.textColor"];
-        [textfield setValue:[regular getFont:12.0f] forKeyPath:@"_placeholderLabel.font"];
         textfield.font=[regular getFont:12.0f];
         if(i==1)
         {

@@ -102,8 +102,6 @@
     [self.view addSubview:password];
     password.placeholder=@" 密 码 ";
     password.returnKeyType=UIReturnKeyDone;
-    [password setValue:Color_placeholder forKeyPath:@"_placeholderLabel.textColor"];
-    [password setValue:[UIFont boldSystemFontOfSize:12] forKeyPath:@"_placeholderLabel.font"];
     password.delegate=self;
     password.font=[regular getFont:12.0f];
     password.textColor=[UIColor whiteColor];
@@ -125,8 +123,6 @@
     username=[[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMinX(password.frame), CGRectGetMinY(password.frame)-8*_Scale-CGRectGetHeight(password.frame), CGRectGetWidth(password.frame), CGRectGetHeight(password.frame))];
     username.textColor=[UIColor whiteColor];
     username.placeholder=@" 手 机 号 或 邮 箱 ";
-    [username setValue:Color_placeholder forKeyPath:@"_placeholderLabel.textColor"];
-    [username setValue:[UIFont boldSystemFontOfSize:12] forKeyPath:@"_placeholderLabel.font"];
     username.font=[regular getFont:12.0f];
     username.delegate=self;
     username.clearButtonMode=UITextFieldViewModeWhileEditing;

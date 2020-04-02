@@ -51,8 +51,6 @@
 
         textfield.returnKeyType=UIReturnKeyDone;
         textfield.placeholder=i==0?@"请输入当前密码":i==1?@"请输入六位以上的密码":@"请再次输入新密码";
-        [textfield setValue:[UIColor colorWithRed:200.0f/255.0f green:200.0f/255.0f blue:200.0f/255.0f alpha:1] forKeyPath:@"_placeholderLabel.textColor"];
-        [textfield setValue:[UIFont boldSystemFontOfSize:10] forKeyPath:@"_placeholderLabel.font"];
         textfield.font=[regular getFont:11.0f];
         textfield.delegate=self;
         textfield.textColor=[UIColor colorWithRed:200.0f/255.0f green:200.0f/255.0f blue:200.0f/255.0f alpha:1];

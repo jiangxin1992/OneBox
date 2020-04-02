@@ -64,10 +64,8 @@
 
     username.textColor=[UIColor whiteColor];
     username.placeholder=@"邮 箱";
-    [username setValue:Color_tp forKeyPath:@"_placeholderLabel.textColor"];
 
     username.textAlignment=1;
-    [username setValue:[UIFont boldSystemFontOfSize:12] forKeyPath:@"_placeholderLabel.font"];
     username.font=[regular get_en_Font:12.0f];
     UIView *dibu=[[UIView alloc] initWithFrame:CGRectMake(CGRectGetMinX(username.frame), CGRectGetMaxY(username.frame)-10*_Scale, 400*_Scale, 2*_Scale)];
     dibu.backgroundColor=[UIColor colorWithRed:1 green:1 blue:1 alpha:0.2];

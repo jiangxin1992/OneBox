@@ -627,8 +627,6 @@ static void *EOCAlertViewKey = "EOCAlertViewKey";
 
             textfield.returnKeyType=UIReturnKeyDone;
             textfield.placeholder=i==0?@"昵  称":i==1?@"":@"个  性  签  名";
-            [textfield setValue:[UIColor colorWithRed:200.0f/255.0f green:200.0f/255.0f blue:200.0f/255.0f alpha:1] forKeyPath:@"_placeholderLabel.textColor"];
-            [textfield setValue:[UIFont boldSystemFontOfSize:10] forKeyPath:@"_placeholderLabel.font"];
             textfield.font=[regular getFont:11.0f];
             textfield.delegate=self;
             textfield.textAlignment=1;

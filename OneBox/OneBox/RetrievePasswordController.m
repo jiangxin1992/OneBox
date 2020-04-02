@@ -187,11 +187,6 @@
         textfiled.delegate=self;
         textfiled.textColor=[UIColor whiteColor];
 
-
-        [textfiled setValue:Color_tp forKeyPath:@"_placeholderLabel.textColor"];
-
-        [textfiled setValue:[regular getFont:12.0f] forKeyPath:@"_placeholderLabel.font"];
-
         UIView *view=[[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(textfiled.frame)-10*_Scale, CGRectGetWidth(textfiled.frame), 2*_Scale)];
         view.backgroundColor=[UIColor colorWithRed:1 green:1 blue:1 alpha:0.2];
         [textfiled addSubview:view];

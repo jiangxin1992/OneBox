@@ -278,8 +278,6 @@
 
     searchField.font=(kIOSVersions>=9.0? [UIFont systemFontOfSize:11.0f]:[UIFont fontWithName:@"Helvetica Neue" size:11.0f]);
     searchField.leftView.alpha=0.5;
-
-    [searchField setValue:[UIColor colorWithRed:220.0f/255.0f green:220.0f/255.0f blue:220.0f/255.0f alpha:1] forKeyPath:@"_placeholderLabel.textColor"];
     [_searchBar insertSubview:imageView atIndex:1];
 
     _searchBar.searchBarStyle=UISearchBarStyleDefault;

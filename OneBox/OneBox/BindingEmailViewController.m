@@ -103,8 +103,6 @@
         dibu.backgroundColor=[UIColor colorWithRed:225.0f/255.0f green:225.0f/255.0f blue:225.0f/255.0f alpha:1];
         textfield.userInteractionEnabled=NO;
         textfield.text=nowemail;
-        [textfield setValue:[UIColor colorWithRed:200.0f/255.0f green:200.0f/255.0f blue:200.0f/255.0f alpha:1] forKeyPath:@"_placeholderLabel.textColor"];
-        [textfield setValue:[UIFont boldSystemFontOfSize:10] forKeyPath:@"_placeholderLabel.font"];
         textfield.font=[regular getFont:11.0f];
         textfield.textColor=[UIColor colorWithRed:200.0f/255.0f green:200.0f/255.0f blue:200.0f/255.0f alpha:1];
         UIView *view_left=[[UIView alloc] initWithFrame:CGRectMake(0, 0, 44*_Scale, CGRectGetHeight(textfield.frame))];
@@ -135,9 +133,6 @@
     UIView *dibu=[[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(new_email.frame)-10*_Scale, CGRectGetWidth(new_email.frame), 1*_Scale)];
     [new_email addSubview:dibu];
     dibu.backgroundColor=[UIColor colorWithRed:225.0f/255.0f green:225.0f/255.0f blue:225.0f/255.0f alpha:1];
-
-    [new_email setValue:[UIColor colorWithRed:200.0f/255.0f green:200.0f/255.0f blue:200.0f/255.0f alpha:1] forKeyPath:@"_placeholderLabel.textColor"];
-    [new_email setValue:[UIFont boldSystemFontOfSize:10] forKeyPath:@"_placeholderLabel.font"];
     new_email.placeholder=@"请输入新邮箱";
     new_email.font=[regular getFont:11.0f];
     new_email.textColor=[UIColor colorWithRed:200.0f/255.0f green:200.0f/255.0f blue:200.0f/255.0f alpha:1];

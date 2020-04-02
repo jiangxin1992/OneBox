@@ -118,8 +118,6 @@
         dibu.backgroundColor=[UIColor colorWithRed:225.0f/255.0f green:225.0f/255.0f blue:225.0f/255.0f alpha:1];
         textfield.userInteractionEnabled=NO;
         textfield.text=cell;
-        [textfield setValue:[UIColor colorWithRed:200.0f/255.0f green:200.0f/255.0f blue:200.0f/255.0f alpha:1] forKeyPath:@"_placeholderLabel.textColor"];
-        [textfield setValue:[UIFont boldSystemFontOfSize:10] forKeyPath:@"_placeholderLabel.font"];
         textfield.font=[regular getFont:11.0f];
         textfield.textColor=[UIColor colorWithRed:200.0f/255.0f green:200.0f/255.0f blue:200.0f/255.0f alpha:1];
         UIView *view_left=[[UIView alloc] initWithFrame:CGRectMake(0, 0, 44*_Scale, CGRectGetHeight(textfield.frame))];
@@ -153,9 +151,6 @@
             UIView *dibu=[[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(_yanzheng_text.frame)-10*_Scale, CGRectGetWidth(_yanzheng_text.frame), 1*_Scale)];
             [_yanzheng_text addSubview:dibu];
             dibu.backgroundColor=[UIColor colorWithRed:225.0f/255.0f green:225.0f/255.0f blue:225.0f/255.0f alpha:1];
-
-            [_yanzheng_text setValue:[UIColor colorWithRed:200.0f/255.0f green:200.0f/255.0f blue:200.0f/255.0f alpha:1] forKeyPath:@"_placeholderLabel.textColor"];
-            [_yanzheng_text setValue:[UIFont boldSystemFontOfSize:10] forKeyPath:@"_placeholderLabel.font"];
             _yanzheng_text.font=[regular getFont:11.0f];
             _yanzheng_text.textColor=[UIColor colorWithRed:200.0f/255.0f green:200.0f/255.0f blue:200.0f/255.0f alpha:1];
             _yanzheng_text.placeholder=@"请输入验证码";
@@ -220,8 +215,6 @@
                     _newphonenum_text.frame=CGRectMake(_x_p, CGRectGetMinY(label.frame), _width, CGRectGetHeight(label.frame));
 //                    _newphonenum_text.backgroundColor=[UIColor redColor];
                     [backview addSubview:_newphonenum_text];
-                    [_newphonenum_text setValue:[UIColor colorWithRed:200.0f/255.0f green:200.0f/255.0f blue:200.0f/255.0f alpha:1] forKeyPath:@"_placeholderLabel.textColor"];
-                    [_newphonenum_text setValue:[UIFont boldSystemFontOfSize:10] forKeyPath:@"_placeholderLabel.font"];
                     _newphonenum_text.font=[regular getFont:11.0f];
                     _newphonenum_text.textColor=[UIColor colorWithRed:200.0f/255.0f green:200.0f/255.0f blue:200.0f/255.0f alpha:1];
 

@@ -216,8 +216,6 @@
     _textfiled.textAlignment=0;
     _textfiled.delegate=self;
     _textfiled.font=[regular getFont:13.0f];
-    //    设置placeholder字体颜色
-    [_textfiled setValue:[UIColor colorWithRed:160.0f/255.0f green:160.0f/255.0f blue:160.0f/255.0f alpha:1] forKeyPath:@"_placeholderLabel.textColor"];
 //    clear类型
      _textfiled.clearButtonMode=UITextFieldViewModeWhileEditing;
     _textfiled.leftViewMode=UITextFieldViewModeAlways;

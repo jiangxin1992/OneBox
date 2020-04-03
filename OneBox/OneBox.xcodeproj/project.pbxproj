@@ -51,6 +51,16 @@
 		3F4B1E091DE3DCC4000867D0 /* screenShcoolView_郊区_outskirt.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F4B1E051DE3DCC4000867D0 /* screenShcoolView_郊区_outskirt.png */; };
 		3F4B1E0A1DE3DCC4000867D0 /* screenShcoolView_乡村_village.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F4B1E061DE3DCC4000867D0 /* screenShcoolView_乡村_village.png */; };
 		3F61EFD020A99012004DEE20 /* ScreenTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F61EFCF20A99011004DEE20 /* ScreenTableView.m */; };
+		3F6C7CD624365874002611F5 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F6C7CD524365874002611F5 /* AssetsLibrary.framework */; };
+		3F6C7CD8243659DC002611F5 /* libBlocksKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F6C7CD7243659DC002611F5 /* libBlocksKit.a */; };
+		3F6C7CDA243659DC002611F5 /* libHappyDNS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F6C7CD9243659DC002611F5 /* libHappyDNS.a */; };
+		3F6C7CDC243659DC002611F5 /* libMasonry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F6C7CDB243659DC002611F5 /* libMasonry.a */; };
+		3F6C7CDE243659DC002611F5 /* libMJExtension.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F6C7CDD243659DC002611F5 /* libMJExtension.a */; };
+		3F6C7CE0243659DC002611F5 /* libMJRefresh.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F6C7CDF243659DC002611F5 /* libMJRefresh.a */; };
+		3F6C7CE2243659DC002611F5 /* libQiniu.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F6C7CE1243659DC002611F5 /* libQiniu.a */; };
+		3F6C7CE424365A34002611F5 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F6C7CE324365A34002611F5 /* StoreKit.framework */; };
+		3F6C7CE724365D3C002611F5 /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F95860C1E56EAE8004A5AC2 /* libstdc++.6.0.9.tbd */; };
+		3F6C7CE824365DF6002611F5 /* libstdc++.6.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F6C7CE524365A8F002611F5 /* libstdc++.6.tbd */; };
 		3F90A8361E52D01800DBEF1A /* LoginTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F90A8351E52D01800DBEF1A /* LoginTool.m */; };
 		3F90A83F1E52D7DE00DBEF1A /* UIImageView+CornerRadius.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F90A83E1E52D7DE00DBEF1A /* UIImageView+CornerRadius.m */; };
 		3F90A8431E52D7EB00DBEF1A /* NSDate+Custom.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F90A8421E52D7EB00DBEF1A /* NSDate+Custom.m */; };
@@ -668,6 +678,15 @@
 		3F4B1E061DE3DCC4000867D0 /* screenShcoolView_乡村_village.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "screenShcoolView_乡村_village.png"; sourceTree = "<group>"; };
 		3F61EFCE20A99011004DEE20 /* ScreenTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScreenTableView.h; sourceTree = "<group>"; };
 		3F61EFCF20A99011004DEE20 /* ScreenTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScreenTableView.m; sourceTree = "<group>"; };
+		3F6C7CD524365874002611F5 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		3F6C7CD7243659DC002611F5 /* libBlocksKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libBlocksKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		3F6C7CD9243659DC002611F5 /* libHappyDNS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libHappyDNS.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		3F6C7CDB243659DC002611F5 /* libMasonry.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libMasonry.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		3F6C7CDD243659DC002611F5 /* libMJExtension.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libMJExtension.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		3F6C7CDF243659DC002611F5 /* libMJRefresh.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libMJRefresh.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		3F6C7CE1243659DC002611F5 /* libQiniu.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libQiniu.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		3F6C7CE324365A34002611F5 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		3F6C7CE524365A8F002611F5 /* libstdc++.6.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.tbd"; path = "usr/lib/libstdc++.6.tbd"; sourceTree = SDKROOT; };
 		3F90A8341E52D01800DBEF1A /* LoginTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginTool.h; sourceTree = "<group>"; };
 		3F90A8351E52D01800DBEF1A /* LoginTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginTool.m; sourceTree = "<group>"; };
 		3F90A83D1E52D7DE00DBEF1A /* UIImageView+CornerRadius.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+CornerRadius.h"; sourceTree = "<group>"; };
@@ -1710,22 +1729,35 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F6C7CE824365DF6002611F5 /* libstdc++.6.tbd in Frameworks */,
+				3F9586011E56EA81004A5AC2 /* libstdc++.tbd in Frameworks */,
+				3F95860D1E56EAE8004A5AC2 /* libstdc++.6.0.9.tbd in Frameworks */,
+				3F6C7CE424365A34002611F5 /* StoreKit.framework in Frameworks */,
+				3F6C7CD8243659DC002611F5 /* libBlocksKit.a in Frameworks */,
+				3F6C7CDA243659DC002611F5 /* libHappyDNS.a in Frameworks */,
+				3F6C7CDC243659DC002611F5 /* libMasonry.a in Frameworks */,
+				3F6C7CDE243659DC002611F5 /* libMJExtension.a in Frameworks */,
+				3F6C7CE0243659DC002611F5 /* libMJRefresh.a in Frameworks */,
+				20A32801465A4014FF29F97D /* libPods-OneBox.a in Frameworks */,
+				3F6C7CE2243659DC002611F5 /* libQiniu.a in Frameworks */,
+				66BEED4B1AB2AE5000C1F5AC /* CoreMedia.framework in Frameworks */,
+				3F6C7CD624365874002611F5 /* AssetsLibrary.framework in Frameworks */,
+				66BEED491AB2AE3E00C1F5AC /* CoreVideo.framework in Frameworks */,
 				3F9586191E56EB2F004A5AC2 /* libicucore.tbd in Frameworks */,
 				3F9586171E56EB1B004A5AC2 /* libz.1.2.5.tbd in Frameworks */,
 				3F9586151E56EB12004A5AC2 /* libc++abi.tbd in Frameworks */,
 				3F9586111E56EAFA004A5AC2 /* libsqlite3.0.tbd in Frameworks */,
 				3F95860F1E56EAF1004A5AC2 /* libc++.tbd in Frameworks */,
-				3F95860D1E56EAE8004A5AC2 /* libstdc++.6.0.9.tbd in Frameworks */,
 				3F95860B1E56EADE004A5AC2 /* libsqlite3.tbd in Frameworks */,
 				3F9586091E56EAD3004A5AC2 /* libxml2.tbd in Frameworks */,
 				3F9586071E56EAC8004A5AC2 /* libiconv.tbd in Frameworks */,
 				3F9586051E56EABB004A5AC2 /* libresolv.tbd in Frameworks */,
 				3F9586031E56EA8D004A5AC2 /* libz.tbd in Frameworks */,
-				3F9586011E56EA81004A5AC2 /* libstdc++.tbd in Frameworks */,
 				3FF879B02062330800E7A451 /* libEaseMobClientSDK.a in Frameworks */,
 				3F25817D1E51E5900004B573 /* JavaScriptCore.framework in Frameworks */,
 				66BEED511AB2AE7E00C1F5AC /* CoreGraphics.framework in Frameworks */,
 				66AF3F9C1AA5B7EC00F92C6D /* ImageIO.framework in Frameworks */,
+				3F6C7CE724365D3C002611F5 /* libstdc++.6.0.9.tbd in Frameworks */,
 				53B771D71C4F457600F20085 /* CoreText.framework in Frameworks */,
 				66AF3F941AA5B78600F92C6D /* QuartzCore.framework in Frameworks */,
 				66AF3F961AA5B79100F92C6D /* CoreTelephony.framework in Frameworks */,
@@ -1749,14 +1781,11 @@
 				66BEED591AB2AEB100C1F5AC /* AudioToolbox.framework in Frameworks */,
 				66BEED531AB2AE8B00C1F5AC /* CoreAudio.framework in Frameworks */,
 				66BEED4F1AB2AE7400C1F5AC /* CoreImage.framework in Frameworks */,
-				66BEED4B1AB2AE5000C1F5AC /* CoreMedia.framework in Frameworks */,
-				66BEED491AB2AE3E00C1F5AC /* CoreVideo.framework in Frameworks */,
 				53F976081BB29501004FC0B7 /* libopencore-amrwb.a in Frameworks */,
 				66BEED3F1AB2ADE500C1F5AC /* OpenGLES.framework in Frameworks */,
 				66C731671AC13D25002BCBB9 /* libssl.a in Frameworks */,
 				66C731661AC13D25002BCBB9 /* libcrypto.a in Frameworks */,
 				53B771D31C4F424600F20085 /* AlipaySDK.framework in Frameworks */,
-				20A32801465A4014FF29F97D /* libPods-OneBox.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1802,6 +1831,15 @@
 		3F25817B1E51E5900004B573 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3F6C7CE524365A8F002611F5 /* libstdc++.6.tbd */,
+				3F6C7CE324365A34002611F5 /* StoreKit.framework */,
+				3F6C7CD7243659DC002611F5 /* libBlocksKit.a */,
+				3F6C7CD9243659DC002611F5 /* libHappyDNS.a */,
+				3F6C7CDB243659DC002611F5 /* libMasonry.a */,
+				3F6C7CDD243659DC002611F5 /* libMJExtension.a */,
+				3F6C7CDF243659DC002611F5 /* libMJRefresh.a */,
+				3F6C7CE1243659DC002611F5 /* libQiniu.a */,
+				3F6C7CD524365874002611F5 /* AssetsLibrary.framework */,
 				3F9586181E56EB2F004A5AC2 /* libicucore.tbd */,
 				3F9586161E56EB1B004A5AC2 /* libz.1.2.5.tbd */,
 				3F9586141E56EB12004A5AC2 /* libc++abi.tbd */,
@@ -4639,6 +4677,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 				"zh-Hans",
@@ -5429,6 +5468,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 8S92E4NW68;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -5475,6 +5515,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"$(OTHER_LDFLAGS)",
+					"$(inherited)",
 					"-ObjC",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.onebox.boxs;
@@ -5494,10 +5535,11 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = NO;
 				CODE_SIGN_ENTITLEMENTS = OneBox/OneBox.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 8S92E4NW68;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -5544,6 +5586,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"$(OTHER_LDFLAGS)",
+					"$(inherited)",
 					"-ObjC",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.onebox.boxs;

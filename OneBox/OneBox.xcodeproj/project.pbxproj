@@ -59,7 +59,6 @@
 		3F6C7CE0243659DC002611F5 /* libMJRefresh.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F6C7CDF243659DC002611F5 /* libMJRefresh.a */; };
 		3F6C7CE2243659DC002611F5 /* libQiniu.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F6C7CE1243659DC002611F5 /* libQiniu.a */; };
 		3F6C7CE424365A34002611F5 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F6C7CE324365A34002611F5 /* StoreKit.framework */; };
-		3F6C7CE724365D3C002611F5 /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F95860C1E56EAE8004A5AC2 /* libstdc++.6.0.9.tbd */; };
 		3F6C7CE824365DF6002611F5 /* libstdc++.6.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F6C7CE524365A8F002611F5 /* libstdc++.6.tbd */; };
 		3F90A8361E52D01800DBEF1A /* LoginTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F90A8351E52D01800DBEF1A /* LoginTool.m */; };
 		3F90A83F1E52D7DE00DBEF1A /* UIImageView+CornerRadius.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F90A83E1E52D7DE00DBEF1A /* UIImageView+CornerRadius.m */; };
@@ -1757,7 +1756,6 @@
 				3F25817D1E51E5900004B573 /* JavaScriptCore.framework in Frameworks */,
 				66BEED511AB2AE7E00C1F5AC /* CoreGraphics.framework in Frameworks */,
 				66AF3F9C1AA5B7EC00F92C6D /* ImageIO.framework in Frameworks */,
-				3F6C7CE724365D3C002611F5 /* libstdc++.6.0.9.tbd in Frameworks */,
 				53B771D71C4F457600F20085 /* CoreText.framework in Frameworks */,
 				66AF3F941AA5B78600F92C6D /* QuartzCore.framework in Frameworks */,
 				66AF3F961AA5B79100F92C6D /* CoreTelephony.framework in Frameworks */,
@@ -4654,7 +4652,7 @@
 		53B537201A7F465D0095C129 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0930;
+				LastUpgradeCheck = 1140;
 				ORGANIZATIONNAME = "谢江新";
 				TargetAttributes = {
 					53B537271A7F465D0095C129 = {
@@ -4674,10 +4672,9 @@
 			};
 			buildConfigurationList = 53B537231A7F465D0095C129 /* Build configuration list for PBXProject "OneBox" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
 				Base,
 				"zh-Hans",

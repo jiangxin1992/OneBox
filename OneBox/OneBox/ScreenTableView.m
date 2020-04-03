@@ -127,10 +127,14 @@
         UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"found_school_2_选中底图.png"]];
         imageView.frame = _searchController.searchBar.frame;
         _searchController.searchBar.placeholder = @"输入城市或者学校名字 试试吧";
-        UITextField *searchField = [_searchController.searchBar valueForKey:@"_searchField"];
+        if (@available(iOS 13.0, *)) {
+            UITextField *searchField = _searchController.searchBar.searchTextField;
 
-        searchField.font = (kIOSVersions>=9.0? [UIFont systemFontOfSize:11.0f]:[UIFont fontWithName:@"Helvetica Neue" size:11.0f]);
-        searchField.leftView.alpha = 0.5;
+            searchField.font = (kIOSVersions>=9.0? [UIFont systemFontOfSize:11.0f]:[UIFont fontWithName:@"Helvetica Neue" size:11.0f]);
+            searchField.leftView.alpha = 0.5;
+        } else {
+            // Fallback on earlier versions
+        }
 
         [_searchController.searchBar insertSubview:imageView atIndex:1];
 

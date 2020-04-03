@@ -47,12 +47,9 @@
 
     //搜索结果数据
     NSMutableArray *_arrayResult;
-
     NSMutableArray *_arrayData;
     NSInteger _page;
-
     BOOL _isfirst_choose;
-
 
     void (^blockFailure)(NSError *error);
 }
@@ -60,8 +57,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor=_define_backview_color;
-
-    // Do any additional setup after loading the view from its nib.
 }
 -(void)prepareData
 {
@@ -115,7 +110,6 @@
     _tableView.delegate=self;
     _tableView.dataSource=self;
     _tableView.showsVerticalScrollIndicator=YES;
-//    _tableView.tableFooterView=[[UIView alloc] initWithFrame:CGRectMake(0, 0,CGRectGetWidth(_tableView.frame) ,100)];
     _tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
     _tableView.sectionIndexBackgroundColor = [UIColor clearColor];
     _tableView.sectionIndexColor = [UIColor colorWithRed:204.0f/255.0f green:204.0f/255.0f blue:204.0f/255.0f alpha:1];
@@ -138,13 +132,9 @@
 
     UILabel *label=[[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(banbenimg.frame), CGRectGetWidth(banbenview.frame), CGRectGetHeight(banbenview.frame)-CGRectGetMaxY(banbenimg.frame))];
     label.textAlignment=1;
-
-//    label.text=@"V 1.4";
     label.textColor=[UIColor colorWithRed:193.0f/255.0f green:193.0f/255.0f blue:193.0f/255.0f alpha:1];
     label.font=[regular get_en_Font:11.0f];
     [banbenview addSubview:label];
-
-    //    banbenview.backgroundColor=[UIColor redColor];
     banbenview.hidden=YES;
     
 }
@@ -155,8 +145,6 @@
     _searchBar = [[UISearchBar alloc] init];
     _searchBar.backgroundColor=[UIColor clearColor];
     _searchBar.frame = CGRectMake(0, 0, ScreenWidth, 44);
-//    _searchBar.delegate=self;
-    //    _searchBar.searc
     [_searchBar setSearchFieldBackgroundImage:[UIImage imageNamed:@"found_school_所在州所在城市筛选框"] forState:UIControlStateNormal];
     _searchBar.backgroundImage=[UIImage imageNamed:@"hehehehe"];
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"found_school_2_选中底图.png"]];
@@ -235,47 +223,24 @@
         if(CGRectGetWidth(titleLabel.frame)>230&&_Default_font==13.0f)
         {
             titleLabel.frame=CGRectMake(0, 0, CGRectGetWidth(view.frame), CGRectGetHeight(view.frame));
-
         }else
         {
             titleLabel.frame=CGRectMake((CGRectGetWidth(view.frame)-CGRectGetWidth(titleLabel.frame))/2.0f, (CGRectGetHeight(view.frame)-CGRectGetHeight(titleLabel.frame))/2.0f, CGRectGetWidth(titleLabel.frame), CGRectGetHeight(titleLabel.frame));
-            
         }
         self.navigationItem.titleView=view;
-    }else
-    {
     }
-
-
-
 
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSDictionary *_parameters=nil;
-    if(_type==1)
-    {
-
+    if (_type==1) {
         _parameters=@{@"mark":@"niche"};
-    }else if(_type==2)
-    {
-
+    } else if(_type==2) {
         _parameters=@{@"mark":@"insider"};
-    }
-    else if(_type==5)
-    {
-//day boarding
+    } else if(_type==5) {
         _parameters=@{@"mark":@"day"};
-
-    }
-    else if(_type==6)
-    {
-        //day boarding
+    } else if(_type==6) {
         _parameters=@{@"mark":@"boarding"};
-
-        
-    }
-    else if(_type==4)
-    {
-
+    } else if(_type==4) {
         _parameters=@{@"mark":@"blue_ribbon"};
     }
     [manager GET:[[NSString alloc] initWithFormat:@"%@%@",DNS,@"/v1/rank_schools"] parameters:_parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -283,8 +248,6 @@
         NSString *html = operation.responseString;
         NSData* data=[html dataUsingEncoding:NSUTF8StringEncoding];
         NSDictionary *dict=[NSJSONSerialization  JSONObjectWithData:data options:0 error:nil];
-
-//        blockSuccess(dict);
         [self setdata:dict];
         [_tableView reloadData];
 
@@ -296,7 +259,6 @@
 }
 -(void)setdata:(NSDictionary *)_dict
 {
-    //        if()
     if(((NSArray *)[_dict objectForKey:@"data"]).count==0)
     {
 
@@ -312,7 +274,6 @@
 
     }else
     {
-
         [_arrayData removeAllObjects];
         [_arrayData addObjectsFromArray:[FoundModel parsingData:_dict]];
         banbenview.hidden=NO;
@@ -321,56 +282,21 @@
         [_tableView reloadData];
     }
 
-
     if(start==0)
     {
         if(_dict[@"count"]!=[NSNull null])
         {
             NSString *countStr=(NSString *)_dict[@"count"];
             count=[countStr intValue];
-
         }else
         {
             count=0;
             [_arrayData removeAllObjects];
             [_arrayChar removeAllObjects];
             [_arrayResult removeAllObjects];
-
         }
-
-
-    }else
-    {
-
     }
 }
-//- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar
-//{
-//    JXLOG(@"ShouldBeginEditing");
-//    return YES;
-//}
-//- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
-//{
-//    JXLOG(@"DidBeginEditing");
-//}
-//- (BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar
-//{
-//    JXLOG(@"ShouldEndEditing");
-//    return YES;
-//}
-//- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
-//{
-//    JXLOG(@"DidEndEditing");
-//}
-//- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
-//{
-//    JXLOG(@"DidChange");
-//}
-//- (BOOL)searchBar:(UISearchBar *)searchBar shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
-//{
-//    JXLOG(@"ChangeTextInRange");
-//    return YES;
-//}
 #pragma mark-tableview
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -399,57 +325,14 @@
 
         schoolView.data_dict=pushdict;
         [self.navigationController pushViewController:schoolView animated:YES];
-
     }
-
 }
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-
-//    if(tableView==_tableView)
-//    {
-//        NSInteger _count=_arrayChar.count;
-//        return _count;
-//    }else
-//    {
-        //因为在searchDC上的_searchBar就是创建searchDC时，由第一个参数指定的_searchBar
-        //        NSString *searchCon = _searchBar.text;
-        //        JXLOG(@"%@", searchCon);
-
-//        [_arrayResult removeAllObjects];
-//        NSString *title=_searchBar.text;
-//
-//        //遍历数据源数据，找到与当前搜索内容相匹配的数据
-//        JXLOG(@"%@",_dictPinyinAndChinese);
-//
-//        for (FoundModel *model in _arrayData) {
-//
-//            if(![title isEqualToString:@""])
-//            {
-//
-//                NSRange range1 = [[ChineseToPinyin pinyinFromChiniseString:model.cn_name] rangeOfString:[ChineseToPinyin pinyinFromChiniseString:title]];
-//                NSRange range2 = [[ChineseToPinyin pinyinFromChiniseString:model.en_name] rangeOfString:[ChineseToPinyin pinyinFromChiniseString:title]];
-//                //                    JXLOG(@"1111%@",model.city);
-//                NSString *titeeee=model.city;
-//                NSRange range3 = [[ChineseToPinyin pinyinFromChiniseString:titeeee] rangeOfString:[ChineseToPinyin pinyinFromChiniseString:title]];
-//
-//                if(((range1.location != NSNotFound)||(range2.location!=NSNotFound))&&(![model.en_name isEqualToString:@""])&&(![model.cn_name isEqualToString:@""]))
-//                {
-//                    [_arrayResult addObject:model];
-//                }else if(![model.city isEqualToString:@""])
-//                {
-//                    if((range3.location!=NSNotFound))
-//                    {
-//                        [_arrayResult addObject:model];
-//                    }
-//                }
-//            }
-//        }
-//        JXLOG(@"%@",_arrayResult);
         return 1;
-//    }
-
 }
+
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if(tableView==_tableView)
@@ -457,20 +340,11 @@
         if(_arrayData.count==section)
         {
             return 0;
-
         }
-//        NSString *strKey = [_arrayChar objectAtIndex:section];
-//        NSInteger _count=[[_dictPinyinAndChinese objectForKey:strKey] count];
         return _arrayData.count;
-        //    return _arrayData.count;
-
-    }else
-    {
-//        JXLOG(@"%d",_arrayResult.count);
+    }else{
         return _arrayResult.count;
     }
-
-
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -489,79 +363,20 @@
 
     static NSString *cellid=@"cell";
     bangdanCell *cell=[tableView dequeueReusableCellWithIdentifier:cellid ];
-    if(!cell)
-    {
+    if (!cell) {
         cell=[[bangdanCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellid];
-
     }
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
-    if(tableView==_tableView)
-    {
-//        NSInteger _section=indexPath.section;
+    if (tableView==_tableView) {
         JXLOG(@"%@",_arrayChar);
-//        NSString *strKey  = [_arrayChar objectAtIndex:_section];
-//        NSMutableArray  *__arr=[[NSMutableArray alloc] initWithArray:[_dictPinyinAndChinese objectForKey:strKey]];
         NSInteger num=indexPath.row;
         FoundModel *model=_arrayData[num];
-
-
         cell.model =model;
-        //    cell.model=_arrayData[indexPath.row];
-    }else
-    {
+    } else {
         cell.model = [_arrayResult objectAtIndex:indexPath.row];
     }
     return cell;
 }
-#pragma mark-索引
-//- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
-//{
-//    JXLOG(@"%@",_arrayChar);
-
-//    if(tableView==_tableView)
-//    {
-//        return _arrayChar;
-//    }
-//    JXLOG(@"%@",_arrayResult);
-//    //    [_arrayData addObjectsFromArray:[FoundModel parsingData:_dict]];
-//    _dictPinyinAndChinese1= [[NSMutableDictionary alloc] init];
-//
-//    //name = “关羽”
-//    for (FoundModel *model in _arrayResult) {
-//        //‘GUANYU’
-//        NSString *pinyin = [ChineseToPinyin pinyinFromChiniseString:model.en_name];
-//
-//        //“G”
-//        NSString *charFirst = [pinyin substringToIndex:1];
-//        //从字典中招关于G的键值对
-//        NSMutableArray *charArray  = [_dictPinyinAndChinese1 objectForKey:charFirst];
-//        //没有找到
-//        if (charArray == nil) {
-//            NSMutableArray *subArray = [[NSMutableArray alloc] init];
-//            //“关羽”
-//            [subArray addObject:model];
-//            // dict   key = "G"  value = subArray -> "关羽"
-//            [_dictPinyinAndChinese1 setValue:subArray forKey:charFirst];
-//        }
-//        else
-//        {
-//            [charArray addObject:model];
-//        }
-//    }
-//
-//    [_arrayChar1 removeAllObjects];
-//    for (int i = 0; i < 26; i++) {
-//        NSString *str = [NSString stringWithFormat:@"%c", 'A' + i];
-//        for (NSString *key in [_dictPinyinAndChinese1 allKeys]) {
-//            if ([str isEqualToString:key]) {
-//                [_arrayChar1 addObject:str];
-//            }
-//        }
-//    }
-//    JXLOG(@"%@",_arrayChar1);
-
-//    return _arrayChar1;
-//}
 
 -(void)viewWillDisappear:(BOOL)animated
 {
@@ -578,9 +393,6 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-
 }
-
-
 
 @end

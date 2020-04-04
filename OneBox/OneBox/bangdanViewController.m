@@ -24,21 +24,10 @@
 {
     UIView *banbenview;
     UIView *footview;
-    NSArray *titleArr;
-
-    //    tableview
     UITableView *_tableView;
-    //    开始
-    NSInteger start;
-    //    数量
-    NSInteger count;
-    //搜索栏
-    UISearchBar *_searchBar;
 
-    //搜索结果数据
-    NSMutableArray *_arrayResult;
-    NSMutableArray *_arrayData;
-    NSInteger _page;
+    NSArray *titleArr;
+    NSMutableArray *_arrayList;
 }
 #pragma mark - Route 路由方法
 
@@ -69,7 +58,7 @@
 
 #pragma mark - Delegate (确切到某个delegate UITableViewDelegate)
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if(_arrayData.count==indexPath.section)
+    if(_arrayList.count==indexPath.section)
     {
         return foundCellHeight;
     }
@@ -79,7 +68,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
     NSInteger num=indexPath.row;
-    FoundModel *model=_arrayData[num];
+    FoundModel *model=_arrayList[num];
     NSDictionary *pushdict=[[NSDictionary alloc] initWithObjectsAndKeys:model.cn_name,@"schoolName",model.sid,@"schoolID",[NSNumber numberWithInteger:model.is_order_school],@"is_order_school",nil];
 
     if(_type==5||_type==6)
@@ -100,20 +89,14 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if(tableView==_tableView)
-    {
-        if(_arrayData.count==section)
-        {
-            return 0;
-        }
-        return _arrayData.count;
-    }else{
-        return _arrayResult.count;
+    if(_arrayList.count==section) {
+        return 0;
     }
+    return _arrayList.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if(_arrayData.count==indexPath.section)
+    if(_arrayList.count==indexPath.section)
     {
         static NSString *cellid=@"cellid";
         UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:cellid];
@@ -131,13 +114,9 @@
         cell=[[bangdanCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellid];
     }
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
-    if (tableView==_tableView) {
-        NSInteger num=indexPath.row;
-        FoundModel *model=_arrayData[num];
-        cell.model =model;
-    } else {
-        cell.model = [_arrayResult objectAtIndex:indexPath.row];
-    }
+    NSInteger num=indexPath.row;
+    FoundModel *model=_arrayList[num];
+    cell.model =model;
     return cell;
 }
 
@@ -186,29 +165,6 @@
     label.font=[regular get_en_Font:11.0f];
     [banbenview addSubview:label];
     banbenview.hidden=YES;
-}
-
-- (void)createSearchBar {
-    _searchBar = [[UISearchBar alloc] init];
-    _searchBar.backgroundColor=[UIColor clearColor];
-    _searchBar.frame = CGRectMake(0, 0, ScreenWidth, 44);
-    [_searchBar setSearchFieldBackgroundImage:[UIImage imageNamed:@"found_school_所在州所在城市筛选框"] forState:UIControlStateNormal];
-    _searchBar.backgroundImage=[UIImage imageNamed:@"hehehehe"];
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"found_school_2_选中底图.png"]];
-    imageView.frame=_searchBar.frame;
-    _searchBar.placeholder=@"输入城市或者学校名字 试试吧";
-    if (@available(iOS 13.0, *)) {
-        UITextField *searchField = _searchBar.searchTextField;
-
-        searchField.font=(kIOSVersions>=9.0? [UIFont systemFontOfSize:11.0f]:[UIFont fontWithName:@"Helvetica Neue" size:11.0f]);
-        searchField.leftView.alpha=0.5;
-    } else {
-        // Fallback on earlier versions
-    }
-
-    [_searchBar insertSubview:imageView atIndex:1];
-    _searchBar.searchBarStyle=UISearchBarStyleDefault;
-    _tableView.tableHeaderView = _searchBar;
 }
 
 - (void)setTitleStyle {
@@ -269,47 +225,22 @@
 - (void)setdata:(NSDictionary *)_dict {
     if(((NSArray *)[_dict objectForKey:@"data"]).count==0)
     {
-
-        if(_page>1)
-        {
-            [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"没有更多了" WithImg:@"Prompt_提交成功" Withtype:1]];
-        }else
-        {
-            [_tableView reloadData];
-        }
-
+        [_tableView reloadData];
     }else
     {
-        [_arrayData removeAllObjects];
-        [_arrayData addObjectsFromArray:[FoundModel parsingData:_dict]];
+        [_arrayList removeAllObjects];
+        [_arrayList addObjectsFromArray:[FoundModel parsingData:_dict]];
         banbenview.hidden=NO;
         footview.backgroundColor=_define_backview_color;
-        JXLOG(@"%@",_arrayData);
+        JXLOG(@"%@",_arrayList);
         [_tableView reloadData];
-    }
-
-    if(start==0)
-    {
-        if(_dict[@"count"]!=[NSNull null])
-        {
-            NSString *countStr=(NSString *)_dict[@"count"];
-            count=[countStr intValue];
-        }else
-        {
-            count=0;
-            [_arrayData removeAllObjects];
-            [_arrayResult removeAllObjects];
-        }
     }
 }
 
 - (void)prepareData {
     UIBarButtonItem *_btn=[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"返回箭头"] style:UIBarButtonItemStylePlain target:self action:@selector(popviewAction)];
     self.navigationItem.leftBarButtonItem=_btn;
-
-    _page=1;
-    _arrayData=[[NSMutableArray alloc] init];
-    _arrayResult = [[NSMutableArray alloc] init];
+    _arrayList=[[NSMutableArray alloc] init];
 }
 
 - (void)featchData {
@@ -349,8 +280,6 @@
     [self prepareData];
     //    创建tableview
     [self createTableView];
-    //    创建搜索栏
-    [self createSearchBar];
 
     [self setTitleStyle];
 

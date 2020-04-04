@@ -23,7 +23,6 @@
     NSInteger currentPage;
     bangdanViewController *ctn1;
     bangdanViewController *ctn2;
-    bangdanViewController *ctn3;
 }
 
 -(void)popviewAction
@@ -186,21 +185,6 @@
             [_pageVc setViewControllers:@[ctn2] direction:0 animated:YES completion:nil];
 
         }
-
-
-    }else if(btn.tag-100==2)
-    {
-        if(ctn3==nil)
-        {
-            ctn3=[[bangdanViewController alloc] init];
-            ctn3.type=7;
-
-        }
-        if(currentPage<2&&ctn3!=nil)
-        {
-            [_pageVc setViewControllers:@[ctn3] direction:0 animated:YES completion:nil];
-        }
-
     }
     for (UIButton *_btn in btnarr) {
         _btn.selected=NO;

@@ -12,9 +12,7 @@
 #import "CustomTabbarController.h"
 
 #import "bangdanCell.h"
-
 #import "FoundModel.h"
-#import "ChineseToPinyin.h"
 
 #define foundCellHeight 200*_Scale
 
@@ -27,10 +25,6 @@
     UIView *banbenview;
     UIView *footview;
     NSArray *titleArr;
-    NSDictionary *_dictPinyinAndChinese;
-    NSDictionary *_dictPinyinAndChinese1;
-    NSMutableArray *_arrayChar;
-     NSMutableArray *_arrayChar1;
 
     //    tableview
     UITableView *_tableView;
@@ -38,62 +32,118 @@
     NSInteger start;
     //    数量
     NSInteger count;
-    //    data
-    NSMutableData *_receiveData;
     //搜索栏
     UISearchBar *_searchBar;
-    //搜索结果展示控制器 ，经常和UISearchBar配合使用
-    UISearchDisplayController *_searchDC;
 
     //搜索结果数据
     NSMutableArray *_arrayResult;
     NSMutableArray *_arrayData;
     NSInteger _page;
-    BOOL _isfirst_choose;
-
-    void (^blockFailure)(NSError *error);
 }
-
+#pragma mark - Route 路由方法
+#pragma mark - LifeCycle 生命周期
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor=_define_backview_color;
 }
--(void)prepareData
-{
 
-    _arrayChar1=[[NSMutableArray alloc] init];
-    UIBarButtonItem *_btn=[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"返回箭头"] style:UIBarButtonItemStylePlain target:self action:@selector(popviewAction)];
-    self.navigationItem.leftBarButtonItem=_btn;
-
-    _arrayData=[[NSMutableArray alloc] init];
-    _page=1;
-    _isfirst_choose=YES;
-    _receiveData=[[NSMutableData alloc] init];
-    _arrayData=[[NSMutableArray alloc] init];
-    _arrayResult = [[NSMutableArray alloc] init];
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:@"bangdanViewController"];
 }
--(void)popviewAction
-{
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [MobClick beginLogPageView:@"bangdanViewController"];
+
+    [[CustomTabbarController sharedManager] tabbarHide];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+}
+
+#pragma mark - Delegate (确切到某个delegate UITableViewDelegate)
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if(_arrayData.count==indexPath.section)
+    {
+        return foundCellHeight;
+    }
+    return foundCellHeight;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+
+    NSInteger num=indexPath.row;
+    FoundModel *model=_arrayData[num];
+    NSDictionary *pushdict=[[NSDictionary alloc] initWithObjectsAndKeys:model.cn_name,@"schoolName",model.sid,@"schoolID",[NSNumber numberWithInteger:model.is_order_school],@"is_order_school",nil];
+
+    if(_type==5||_type==6)
+    {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"bangdanpush_detail" object:pushdict];
+
+    }else
+    {
+        SchoolDetailViewController *schoolView=[[SchoolDetailViewController alloc] init];
+
+        schoolView.data_dict=pushdict;
+        [self.navigationController pushViewController:schoolView animated:YES];
+    }
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+        return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if(tableView==_tableView)
+    {
+        if(_arrayData.count==section)
+        {
+            return 0;
+        }
+        return _arrayData.count;
+    }else{
+        return _arrayResult.count;
+    }
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if(_arrayData.count==indexPath.section)
+    {
+        static NSString *cellid=@"cellid";
+        UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:cellid];
+        if(!cell)
+        {
+            cell=[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellid];
+        }
+        cell.selectionStyle=UITableViewCellSelectionStyleNone;
+        return cell;
+    }
+
+    static NSString *cellid=@"cell";
+    bangdanCell *cell=[tableView dequeueReusableCellWithIdentifier:cellid ];
+    if (!cell) {
+        cell=[[bangdanCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellid];
+    }
+    cell.selectionStyle=UITableViewCellSelectionStyleNone;
+    if (tableView==_tableView) {
+        NSInteger num=indexPath.row;
+        FoundModel *model=_arrayData[num];
+        cell.model =model;
+    } else {
+        cell.model = [_arrayResult objectAtIndex:indexPath.row];
+    }
+    return cell;
+}
+
+#pragma mark - Event handler (响应事件处理 button gesture)
+- (void)popviewAction {
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void)createSearchDisplayCtrl
-{
-    //创建搜索结果显示控制器
-    //参数 1: 将控制器与参数1指定的搜索栏相关联
-    //参数 2 : 指定控制器的显示位置，（当前控制器显示在哪个视图控制器上）
-    //当用户点击到_searchBar时，searchDC就会显示，同时searchDC将_searchBar移到searchDC，再将_searchBar的取消按钮设为可见
-    _searchDC = [[UISearchDisplayController alloc] initWithSearchBar:_searchBar contentsController:self];
-
-    //设置控制器的tableview的搜索结果数据源代理
-    _searchDC.searchResultsDataSource = self;
-    //设置控制器的tableview的代理
-    _searchDC.searchResultsDelegate = self;
-    
-}
-
--(void)createTableView
-{
+#pragma mark - private method (handler data method)
+- (void)createTableView {
     CGRect _rect;
     if(_type>4)
     {
@@ -104,9 +154,6 @@
 
     }
     _tableView=[[UITableView alloc] initWithFrame:_rect style:UITableViewStylePlain];
-
-
-
     _tableView.delegate=self;
     _tableView.dataSource=self;
     _tableView.showsVerticalScrollIndicator=YES;
@@ -118,11 +165,9 @@
     _tableView.tableFooterView=footview;
     [self createVersionView];
     _tableView.backgroundColor=[UIColor clearColor];
-
-
 }
--(void)createVersionView
-{
+
+- (void)createVersionView {
     banbenview=[[UIView alloc] initWithFrame:CGRectMake((CGRectGetWidth(_tableView.frame)-100*_Scale)/2.0f,50*_Scale, 100*_Scale, 100*_Scale)];
     banbenview.backgroundColor=[UIColor clearColor];
     [footview addSubview:banbenview];
@@ -136,12 +181,9 @@
     label.font=[regular get_en_Font:11.0f];
     [banbenview addSubview:label];
     banbenview.hidden=YES;
-    
 }
 
-- (void)createSearchBar
-{
-
+- (void)createSearchBar {
     _searchBar = [[UISearchBar alloc] init];
     _searchBar.backgroundColor=[UIColor clearColor];
     _searchBar.frame = CGRectMake(0, 0, ScreenWidth, 44);
@@ -163,20 +205,8 @@
     _searchBar.searchBarStyle=UISearchBarStyleDefault;
     _tableView.tableHeaderView = _searchBar;
 }
--(void)setType:(NSInteger)type
-{
 
-    titleArr=@[@"Niche 榜",@"Business Insider 榜",@"Prep Review 榜",@"蓝带学校榜"];
-    _type=type;
-
-    [self prepareData];
-    //    创建tableview
-    [self createTableView];
-    //    创建搜索栏
-    [self createSearchBar];
-    //    创建搜索结果显示器
-    [self createSearchDisplayCtrl];
-
+- (void)setTitleStyle {
     if(_type<=4)
     {
         CGFloat _Default_font=16.0;
@@ -185,7 +215,6 @@
 
         UILabel *titleLabel=[[UILabel alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(view.frame), CGRectGetHeight(view.frame))];
         titleLabel.font=[UIFont fontWithName:@"Skia" size:_Default_font];
-
         titleLabel.textColor=[UIColor whiteColor];
         titleLabel.textAlignment=NSTextAlignmentCenter;
         [titleLabel setAttributedText:[regular createAttributeString:titleArr[_type-1] andFloat:@(_Default_Spacing)]];
@@ -230,35 +259,9 @@
         self.navigationItem.titleView=view;
     }
 
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    NSDictionary *_parameters=nil;
-    if (_type==1) {
-        _parameters=@{@"mark":@"niche"};
-    } else if(_type==2) {
-        _parameters=@{@"mark":@"insider"};
-    } else if(_type==5) {
-        _parameters=@{@"mark":@"day"};
-    } else if(_type==6) {
-        _parameters=@{@"mark":@"boarding"};
-    } else if(_type==4) {
-        _parameters=@{@"mark":@"blue_ribbon"};
-    }
-    [manager GET:[[NSString alloc] initWithFormat:@"%@%@",DNS,@"/v1/rank_schools"] parameters:_parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-
-        NSString *html = operation.responseString;
-        NSData* data=[html dataUsingEncoding:NSUTF8StringEncoding];
-        NSDictionary *dict=[NSJSONSerialization  JSONObjectWithData:data options:0 error:nil];
-        [self setdata:dict];
-        [_tableView reloadData];
-
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错白色" Withtype:1]];
-    }];
-
-    
 }
--(void)setdata:(NSDictionary *)_dict
-{
+
+- (void)setdata:(NSDictionary *)_dict {
     if(((NSArray *)[_dict objectForKey:@"data"]).count==0)
     {
 
@@ -267,8 +270,6 @@
             [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"没有更多了" WithImg:@"Prompt_提交成功" Withtype:1]];
         }else
         {
-            [_arrayChar removeAllObjects];
-
             [_tableView reloadData];
         }
 
@@ -292,107 +293,62 @@
         {
             count=0;
             [_arrayData removeAllObjects];
-            [_arrayChar removeAllObjects];
             [_arrayResult removeAllObjects];
         }
     }
 }
-#pragma mark-tableview
 
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if(_arrayData.count==indexPath.section)
-    {
-        return foundCellHeight;
+- (void)prepareData {
+    UIBarButtonItem *_btn=[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"返回箭头"] style:UIBarButtonItemStylePlain target:self action:@selector(popviewAction)];
+    self.navigationItem.leftBarButtonItem=_btn;
+
+    _page=1;
+    _arrayData=[[NSMutableArray alloc] init];
+    _arrayResult = [[NSMutableArray alloc] init];
+}
+
+- (void)featchData {
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSDictionary *_parameters=nil;
+    if (_type==1) {
+        _parameters=@{@"mark":@"niche"};
+    } else if(_type==2) {
+        _parameters=@{@"mark":@"insider"};
+    } else if(_type==5) {
+        _parameters=@{@"mark":@"day"};
+    } else if(_type==6) {
+        _parameters=@{@"mark":@"boarding"};
+    } else if(_type==4) {
+        _parameters=@{@"mark":@"blue_ribbon"};
     }
-    return foundCellHeight;
+    [manager GET:[[NSString alloc] initWithFormat:@"%@%@",DNS,@"/v1/rank_schools"] parameters:_parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+
+        NSString *html = operation.responseString;
+        NSData* data=[html dataUsingEncoding:NSUTF8StringEncoding];
+        NSDictionary *dict=[NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+        [self setdata:dict];
+        [self->_tableView reloadData];
+
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错白色" Withtype:1]];
+    }];
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+#pragma mark - getters && setters
+- (void)setType:(NSInteger)type {
 
-    NSInteger num=indexPath.row;
-    FoundModel *model=_arrayData[num];
-    NSDictionary *pushdict=[[NSDictionary alloc] initWithObjectsAndKeys:model.cn_name,@"schoolName",model.sid,@"schoolID",[NSNumber numberWithInteger:model.is_order_school],@"is_order_school",nil];
+    titleArr=@[@"Niche 榜",@"Business Insider 榜",@"Prep Review 榜",@"蓝带学校榜"];
+    _type=type;
 
-    if(_type==5||_type==6)
-    {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"bangdanpush_detail" object:pushdict];
+    [self prepareData];
+    //    创建tableview
+    [self createTableView];
+    //    创建搜索栏
+    [self createSearchBar];
 
-    }else
-    {
-        SchoolDetailViewController *schoolView=[[SchoolDetailViewController alloc] init];
+    [self setTitleStyle];
 
-        schoolView.data_dict=pushdict;
-        [self.navigationController pushViewController:schoolView animated:YES];
-    }
-}
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-        return 1;
-}
-
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    if(tableView==_tableView)
-    {
-        if(_arrayData.count==section)
-        {
-            return 0;
-        }
-        return _arrayData.count;
-    }else{
-        return _arrayResult.count;
-    }
-}
-
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if(_arrayData.count==indexPath.section)
-    {
-        static NSString *cellid=@"cellid";
-        UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:cellid];
-        if(!cell)
-        {
-            cell=[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellid];
-        }
-        cell.selectionStyle=UITableViewCellSelectionStyleNone;
-        return cell;
-    }
-
-    static NSString *cellid=@"cell";
-    bangdanCell *cell=[tableView dequeueReusableCellWithIdentifier:cellid ];
-    if (!cell) {
-        cell=[[bangdanCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellid];
-    }
-    cell.selectionStyle=UITableViewCellSelectionStyleNone;
-    if (tableView==_tableView) {
-        JXLOG(@"%@",_arrayChar);
-        NSInteger num=indexPath.row;
-        FoundModel *model=_arrayData[num];
-        cell.model =model;
-    } else {
-        cell.model = [_arrayResult objectAtIndex:indexPath.row];
-    }
-    return cell;
-}
-
--(void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    [MobClick endLogPageView:@"bangdanViewController"];
-}
--(void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    [MobClick beginLogPageView:@"bangdanViewController"];
-
-    [[CustomTabbarController sharedManager] tabbarHide];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
+    [self featchData];
 }
 
 @end

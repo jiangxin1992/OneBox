@@ -591,7 +591,7 @@
                 btn.selected=YES;
                 if(_step==i)
                 {
-                    label.textColor=_yellowColor;
+                    label.textColor=_grayColor;
                     [self setgif_hideWithTag:i];
                 }else
                 {

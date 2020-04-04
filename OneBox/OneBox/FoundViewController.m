@@ -166,8 +166,6 @@
 -(void)UIConfig{
     //    创建tableview
     [self createTableView];
-    //    创建视图下方三个按钮
-    [self createHelp];
 }
 -(void)createTableView
 {
@@ -198,33 +196,6 @@
     [_tableView reloadData];
 
     [self setupRefresh];
-}
--(void)createHelp
-{
-    UIView *helpview = [UIView getCustomViewWithColor:nil];
-    [self.view addSubview:helpview];
-    [helpview mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(-70*_Scale);
-        make.bottom.mas_equalTo(-10*_Scale-kTabBarHeight);
-        make.width.mas_equalTo(90*_Scale);
-        make.height.mas_equalTo(150*_Scale);
-    }];
-
-    UIButton *help_btn = [UIButton getCustomImgBtnWithImageStr:@"found_问问" WithSelectedImageStr:nil];
-    [helpview addSubview:help_btn];
-    [help_btn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.mas_equalTo(0);
-        make.height.mas_equalTo(90*_Scale);
-    }];
-    [help_btn addTarget:self action:@selector(helpAction:) forControlEvents:UIControlEventTouchUpInside];
-
-    UILabel *label_title = [UILabel getLabelWithAlignment:1 WithTitle:@"问问" WithFont:12.0f WithTextColor:_define_white_color WithSpacing:3.0];
-    [helpview addSubview:label_title];
-    [label_title mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.mas_equalTo(0);
-        make.top.mas_equalTo(help_btn.mas_bottom).with.offset(12*_Scale);
-        make.height.mas_equalTo(34*_Scale);
-    }];
 }
 -(void)createTableHeadView:(NSString *)headviewimage
 {
@@ -434,21 +405,6 @@
 {
     MapViewController *mapView = [[MapViewController alloc] init];
     [self.navigationController pushViewController:mapView animated:YES];
-}
-//跳转帮助view
--(void)helpAction:(UIButton*)btn
-{
-    NSString *login = nil;
-    if(![regular isLogin])
-    {
-        login = @"0";
-    }else
-    {
-        login = @"1";
-    }
-    OnlineProjectsViewController *online = [[OnlineProjectsViewController alloc] init];
-    online.islogin = login;
-    [self.navigationController pushViewController:online animated:YES];
 }
 //筛选
 -(void)screenAction{

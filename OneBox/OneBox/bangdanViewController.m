@@ -41,6 +41,9 @@
     NSInteger _page;
 }
 #pragma mark - Route 路由方法
+
+
+
 #pragma mark - LifeCycle 生命周期
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -62,6 +65,7 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
+
 
 #pragma mark - Delegate (确切到某个delegate UITableViewDelegate)
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -141,6 +145,7 @@
 - (void)popviewAction {
     [self.navigationController popViewControllerAnimated:YES];
 }
+
 
 #pragma mark - private method (handler data method)
 - (void)createTableView {
@@ -333,6 +338,7 @@
         [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错白色" Withtype:1]];
     }];
 }
+
 
 #pragma mark - getters && setters
 - (void)setType:(NSInteger)type {

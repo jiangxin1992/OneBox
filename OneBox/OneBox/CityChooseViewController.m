@@ -12,7 +12,7 @@
 
 #import "ChineseToPinyin.h"
 
-@interface CityChooseViewController ()<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate>
+@interface CityChooseViewController ()<UITableViewDataSource,UITableViewDelegate>
 
 @end
 
@@ -23,14 +23,6 @@
     //    这个列表中用到的数据和索引
     NSMutableDictionary *_dictPinyinAndChinese;
     NSMutableArray *_arrayChar;
-    //    记录搜索列表中用到的数据和索引
-    NSMutableDictionary *_dictPinyinAndChinese1;
-    NSMutableArray *_arrayChar1;
-
-    //搜索栏
-    UISearchBar *_searchBar;
-    //搜索结果展示控制器 ，经常和UISearchBar配合使用
-    UISearchDisplayController *_searchDC;
 
     UITableView *_tableview;
 }
@@ -201,45 +193,12 @@
     }
     return dict;
 }
-#pragma mark*搜索出包含该字符的数据(中英文搜索)
--(NSMutableArray *)get_contain_word_arr:(NSString *)title
-{
-    NSMutableArray *arr=[[NSMutableArray alloc] init];
-
-    for (NSDictionary *model in  city_data_arr) {
-        if(![title isEqualToString:@""])
-        {
-            NSRange range1 = [[ChineseToPinyin pinyinFromChiniseString:[model objectForKey:@"name"]] rangeOfString:[ChineseToPinyin pinyinFromChiniseString:title]];
-            NSRange range2 = [[ChineseToPinyin pinyinFromChiniseString:[model objectForKey:@"en_name"]] rangeOfString:[ChineseToPinyin pinyinFromChiniseString:title]];
-
-            NSString *titeeee=[model objectForKey:@"en_name"];
-            NSRange range3 = [[ChineseToPinyin pinyinFromChiniseString:titeeee] rangeOfString:[ChineseToPinyin pinyinFromChiniseString:title]];
-
-            if(((range1.location != NSNotFound)||(range2.location!=NSNotFound))&&(![[model objectForKey:@"en_name"] isEqualToString:@""])&&(![[model objectForKey:@"name"] isEqualToString:@""]))
-            {
-                [arr addObject:model];
-            }else if(![[model objectForKey:@"name"] isEqualToString:@""])
-            {
-                if((range3.location!=NSNotFound))
-                {
-                    [arr addObject:model];
-                }
-            }
-        }
-    }
-
-    return arr;
-}
 
 #pragma mark-----------------视图创建----------------
 -(void)UIConfig
 {
     //    创建tableview
     [self createtableview];
-    //    创建搜索栏
-    [self createSearchBar];
-    //    创建搜索结果显示器
-    [self createSearchDisplayCtrl];
 }
 #pragma mark*创建tableview
 -(void)createtableview
@@ -257,108 +216,19 @@
         make.bottom.mas_equalTo(self.mas_bottomLayoutGuideTop).with.offset(0);
     }];
 }
-#pragma mark*创建SearchBar
-- (void)createSearchBar
-{
-    _searchBar = [[UISearchBar alloc] init];
-    _searchBar.backgroundColor=[UIColor clearColor];
-    _searchBar.frame = CGRectMake(0, 0, ScreenWidth, 44);
-
-    _searchBar.delegate=self;
-    //    _searchBar.searc
-    [_searchBar setSearchFieldBackgroundImage:[UIImage imageNamed:@"found_school_所在州所在城市筛选框"] forState:UIControlStateNormal];
-    _searchBar.backgroundImage=[UIImage imageNamed:@"hehehehe"];
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"found_school_2_选中底图.png"]];
-    imageView.frame=_searchBar.frame;
-    _searchBar.placeholder=@"查找州城市";
-    if (@available(iOS 13.0, *)) {
-        UITextField *searchField = _searchBar.searchTextField;
-
-        searchField.font=(kIOSVersions>=9.0? [UIFont systemFontOfSize:11.0f]:[UIFont fontWithName:@"Helvetica Neue" size:11.0f]);;
-        searchField.leftView.alpha=0.5;
-    } else {
-        // Fallback on earlier versions
-    }
-
-    [_searchBar insertSubview:imageView atIndex:1];
-
-    _searchBar.searchBarStyle=UISearchBarStyleDefault;
-    //设置搜索栏取消按钮是否显示
-    //        _searchBar.showsCancelButton = YES;
-    //将搜索栏添加到视图控制器的主视图上
-    //效果是,搜索栏不会随着表视图的滚动而滚动
-    //    [self.view addSubview:_searchBar];
-    //将搜索栏添加到表视图的表头视图上
-    //效果是,搜索栏会随着表视图的滚动而滚动
-    _tableview.tableHeaderView = _searchBar;
-}
-#pragma mark*创建搜索显示器
-- (void)createSearchDisplayCtrl
-{
-    //创建搜索结果显示控制器
-    //参数 1: 将控制器与参数1指定的搜索栏相关联
-    //参数 2 : 指定控制器的显示位置，（当前控制器显示在哪个视图控制器上）
-    //当用户点击到_searchBar时，searchDC就会显示，同时searchDC将_searchBar移到searchDC，再将_searchBar的取消按钮设为可见
-    _searchDC = [[UISearchDisplayController alloc] initWithSearchBar:_searchBar contentsController:self];
-
-
-    //设置控制器的tableview的搜索结果数据源代理
-    _searchDC.searchResultsDataSource = self;
-    //设置控制器的tableview的代理
-    _searchDC.searchResultsDelegate = self;
-
-}
 #pragma mark-----------------SomeDelegate----------------
-#pragma mark---SearchBarDelegate---
-#pragma mark*内容发生变化的时候，对国家数据进行搜索
-- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
-{
-    if(![_searchBar.text isEqualToString:@""])
-    {
-        //获得搜索数据
-        NSArray *data_Result_arr=[[self get_contain_word_arr:_searchBar.text] sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-            return [[ChineseToPinyin pinyinFromChiniseString:[obj1 objectForKey:@"name"]] compare:[ChineseToPinyin pinyinFromChiniseString:[obj2 objectForKey:@"name"]] options:NSNumericSearch];
-        }];
-
-        _dictPinyinAndChinese1=[self get_country_dict:data_Result_arr];
-        _arrayChar1=[self get_country_arr:_dictPinyinAndChinese1];
-
-    }
-}
 #pragma mark---TableViewDelegate---
 #pragma mark*索引
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
 {
-    if(tableView==_tableview)
-    {
         return _arrayChar;
-    }
-    return _arrayChar1;
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    if(tableView==_tableview)
-    {
         return _arrayChar.count+1;
-    }else
-    {
-        //因为在searchDC上的_searchBar就是创建searchDC时，由第一个参数指定的_searchBar
-        if(![_searchBar.text isEqualToString:@""])
-        {
-            tableView.sectionIndexBackgroundColor = [UIColor clearColor];
-            tableView.sectionIndexColor = [UIColor colorWithRed:204.0f/255.0f green:204.0f/255.0f blue:204.0f/255.0f alpha:1];
-
-            return _arrayChar1.count+1;
-        }
-
-        return 1;
-    }
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-
-    if(tableView==_tableview)
-    {
         if(_arrayChar.count==0)
         {
             return 0;
@@ -373,28 +243,7 @@
 
         }
 
-    }else
-    {
-        if(![_searchBar.text isEqualToString:@""])
-        {
-            if(_arrayChar.count==0)
-            {
-                return 0;
-            }else if(section>=[[_dictPinyinAndChinese1 allKeys] count])
-            {
-                return 1;
-            }else
-            {
-                NSString *strKey = [_arrayChar1 objectAtIndex:section];
-                NSInteger _count=[[_dictPinyinAndChinese1 objectForKey:strKey] count];
-                return _count;
 
-            }
-
-
-        }
-        return 1;
-    }
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -403,21 +252,15 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSDictionary *pushdict=nil;
-    if(([[_dictPinyinAndChinese1 allKeys] count] ==indexPath.section&&indexPath.section>0)||([[_dictPinyinAndChinese allKeys] count] ==indexPath.section&&indexPath.section>0))
+    if([[_dictPinyinAndChinese allKeys] count] ==indexPath.section&&indexPath.section>0)
     {
         pushdict=@{@"country_code":[_dict objectForKey:@"country_code"],@"state_code":[_dict objectForKey:@"state_code"]};
 
     }else
     {
-        if(tableView==_tableview)
-        {
             pushdict=@{@"country_code":[_dict objectForKey:@"country_code"],@"state_code":[_dict objectForKey:@"state_code"],@"city_code":[[[_dictPinyinAndChinese objectForKey:[_arrayChar objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row] objectForKey:@"code"]};
 
-        }else
-        {
-            pushdict=@{@"country_code":[_dict objectForKey:@"country_code"],@"state_code":[_dict objectForKey:@"state_code"],@"city_code":[[[_dictPinyinAndChinese1 objectForKey:[_arrayChar1 objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row] objectForKey:@"code"]};
 
-        }
 
     }
     [[NSNotificationCenter defaultCenter] postNotificationName:@"location_change" object:pushdict];
@@ -444,8 +287,6 @@
         cell.textLabel.font=[regular getFont:14.0f];
         NSString *content=nil;
         NSDictionary *dict=nil;
-        if(tableView==_tableview)
-        {
             if((indexPath.section==[[_dictPinyinAndChinese allKeys] count])&&[[_dictPinyinAndChinese allKeys] count]>0)
             {
                 cell.accessoryType=UITableViewCellAccessoryNone;
@@ -464,32 +305,7 @@
                 }
 
             }
-        }else
-        {
-            if(((indexPath.section==[[_dictPinyinAndChinese1 allKeys] count])&&[[_dictPinyinAndChinese1 allKeys] count]>0)||_arrayChar1.count==0)
-            {
-                cell.accessoryType=UITableViewCellAccessoryNone;
-                content=@"其他";
-            }else
-            {
-                if(![_searchBar.text isEqualToString:@""])
-                {
-                    dict=[[_dictPinyinAndChinese1 objectForKey:[_arrayChar1 objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row];
-                    cell.accessoryType=UITableViewCellAccessoryNone;
-                    if([dict objectForKey:@"name"]==nil)
-                    {
-                        content=@"";
-                    }else
-                    {
-                        content=[dict objectForKey:@"name"];
-                    }
-                }else
-                {
-                    content=@"";
-                }
 
-            }
-        }
         cell.textLabel.text=content;
         return cell;
     }

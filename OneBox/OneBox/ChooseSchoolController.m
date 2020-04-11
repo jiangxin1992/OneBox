@@ -83,7 +83,6 @@
         [self UIConfig];
     }else if(isToCol)
     {
-
         _alertViewArray=[[NSMutableArray alloc] init];
         _nextBtn_height=70*_Scale;
         _addDiameter=110*_Scale;
@@ -367,7 +366,7 @@
     _scrollView.contentSize=CGSizeMake(ScreenWidth, CGRectGetMaxY(_card.frame));
     max_y=CGRectGetMaxY(_card.frame);
 
-    UIImageView *titleImg=[[UIImageView alloc] initWithFrame:CGRectMake((CGRectGetWidth(_scrollView.frame)-59*_Scale)/2.0f, CGRectGetMinY(_card.frame)-3-69*_Scale/2, 64*_Scale, 64*_Scale)];
+    UIImageView *titleImg=[[UIImageView alloc] initWithFrame:CGRectMake((ScreenWidth-59*_Scale)/2.0f, CGRectGetMinY(_card.frame)-3-69*_Scale/2, 64*_Scale, 64*_Scale)];
 
     titleImg.image=[UIImage imageNamed:@"box_choose_圆点"];
     titleImg.userInteractionEnabled=YES;
@@ -383,7 +382,7 @@
     [_scrollView addSubview:titleImg];
     [_titleImgArray addObject:titleImg];
 
-    UIImageView *deleteImg=[[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetWidth(_scrollView.frame)-71.5*_Scale, CGRectGetMinY(_card.frame)-47.5*_Scale/2, 59*_Scale, 59*_Scale)];
+    UIImageView *deleteImg=[[UIImageView alloc] initWithFrame:CGRectMake(ScreenWidth-71.5*_Scale, CGRectGetMinY(_card.frame)-47.5*_Scale/2, 59*_Scale, 59*_Scale)];
     deleteImg.image=[UIImage imageNamed:@"box_choose_关闭按钮"];
     deleteImg.userInteractionEnabled=YES;
     deleteImg.tag=100+index;

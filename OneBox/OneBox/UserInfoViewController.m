@@ -747,26 +747,26 @@ static void *EOCAlertViewKey = "EOCAlertViewKey";
 
     if((app1==NO)&&(app2==NO))
     {
-        imageName = @[@"微博Share",@"qq空间Share",@"emailShare"];
-        imageTitleName= @[@"微博",@"QQ空间",@"邮件"];
+        imageName = @[@"微博Share",@"qq空间Share",];
+        imageTitleName= @[@"微博",@"QQ空间",];
 
     }else if((app1==YES)&&(app2==NO))
     {
 
-        imageName = @[@"微信Share",@"朋友圈Share",@"微博Share",@"qq空间Share",@"emailShare"];
-        imageTitleName= @[@"微信",@"朋友圈",@"微博",@"QQ空间",@"邮件"];
+        imageName = @[@"微信Share",@"朋友圈Share",@"微博Share",@"qq空间Share",];
+        imageTitleName= @[@"微信",@"朋友圈",@"微博",@"QQ空间",];
 
     }else if((app1==NO)&&(app2==YES))
     {
 
-        imageName = @[@"微博Share",@"qqShare",@"qq空间Share",@"emailShare"];
-        imageTitleName= @[@"微博",@"QQ",@"QQ空间",@"邮件"];
+        imageName = @[@"微博Share",@"qqShare",@"qq空间Share",];
+        imageTitleName= @[@"微博",@"QQ",@"QQ空间",];
 
     }else
     {
 
-        imageName = @[@"微信Share",@"朋友圈Share",@"微博Share",@"qqShare",@"qq空间Share",@"emailShare"];
-        imageTitleName= @[@"微信",@"朋友圈",@"微博",@"QQ",@"QQ空间",@"邮件"];
+        imageName = @[@"微信Share",@"朋友圈Share",@"微博Share",@"qqShare",@"qq空间Share",];
+        imageTitleName= @[@"微信",@"朋友圈",@"微博",@"QQ",@"QQ空间",];
     }
 //    r 50  bianju 40
     CGFloat _width=50*2*_Scale;
@@ -868,7 +868,7 @@ static void *EOCAlertViewKey = "EOCAlertViewKey";
     //    id<ISSQQApp> app2 =(id<ISSQQApp>)[ShareSDK getClientWithType:ShareTypeQQSpace];
     
     //  @[@(22),@(23),@(1),@(24),@(6),@(18)];
-    //    @[@"微信Share",@"朋友圈Share",@"微博Share",@"qqShare",@"qq空间Share",@"emailShare"];
+    //    @[@"微信Share",@"朋友圈Share",@"微博Share",@"qqShare",@"qq空间Share",];
     if((app1==NO)&&(app2==NO))
     {
         

@@ -4073,23 +4073,24 @@
         max_y=CGRectGetMaxY(subview.frame)+_margin;
         _view_Rank=[[ToolManager sharedManager] createView:CGRectMake(0, max_y, CGRectGetWidth(_scrollView.frame), 250*_Scale) WithColor:[UIColor whiteColor]];
 //        50 20
-        CGFloat _jiange = (ScreenWidth-50*3*_Scale)/4.0f;
+        CGFloat viewDiameter = 100*_Scale;
+        CGFloat _jiange = (ScreenWidth-3*viewDiameter)/4.0f;
         for (int i=0; i<3; i++) {
             UIView *_view=[[UIView alloc] init];
             [_view_Rank addSubview:_view];
-            _view.frame=CGRectMake(_jiange+(_jiange+50*_Scale)*i, 20*_Scale, 50*_Scale, 50*_Scale);
+            _view.frame=CGRectMake(_jiange+(_jiange+viewDiameter)*i, 40*_Scale, viewDiameter, viewDiameter);
             _view.layer.masksToBounds=YES;
-            _view.layer.cornerRadius=25;
+            _view.layer.cornerRadius=viewDiameter/2;
             _view.backgroundColor=[UIColor colorWithDisplayP3Red:186.0f/255.0f green:198.0f/255.0f blue:67.0f/255.0f alpha:1];
             
-            UILabel *label=[[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50*_Scale, 50*_Scale)];
+            UILabel *label=[[UILabel alloc] initWithFrame:CGRectMake(0, 0, viewDiameter, viewDiameter)];
             [_view addSubview:label];
             label.font=[regular get_en_Font:18.0f];
             label.textColor=[UIColor whiteColor];
             label.textAlignment=1;
             label.text=[detail_model.ranks objectForKey:[keyArr objectAtIndex:i]];
             
-            UILabel *titlelabel1=[[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMinX(_view.frame)-5*_Scale, CGRectGetMaxY(_view.frame), CGRectGetWidth(_view.frame)+10*_Scale, 26*_Scale)];
+            UILabel *titlelabel1=[[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMinX(_view.frame)-40*_Scale, CGRectGetMaxY(_view.frame) + 20*_Scale, CGRectGetWidth(_view.frame)+80*_Scale, 26*_Scale)];
             [_view_Rank addSubview:titlelabel1];
             titlelabel1.font=[regular get_en_Font:12.0f];
             titlelabel1.textAlignment=1;

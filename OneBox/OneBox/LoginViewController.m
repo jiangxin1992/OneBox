@@ -433,7 +433,7 @@
 {
     //将username、password、islogin、uid、userImage保存进NSUserDefaults
     //取出沙盒中的NSUserDefaults
-    NSDictionary *_user = [[dict objectForKey:@"data"] objectForKey:@"user"];
+    NSDictionary *_user = [dict objectForKey:@"data"];
     BOOL isAutoLogin = [[EaseMob sharedInstance].chatManager isAutoLoginEnabled];
     if (!isAutoLogin) {
         [[EaseMob sharedInstance].chatManager asyncLoginWithUsername:[_user objectForKey:@"ease_mob_username"] password:[_user objectForKey:@"ease_mob_password"]

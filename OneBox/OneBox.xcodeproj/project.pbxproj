@@ -5465,6 +5465,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 2;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 8S92E4NW68;
 				ENABLE_BITCODE = NO;
@@ -5509,6 +5510,7 @@
 					"$(PROJECT_DIR)/OneBox/DDAY/ZFB",
 					"$(PROJECT_DIR)/OneBox/DDAY",
 				);
+				MARKETING_VERSION = 3.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"$(OTHER_LDFLAGS)",
@@ -5536,6 +5538,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = YES;
+				CURRENT_PROJECT_VERSION = 2;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 8S92E4NW68;
 				ENABLE_BITCODE = NO;
@@ -5580,6 +5583,7 @@
 					"$(PROJECT_DIR)/OneBox/DDAY/ZFB",
 					"$(PROJECT_DIR)/OneBox/DDAY",
 				);
+				MARKETING_VERSION = 3.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"$(OTHER_LDFLAGS)",

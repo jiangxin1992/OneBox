@@ -7,7 +7,6 @@
 //
 /*************** 第三方 ***************/
 #import "Masonry.h"
-#import "EaseMob.h"
 #import "MobClick.h"
 #import "YYAnimationIndicator.h"
 #import "DBImageView.h"

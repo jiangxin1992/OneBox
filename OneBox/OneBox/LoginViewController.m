@@ -439,29 +439,6 @@
     }else{
         _user = [dict objectForKey:@"data"];
     }
-    BOOL isAutoLogin = [[EaseMob sharedInstance].chatManager isAutoLoginEnabled];
-    if (!isAutoLogin) {
-        [[EaseMob sharedInstance].chatManager asyncLoginWithUsername:[_user objectForKey:@"ease_mob_username"] password:[_user objectForKey:@"ease_mob_password"]
-                                                          completion:^(NSDictionary *loginInfo, EMError *error) {
-                                                              if (!error) {
-                                                                  // 设置自动登录
-                                                                  [[EaseMob sharedInstance].chatManager setIsAutoLoginEnabled:YES];
-                                                              }
-
-
-                                                          }onQueue:nil];
-    }else
-    {
-        [[EaseMob sharedInstance].chatManager asyncLoginWithUsername:[_user objectForKey:@"ease_mob_username"] password:[_user objectForKey:@"ease_mob_password"]
-                                                          completion:^(NSDictionary *loginInfo, EMError *error) {
-                                                              if (!error) {
-                                                                  // 设置自动登录
-                                                                  [[EaseMob sharedInstance].chatManager setIsAutoLoginEnabled:YES];
-                                                              }
-                                                              
-                                                              
-                                                          }onQueue:nil];
-    }
 
     NSUserDefaults *defaults =[NSUserDefaults standardUserDefaults];
     //将islogin存入defaults中

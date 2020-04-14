@@ -228,12 +228,6 @@ static void *EOCAlertViewKey = "EOCAlertViewKey";
     [self.navigationController pushViewController:about animated:YES];
 }
 - (void)backBtn:(UIButton *)sender {
-
-    EMError *error = nil;
-    NSDictionary *info = [[EaseMob sharedInstance].chatManager logoffWithUnbindDeviceToken:YES error:&error];
-    if (!error && info) {
-        JXLOG(@"退出成功");
-    }
     NSDictionary *parameters = @{@"token":[regular getToken]};
     NSString *url = [[NSString alloc] initWithFormat:@"%@%@",DNS,@"/v1/users/login_out"];
     AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc]init];

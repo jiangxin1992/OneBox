@@ -333,31 +333,6 @@
     NSInteger _code=[[dict objectForKey:@"code"] integerValue];
     if(_code==1)
     {
-        BOOL isAutoLogin = [[EaseMob sharedInstance].chatManager isAutoLoginEnabled];
-        if (!isAutoLogin) {
-            [[EaseMob sharedInstance].chatManager asyncLoginWithUsername:[[dict objectForKey:@"data"] objectForKey:@"ease_mob_username"] password:[[dict objectForKey:@"data"] objectForKey:@"ease_mob_password"]
-                                                              completion:^(NSDictionary *loginInfo, EMError *error) {
-                                                                  if (!error) {
-                                                                      // 设置自动登录
-                                                                      [[EaseMob sharedInstance].chatManager setIsAutoLoginEnabled:YES];
-                                                                  }
-
-
-                                                              }onQueue:nil];
-        }else
-        {
-            [[EaseMob sharedInstance].chatManager asyncLoginWithUsername:[[dict objectForKey:@"data"] objectForKey:@"ease_mob_username"] password:[[dict objectForKey:@"data"] objectForKey:@"ease_mob_password"]
-                                                              completion:^(NSDictionary *loginInfo, EMError *error) {
-                                                                  if (!error) {
-                                                                      // 设置自动登录
-                                                                      [[EaseMob sharedInstance].chatManager setIsAutoLoginEnabled:YES];
-                                                                  }
-                                                                  
-                                                                  
-                                                              }onQueue:nil];
-
-
-        }
 
         [[ToolManager sharedManager] removeProgress];
 #pragma mark-发通知刷新发现美校

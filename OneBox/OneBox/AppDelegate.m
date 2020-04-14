@@ -57,7 +57,6 @@
 #import "WeiboSDK.h"
 //新浪微博SDK需要在项目Build Settings中的Other Linker Flags添加"-ObjC"
 
-#import "EaseMob.h"
 #import "CustomTabbarController.h"
 
 #import "MYIntroductionPanel.h"
@@ -106,55 +105,6 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
     [GeTuiSdk startSdkWithAppId:kGtAppId appKey:kGtAppKey appSecret:kGtAppSecret delegate:self];
     // 注册 APNs
     [self registerRemoteNotification];
-
-    // 启动环信sdk
-    [[EaseMob sharedInstance] registerSDKWithAppKey:@"onebox2015#abroadboxios" apnsCertName:@"onebox_push"];
-    [[EaseMob sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
-
-    //先判断是否开启自动登录，如果没有开启，则调用登录方法，并在登录成功后开启自动登录的开关
-
-    //    自动登录在以下几种情况下会被取消
-
-    //   1. 用户调用了SDK的登出动作;
-    //   2. 用户在别的设备上更改了密码, 导致此设备上自动登陆失败;
-    //   3. 用户的账号被从服务器端删除;
-    //   4. 用户从另一个设备登录，把当前设备上登陆的用户踢出.
-
-    //@"ease_mob_username"] password:[[dict objectForKey:@"data"] objectForKey:@"ease_mob_password"
-    
-    if((![NSString isNilOrEmpty:[regular getEaseMobUsername]])&&(![NSString isNilOrEmpty:[regular getEaseMobPassword]]))
-    {
-        BOOL isAutoLogin = [[EaseMob sharedInstance].chatManager isAutoLoginEnabled];
-        if (!isAutoLogin) {
-            
-            [[EaseMob sharedInstance].chatManager asyncLoginWithUsername:[regular getEaseMobUsername] password:[regular getEaseMobPassword]
-                                                              completion:^(NSDictionary *loginInfo, EMError *error) {
-                                                                  if (!error) {
-                                                                      // 设置自动登录
-                                                                      [[EaseMob sharedInstance].chatManager setIsAutoLoginEnabled:YES];
-                                                                  }
-
-
-                                                              }onQueue:nil];
-        }else
-        {
-            [[EaseMob sharedInstance].chatManager asyncLoginWithUsername:[regular getEaseMobUsername] password:[regular getEaseMobPassword]
-                                                              completion:^(NSDictionary *loginInfo, EMError *error) {
-                                                                  if (!error) {
-                                                                      // 设置自动登录
-                                                                      [[EaseMob sharedInstance].chatManager setIsAutoLoginEnabled:YES];
-                                                                  }
-                                                                  
-                                                                  
-                                                              }onQueue:nil];
-        }
-    }
-    
-
-    EMPushNotificationOptions* options = [[EaseMob sharedInstance].chatManager pushNotificationOptions];
-    options.displayStyle =ePushNotificationDisplayStyle_messageSummary;
-    [[EaseMob sharedInstance].chatManager asyncUpdatePushOptions:options];
-
     double version = [[UIDevice currentDevice].systemVersion doubleValue];//判定系统版本。
 
     if (version>=8.0f)
@@ -261,18 +211,11 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-    [[EaseMob sharedInstance] applicationDidEnterBackground:application];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     //    app进入后台时候 让导航栏恢复原样
     [[NSNotificationCenter defaultCenter] postNotificationName:@"navBarReset" object:self];
-    [[EaseMob sharedInstance] applicationWillEnterForeground:application];
-    NSUInteger _unreadnum=[[EaseMob sharedInstance].chatManager loadTotalUnreadMessagesCountFromDatabase];
-    if(_unreadnum)
-    {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"qiehuan" object:self];
-    }
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
 }
 
@@ -287,7 +230,6 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-    [[EaseMob sharedInstance] applicationWillTerminate:application];
 }
 #pragma mark - 用户通知(推送) _自定义方法
 
@@ -390,8 +332,6 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
 /** 远程通知注册成功委托 */
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken
 {
-    [[EaseMob sharedInstance] application:application didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
-
     // 获得token并存入
     NSString *token = [[deviceToken description] stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
     _deviceToken = [token stringByReplacingOccurrencesOfString:@" " withString:@""] ;

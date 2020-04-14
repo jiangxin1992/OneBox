@@ -8,7 +8,6 @@
 
 #import "ChooseSchoolController.h"
 
-#import "OnlineProjectsViewController.h"
 #import "AcademicRecordsController.h"
 #import "SchoolDetailViewController.h"
 #import "CustomTabbarController.h"

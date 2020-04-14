@@ -10,9 +10,6 @@
 
 #import "HttpRequestManager.h"
 
-#import "FollowingViewController.h"
-#import "FollowerViewController.h"
-#import "ChatViewController.h"
 #import "LoginViewController.h"
 
 #import "comment_cell.h"

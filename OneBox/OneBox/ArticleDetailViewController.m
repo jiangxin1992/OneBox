@@ -17,9 +17,6 @@
 #import <ShareSDKExtension/ShareSDK+Extension.h>
 #import <ShareSDKConnector/ShareSDKConnector.h>
 
-#import "ChatViewController.h"
-#import "FollowerViewController.h"
-#import "FollowingViewController.h"
 #import "CustomTabbarController.h"
 #import "ArticleCommentController.h"
 #import "LoginViewController.h"

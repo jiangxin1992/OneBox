@@ -7,19 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-@class AppDelegate;
 @interface CustomTabbarController : UITabBarController
-- (void)didReceiveLocalNotification:(UILocalNotification *)notification;
 
 //调用单例
 +(id)sharedManager;
 //使tabbarHide
 -(void)tabbarHide;
--(void)tabbarHideWithanimated;
--(void)tabbarAppearWithanimated;
 //使tabbarAppear
-- (void)updateMsgCount:(int) count;
 -(void)tabbarAppear;
-- (void)logMsg:(NSString *)aMsg;
-- (void)updateStatusView:(AppDelegate *)delegate;
 @end

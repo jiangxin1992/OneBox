@@ -10,8 +10,6 @@
 
 #import <CoreLocation/CoreLocation.h>
 #import <MapKit/MapKit.h>
-
-#import "OnlineProjectsViewController.h"
 #import "CustomTabbarController.h"
 
 #import "MyPoint.h"
@@ -214,10 +212,6 @@
     [UIView setAnimationDuration:1];
     SelfbottomView.frame = CGRectMake(0,ScreenHeight-64-100*_Scale, ScreenWidth, 192);
     [UIView commitAnimations];
-
-}
-- (void)application:(UIApplication *)app didReceiveLocalNotification:(UILocalNotification *)notif
-{
 
 }
 #pragma mark-数据请求

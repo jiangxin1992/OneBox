@@ -8,7 +8,6 @@
 
 #import "Boxlistviewcontroller.h"
 
-#import "OnlineProjectsViewController.h"
 #import "QianViewController.h"
 #import "SubmitMaterialController.h"
 #import "SubmitSchoolController.h"

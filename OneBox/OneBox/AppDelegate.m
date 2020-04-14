@@ -385,18 +385,6 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
 
 #endif
 
-//接收本地推送
-- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification{
-
-    //    NSDictionary *userInfo = notification.userInfo;
-    //    [[ToolManager sharedManager] alertTitle_Simple:[[NSString alloc] initWithFormat:@"收到1=%@",userInfo]];
-
-    if (_viewController) {
-        //        [[ToolManager sharedManager] alertTitle_Simple:[[NSString alloc] initWithFormat:@"收到2=%@",userInfo]];
-        [_viewController didReceiveLocalNotification:notification];
-    }
-}
-
 #pragma mark - 远程通知(推送)回调
 
 /** 远程通知注册成功委托 */
@@ -454,7 +442,6 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
 - (void)GeTuiSDkDidNotifySdkState:(SdkStatus)aStatus {
     // [EXT]:通知SDK运行状态
     JXLOG(@"\n>>>[GexinSdk SdkState]:%u\n\n", aStatus);
-    [_viewController updateStatusView:self];
 }
 
 /** SDK设置推送模式回调 */

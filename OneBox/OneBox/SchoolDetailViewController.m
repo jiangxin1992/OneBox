@@ -19,14 +19,11 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 
-#import "FollowerViewController.h"
-#import "FollowingViewController.h"
 #import "AdmissionViewController.h"
 #import "SchoolCommentController.h"
 #import "CustomTabbarController.h"
 #import "ImageViewController.h"
 #import "LoginViewController.h"
-#import "ChatViewController.h"
 
 #import "MyPoint.h"
 #import "KVNProgress.h"
@@ -724,28 +721,6 @@
 {
     [[self.view.window viewWithTag:3000] removeFromSuperview];
 }
--(void)friend_list:(UIGestureRecognizer *)ges
-{
-
-    if(ges.view.tag==6000)
-    {
-        FollowerViewController *foll=[[FollowerViewController alloc] init];
-        foll.token=friend_token;
-        [self.navigationController pushViewController:foll animated:YES];
-        [self xiaoshi];
-
-
-    }else
-    {
-        FollowingViewController *foll=[[FollowingViewController alloc] init];
-        foll.token=friend_token;
-        [self.navigationController pushViewController:foll animated:YES];
-        [self xiaoshi];
-
-    }
-}
-
-
 -(void)createAdmissionsViewWithView:(UIView *)subview
 {
 

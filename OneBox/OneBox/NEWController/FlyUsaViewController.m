@@ -5,8 +5,6 @@
 //  Created by 谢江新 on 15/7/8.
 //  Copyright (c) 2015年 谢江新. All rights reserved.
 //
-#import "OnlineProjectsViewController.h"
-
 #import "HttpRequestManager.h"
 
 #import "FlyUsaViewController.h"

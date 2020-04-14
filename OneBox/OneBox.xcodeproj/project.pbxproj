@@ -892,7 +892,7 @@
 		53AE1D2A1BBAA0920048A28F /* chat_sender_audio_playing_full@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chat_sender_audio_playing_full@3x.png"; sourceTree = "<group>"; };
 		53B4907F1B56352A00814F1A /* bangdanCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bangdanCell.h; sourceTree = "<group>"; };
 		53B490801B56352A00814F1A /* bangdanCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = bangdanCell.m; sourceTree = "<group>"; };
-		53B537281A7F465D0095C129 /* OneBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OneBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		53B537281A7F465D0095C129 /* 美高盒子.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "美高盒子.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		53B5372C1A7F465D0095C129 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		53B5372D1A7F465D0095C129 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		53B5372F1A7F465D0095C129 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -2978,7 +2978,7 @@
 		53B537291A7F465D0095C129 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				53B537281A7F465D0095C129 /* OneBox.app */,
+				53B537281A7F465D0095C129 /* 美高盒子.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -4634,7 +4634,6 @@
 				53B537241A7F465D0095C129 /* Sources */,
 				53B537251A7F465D0095C129 /* Frameworks */,
 				53B537261A7F465D0095C129 /* Resources */,
-				68EFE937CFC1DC5A87BDF1FF /* [CP] Embed Pods Frameworks */,
 				3F2F6DF92DF708723FA286E1 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
@@ -4643,7 +4642,7 @@
 			);
 			name = OneBox;
 			productName = OneBox;
-			productReference = 53B537281A7F465D0095C129 /* OneBox.app */;
+			productReference = 53B537281A7F465D0095C129 /* 美高盒子.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -4971,33 +4970,20 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-OneBox/Pods-OneBox-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-OneBox/Pods-OneBox-resources.sh",
 				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
 				"${PODS_ROOT}/mob_sharesdk/SDK/ShareSDK/Support/Required/ShareSDK.bundle",
 				"${PODS_ROOT}/mob_sharesdk/SDK/ShareSDK/Support/PlatformSDK/SinaWeiboSDK/WeiboSDK.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MJRefresh.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ShareSDK.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/WeiboSDK.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-OneBox/Pods-OneBox-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		68EFE937CFC1DC5A87BDF1FF /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-OneBox/Pods-OneBox-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-OneBox/Pods-OneBox-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		BE4D172027CF0B613BF864F5 /* [CP] Check Pods Manifest.lock */ = {
@@ -5518,7 +5504,7 @@
 					"-ObjC",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.onebox.boxs;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "美高盒子";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -5591,7 +5577,7 @@
 					"-ObjC",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.onebox.boxs;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "美高盒子";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";

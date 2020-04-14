@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "53B537271A7F465D0095C129"
-               BuildableName = "OneBox.app"
+               BuildableName = "&#x7f8e;&#x9ad8;&#x76d2;&#x5b50;.app"
                BlueprintName = "OneBox"
                ReferencedContainer = "container:OneBox.xcodeproj">
             </BuildableReference>
@@ -45,7 +45,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "53B537271A7F465D0095C129"
-            BuildableName = "OneBox.app"
+            BuildableName = "&#x7f8e;&#x9ad8;&#x76d2;&#x5b50;.app"
             BlueprintName = "OneBox"
             ReferencedContainer = "container:OneBox.xcodeproj">
          </BuildableReference>
@@ -78,7 +78,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "53B537271A7F465D0095C129"
-            BuildableName = "OneBox.app"
+            BuildableName = "&#x7f8e;&#x9ad8;&#x76d2;&#x5b50;.app"
             BlueprintName = "OneBox"
             ReferencedContainer = "container:OneBox.xcodeproj">
          </BuildableReference>
@@ -95,7 +95,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "53B537271A7F465D0095C129"
-            BuildableName = "OneBox.app"
+            BuildableName = "&#x7f8e;&#x9ad8;&#x76d2;&#x5b50;.app"
             BlueprintName = "OneBox"
             ReferencedContainer = "container:OneBox.xcodeproj">
          </BuildableReference>

@@ -1843,6 +1843,7 @@
 		53A13DD21A81D06B009108DE /* SDK */ = {
 			isa = PBXGroup;
 			children = (
+				53F975B71BB29501004FC0B7 /* UMeng */,
 				53B7715D1C4F3C1200F20085 /* ZFB */,
 			);
 			name = SDK;
@@ -2113,7 +2114,6 @@
 		53B537821A7F4B640095C129 /* Class */ = {
 			isa = PBXGroup;
 			children = (
-				53F9752B1BB294F1004FC0B7 /* Class */,
 				537F1D2C1C1928AA00331419 /* 常用类 */,
 				537F1D2A1C1927D500331419 /* 工具类 */,
 				537F1D2B1C19282800331419 /* 视图类 */,
@@ -2355,22 +2355,6 @@
 				537F1D0C1C191DB400331419 /* 从选择学校列表进入 */,
 			);
 			name = "心愿单";
-			sourceTree = "<group>";
-		};
-		53F9752B1BB294F1004FC0B7 /* Class */ = {
-			isa = PBXGroup;
-			children = (
-				53F9752C1BB29501004FC0B7 /* 3rdparty */,
-			);
-			name = Class;
-			sourceTree = "<group>";
-		};
-		53F9752C1BB29501004FC0B7 /* 3rdparty */ = {
-			isa = PBXGroup;
-			children = (
-				53F975B71BB29501004FC0B7 /* UMeng */,
-			);
-			path = 3rdparty;
 			sourceTree = "<group>";
 		};
 		53F975B71BB29501004FC0B7 /* UMeng */ = {

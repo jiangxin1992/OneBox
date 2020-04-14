@@ -123,17 +123,6 @@
 
 }
 #pragma mark - Event handler (响应事件处理 button gesture)
-- (void)helpAction {
-    NSString *login=nil;
-    if(![regular isLogin]) {
-        login=@"0";
-    } else {
-        login=@"1";
-    }
-    OnlineProjectsViewController *online=[[OnlineProjectsViewController alloc] init];
-    online.islogin=login;
-    [self.navigationController pushViewController:online animated:YES];
-}
 - (void)popviewAction {
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -622,14 +611,6 @@
 
     UIBarButtonItem *_btn=[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"返回箭头"] style:UIBarButtonItemStylePlain target:self action:@selector(popviewAction)];
     self.navigationItem.leftBarButtonItem=_btn;
-
-
-    UIButton *_btn_r=[UIButton buttonWithType:UIButtonTypeCustom];
-    _btn_r.frame=CGRectMake(0, 0, 28, 28);
-    [_btn_r addTarget:self action:@selector(helpAction) forControlEvents:UIControlEventTouchUpInside];
-    [_btn_r setBackgroundImage:[UIImage imageNamed:@"found_问问"] forState:UIControlStateNormal];
-    UIBarButtonItem *_btn_bar=[[UIBarButtonItem alloc] initWithCustomView:_btn_r];
-    self.navigationItem.rightBarButtonItem=_btn_bar;
 
 }
 - (void)getData {

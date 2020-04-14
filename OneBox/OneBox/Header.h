@@ -14,8 +14,6 @@
 #import <MJExtension.h>
 
 /*************** Category ***************/
-#import "UIViewController+HUD.h"
-#import "UIViewController+DismissKeyboard.h"
 #import "NSString+extra.h"
 #import "UIColor+Hex.h"
 #import "UILabel+Custom.h"

@@ -221,18 +221,7 @@
 		53F828641B1EF8F1002D9409 /* ChooseSchoolController.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F828621B1EF8F1002D9409 /* ChooseSchoolController.m */; };
 		53F828691B1EF932002D9409 /* SubmitSchoolController.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F828671B1EF932002D9409 /* SubmitSchoolController.m */; };
 		53F973911BB29414004FC0B7 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 53F973901BB29414004FC0B7 /* Settings.bundle */; };
-		53F975FD1BB29501004FC0B7 /* sr_refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = 53F975AA1BB29501004FC0B7 /* sr_refresh.png */; };
-		53F975FE1BB29501004FC0B7 /* sr_refresh@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = 53F975AB1BB29501004FC0B7 /* sr_refresh@2X.png */; };
-		53F975FF1BB29501004FC0B7 /* SRRefreshView.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F975AE1BB29501004FC0B7 /* SRRefreshView.m */; };
-		53F976001BB29501004FC0B7 /* SRSlimeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F975B01BB29501004FC0B7 /* SRSlimeView.m */; };
-		53F976011BB29501004FC0B7 /* THProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F975B31BB29501004FC0B7 /* THProgressView.m */; };
-		53F976021BB29501004FC0B7 /* TTGlobalUICommon.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F975B61BB29501004FC0B7 /* TTGlobalUICommon.m */; };
 		53F976031BB29501004FC0B7 /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 53F975B81BB29501004FC0B7 /* libMobClickLibrary.a */; };
-		53F976041BB29501004FC0B7 /* amrFileCodec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 53F975BD1BB29501004FC0B7 /* amrFileCodec.mm */; };
-		53F976051BB29501004FC0B7 /* wav.mm in Sources */ = {isa = PBXBuildFile; fileRef = 53F975BF1BB29501004FC0B7 /* wav.mm */; };
-		53F976061BB29501004FC0B7 /* EMVoiceConverter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 53F975C11BB29501004FC0B7 /* EMVoiceConverter.mm */; };
-		53F976071BB29501004FC0B7 /* libopencore-amrnb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 53F975C51BB29501004FC0B7 /* libopencore-amrnb.a */; };
-		53F976081BB29501004FC0B7 /* libopencore-amrwb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 53F975C91BB29501004FC0B7 /* libopencore-amrwb.a */; };
 		53F976E51BB295F7004FC0B7 /* usermodel.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F976E41BB295F7004FC0B7 /* usermodel.m */; };
 		53F9776E1BB3BC9E004FC0B7 /* NotificationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F977641BB3BC9E004FC0B7 /* NotificationController.m */; };
 		53F977701BB3BC9E004FC0B7 /* NotificationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F977671BB3BC9E004FC0B7 /* NotificationCell.m */; };
@@ -731,32 +720,8 @@
 		53F828661B1EF932002D9409 /* SubmitSchoolController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubmitSchoolController.h; sourceTree = "<group>"; };
 		53F828671B1EF932002D9409 /* SubmitSchoolController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubmitSchoolController.m; sourceTree = "<group>"; };
 		53F973901BB29414004FC0B7 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Settings.bundle; path = ../OneBox/Settings.bundle; sourceTree = "<group>"; };
-		53F9754A1BB29501004FC0B7 /* macros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = macros.h; sourceTree = "<group>"; };
-		53F975AA1BB29501004FC0B7 /* sr_refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sr_refresh.png; sourceTree = "<group>"; };
-		53F975AB1BB29501004FC0B7 /* sr_refresh@2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sr_refresh@2X.png"; sourceTree = "<group>"; };
-		53F975AC1BB29501004FC0B7 /* SRDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRDefine.h; sourceTree = "<group>"; };
-		53F975AD1BB29501004FC0B7 /* SRRefreshView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRRefreshView.h; sourceTree = "<group>"; };
-		53F975AE1BB29501004FC0B7 /* SRRefreshView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRRefreshView.m; sourceTree = "<group>"; };
-		53F975AF1BB29501004FC0B7 /* SRSlimeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRSlimeView.h; sourceTree = "<group>"; };
-		53F975B01BB29501004FC0B7 /* SRSlimeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRSlimeView.m; sourceTree = "<group>"; };
-		53F975B21BB29501004FC0B7 /* THProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THProgressView.h; sourceTree = "<group>"; };
-		53F975B31BB29501004FC0B7 /* THProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THProgressView.m; sourceTree = "<group>"; };
-		53F975B51BB29501004FC0B7 /* TTGlobalUICommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTGlobalUICommon.h; sourceTree = "<group>"; };
-		53F975B61BB29501004FC0B7 /* TTGlobalUICommon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTGlobalUICommon.m; sourceTree = "<group>"; };
 		53F975B81BB29501004FC0B7 /* libMobClickLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMobClickLibrary.a; sourceTree = "<group>"; };
 		53F975B91BB29501004FC0B7 /* MobClick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClick.h; sourceTree = "<group>"; };
-		53F975BC1BB29501004FC0B7 /* amrFileCodec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = amrFileCodec.h; sourceTree = "<group>"; };
-		53F975BD1BB29501004FC0B7 /* amrFileCodec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = amrFileCodec.mm; sourceTree = "<group>"; };
-		53F975BE1BB29501004FC0B7 /* wav.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wav.h; sourceTree = "<group>"; };
-		53F975BF1BB29501004FC0B7 /* wav.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = wav.mm; sourceTree = "<group>"; };
-		53F975C01BB29501004FC0B7 /* EMVoiceConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMVoiceConverter.h; sourceTree = "<group>"; };
-		53F975C11BB29501004FC0B7 /* EMVoiceConverter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EMVoiceConverter.mm; sourceTree = "<group>"; };
-		53F975C31BB29501004FC0B7 /* interf_dec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = interf_dec.h; sourceTree = "<group>"; };
-		53F975C41BB29501004FC0B7 /* interf_enc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = interf_enc.h; sourceTree = "<group>"; };
-		53F975C51BB29501004FC0B7 /* libopencore-amrnb.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libopencore-amrnb.a"; sourceTree = "<group>"; };
-		53F975C71BB29501004FC0B7 /* dec_if.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dec_if.h; sourceTree = "<group>"; };
-		53F975C81BB29501004FC0B7 /* if_rom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = if_rom.h; sourceTree = "<group>"; };
-		53F975C91BB29501004FC0B7 /* libopencore-amrwb.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libopencore-amrwb.a"; sourceTree = "<group>"; };
 		53F976E31BB295F7004FC0B7 /* usermodel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = usermodel.h; sourceTree = "<group>"; };
 		53F976E41BB295F7004FC0B7 /* usermodel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = usermodel.m; sourceTree = "<group>"; };
 		53F977631BB3BC9E004FC0B7 /* NotificationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationController.h; sourceTree = "<group>"; };
@@ -904,14 +869,12 @@
 				53F976031BB29501004FC0B7 /* libMobClickLibrary.a in Frameworks */,
 				66BEED571AB2AE9E00C1F5AC /* AVFoundation.framework in Frameworks */,
 				66BB85E01AAD815F0012AD33 /* MapKit.framework in Frameworks */,
-				53F976071BB29501004FC0B7 /* libopencore-amrnb.a in Frameworks */,
 				66BEED4D1AB2AE5900C1F5AC /* CoreLocation.framework in Frameworks */,
 				66AF3F9E1AA5B80A00F92C6D /* MessageUI.framework in Frameworks */,
 				53A8CCF11B0C3C1600AE8618 /* CoreFoundation.framework in Frameworks */,
 				66BEED591AB2AEB100C1F5AC /* AudioToolbox.framework in Frameworks */,
 				66BEED531AB2AE8B00C1F5AC /* CoreAudio.framework in Frameworks */,
 				66BEED4F1AB2AE7400C1F5AC /* CoreImage.framework in Frameworks */,
-				53F976081BB29501004FC0B7 /* libopencore-amrwb.a in Frameworks */,
 				66BEED3F1AB2ADE500C1F5AC /* OpenGLES.framework in Frameworks */,
 				66C731671AC13D25002BCBB9 /* libssl.a in Frameworks */,
 				66C731661AC13D25002BCBB9 /* libcrypto.a in Frameworks */,
@@ -2405,46 +2368,9 @@
 		53F9752C1BB29501004FC0B7 /* 3rdparty */ = {
 			isa = PBXGroup;
 			children = (
-				53F9754A1BB29501004FC0B7 /* macros.h */,
-				53F975A91BB29501004FC0B7 /* SlimeRefresh */,
-				53F975B11BB29501004FC0B7 /* THProgressView */,
-				53F975B41BB29501004FC0B7 /* TTGlobalUICommon */,
 				53F975B71BB29501004FC0B7 /* UMeng */,
-				53F975BA1BB29501004FC0B7 /* VoiceConvert */,
 			);
 			path = 3rdparty;
-			sourceTree = "<group>";
-		};
-		53F975A91BB29501004FC0B7 /* SlimeRefresh */ = {
-			isa = PBXGroup;
-			children = (
-				53F975AA1BB29501004FC0B7 /* sr_refresh.png */,
-				53F975AB1BB29501004FC0B7 /* sr_refresh@2X.png */,
-				53F975AC1BB29501004FC0B7 /* SRDefine.h */,
-				53F975AD1BB29501004FC0B7 /* SRRefreshView.h */,
-				53F975AE1BB29501004FC0B7 /* SRRefreshView.m */,
-				53F975AF1BB29501004FC0B7 /* SRSlimeView.h */,
-				53F975B01BB29501004FC0B7 /* SRSlimeView.m */,
-			);
-			path = SlimeRefresh;
-			sourceTree = "<group>";
-		};
-		53F975B11BB29501004FC0B7 /* THProgressView */ = {
-			isa = PBXGroup;
-			children = (
-				53F975B21BB29501004FC0B7 /* THProgressView.h */,
-				53F975B31BB29501004FC0B7 /* THProgressView.m */,
-			);
-			path = THProgressView;
-			sourceTree = "<group>";
-		};
-		53F975B41BB29501004FC0B7 /* TTGlobalUICommon */ = {
-			isa = PBXGroup;
-			children = (
-				53F975B51BB29501004FC0B7 /* TTGlobalUICommon.h */,
-				53F975B61BB29501004FC0B7 /* TTGlobalUICommon.m */,
-			);
-			path = TTGlobalUICommon;
 			sourceTree = "<group>";
 		};
 		53F975B71BB29501004FC0B7 /* UMeng */ = {
@@ -2454,49 +2380,6 @@
 				53F975B91BB29501004FC0B7 /* MobClick.h */,
 			);
 			path = UMeng;
-			sourceTree = "<group>";
-		};
-		53F975BA1BB29501004FC0B7 /* VoiceConvert */ = {
-			isa = PBXGroup;
-			children = (
-				53F975BB1BB29501004FC0B7 /* amrwapper */,
-				53F975C01BB29501004FC0B7 /* EMVoiceConverter.h */,
-				53F975C11BB29501004FC0B7 /* EMVoiceConverter.mm */,
-				53F975C21BB29501004FC0B7 /* opencore-amrnb */,
-				53F975C61BB29501004FC0B7 /* opencore-amrwb */,
-			);
-			path = VoiceConvert;
-			sourceTree = "<group>";
-		};
-		53F975BB1BB29501004FC0B7 /* amrwapper */ = {
-			isa = PBXGroup;
-			children = (
-				53F975BC1BB29501004FC0B7 /* amrFileCodec.h */,
-				53F975BD1BB29501004FC0B7 /* amrFileCodec.mm */,
-				53F975BE1BB29501004FC0B7 /* wav.h */,
-				53F975BF1BB29501004FC0B7 /* wav.mm */,
-			);
-			path = amrwapper;
-			sourceTree = "<group>";
-		};
-		53F975C21BB29501004FC0B7 /* opencore-amrnb */ = {
-			isa = PBXGroup;
-			children = (
-				53F975C31BB29501004FC0B7 /* interf_dec.h */,
-				53F975C41BB29501004FC0B7 /* interf_enc.h */,
-				53F975C51BB29501004FC0B7 /* libopencore-amrnb.a */,
-			);
-			path = "opencore-amrnb";
-			sourceTree = "<group>";
-		};
-		53F975C61BB29501004FC0B7 /* opencore-amrwb */ = {
-			isa = PBXGroup;
-			children = (
-				53F975C71BB29501004FC0B7 /* dec_if.h */,
-				53F975C81BB29501004FC0B7 /* if_rom.h */,
-				53F975C91BB29501004FC0B7 /* libopencore-amrwb.a */,
-			);
-			path = "opencore-amrwb";
 			sourceTree = "<group>";
 		};
 		53F977621BB3BC93004FC0B7 /* 推送列表 */ = {
@@ -2675,7 +2558,6 @@
 				53F977C11BB530C2004FC0B7 /* slider-default-handle@3x.png in Resources */,
 				530823361A8247A8004306D1 /* KVNProgressView.xib in Resources */,
 				3F25811B1E51D5F60004B573 /* archive-in14.png in Resources */,
-				53F975FE1BB29501004FC0B7 /* sr_refresh@2X.png in Resources */,
 				3F2581291E51D5F60004B573 /* archive-in28.png in Resources */,
 				53F977BE1BB530C2004FC0B7 /* handle@x.png in Resources */,
 				53FFC5351B0C939B00D643D4 /* Localizable.strings in Resources */,
@@ -2684,7 +2566,6 @@
 				3F25811D1E51D5F60004B573 /* archive-in16.png in Resources */,
 				3F25810F1E51D5F60004B573 /* archive-in2.png in Resources */,
 				3F25811C1E51D5F60004B573 /* archive-in15.png in Resources */,
-				53F975FD1BB29501004FC0B7 /* sr_refresh.png in Resources */,
 				53F977BD1BB530C2004FC0B7 /* handle@3x.png in Resources */,
 				53B537391A7F465D0095C129 /* Images.xcassets in Resources */,
 				3F25812A1E51D5F60004B573 /* archive-in29.png in Resources */,
@@ -2749,7 +2630,6 @@
 				53922B061B4B8BE00079ECA3 /* WebViewController.m in Sources */,
 				53A591271BEB36BA008BF2B1 /* BingingAuthViewController.m in Sources */,
 				538CB7CC1AFA13A300C27431 /* AFHTTPSessionManager.m in Sources */,
-				53F976061BB29501004FC0B7 /* EMVoiceConverter.mm in Sources */,
 				536731F61B0B1E6F008B29DD /* ApplyFilemodel.m in Sources */,
 				53A9CE6D1B3BE64200BB6879 /* GoalViewController.m in Sources */,
 				53F977AA1BB50610004FC0B7 /* ImageViewController.m in Sources */,
@@ -2774,7 +2654,6 @@
 				53E2CE481BFEFA78006E9711 /* RegisterEmailController.m in Sources */,
 				538CB7CF1AFA13A300C27431 /* AFURLConnectionOperation.m in Sources */,
 				53CD92561BEC840B0098E3FD /* CountryCodeCell.m in Sources */,
-				53F976011BB29501004FC0B7 /* THProgressView.m in Sources */,
 				53A270691B1852C20013A6CD /* UIButton+AFNetworking.m in Sources */,
 				53A9CE781B3C039400BB6879 /* AboutViewController.m in Sources */,
 				53CF3DEE1B39005600BCD8DD /* SchoolDetailViewController.m in Sources */,
@@ -2793,8 +2672,6 @@
 				53FFA0871B26B18D0012504A /* SouSuoViewController.m in Sources */,
 				66BD253E1AA6AA7F0005B5E7 /* NSString+extra.m in Sources */,
 				53F828641B1EF8F1002D9409 /* ChooseSchoolController.m in Sources */,
-				53F976021BB29501004FC0B7 /* TTGlobalUICommon.m in Sources */,
-				53F976051BB29501004FC0B7 /* wav.mm in Sources */,
 				3F4A7A2B20591CAE005FF374 /* Foundtion+JRLog.m in Sources */,
 				538CB7D21AFA13A300C27431 /* AFURLSessionManager.m in Sources */,
 				53050D201AFB4B330066ABC8 /* schoolDetailModel.m in Sources */,
@@ -2833,7 +2710,6 @@
 				3F90A85F1E52D84600DBEF1A /* UIButton+EnlargeEdge.m in Sources */,
 				5323BC591A889A82009955FA /* ChineseToPinyin.m in Sources */,
 				3F90A8471E52D7FA00DBEF1A /* UIView+Custom.m in Sources */,
-				53F976001BB29501004FC0B7 /* SRSlimeView.m in Sources */,
 				537A924D1B0079160002BDBF /* regular.m in Sources */,
 				531133571BE3205D00C78954 /* StateChooseViewController.m in Sources */,
 				53D419381BFEE8CC005B80A9 /* ChooseResetPwdTypeViewController.m in Sources */,
@@ -2864,7 +2740,6 @@
 				53B5375E1A7F48D40095C129 /* CustomTabbarController.m in Sources */,
 				5311335C1BE3206700C78954 /* CityChooseViewController.m in Sources */,
 				66C732371AC2A922002BCBB9 /* ADClusterAnnotation.m in Sources */,
-				53F975FF1BB29501004FC0B7 /* SRRefreshView.m in Sources */,
 				53A13DD01A81CCAB009108DE /* LoginViewController.m in Sources */,
 				3F32F42B207A206E00FB3D04 /* FoundListSousuoView.m in Sources */,
 				536E8A361B3D357F0020E69F /* PrivacyViewController.m in Sources */,
@@ -2898,7 +2773,6 @@
 				53FE28201BD64B4800E910CF /* ChangePswViewController.m in Sources */,
 				3F90A8531E52D82000DBEF1A /* UITextField+Custom.m in Sources */,
 				53F977701BB3BC9E004FC0B7 /* NotificationCell.m in Sources */,
-				53F976041BB29501004FC0B7 /* amrFileCodec.mm in Sources */,
 				3FACCDC120887298004AF8EA /* TableViewSliderParameterModel.m in Sources */,
 				530A54C41A8C50C50048EEEB /* Tools.m in Sources */,
 				538CB7CD1AFA13A300C27431 /* AFNetworkReachabilityManager.m in Sources */,

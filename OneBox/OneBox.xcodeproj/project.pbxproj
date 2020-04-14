@@ -221,16 +221,6 @@
 		53F828641B1EF8F1002D9409 /* ChooseSchoolController.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F828621B1EF8F1002D9409 /* ChooseSchoolController.m */; };
 		53F828691B1EF932002D9409 /* SubmitSchoolController.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F828671B1EF932002D9409 /* SubmitSchoolController.m */; };
 		53F973911BB29414004FC0B7 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 53F973901BB29414004FC0B7 /* Settings.bundle */; };
-		53F975CA1BB29501004FC0B7 /* EMAudioPlayerUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F975341BB29501004FC0B7 /* EMAudioPlayerUtil.m */; };
-		53F975CB1BB29501004FC0B7 /* EMAudioRecorderUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F975361BB29501004FC0B7 /* EMAudioRecorderUtil.m */; };
-		53F975CC1BB29501004FC0B7 /* EMCDDeviceManager+Media.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F975381BB29501004FC0B7 /* EMCDDeviceManager+Media.m */; };
-		53F975CD1BB29501004FC0B7 /* EMCDDeviceManager+Microphone.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F9753A1BB29501004FC0B7 /* EMCDDeviceManager+Microphone.m */; };
-		53F975CE1BB29501004FC0B7 /* EMCDDeviceManager+ProximitySensor.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F9753C1BB29501004FC0B7 /* EMCDDeviceManager+ProximitySensor.m */; };
-		53F975CF1BB29501004FC0B7 /* EMCDDeviceManager+Remind.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F9753E1BB29501004FC0B7 /* EMCDDeviceManager+Remind.m */; };
-		53F975D01BB29501004FC0B7 /* EMCDDeviceManagerBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F975411BB29501004FC0B7 /* EMCDDeviceManagerBase.m */; };
-		53F975D11BB29501004FC0B7 /* EMAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F975441BB29501004FC0B7 /* EMAlertView.m */; };
-		53F975D21BB29501004FC0B7 /* Emoji.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F975471BB29501004FC0B7 /* Emoji.m */; };
-		53F975D31BB29501004FC0B7 /* EmojiEmoticons.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F975491BB29501004FC0B7 /* EmojiEmoticons.m */; };
 		53F975D41BB29501004FC0B7 /* MBProgressHUD+Add.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F9754D1BB29501004FC0B7 /* MBProgressHUD+Add.m */; };
 		53F975D51BB29501004FC0B7 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F9754F1BB29501004FC0B7 /* MBProgressHUD.m */; };
 		53F975D61BB29501004FC0B7 /* MWCaptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F975531BB29501004FC0B7 /* MWCaptionView.m */; };
@@ -784,30 +774,6 @@
 		53F828661B1EF932002D9409 /* SubmitSchoolController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubmitSchoolController.h; sourceTree = "<group>"; };
 		53F828671B1EF932002D9409 /* SubmitSchoolController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubmitSchoolController.m; sourceTree = "<group>"; };
 		53F973901BB29414004FC0B7 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Settings.bundle; path = ../OneBox/Settings.bundle; sourceTree = "<group>"; };
-		53F9752F1BB29501004FC0B7 /* EMCDDeviceManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMCDDeviceManagerDelegate.h; sourceTree = "<group>"; };
-		53F975301BB29501004FC0B7 /* EMCDDeviceManagerProximitySensorDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMCDDeviceManagerProximitySensorDelegate.h; sourceTree = "<group>"; };
-		53F975321BB29501004FC0B7 /* DemoErrorCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoErrorCode.h; sourceTree = "<group>"; };
-		53F975331BB29501004FC0B7 /* EMAudioPlayerUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMAudioPlayerUtil.h; sourceTree = "<group>"; };
-		53F975341BB29501004FC0B7 /* EMAudioPlayerUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMAudioPlayerUtil.m; sourceTree = "<group>"; };
-		53F975351BB29501004FC0B7 /* EMAudioRecorderUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMAudioRecorderUtil.h; sourceTree = "<group>"; };
-		53F975361BB29501004FC0B7 /* EMAudioRecorderUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMAudioRecorderUtil.m; sourceTree = "<group>"; };
-		53F975371BB29501004FC0B7 /* EMCDDeviceManager+Media.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EMCDDeviceManager+Media.h"; sourceTree = "<group>"; };
-		53F975381BB29501004FC0B7 /* EMCDDeviceManager+Media.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "EMCDDeviceManager+Media.m"; sourceTree = "<group>"; };
-		53F975391BB29501004FC0B7 /* EMCDDeviceManager+Microphone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EMCDDeviceManager+Microphone.h"; sourceTree = "<group>"; };
-		53F9753A1BB29501004FC0B7 /* EMCDDeviceManager+Microphone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "EMCDDeviceManager+Microphone.m"; sourceTree = "<group>"; };
-		53F9753B1BB29501004FC0B7 /* EMCDDeviceManager+ProximitySensor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EMCDDeviceManager+ProximitySensor.h"; sourceTree = "<group>"; };
-		53F9753C1BB29501004FC0B7 /* EMCDDeviceManager+ProximitySensor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "EMCDDeviceManager+ProximitySensor.m"; sourceTree = "<group>"; };
-		53F9753D1BB29501004FC0B7 /* EMCDDeviceManager+Remind.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EMCDDeviceManager+Remind.h"; sourceTree = "<group>"; };
-		53F9753E1BB29501004FC0B7 /* EMCDDeviceManager+Remind.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "EMCDDeviceManager+Remind.m"; sourceTree = "<group>"; };
-		53F9753F1BB29501004FC0B7 /* EMCDDeviceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMCDDeviceManager.h; sourceTree = "<group>"; };
-		53F975401BB29501004FC0B7 /* EMCDDeviceManagerBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMCDDeviceManagerBase.h; sourceTree = "<group>"; };
-		53F975411BB29501004FC0B7 /* EMCDDeviceManagerBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMCDDeviceManagerBase.m; sourceTree = "<group>"; };
-		53F975431BB29501004FC0B7 /* EMAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMAlertView.h; sourceTree = "<group>"; };
-		53F975441BB29501004FC0B7 /* EMAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMAlertView.m; sourceTree = "<group>"; };
-		53F975461BB29501004FC0B7 /* Emoji.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Emoji.h; sourceTree = "<group>"; };
-		53F975471BB29501004FC0B7 /* Emoji.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Emoji.m; sourceTree = "<group>"; };
-		53F975481BB29501004FC0B7 /* EmojiEmoticons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmojiEmoticons.h; sourceTree = "<group>"; };
-		53F975491BB29501004FC0B7 /* EmojiEmoticons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmojiEmoticons.m; sourceTree = "<group>"; };
 		53F9754A1BB29501004FC0B7 /* macros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = macros.h; sourceTree = "<group>"; };
 		53F9754C1BB29501004FC0B7 /* MBProgressHUD+Add.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+Add.h"; sourceTree = "<group>"; };
 		53F9754D1BB29501004FC0B7 /* MBProgressHUD+Add.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+Add.m"; sourceTree = "<group>"; };
@@ -2574,9 +2540,6 @@
 		53F9752C1BB29501004FC0B7 /* 3rdparty */ = {
 			isa = PBXGroup;
 			children = (
-				53F9752D1BB29501004FC0B7 /* DeviceUtil */,
-				53F975421BB29501004FC0B7 /* EMAlertView */,
-				53F975451BB29501004FC0B7 /* Emoji */,
 				53F9754A1BB29501004FC0B7 /* macros.h */,
 				53F9754B1BB29501004FC0B7 /* MBProgressHUD */,
 				53F975501BB29501004FC0B7 /* MWPhotoBrowser */,
@@ -2587,67 +2550,6 @@
 				53F975BA1BB29501004FC0B7 /* VoiceConvert */,
 			);
 			path = 3rdparty;
-			sourceTree = "<group>";
-		};
-		53F9752D1BB29501004FC0B7 /* DeviceUtil */ = {
-			isa = PBXGroup;
-			children = (
-				53F9752E1BB29501004FC0B7 /* delegates */,
-				53F975311BB29501004FC0B7 /* internal */,
-			);
-			path = DeviceUtil;
-			sourceTree = "<group>";
-		};
-		53F9752E1BB29501004FC0B7 /* delegates */ = {
-			isa = PBXGroup;
-			children = (
-				53F9752F1BB29501004FC0B7 /* EMCDDeviceManagerDelegate.h */,
-				53F975301BB29501004FC0B7 /* EMCDDeviceManagerProximitySensorDelegate.h */,
-			);
-			path = delegates;
-			sourceTree = "<group>";
-		};
-		53F975311BB29501004FC0B7 /* internal */ = {
-			isa = PBXGroup;
-			children = (
-				53F975321BB29501004FC0B7 /* DemoErrorCode.h */,
-				53F975331BB29501004FC0B7 /* EMAudioPlayerUtil.h */,
-				53F975341BB29501004FC0B7 /* EMAudioPlayerUtil.m */,
-				53F975351BB29501004FC0B7 /* EMAudioRecorderUtil.h */,
-				53F975361BB29501004FC0B7 /* EMAudioRecorderUtil.m */,
-				53F975371BB29501004FC0B7 /* EMCDDeviceManager+Media.h */,
-				53F975381BB29501004FC0B7 /* EMCDDeviceManager+Media.m */,
-				53F975391BB29501004FC0B7 /* EMCDDeviceManager+Microphone.h */,
-				53F9753A1BB29501004FC0B7 /* EMCDDeviceManager+Microphone.m */,
-				53F9753B1BB29501004FC0B7 /* EMCDDeviceManager+ProximitySensor.h */,
-				53F9753C1BB29501004FC0B7 /* EMCDDeviceManager+ProximitySensor.m */,
-				53F9753D1BB29501004FC0B7 /* EMCDDeviceManager+Remind.h */,
-				53F9753E1BB29501004FC0B7 /* EMCDDeviceManager+Remind.m */,
-				53F9753F1BB29501004FC0B7 /* EMCDDeviceManager.h */,
-				53F975401BB29501004FC0B7 /* EMCDDeviceManagerBase.h */,
-				53F975411BB29501004FC0B7 /* EMCDDeviceManagerBase.m */,
-			);
-			path = internal;
-			sourceTree = "<group>";
-		};
-		53F975421BB29501004FC0B7 /* EMAlertView */ = {
-			isa = PBXGroup;
-			children = (
-				53F975431BB29501004FC0B7 /* EMAlertView.h */,
-				53F975441BB29501004FC0B7 /* EMAlertView.m */,
-			);
-			path = EMAlertView;
-			sourceTree = "<group>";
-		};
-		53F975451BB29501004FC0B7 /* Emoji */ = {
-			isa = PBXGroup;
-			children = (
-				53F975461BB29501004FC0B7 /* Emoji.h */,
-				53F975471BB29501004FC0B7 /* Emoji.m */,
-				53F975481BB29501004FC0B7 /* EmojiEmoticons.h */,
-				53F975491BB29501004FC0B7 /* EmojiEmoticons.m */,
-			);
-			path = Emoji;
 			sourceTree = "<group>";
 		};
 		53F9754B1BB29501004FC0B7 /* MBProgressHUD */ = {
@@ -3151,7 +3053,6 @@
 				53F975EE1BB29501004FC0B7 /* UIView+EMWebCacheOperation.m in Sources */,
 				53F975E81BB29501004FC0B7 /* UIButton+EMWebCache.m in Sources */,
 				3F90A84B1E52D80600DBEF1A /* UIColor+Hex.m in Sources */,
-				53F975D21BB29501004FC0B7 /* Emoji.m in Sources */,
 				66C7322D1AC2A765002BCBB9 /* ADClusterableAnnotation.m in Sources */,
 				53B675691BEC5B4B00DFD940 /* CountryCodeViewController.m in Sources */,
 				535D5E5B1C16B01300470F7F /* SouSuoCitiesViewController.m in Sources */,
@@ -3185,7 +3086,6 @@
 				53F977731BB3BC9E004FC0B7 /* NotContentViewController.m in Sources */,
 				53F977CA1BB530C2004FC0B7 /* NMRangeSlider.m in Sources */,
 				66C732251AC2A40E002BCBB9 /* customTap.m in Sources */,
-				53F975D31BB29501004FC0B7 /* EmojiEmoticons.m in Sources */,
 				53B771C51C4F3C1300F20085 /* DataVerifier.m in Sources */,
 				53B771C31C4F3C1300F20085 /* base64.m in Sources */,
 				3F61EFD020A99012004DEE20 /* ScreenTableView.m in Sources */,
@@ -3200,7 +3100,6 @@
 				66BD253E1AA6AA7F0005B5E7 /* NSString+extra.m in Sources */,
 				53F828641B1EF8F1002D9409 /* ChooseSchoolController.m in Sources */,
 				53F976021BB29501004FC0B7 /* TTGlobalUICommon.m in Sources */,
-				53F975CF1BB29501004FC0B7 /* EMCDDeviceManager+Remind.m in Sources */,
 				53F976051BB29501004FC0B7 /* wav.mm in Sources */,
 				3F4A7A2B20591CAE005FF374 /* Foundtion+JRLog.m in Sources */,
 				53F975E91BB29501004FC0B7 /* UIImage+EMGIF.m in Sources */,
@@ -3224,7 +3123,6 @@
 				538CB7CE1AFA13A300C27431 /* AFSecurityPolicy.m in Sources */,
 				53A13DD51A81D0B0009108DE /* MyMD5.m in Sources */,
 				53FFA07B1B268E6D0012504A /* bangdanViewController.m in Sources */,
-				53F975CB1BB29501004FC0B7 /* EMAudioRecorderUtil.m in Sources */,
 				530823331A824794004306D1 /* KVNProgress.m in Sources */,
 				538591F81A9DB487006D785E /* comment_cell.m in Sources */,
 				53F975DB1BB29501004FC0B7 /* MWTapDetectingImageView.m in Sources */,
@@ -3239,7 +3137,6 @@
 				530ADAE41B09A9DC00BFE726 /* academicRecordModel.m in Sources */,
 				53F975EA1BB29501004FC0B7 /* UIImage+EMMultiFormat.m in Sources */,
 				3F90A8361E52D01800DBEF1A /* LoginTool.m in Sources */,
-				53F975CE1BB29501004FC0B7 /* EMCDDeviceManager+ProximitySensor.m in Sources */,
 				538CB7CB1AFA13A300C27431 /* AFHTTPRequestOperationManager.m in Sources */,
 				53F975E51BB29501004FC0B7 /* EMSDWebImagePrefetcher.m in Sources */,
 				53947F691C5722B9007C5A28 /* Boxlistviewcontroller.m in Sources */,
@@ -3283,9 +3180,7 @@
 				53B5376B1A7F49610095C129 /* MapViewController.m in Sources */,
 				3FF87DDA2062628600E7A451 /* BoxHelpViewController.m in Sources */,
 				53F975E41BB29501004FC0B7 /* EMSDWebImageManager.m in Sources */,
-				53F975D01BB29501004FC0B7 /* EMCDDeviceManagerBase.m in Sources */,
 				3F90A8711E53266E00DBEF1A /* NSDate+Formatter.m in Sources */,
-				53F975D11BB29501004FC0B7 /* EMAlertView.m in Sources */,
 				53CE563E1AFF27FF00813C95 /* comment_model_alter.m in Sources */,
 				53A13E0B1A820AD3009108DE /* DBImageViewCache.m in Sources */,
 				53A13E0A1A820AD3009108DE /* DBImageView.m in Sources */,
@@ -3304,7 +3199,6 @@
 				53F975DA1BB29501004FC0B7 /* MWPhotoBrowser.m in Sources */,
 				53F02B5C1B5FA2F300E45601 /* SuggestViewController.m in Sources */,
 				53F2D9651B1F073E000A5183 /* MYIntroductionPanel.m in Sources */,
-				53F975CD1BB29501004FC0B7 /* EMCDDeviceManager+Microphone.m in Sources */,
 				66C732381AC2A922002BCBB9 /* ADClusterMapView.m in Sources */,
 				53F975D51BB29501004FC0B7 /* MBProgressHUD.m in Sources */,
 				53A270661B1852C20013A6CD /* AFNetworkActivityIndicatorManager.m in Sources */,
@@ -3338,7 +3232,6 @@
 				53F975F01BB29501004FC0B7 /* PSTCollectionView.m in Sources */,
 				3FACCDC120887298004AF8EA /* TableViewSliderParameterModel.m in Sources */,
 				530A54C41A8C50C50048EEEB /* Tools.m in Sources */,
-				53F975CC1BB29501004FC0B7 /* EMCDDeviceManager+Media.m in Sources */,
 				538CB7CD1AFA13A300C27431 /* AFNetworkReachabilityManager.m in Sources */,
 				53A13E091A820AD3009108DE /* DBImageRequest.m in Sources */,
 				66C7323D1AC2AA5B002BCBB9 /* ToolManager.m in Sources */,
@@ -3350,7 +3243,6 @@
 				53F976E51BB295F7004FC0B7 /* usermodel.m in Sources */,
 				5366E15F1C1FC9060036A960 /* ArticleModel.m in Sources */,
 				538CB7D01AFA13A300C27431 /* AFURLRequestSerialization.m in Sources */,
-				53F975CA1BB29501004FC0B7 /* EMAudioPlayerUtil.m in Sources */,
 				5372BB411AF765EA00813045 /* CollectionSchoolViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

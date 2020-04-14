@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		20A32801465A4014FF29F97D /* libPods-OneBox.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 01C0DF303A3DAAD7CF87D24C /* libPods-OneBox.a */; };
+		3F06340D244651D500581A10 /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 53F975B81BB29501004FC0B7 /* libMobClickLibrary.a */; };
 		3F25810E1E51D5F60004B573 /* archive-in1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F2580F11E51D5F60004B573 /* archive-in1.png */; };
 		3F25810F1E51D5F60004B573 /* archive-in2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F2580F21E51D5F60004B573 /* archive-in2.png */; };
 		3F2581101E51D5F60004B573 /* archive-in3.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F2580F31E51D5F60004B573 /* archive-in3.png */; };
@@ -221,7 +222,6 @@
 		53F828641B1EF8F1002D9409 /* ChooseSchoolController.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F828621B1EF8F1002D9409 /* ChooseSchoolController.m */; };
 		53F828691B1EF932002D9409 /* SubmitSchoolController.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F828671B1EF932002D9409 /* SubmitSchoolController.m */; };
 		53F973911BB29414004FC0B7 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 53F973901BB29414004FC0B7 /* Settings.bundle */; };
-		53F976031BB29501004FC0B7 /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 53F975B81BB29501004FC0B7 /* libMobClickLibrary.a */; };
 		53F976E51BB295F7004FC0B7 /* usermodel.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F976E41BB295F7004FC0B7 /* usermodel.m */; };
 		53F9776E1BB3BC9E004FC0B7 /* NotificationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F977641BB3BC9E004FC0B7 /* NotificationController.m */; };
 		53F977701BB3BC9E004FC0B7 /* NotificationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F977671BB3BC9E004FC0B7 /* NotificationCell.m */; };
@@ -828,6 +828,7 @@
 			files = (
 				3F6C7CE824365DF6002611F5 /* libstdc++.6.tbd in Frameworks */,
 				3F9586011E56EA81004A5AC2 /* libstdc++.tbd in Frameworks */,
+				3F06340D244651D500581A10 /* libMobClickLibrary.a in Frameworks */,
 				3F95860D1E56EAE8004A5AC2 /* libstdc++.6.0.9.tbd in Frameworks */,
 				3F6C7CE424365A34002611F5 /* StoreKit.framework in Frameworks */,
 				3F6C7CD8243659DC002611F5 /* libBlocksKit.a in Frameworks */,
@@ -866,7 +867,6 @@
 				66BEED3D1AB2ADCA00C1F5AC /* UIKit.framework in Frameworks */,
 				53B771C01C4F3C1300F20085 /* libcrypto.a in Frameworks */,
 				66BEED471AB2AE2F00C1F5AC /* Foundation.framework in Frameworks */,
-				53F976031BB29501004FC0B7 /* libMobClickLibrary.a in Frameworks */,
 				66BEED571AB2AE9E00C1F5AC /* AVFoundation.framework in Frameworks */,
 				66BB85E01AAD815F0012AD33 /* MapKit.framework in Frameworks */,
 				66BEED4D1AB2AE5900C1F5AC /* CoreLocation.framework in Frameworks */,
@@ -2960,6 +2960,7 @@
 					"$(PROJECT_DIR)/OneBox/ShareSDK/Support/PlatformSDK/WeChatSDK",
 					"$(PROJECT_DIR)/OneBox/DDAY/ZFB",
 					"$(PROJECT_DIR)/OneBox/DDAY",
+					"$(PROJECT_DIR)/OneBox/UMeng",
 				);
 				MARKETING_VERSION = 3.0;
 				ONLY_ACTIVE_ARCH = YES;
@@ -3033,6 +3034,7 @@
 					"$(PROJECT_DIR)/OneBox/ShareSDK/Support/PlatformSDK/WeChatSDK",
 					"$(PROJECT_DIR)/OneBox/DDAY/ZFB",
 					"$(PROJECT_DIR)/OneBox/DDAY",
+					"$(PROJECT_DIR)/OneBox/UMeng",
 				);
 				MARKETING_VERSION = 3.0;
 				ONLY_ACTIVE_ARCH = YES;

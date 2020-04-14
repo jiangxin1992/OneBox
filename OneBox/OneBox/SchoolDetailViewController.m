@@ -53,7 +53,6 @@
     usermodel *kefu_model;
 
     UIImageView *banbenimg;
-    UIButton *help_btn;
     UIButton *shareschoolBtn;
 
     NSMutableArray *mutable_school_image_arr;
@@ -1027,44 +1026,13 @@
     }
     [_scrollView addSubview:_coll_titlelab];
 
-    JXLOG(@"y_p=%f",CGRectGetMaxY(_coll_titlelab.frame));
-    help_btn=[UIButton buttonWithType:UIButtonTypeCustom];
-    help_btn.backgroundColor=_define_blue_color;
-    help_btn.frame=CGRectMake(10*_Scale, CGRectGetMaxY(_coll_titlelab.frame)+10*_Scale, CGRectGetWidth(_scrollView.frame)-20*_Scale, 80*_Scale);
-    [help_btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [help_btn setTitle:@"我要申请" forState:UIControlStateNormal];
-    [help_btn.titleLabel setAttributedText:[regular createAttributeString:@"我要申请" andFloat:@(5.0)]];
-    help_btn.titleLabel.font=[regular getFont:15.0f];
-    help_btn.contentHorizontalAlignment=UIControlContentHorizontalAlignmentCenter;
-    [help_btn addTarget:self action:@selector(help_action:) forControlEvents:UIControlEventTouchUpInside];
-    [_scrollView addSubview:help_btn];
-
-    banbenimg=[[UIImageView alloc] initWithFrame:CGRectMake((CGRectGetWidth(_scrollView.frame)-40*_Scale)/2.0f, CGRectGetMaxY(help_btn.frame)+20*_Scale, 40*_Scale, 39*_Scale)];
+    banbenimg=[[UIImageView alloc] initWithFrame:CGRectMake((CGRectGetWidth(_scrollView.frame)-40*_Scale)/2.0f, CGRectGetMaxY(_coll_titlelab.frame)+20*_Scale, 40*_Scale, 39*_Scale)];
     banbenimg.image=[UIImage imageNamed:@"版本_v1.0"];
 
     [_scrollView addSubview:banbenimg];
 
     
     [self createtabbar];
-}
-//发起聊天
--(void)help_action:(UIButton *)btn
-{
-    if([regular isLogin])
-    {
-        ChatViewController *chatVC = [[ChatViewController alloc] initWithChatter:kefu_model.ease_mob_username isGroup:NO];
-        [chatVC setH_title:kefu_model.username];
-        chatVC.userinfo=@{@"cell":kefu_model.cell,@"is_server":[NSNumber numberWithBool:kefu_model.is_server],@"uid":kefu_model.user_id};
-        chatVC.friend_head=kefu_model.avatar;
-        chatVC.uid=kefu_model.user_id;
-        chatVC.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:chatVC animated:YES];
-    }else
-    {
-        LoginViewController*login=[[LoginViewController alloc] init];
-        login.type=@"other";
-        [self presentModalViewController:login animated:YES];
-    }
 }
 
 - (void)shareBtnPress:(UIButton *)btn
@@ -3729,7 +3697,6 @@
 
 
     _coll_titlelab.frame=CGRectMake(CGRectGetMinX(_coll_titlelab.frame), CGRectGetMinY(_coll_titlelab.frame)+frame.size.height, CGRectGetWidth(_coll_titlelab.frame),CGRectGetHeight(_coll_titlelab.frame)) ;
-    help_btn.frame=CGRectMake(CGRectGetMinX(help_btn.frame), CGRectGetMinY(help_btn.frame)+frame.size.height, CGRectGetWidth(help_btn.frame),CGRectGetHeight(help_btn.frame)) ;
 
     banbenimg.frame=CGRectMake(CGRectGetMinX(banbenimg.frame), CGRectGetMinY(banbenimg.frame)+frame.size.height, CGRectGetWidth(banbenimg.frame),CGRectGetHeight(banbenimg.frame)) ;
 

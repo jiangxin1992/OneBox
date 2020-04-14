@@ -806,7 +806,7 @@
 		537493111B05A9AC00922BE9 /* chooseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = chooseModel.h; sourceTree = "<group>"; };
 		537493121B05A9AC00922BE9 /* chooseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = chooseModel.m; sourceTree = "<group>"; };
 		537A924B1B0079160002BDBF /* regular.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = regular.h; sourceTree = "<group>"; };
-		537A924C1B0079160002BDBF /* regular.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = regular.m; sourceTree = "<group>"; };
+		537A924C1B0079160002BDBF /* regular.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = regular.m; sourceTree = "<group>"; wrapsLines = 0; };
 		53807EEA1BF9A33A00A46480 /* bangdanlistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bangdanlistViewController.h; sourceTree = "<group>"; };
 		53807EEB1BF9A33A00A46480 /* bangdanlistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = bangdanlistViewController.m; sourceTree = "<group>"; };
 		538591ED1A9C6E09006D785E /* MyPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyPoint.h; sourceTree = "<group>"; };

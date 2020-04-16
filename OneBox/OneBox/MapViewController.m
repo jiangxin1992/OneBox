@@ -37,13 +37,10 @@
 
 @implementation MapViewController
 {
-//    BOOL _ishide;
     //保存双击手势对象
     UITapGestureRecognizer *_tapRec;
     NSInteger start;
     NSInteger _page;
-    //2的时候缓存
-//    NSInteger huancun;
     BOOL nowrefresh;
     YYAnimationIndicator *indicator;
     BOOL hasnum;
@@ -68,8 +65,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-//    _ishide=NO;
     nowrefresh=NO;
     ADClusterableAnnotation* anno=[[ADClusterableAnnotation alloc]initWithDictionary:@{@"is_order_school":[NSNumber numberWithLong:0],@"id":[NSNumber numberWithLong:4],@"latitude":@"38.5",@"longtitude":@"97"}];
     hasnum=NO;
@@ -80,9 +75,6 @@
     dataarr=[[NSArray alloc] init];
     is_order_school=NO;
 
-    UIBarButtonItem *_btn=[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"返回箭头"] style:UIBarButtonItemStylePlain target:self action:@selector(popviewAction)];
-    self.navigationItem.leftBarButtonItem=_btn;
-
     self.navigationController.navigationBar.barTintColor =[UIColor colorWithRed:70.0f/255.0f green:195.0f/255.0f blue:247.0f/255.0f alpha:1];
     ename=[[NSMutableString alloc] init];
     cname=[[NSMutableString alloc] init];
@@ -91,7 +83,6 @@
     self.navigationItem.titleView=[regular returnNavView:@"地图找校" withmaxwidth:230];
 
     _justSelect=0;
-    //init the mapview
     _mapview=[[ADClusterMapView alloc] initWithFrame:CGRectMake(0, 0,ScreenWidth, ScreenHeight)];
     [self.view addSubview:_mapview];
     _mapview.delegate=self;
@@ -112,8 +103,6 @@
         span.latitudeDelta=25;//20
         span.longitudeDelta=70;//60
     }
-//    span.latitudeDelta=25;//20
-//    span.longitudeDelta=70;//60
     MKCoordinateRegion reg=MKCoordinateRegionMake(c, span);
     [_mapview setRegion:reg];
 
@@ -158,10 +147,7 @@
     //    只有双击失败得时候单击才会调用
     [_tapRec  requireGestureRecognizerToFail:tapDoubleGes];
 }
--(void)popviewAction
-{
-    [self.navigationController popViewControllerAnimated:YES];
-}
+
 #pragma mark - 手势协议方法
 //这个方法默认返回为NO，返回NO，则不支持多个手势同时处理，YES，支持
 -(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
@@ -241,7 +227,7 @@
 -(void)createRefreshBtn
 {
     UIButton *btn=[UIButton buttonWithType:UIButtonTypeCustom];
-    btn.frame=CGRectMake((ScreenWidth-70*_Scale)/2.0f, ScreenHeight-70*_Scale-64, 70*_Scale, 70*_Scale);
+    btn.frame=CGRectMake((ScreenWidth-70*_Scale)/2.0f, ScreenHeight-70*_Scale-64 - 40, 70*_Scale, 70*_Scale);
     [btn setBackgroundImage:[UIImage imageNamed:@"刷新icon"] forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(initMap:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btn];
@@ -301,12 +287,6 @@
 
     }];
 
-//    _annoations=[[NSMutableArray alloc] init];
-//    _showcard=NO;
-//
-//    _origin=_mapview.region;
-//    dataarr=[[NSArray alloc] init];
-//    [self get_location_info];
 
 }
 -(void)removeYindao:(UIGestureRecognizer *)ges
@@ -325,8 +305,6 @@
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:NO];
     [MobClick beginLogPageView:@"MapViewController"];
-
-    [[CustomTabbarController sharedManager] tabbarHide];
 }
 -(void)viewWillDisappear:(BOOL)animated
 {
@@ -455,18 +433,10 @@
                 for (NSInteger i=0;i<dataarr.count;i++) {
 
                     NSDictionary* annotationDictionary =dataarr[i];
-
-
-                    //                    if((![[annotationDictionary objectForKey:@"longtitude"] isEqualToString:@""])&&(![[annotationDictionary objectForKey:@"latitude"] isEqualToString:@""]))
-                    //                    {
                     ADClusterableAnnotation* anno=[[ADClusterableAnnotation alloc]initWithDictionary:annotationDictionary];
 
                     [arr111 addObject:anno];
-                    //                        [ addObject:anno];
-
                     [_mapview setAnnotations:_annoations];
-                    //                    }
-
 
                 }
                 _annoations=arr111;
@@ -592,13 +562,6 @@
 
 
 }
-
-
-
-//-(IBAction)exitToHere:(UIStoryboardPopoverSegue *)sender{
-//
-//
-//}
 
 #pragma mark ADC
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {

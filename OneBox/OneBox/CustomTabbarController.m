@@ -11,6 +11,7 @@
 #import "ArticleViewController.h"
 #import "FoundViewController.h"
 #import "BoxViewController.h"
+#import "MapViewController.h"
 #import "TabbarItem.h"
 
 @interface CustomTabbarController ()<UITabBarControllerDelegate>
@@ -185,9 +186,9 @@ static CustomTabbarController *tabbarController = nil;
 {
     //     创建数组并初始化
     NSMutableArray *vcs = [[NSMutableArray alloc]init];
-    for (int i = 0; i<4; i++) {
+    for (int i = 0; i<5; i++) {
         //        三目运算创建视图
-        UIViewController *vc =i==0?[[ArticleViewController alloc] init]:i==1?[[BoxViewController alloc] init]:i==2?[[FoundViewController alloc]init]:[[UserInfoViewController alloc] init];
+        UIViewController *vc =i==0?[[ArticleViewController alloc] init]:i==1?[[MapViewController alloc] init]:i==2?[[BoxViewController alloc] init]:i==3?[[FoundViewController alloc]init]:[[UserInfoViewController alloc] init];
         //        将创建视图加入到navi中
 
         UINavigationController *navi = [[UINavigationController alloc]initWithRootViewController:vc];
@@ -207,6 +208,7 @@ static CustomTabbarController *tabbarController = nil;
 
     NSArray *imageArr = @[
                           @"found_activity_文章_select1"
+                          ,@"found_activity_map_select1"
                           ,@"found_activity_盒子_select1"
                           ,@"found_activity_发现_select1"
                           ,@"found_activity_user_select1"
@@ -214,25 +216,29 @@ static CustomTabbarController *tabbarController = nil;
     //    创建tabbarItem  select情况下的显示图片
     NSArray *imageSelectArr = @[
                                 @"found_activity_文章_normal1"
+                                ,@"found_activity_map_normal1"
                                 ,@"found_activity_盒子_normal1"
                                 ,@"found_activity_发现_normal1"
                                 ,@"found_activity_user_normal1"
                                 ];
     //计算当前屏幕尺寸下tabbarItem的宽度
-    CGFloat buttonWidth =ScreenWidth/4;
+    CGFloat buttonWidth =ScreenWidth/5;
     for (int i = 0; i<imageArr.count; i++) {
         TabbarItem *item = [TabbarItem buttonWithType:UIButtonTypeCustom];
         if(i==1)
+        {
+            item.type=15;
+        }else if(i==2)
         {
             //            当当前TabbarItem为中间的box时，设置type为1（为了区分box和其他TabbarItem，进行不同的定制）
             item.type=1;
         }else if(i==0)
         {
             item.type=0;
-        }else if(i==2)
+        }else if(i==3)
         {
             item.type=5;
-        }else if(i==3)
+        }else if(i==4)
         {
             _unreadview1=[[UIImageView alloc] initWithFrame:CGRectMake(buttonWidth-26, 13, 7, 7)];
             [item addSubview:_unreadview1];
@@ -267,7 +273,7 @@ static CustomTabbarController *tabbarController = nil;
         //        item.titleLabel.font=[regular get_en_Font:9.5f];
 
         //锁定第一个视图为默认出现页面
-        if (i == 2) {
+        if (i == 3) {
             item.selected = YES;
         }
         //        添加标签

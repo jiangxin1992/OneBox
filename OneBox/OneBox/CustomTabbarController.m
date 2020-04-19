@@ -7,8 +7,8 @@
 //
 #import "CustomTabbarController.h"
 
-#import "UserInfoViewController.h"
-#import "ArticleViewController.h"
+#import "ScreenMainViewController.h"
+#import "bangdanMainViewController.h"
 #import "FoundViewController.h"
 #import "BoxViewController.h"
 #import "MapViewController.h"
@@ -65,7 +65,7 @@ static CustomTabbarController *tabbarController = nil;
     //    btn1.selected = YES;
     btn1.selected = YES;
     //    切换到点击item相对应的视图
-    self.selectedIndex = 1;
+    self.selectedIndex = 3;
 }
 - (void)viewDidLoad {
 
@@ -188,7 +188,7 @@ static CustomTabbarController *tabbarController = nil;
     NSMutableArray *vcs = [[NSMutableArray alloc]init];
     for (int i = 0; i<5; i++) {
         //        三目运算创建视图
-        UIViewController *vc =i==0?[[ArticleViewController alloc] init]:i==1?[[MapViewController alloc] init]:i==2?[[BoxViewController alloc] init]:i==3?[[FoundViewController alloc]init]:[[UserInfoViewController alloc] init];
+        UIViewController *vc =i==0?[[bangdanMainViewController alloc] init]:i==1?[[MapViewController alloc] init]:i==2?[[BoxViewController alloc] init]:i==3?[[FoundViewController alloc]init]:[[ScreenMainViewController alloc] init];
         //        将创建视图加入到navi中
 
         UINavigationController *navi = [[UINavigationController alloc]initWithRootViewController:vc];
@@ -197,7 +197,7 @@ static CustomTabbarController *tabbarController = nil;
     }
     //    将数组中的视图添加到当前的tabbarController中去
     self.viewControllers = vcs;
-    self.selectedIndex=2;
+    self.selectedIndex=3;
     
 }
 -(void)createTabbarItem
@@ -211,7 +211,7 @@ static CustomTabbarController *tabbarController = nil;
                           ,@"found_activity_map_select1"
                           ,@"found_activity_盒子_select1"
                           ,@"found_activity_发现_select1"
-                          ,@"found_activity_user_select1"
+                          ,@"found_activity_search_select1"
                           ];
     //    创建tabbarItem  select情况下的显示图片
     NSArray *imageSelectArr = @[
@@ -219,7 +219,7 @@ static CustomTabbarController *tabbarController = nil;
                                 ,@"found_activity_map_normal1"
                                 ,@"found_activity_盒子_normal1"
                                 ,@"found_activity_发现_normal1"
-                                ,@"found_activity_user_normal1"
+                                ,@"found_activity_search_normal1"
                                 ];
     //计算当前屏幕尺寸下tabbarItem的宽度
     CGFloat buttonWidth =ScreenWidth/5;

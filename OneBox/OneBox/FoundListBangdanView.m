@@ -10,8 +10,6 @@
 
 @interface FoundListBangdanView()
 
-@property (nonatomic, strong) UIImageView *backImgView;
-
 @end
 
 @implementation FoundListBangdanView
@@ -33,26 +31,12 @@
 }
 - (void)PrepareData{}
 - (void)PrepareUI{
-    self.userInteractionEnabled=YES;
-    UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(backAction)];
-    [self addGestureRecognizer:tap];
 }
 
 #pragma mark - --------------UIConfig----------------------
 -(void)UIConfig{
-    //创建背景
-    [self createBackView];
     //创建榜单按钮
     [self createBangdanBtn];
-}
-//创建背景
--(void)createBackView{
-    _backImgView = [UIImageView getImgWithImageStr:@"蒙板"];
-    [self addSubview:_backImgView];
-    [_backImgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(self);
-    }];
-    _backImgView.contentMode = UIViewContentModeScaleToFill;
 }
 //创建榜单按钮
 -(void)createBangdanBtn{
@@ -61,7 +45,7 @@
     for (int i = 0; i < 4; i++) {
 
         UIButton *btn = [UIButton getCustomBackImgBtnWithImageStr:[self getImageName:i] WithSelectedImageStr:nil];
-        [_backImgView addSubview:btn];
+        [self addSubview:btn];
 
         CGFloat _x_bianju = (ScreenWidth - 450*_Scale)/2.0f;
         CGFloat _y_bianju = (ScreenHeight - 450*_Scale)/2.0f;
@@ -114,11 +98,6 @@
 }
 
 #pragma mark - --------------自定义方法----------------------
--(void)backAction{
-    if(self){
-        self.hidden = YES;
-    }
-}
 -(NSString *)getImageName:(NSInteger )index{
     NSString *imagename = nil;
     if(index == 0)

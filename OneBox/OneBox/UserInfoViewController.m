@@ -661,7 +661,7 @@ static void *EOCAlertViewKey = "EOCAlertViewKey";
 {
     [super viewWillAppear:animated];
     [MobClick beginLogPageView:@"UserInfoViewController"];
-    [[CustomTabbarController sharedManager] tabbarAppear];
+    [[CustomTabbarController sharedManager] tabbarHide];
     if([regular isLogin])
     {
         if(_isfirstlogin)

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		20A32801465A4014FF29F97D /* libPods-OneBox.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 01C0DF303A3DAAD7CF87D24C /* libPods-OneBox.a */; };
+		3F042E14244C3F1A00E7CE85 /* bangdanMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F042E13244C3F1A00E7CE85 /* bangdanMainViewController.m */; };
+		3F042E17244C446A00E7CE85 /* ScreenMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F042E16244C446A00E7CE85 /* ScreenMainViewController.m */; };
 		3F06340D244651D500581A10 /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 53F975B81BB29501004FC0B7 /* libMobClickLibrary.a */; };
 		3F25810E1E51D5F60004B573 /* archive-in1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F2580F11E51D5F60004B573 /* archive-in1.png */; };
 		3F25810F1E51D5F60004B573 /* archive-in2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F2580F21E51D5F60004B573 /* archive-in2.png */; };
@@ -290,6 +292,10 @@
 
 /* Begin PBXFileReference section */
 		01C0DF303A3DAAD7CF87D24C /* libPods-OneBox.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-OneBox.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3F042E12244C3F1A00E7CE85 /* bangdanMainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = bangdanMainViewController.h; sourceTree = "<group>"; };
+		3F042E13244C3F1A00E7CE85 /* bangdanMainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = bangdanMainViewController.m; sourceTree = "<group>"; };
+		3F042E15244C446A00E7CE85 /* ScreenMainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScreenMainViewController.h; sourceTree = "<group>"; };
+		3F042E16244C446A00E7CE85 /* ScreenMainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScreenMainViewController.m; sourceTree = "<group>"; };
 		3F2580F11E51D5F60004B573 /* archive-in1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "archive-in1.png"; sourceTree = "<group>"; };
 		3F2580F21E51D5F60004B573 /* archive-in2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "archive-in2.png"; sourceTree = "<group>"; };
 		3F2580F31E51D5F60004B573 /* archive-in3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "archive-in3.png"; sourceTree = "<group>"; };
@@ -2388,6 +2394,8 @@
 				53FFA0791B268E6D0012504A /* bangdanViewController.m */,
 				53B4907F1B56352A00814F1A /* bangdanCell.h */,
 				53B490801B56352A00814F1A /* bangdanCell.m */,
+				3F042E12244C3F1A00E7CE85 /* bangdanMainViewController.h */,
+				3F042E13244C3F1A00E7CE85 /* bangdanMainViewController.m */,
 			);
 			name = "榜单";
 			sourceTree = "<group>";
@@ -2399,6 +2407,8 @@
 				3F61EFCF20A99011004DEE20 /* ScreenTableView.m */,
 				53FFA07E1B26A2870012504A /* ScreenViewController.h */,
 				53FFA07F1B26A2870012504A /* ScreenViewController.m */,
+				3F042E15244C446A00E7CE85 /* ScreenMainViewController.h */,
+				3F042E16244C446A00E7CE85 /* ScreenMainViewController.m */,
 			);
 			name = "筛选";
 			sourceTree = "<group>";
@@ -2707,6 +2717,7 @@
 				3F90A8571E52D82D00DBEF1A /* UIImageView+Custom.m in Sources */,
 				5354B0D41C30DEB30066CF24 /* ArticleColViewController.m in Sources */,
 				3F90A8431E52D7EB00DBEF1A /* NSDate+Custom.m in Sources */,
+				3F042E14244C3F1A00E7CE85 /* bangdanMainViewController.m in Sources */,
 				53FFA09D1B26EA500012504A /* UserInfoViewController.m in Sources */,
 				53552CCA1B6F8ECE00CCAC9F /* YYAnimationIndicator.m in Sources */,
 				53922B221B4CB5130079ECA3 /* FlyUsaViewController.m in Sources */,
@@ -2768,6 +2779,7 @@
 				3FACCDBE20871D97004AF8EA /* FoundTableView.m in Sources */,
 				53F976E51BB295F7004FC0B7 /* usermodel.m in Sources */,
 				5366E15F1C1FC9060036A960 /* ArticleModel.m in Sources */,
+				3F042E17244C446A00E7CE85 /* ScreenMainViewController.m in Sources */,
 				538CB7D01AFA13A300C27431 /* AFURLRequestSerialization.m in Sources */,
 				5372BB411AF765EA00813045 /* CollectionSchoolViewController.m in Sources */,
 			);

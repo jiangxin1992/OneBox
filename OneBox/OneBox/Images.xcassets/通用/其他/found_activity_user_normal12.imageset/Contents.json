@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "found_activity_盒子_select1.png",
+      "filename" : "found_activity_user_normal12.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "found_activity_user_normal12@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "found_activity_user_normal12@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

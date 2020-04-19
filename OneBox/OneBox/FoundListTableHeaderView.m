@@ -52,9 +52,6 @@
     [self createBackView];
     //创建搜索栏
     [self createSearchView];
-    //创建筛选按钮
-    [self createScreenView];
-
 }
 //创建背景
 -(void)createBackView{
@@ -94,54 +91,6 @@
     //    设置return类型
     _textFiled.returnKeyType = UIReturnKeySearch;
 }
-//创建筛选按钮
--(void)createScreenView{
-
-    NSArray *imageNameArr = @[@"found_bangdan_排名",@"found_bangdan_地图",@"found_bangdan_筛选"];
-    NSArray *imageTitleArr = @[@"排名",@"地图",@"筛选"];
-
-    CGFloat jiange = (CGRectGetWidth(self.frame) - 130*_Scale*2 - 80*_Scale*3)/(imageNameArr.count - 1);
-
-    UIView *lastView = nil;
-    for (int i = 0; i < imageNameArr.count; i++) {
-
-        UIImageView *screenImg = [UIImageView getImgWithImageStr:imageNameArr[i]];
-        [self addSubview:screenImg];
-        [screenImg mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(_textFiled.mas_bottom).with.offset(46*_Scale);
-            make.width.height.mas_equalTo(80*_Scale);
-            if(!lastView){
-                make.left.mas_equalTo(130*_Scale);
-            }else{
-                make.left.mas_equalTo(lastView.mas_right).with.offset(jiange);
-            }
-        }];
-        screenImg.userInteractionEnabled = YES;
-        UITapGestureRecognizer *tap = nil;
-        if(i == 0){
-            //榜单
-            tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapActionBangdan:)];
-        }else if(i == 1){
-            //地图
-            tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapActionMap:)];
-        }else if(i == 2){
-            //筛选
-            tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapActionScreen:)];
-        }
-        [screenImg addGestureRecognizer:tap];
-
-        UILabel *titleLabel = [UILabel getLabelWithAlignment:1 WithTitle:imageTitleArr[i] WithFont:13.0f WithTextColor:_define_white_color WithSpacing:2.0];
-        [self addSubview:titleLabel];
-        [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.width.mas_equalTo(100*_Scale);
-            make.height.mas_equalTo(70*_Scale);
-            make.top.mas_equalTo(screenImg.mas_bottom).with.offset(0);
-            make.centerX.mas_equalTo(screenImg);
-        }];
-
-        lastView = screenImg;
-    }
-}
 #pragma mark - --------------UpdateUI----------------------
 -(void)updateUI{
 
@@ -177,24 +126,6 @@
     return YES;
 }
 #pragma mark - --------------自定义响应----------------------
-//榜单
--(void)tapActionBangdan:(UIGestureRecognizer *)sender{
-    if(_headViewBlock){
-        _headViewBlock(@"tapActionBangdan",nil);
-    }
-}
-//地图
--(void)tapActionMap:(UIGestureRecognizer *)sender{
-    if(_headViewBlock){
-        _headViewBlock(@"tapActionMap",nil);
-    }
-}
-//筛选
--(void)tapActionScreen:(UIGestureRecognizer *)sender{
-    if(_headViewBlock){
-        _headViewBlock(@"tapActionScreen",nil);
-    }
-}
 //键盘消失
 -(void)headviewAction
 {

@@ -18,8 +18,6 @@
 @property (nonatomic, strong) FoundListScreenStateView *screenStateView;
 @property (nonatomic, strong) FoundListScreenCityView *screenCityView;
 
-@property (nonatomic, strong) UIImageView *backImgView;
-
 @property (nonatomic, strong) NSMutableString *state;//当前州名
 @property (nonatomic, strong) NSMutableString *city;//当前城市名
 @property (nonatomic, strong) NSMutableString *state_id;//当前州ID
@@ -51,26 +49,12 @@
     self.city_id = [[NSMutableString alloc] initWithString:@""];
 }
 - (void)PrepareUI{
-    self.userInteractionEnabled=YES;
-    UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(backAction)];
-    [self addGestureRecognizer:tap];
 }
 
 #pragma mark - --------------UIConfig----------------------
 -(void)UIConfig{
-    //创建背景
-    [self createBackView];
     //创建筛选主视图
     [self createScreenMainView];
-}
-//创建背景
--(void)createBackView{
-    _backImgView = [UIImageView getImgWithImageStr:@"蒙板"];
-    [self addSubview:_backImgView];
-    [_backImgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(self);
-    }];
-    _backImgView.contentMode = UIViewContentModeScaleToFill;
 }
 //创建筛选主视图
 -(void)createScreenMainView{
@@ -78,11 +62,11 @@
     if(!_screenMainView){
         WeakSelf(ws);
         _screenMainView = [[FoundListScreenMainView alloc] initWithFrame:CGRectZero];
-        [_backImgView addSubview:_screenMainView];
+        [self addSubview:_screenMainView];
         [_screenMainView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(70*_Scale);
             make.right.mas_equalTo(-70*_Scale);
-            make.centerY.mas_equalTo(_backImgView);
+            make.centerY.mas_equalTo(self);
         }];
         [_screenMainView setScreenMainViewBlock:^(NSString *type) {
             if([type isEqualToString:@"chooseState"]){
@@ -107,11 +91,11 @@
         WeakSelf(ws);
         CGFloat y_p=(ScreenHeight-485*_Scale)*(2.0f/5.0f);
         _screenCityView = [[FoundListScreenCityView alloc] initWithFrame:CGRectZero];
-        [_backImgView addSubview:_screenCityView];
+        [self addSubview:_screenCityView];
         [_screenCityView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(y_p);
             make.width.mas_equalTo(440*_Scale);
-            make.centerX.mas_equalTo(_backImgView);
+            make.centerX.mas_equalTo(self);
         }];
         [_screenCityView setScreenCityViewBlock:^(NSString *type) {
             if([type isEqualToString:@"allCity"]){
@@ -137,12 +121,12 @@
         WeakSelf(ws);
         CGFloat y_p=(ScreenHeight-485*_Scale)*(2.0f/5.0f);
         _screenStateView = [[FoundListScreenStateView alloc] initWithFrame:CGRectZero];
-        [_backImgView addSubview:_screenStateView];
+        [self addSubview:_screenStateView];
         [_screenStateView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(y_p);
             make.width.mas_equalTo(360*_Scale);
             make.height.mas_equalTo(600*_Scale);
-            make.centerX.mas_equalTo(_backImgView);
+            make.centerX.mas_equalTo(self);
         }];
         [_screenStateView setScreenStateViewBlock:^(NSString *type) {
             if([type isEqualToString:@"allState"]){

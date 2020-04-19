@@ -55,7 +55,7 @@
 }
 //创建背景
 -(void)createBackView{
-    _backViewImg = [[DBImageView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 420*_Scale)];
+    _backViewImg = [[DBImageView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 320*_Scale)];
     [self addSubview:_backViewImg];
 }
 //创建搜索栏

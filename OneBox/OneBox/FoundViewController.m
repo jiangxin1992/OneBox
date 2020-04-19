@@ -193,7 +193,7 @@
     if(!_tableHeaderView){
         WeakSelf(ws);
         //    创建tableview的headview，为空的时候（即网络数据获取后创建）
-        _tableHeaderView = [[FoundListTableHeaderView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 420*_Scale)];
+        _tableHeaderView = [[FoundListTableHeaderView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 320*_Scale)];
         _tableView.tableHeaderView = _tableHeaderView;
         [_tableHeaderView setHeadViewBlock:^(NSString *type ,NSString *textFieldStr) {
             if([type isEqualToString:@"gotoSouSuoView"]){

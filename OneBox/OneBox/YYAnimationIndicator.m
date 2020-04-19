@@ -27,8 +27,8 @@
             make.bottom.mas_equalTo(-10*_Scale*2);
         }];
         NSMutableArray *arr=[[NSMutableArray alloc] init];
-        for (int i=0; i<29; i++) {
-            NSString *str=[[NSString alloc] initWithFormat:@"archive-in%d",i+1];
+        for (int i=0; i<31; i++) {
+            NSString *str=[[NSString alloc] initWithFormat:@"archive-in%d",i];
             UIImage *image=[UIImage imageNamed:str];
             [arr addObject:image];
         }
@@ -64,7 +64,7 @@
     
     Infolabel.text = _loadtext;
     //设置动画总时间
-    imageView.animationDuration=1.0;
+    imageView.animationDuration=1.5;
     //设置重复次数,0表示不重复
     imageView.animationRepeatCount=0;
     //开始动画

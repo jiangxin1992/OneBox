@@ -44,8 +44,6 @@
 //view
 @property (nonatomic, strong) FoundListTableHeaderView *tableHeaderView;//headview的背景图
 @property (nonatomic, strong) FoundListSousuoView *sousuoView;
-@property (nonatomic, strong) FoundListBangdanView *bangdanView;
-@property (nonatomic, strong) FoundListScreenView *screenView;
 
 @property (nonatomic, strong) UIButton *rightbtn;
 
@@ -55,12 +53,6 @@
 @property (nonatomic, strong) TableViewSliderParameterModel *parameterModel;
 
 @property (nonatomic, assign) NSInteger page;//记录当前page
-
-@property (nonatomic, strong) NSNumber *total_students_min;//记录学生数的最小值
-@property (nonatomic, strong) NSNumber *ap_count_max;//记录ap课程数量的最大值
-@property (nonatomic, strong) NSNumber *total_students_max;//记录学生数的最大值
-@property (nonatomic, strong) NSNumber *ap_count_min;//记录ap课程数量的最小值
-
 @end
 
 @implementation FoundViewController
@@ -207,15 +199,6 @@
             if([type isEqualToString:@"gotoSouSuoView"]){
                 //跳转搜索界面
                 [ws pushToSouSuoView:textFieldStr];
-            }else if([type isEqualToString:@"tapActionBangdan"]){
-                //榜单
-                [ws createBangdanView];
-            }else if([type isEqualToString:@"tapActionMap"]){
-                //地图
-                [ws gotoMapView];
-            }else if([type isEqualToString:@"tapActionScreen"]){
-                //筛选
-                [ws requestScreenViewData];
             }
         }];
         _tableHeaderView.backViewImagePath = headviewimage;
@@ -241,89 +224,6 @@
         }];
     }else{
         _sousuoView.hidden = NO;
-    }
-}
-//榜单
--(void)createBangdanView
-{
-    [regular dismissKeyborad];
-    if(!_bangdanView){
-        WeakSelf(ws);
-        _bangdanView = [[FoundListBangdanView alloc] initWithFrame:CGRectZero];
-        [self.view addSubview:_bangdanView];
-        [_bangdanView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.edges.mas_equalTo(self.view);
-        }];
-        [_bangdanView setBangdanViewBlock:^(NSString *type) {
-            [ws bangdanAction:type];
-        }];
-    }else{
-        _bangdanView.hidden = NO;
-    }
-}
-// 创建筛选视图
--(void)createScreenView{
-    [regular dismissKeyborad];
-    if(!_screenView){
-        WeakSelf(ws);
-        _screenView = [[FoundListScreenView alloc] initWithFrame:CGRectZero];
-        [self.view addSubview:_screenView];
-        [_screenView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.edges.mas_equalTo(self.view);
-        }];
-        [_screenView setScreenViewBlock:^(NSString *type) {
-            if([type isEqualToString:@"hideAll"]){
-                [ws.screenView initializeUI];
-                ws.screenView.hidden = YES;
-            }else if([type isEqualToString:@"screen"]){
-                [ws screenAction];
-            }
-        }];
-        _screenView.total_students_min = _total_students_min;
-        _screenView.ap_count_max = _ap_count_max;
-        _screenView.total_students_max = _total_students_max;
-        _screenView.ap_count_min = _ap_count_min;
-        [_screenView updateUI];
-    }else{
-        _screenView.hidden = NO;
-    }
-}
-// 筛选视图请求
--(void)requestScreenViewData
-{
-    [regular dismissKeyborad];
-    if(!_screenView){
-        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-        [manager GET:[[NSString alloc] initWithFormat:@"%@/v1/schools/pre_search",DNS] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSString *html = operation.responseString;
-            NSData* data=[html dataUsingEncoding:NSUTF8StringEncoding];
-            //        进行解析以后的操作
-            NSDictionary *dict=[NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-            if([[dict objectForKey:@"code"] integerValue]==1)
-            {
-                NSString *html = operation.responseString;
-                NSData* data = [html dataUsingEncoding:NSUTF8StringEncoding];
-                NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-
-                _total_students_min = [[dict objectForKey:@"data"] objectForKey:@"total_students_min"];
-                _ap_count_max = [[dict objectForKey:@"data"] objectForKey:@"ap_count_max"];
-                _total_students_max = [[dict objectForKey:@"data"] objectForKey:@"total_students_max"];
-                _ap_count_min = [[dict objectForKey:@"data"] objectForKey:@"ap_count_min"];
-
-                if((!_bangdanView || _bangdanView.hidden) && (!_sousuoView || _sousuoView.hidden)){
-                    [self createScreenView];
-                }
-
-            }else
-            {
-                [[ToolManager sharedManager] alertTitle_Simple:[dict objectForKey:@"message"]];
-            }
-
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            [self.view.window addSubview:[[ToolManager sharedManager] showSuccessfulOperationViewWithTitle:@"网络连接错误，请检查网络" WithImg:@"Prompt_网络出错白色" Withtype:1]];
-        }];
-    }else{
-        _screenView.hidden = NO;
     }
 }
 #pragma mark - --------------请求数据----------------------
@@ -396,36 +296,6 @@
             bangdanViewController *bangdan = [[bangdanViewController alloc] init];
             bangdan.type = 4;
             [self.navigationController pushViewController:bangdan animated:YES];
-        }
-    }
-}
-//跳转地图view
--(void)gotoMapView
-{
-    MapViewController *mapView = [[MapViewController alloc] init];
-    [self.navigationController pushViewController:mapView animated:YES];
-}
-//筛选
--(void)screenAction{
-    if(_screenView){
-        _page = 1;
-        NSMutableDictionary *parameters = [_screenView getParameters];
-        if(_page > 0)
-        {
-            [parameters setObject:[[NSString alloc] initWithFormat:@"%ld",(long)_page] forKey:@"page"];
-        }
-
-        //当没有选择筛选条件时，不给予跳转，提示请选择筛选条件。没有选择时，key count为2
-        NSArray *keyarr = [parameters allKeys];
-
-        if(keyarr.count > 2)
-        {
-            ScreenViewController *shaixuan = [[ScreenViewController alloc] init];
-            shaixuan.data_dict = parameters;
-            [self.navigationController pushViewController:shaixuan animated:YES];
-        }else
-        {
-            [[ToolManager sharedManager] alertTitle_Simple:@"请选择筛选条件"];
         }
     }
 }

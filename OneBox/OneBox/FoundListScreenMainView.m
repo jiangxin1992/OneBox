@@ -379,7 +379,7 @@
     [_apCourseNumSlider addTarget:self action:@selector(valueChangedForDoubleSlider:) forControlEvents:UIControlEventValueChanged];
 
     //    创建slider下部标题
-    UILabel *sliderTitlelabel = [UILabel getLabelWithAlignment:1 WithTitle:@"学生数" WithFont:11.f WithTextColor:[UIColor colorWithRed:153.0f/255.0f green:153.0f/255.0f blue:153.0f/255.0f alpha:1] WithSpacing:0];
+    UILabel *sliderTitlelabel = [UILabel getLabelWithAlignment:1 WithTitle:@"AP数" WithFont:11.f WithTextColor:[UIColor colorWithRed:153.0f/255.0f green:153.0f/255.0f blue:153.0f/255.0f alpha:1] WithSpacing:0];
     [_chooseAPCourseNumView addSubview:sliderTitlelabel];
     [sliderTitlelabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.mas_equalTo(0);

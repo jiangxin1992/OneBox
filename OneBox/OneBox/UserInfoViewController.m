@@ -129,7 +129,6 @@ static void *EOCAlertViewKey = "EOCAlertViewKey";
     self.view.backgroundColor=_define_backview_color;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(backloginout) name:@"backloginout" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(xiaoshi:) name:@"xiaoshi" object:nil];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(backlogin) name:@"backlogin" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(delete_col:) name:@"delete_col" object:nil];
@@ -193,7 +192,7 @@ static void *EOCAlertViewKey = "EOCAlertViewKey";
     {
         LoginViewController*login=[[LoginViewController alloc] init];
         login.type=@"userinfo";
-        [self presentModalViewController:login animated:YES];
+        [self.navigationController pushViewController:login animated:YES];
     }
 }
 -(void)unloginui
@@ -1176,7 +1175,7 @@ static void *EOCAlertViewKey = "EOCAlertViewKey";
             NSData *imageData1 = UIImageJPEGRepresentation([UIImage imageNamed:@"user_default.png"], 1.0);
             [defaults setObject:imageData1 forKey:@"userImage"];
             loginVC.type=@"userinfo";
-            [self presentModalViewController:loginVC animated:YES];
+            [self.navigationController pushViewController:loginVC animated:YES];
         }
         else
         {

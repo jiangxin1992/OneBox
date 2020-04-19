@@ -65,13 +65,6 @@ static void *EOCAlertViewKey = "EOCAlertViewKey";
 @end
 
 @implementation SchoolCommentController
--(void)xiaoshi:(NSNotification *)not
-{
-    if([not.object isEqualToString:@"other"])
-    {
-        [self dismissModalViewControllerAnimated:YES];
-    }
-}
 
 -(void)createNocommentview
 {
@@ -108,7 +101,6 @@ static void *EOCAlertViewKey = "EOCAlertViewKey";
     self.rightSwipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipes:)];
     self.rightSwipeGestureRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
     [self.view addGestureRecognizer:self.rightSwipeGestureRecognizer];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(xiaoshi:) name:@"xiaoshi" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(other) name:@"other" object:nil];
     self.navigationController.navigationBar.shadowImage = [[UIImage alloc] init];
     UIBarButtonItem *_btn=[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"返回箭头"] style:UIBarButtonItemStylePlain target:self action:@selector(popviewAction)];
@@ -158,7 +150,7 @@ static void *EOCAlertViewKey = "EOCAlertViewKey";
 {
     LoginViewController*login=[[LoginViewController alloc] init];
     login.type=@"other";
-    [self presentModalViewController:login animated:YES];
+    [self.navigationController pushViewController:login animated:YES];
 }
 
 //用于方法的回调，通过点击cell中的删除或者点赞触发block
@@ -259,12 +251,6 @@ static void *EOCAlertViewKey = "EOCAlertViewKey";
         [_tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
     };
 
-}
-
--(void)xiaoshi
-{
-    [[self.view.window viewWithTag:1000] removeFromSuperview];
-    _commentField.text=_commentField1.text;
 }
 -(void)backaction:(UIGestureRecognizer *)ges{}
 

@@ -68,7 +68,6 @@
 -(void)PrepareData{
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeCommentNum_Action:) name:@"changenum" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(other) name:@"other" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(xiaoshi:) name:@"xiaoshi" object:nil];
 }
 -(void)PrepareUI{
     self.view.backgroundColor =  _define_backview_color;
@@ -263,14 +262,6 @@
 {
     comment_num_label.text=[[NSString alloc] initWithFormat:@"%ld",(long)[not.object integerValue]];
 }
-//登录成功／返回回调（通知）
--(void)xiaoshi:(NSNotification *)not
-{
-    if([not.object isEqualToString:@"other"])
-    {
-        [self dismissModalViewControllerAnimated:YES];
-    }
-}
 -(void)other
 {
     _isjunp_login=YES;
@@ -415,7 +406,7 @@
     
     LoginViewController*login=[[LoginViewController alloc] init];
     login.type=@"other";
-    [self presentModalViewController:login animated:YES];
+    [self.navigationController pushViewController:login animated:YES];
 }
 -(void)praise_action:(UIButton *)btn
 {

@@ -672,7 +672,7 @@
 {
     LoginViewController*login=[[LoginViewController alloc] init];
     login.type=@"other";
-    [self presentModalViewController:login animated:YES];
+    [self.navigationController pushViewController:login animated:YES];
 }
 -(void)prepareData
 {
@@ -686,7 +686,6 @@
 -(void)create_notifications
 {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reload) name:@"reload" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(xiaoshi:) name:@"xiaoshi" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(other) name:@"other" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginout) name:@"loginout" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(toprepareData) name:@"updataBox" object:nil];
@@ -694,13 +693,6 @@
 -(void)reload
 {
     [self requsetData];
-}
--(void)xiaoshi:(NSNotification *)not
-{
-    if([not.object isEqualToString:@"other"])
-    {
-        [self dismissModalViewControllerAnimated:YES];
-    }
 }
 -(void)other
 {

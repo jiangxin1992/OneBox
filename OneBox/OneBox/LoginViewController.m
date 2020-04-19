@@ -211,18 +211,7 @@
 
 -(void)backAction:(UIButton *)btn
 {
-    if([self.type isEqualToString:@"userinfo"]){
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"xiaoshi" object:@"userinfo"];
-        
-    }else if([self.type isEqualToString:@"chat"]){
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"xiaoshi" object:@"chat"];
-
-    }else{
-
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"xiaoshi" object:@"other"];
-    }
+    [self.navigationController popViewControllerAnimated:YES];
 }
 -(void)otheraction:(UIButton*)btn
 {

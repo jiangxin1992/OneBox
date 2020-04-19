@@ -63,15 +63,6 @@
 //    添加键盘监控,在键盘消失或者出现时候会调用，来改变bKeyBoardHide的值，以此来判断当前键盘是否为弹出状态
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
-     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(xiaoshi:) name:@"xiaoshi" object:nil];
-}
-
--(void)xiaoshi:(NSNotification *)not
-{
-    if([not.object isEqualToString:@"other"])
-    {
-        [self dismissModalViewControllerAnimated:YES];
-    }
 }
 //键盘消失时候调用
 -(void)keyboardWillHide:(NSNotification *)notification
@@ -152,8 +143,7 @@
     {
         LoginViewController*login=[[LoginViewController alloc] init];
         login.type=@"other";
-        [self presentModalViewController:login animated:YES];
-
+        [self.navigationController pushViewController:login animated:YES];
     }else
     {
         [self.navigationController pushViewController:[ArticleColViewController new] animated:YES];

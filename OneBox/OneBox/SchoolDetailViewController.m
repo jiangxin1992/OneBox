@@ -158,15 +158,6 @@
 
     
 }
--(void)xiaoshi:(NSNotification *)not
-{
-
-    if([not.object isEqualToString:@"other"])
-    {
-        [self dismissModalViewControllerAnimated:YES];
-    }
-
-}
 -(void)other
 {
     [self dismissModalViewControllerAnimated:YES];
@@ -205,7 +196,6 @@
 
     _appear=YES;
     _Dragging=NO;
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(xiaoshi:) name:@"xiaoshi" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(other) name:@"other" object:nil];
     [self prepareData];
     _scrollView=[[UIScrollView alloc] initWithFrame:CGRectMake(_margin, _margin, ScreenWidth-2*_margin, ScreenHeight-2*_margin+49-100*_Scale - (kIPhoneX?34.f:0))];
@@ -507,7 +497,7 @@
     {
         LoginViewController*login=[[LoginViewController alloc] init];
         login.type=@"other";
-        [self presentModalViewController:login animated:YES];
+        [self.navigationController pushViewController:login animated:YES];
     }
 }
 #pragma mark-勋章详情view消失
@@ -717,10 +707,7 @@
 {
 
 }
--(void)xiaoshi
-{
-    [[self.view.window viewWithTag:3000] removeFromSuperview];
-}
+
 -(void)createAdmissionsViewWithView:(UIView *)subview
 {
 
@@ -1690,7 +1677,7 @@
 {
     LoginViewController*login=[[LoginViewController alloc] init];
     login.type=@"other";
-    [self presentModalViewController:login animated:YES];
+    [self.navigationController pushViewController:login animated:YES];
 }
 -(void)goalBtnAction:(UIButton *)btn
 {

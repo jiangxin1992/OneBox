@@ -59,15 +59,6 @@ static void *EOCAlertViewKey = "EOCAlertViewKey";
     NSString *token;
 }
 
--(void)xiaoshi:(NSNotification *)not
-{
-
-    if([not.object isEqualToString:@"other"])
-    {
-        [self dismissModalViewControllerAnimated:YES];
-    }
-    
-}
 -(void)other
 {
     [self dismissModalViewControllerAnimated:YES];
@@ -89,8 +80,7 @@ static void *EOCAlertViewKey = "EOCAlertViewKey";
     self.rightSwipeGestureRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
     [self.view addGestureRecognizer:self.rightSwipeGestureRecognizer];
 
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(xiaoshi:) name:@"xiaoshi" object:nil];
+
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(other) name:@"other" object:nil];
     self.navigationController.navigationBar.shadowImage = [[UIImage alloc] init];
 
@@ -182,7 +172,7 @@ static void *EOCAlertViewKey = "EOCAlertViewKey";
 {
     LoginViewController*login=[[LoginViewController alloc] init];
     login.type=@"other";
-    [self presentModalViewController:login animated:YES];
+    [self.navigationController pushViewController:login animated:YES];
 }
 
 //用于方法的回调，通过点击cell中的删除或者点赞触发block

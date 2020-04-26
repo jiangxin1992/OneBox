@@ -195,7 +195,7 @@
             label.text = contentArray1[i];
         }
     }
-    NSArray *contentArray2 = @[model.setup_year,model.total_students,model.ap_count,model.grade];
+    NSArray *contentArray2 = @[model.setup_year,model.total_students,[model.ap_count isEqualToString:@"0"]?@"N/A":model.ap_count,model.grade];
     for (int i = 0; i < contentArray2.count; i++) {
         if(i == 0)
         {

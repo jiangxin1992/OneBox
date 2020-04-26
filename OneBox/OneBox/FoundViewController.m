@@ -19,6 +19,7 @@
 #import "bangdanlistViewController.h"
 #import "bangdanViewController.h"
 #import "CustomTabbarController.h"
+#import "ArticleDetailViewController.h"
 
 // 自定义视图
 #import "FoundListSousuoView.h"
@@ -181,12 +182,23 @@
             [ws cellClick_schooldetail:indexPath];
         }else if([type isEqualToString:@"cellClick_sousuo"]){
             [ws cellClick_sousuo:indexPath];
+        }else if([type isEqualToString:@"post"]){
+            [ws post:indexPath];
         }
     }];
     [_tableView reloadData];
 
     [self setupRefresh];
 }
+
+-(void)post:(NSIndexPath *)indexPath{
+    FoundModel_new *model = [_arrayData objectAtIndex:indexPath.row];
+    NSString *post_id = [model.data objectForKey:@"post_id"];
+    ArticleDetailViewController *Article = [[ArticleDetailViewController alloc] init];
+    Article.ArticleID = post_id;
+    [self.navigationController pushViewController:Article animated:YES];
+}
+
 -(void)createTableHeadView:(NSString *)headviewimage
 {
     if(!_tableHeaderView){

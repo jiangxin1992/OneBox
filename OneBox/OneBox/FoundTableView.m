@@ -267,6 +267,10 @@
                         }
                     }
                 }
+            }else if([model.m_type isEqualToString:@"post"]){
+                if (_foundTableViewBlock) {
+                    _foundTableViewBlock(@"post",indexPath);
+                }
             }
         }
     }

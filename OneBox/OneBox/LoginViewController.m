@@ -520,7 +520,9 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshList" object:nil];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"backlogin" object:nil];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"other" object:nil];
-    }}
+    }
+    [self.navigationController popViewControllerAnimated:YES];
+}
 #pragma mark - UITextFieldDelegate
 - (BOOL)textFieldShouldReturn:(UITextField *)theTextField {
     if(theTextField==password){
